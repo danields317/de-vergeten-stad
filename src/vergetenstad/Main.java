@@ -20,7 +20,7 @@ public class Main extends Application{
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		
-		Bord bord = new Bord();
+		BordController bord = new BordController();
 		
         Canvas canvas = new Canvas(screenWidth, screenHeight);
         Group root = new Group(canvas);
@@ -36,7 +36,6 @@ public class Main extends Application{
             public void handle(long now) {
                 
             	GraphicsContext gc = canvas.getGraphicsContext2D();
-            	bord.render(gc);
             	
             }
         }.start();

@@ -19,24 +19,61 @@ public class Bord {
 	private boolean collectedArtifactZonnekristal = false;
 	private boolean collectedArtifactNavigatiemodule = false;
 	
-	/////////////////////////////////////// Constructor ///////////////////////////////////////
+	/////////////////////////////////////// Getters & Setters ///////////////////////////////////////
 	
-	public Bord() {
-		
-		backgroundImage = new Image("resources/placeholder.png");
-		
+	public Tile[][] getTiles() {
+		return tiles;
 	}
-	
-	/////////////////////////////////////// Methods ///////////////////////////////////////
-	
-	public void render(GraphicsContext gc) {
-		
-		gc.drawImage(backgroundImage, 0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
-		
+	public void setTiles(Tile[][] tiles) {
+		this.tiles = tiles;
 	}
-	
-	public void addPlayer(Player player) {
-		players[players.length] = player;
+	public Player[] getPlayers() {
+		return players;
+	}
+	public void setPlayers(Player[] players) {
+		this.players = players;
+	}
+	public int getStormLevel() {
+		return stormLevel;
+	}
+	public void setStormLevel(int stormLevel) {
+		this.stormLevel = stormLevel;
+	}
+	public int getStormProgress() {
+		return stormProgress;
+	}
+	public void setStormProgress(int stormProgress) {
+		this.stormProgress = stormProgress;
+	}
+	public Image getBackgroundImage() {
+		return backgroundImage;
+	}
+	public void setBackgroundImage(Image backgroundImage) {
+		this.backgroundImage = backgroundImage;
+	}
+	public boolean isCollectedArtifactPropeller() {
+		return collectedArtifactPropeller;
+	}
+	public void setCollectedArtifactPropeller(boolean collectedArtifactPropeller) {
+		this.collectedArtifactPropeller = collectedArtifactPropeller;
+	}
+	public boolean isCollectedArtifactMotor() {
+		return collectedArtifactMotor;
+	}
+	public void setCollectedArtifactMotor(boolean collectedArtifactMotor) {
+		this.collectedArtifactMotor = collectedArtifactMotor;
+	}
+	public boolean isCollectedArtifactZonnekristal() {
+		return collectedArtifactZonnekristal;
+	}
+	public void setCollectedArtifactZonnekristal(boolean collectedArtifactZonnekristal) {
+		this.collectedArtifactZonnekristal = collectedArtifactZonnekristal;
+	}
+	public boolean isCollectedArtifactNavigatiemodule() {
+		return collectedArtifactNavigatiemodule;
+	}
+	public void setCollectedArtifactNavigatiemodule(boolean collectedArtifactNavigatiemodule) {
+		this.collectedArtifactNavigatiemodule = collectedArtifactNavigatiemodule;
 	}
 	
 }

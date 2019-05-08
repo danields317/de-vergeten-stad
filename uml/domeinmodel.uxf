@@ -5,7 +5,7 @@
     <id>UMLClass</id>
     <coordinates>
       <x>540</x>
-      <y>10</y>
+      <y>20</y>
       <w>210</w>
       <h>190</h>
     </coordinates>
@@ -19,7 +19,7 @@ Bord
     <id>UMLClass</id>
     <coordinates>
       <x>90</x>
-      <y>270</y>
+      <y>280</y>
       <w>200</w>
       <h>190</h>
     </coordinates>
@@ -33,7 +33,7 @@ Player
     <id>UMLClass</id>
     <coordinates>
       <x>0</x>
-      <y>520</y>
+      <y>530</y>
       <w>140</w>
       <h>60</h>
     </coordinates>
@@ -47,7 +47,7 @@ Archeoloog
     <id>UMLClass</id>
     <coordinates>
       <x>240</x>
-      <y>520</y>
+      <y>530</y>
       <w>140</w>
       <h>60</h>
     </coordinates>
@@ -61,7 +61,7 @@ Klimmer
     <id>UMLClass</id>
     <coordinates>
       <x>20</x>
-      <y>600</y>
+      <y>610</y>
       <w>140</w>
       <h>60</h>
     </coordinates>
@@ -75,7 +75,7 @@ Meteooroloog
     <id>UMLClass</id>
     <coordinates>
       <x>220</x>
-      <y>600</y>
+      <y>610</y>
       <w>140</w>
       <h>60</h>
     </coordinates>
@@ -89,7 +89,7 @@ Navigator
     <id>UMLClass</id>
     <coordinates>
       <x>40</x>
-      <y>680</y>
+      <y>690</y>
       <w>140</w>
       <h>60</h>
     </coordinates>
@@ -103,7 +103,7 @@ Verkenner
     <id>UMLClass</id>
     <coordinates>
       <x>200</x>
-      <y>680</y>
+      <y>690</y>
       <w>140</w>
       <h>60</h>
     </coordinates>
@@ -117,7 +117,7 @@ Waterdrager
     <id>Relation</id>
     <coordinates>
       <x>120</x>
-      <y>450</y>
+      <y>460</y>
       <w>30</w>
       <h>90</h>
     </coordinates>
@@ -128,7 +128,7 @@ Waterdrager
     <id>Relation</id>
     <coordinates>
       <x>140</x>
-      <y>450</y>
+      <y>460</y>
       <w>30</w>
       <h>170</h>
     </coordinates>
@@ -139,7 +139,7 @@ Waterdrager
     <id>Relation</id>
     <coordinates>
       <x>160</x>
-      <y>450</y>
+      <y>460</y>
       <w>30</w>
       <h>250</h>
     </coordinates>
@@ -150,7 +150,7 @@ Waterdrager
     <id>Relation</id>
     <coordinates>
       <x>200</x>
-      <y>450</y>
+      <y>460</y>
       <w>30</w>
       <h>250</h>
     </coordinates>
@@ -161,7 +161,7 @@ Waterdrager
     <id>Relation</id>
     <coordinates>
       <x>220</x>
-      <y>450</y>
+      <y>460</y>
       <w>30</w>
       <h>170</h>
     </coordinates>
@@ -172,7 +172,7 @@ Waterdrager
     <id>Relation</id>
     <coordinates>
       <x>240</x>
-      <y>450</y>
+      <y>460</y>
       <w>30</w>
       <h>90</h>
     </coordinates>
@@ -183,7 +183,7 @@ Waterdrager
     <id>UMLClass</id>
     <coordinates>
       <x>450</x>
-      <y>520</y>
+      <y>530</y>
       <w>140</w>
       <h>60</h>
     </coordinates>
@@ -197,7 +197,7 @@ Aardekijker
     <id>UMLClass</id>
     <coordinates>
       <x>470</x>
-      <y>600</y>
+      <y>610</y>
       <w>140</w>
       <h>60</h>
     </coordinates>
@@ -211,7 +211,7 @@ Duinkanon
     <id>UMLClass</id>
     <coordinates>
       <x>490</x>
-      <y>680</y>
+      <y>690</y>
       <w>140</w>
       <h>60</h>
     </coordinates>
@@ -225,7 +225,7 @@ Jetpack
     <id>UMLClass</id>
     <coordinates>
       <x>650</x>
-      <y>680</y>
+      <y>690</y>
       <w>140</w>
       <h>60</h>
     </coordinates>
@@ -239,7 +239,7 @@ Tijdschakelaar
     <id>UMLClass</id>
     <coordinates>
       <x>670</x>
-      <y>600</y>
+      <y>610</y>
       <w>140</w>
       <h>60</h>
     </coordinates>
@@ -253,7 +253,7 @@ Waterreserve
     <id>UMLClass</id>
     <coordinates>
       <x>690</x>
-      <y>520</y>
+      <y>530</y>
       <w>140</w>
       <h>60</h>
     </coordinates>
@@ -267,7 +267,7 @@ Zonneschild
     <id>Relation</id>
     <coordinates>
       <x>670</x>
-      <y>450</y>
+      <y>460</y>
       <w>30</w>
       <h>170</h>
     </coordinates>
@@ -278,7 +278,7 @@ Zonneschild
     <id>Relation</id>
     <coordinates>
       <x>650</x>
-      <y>450</y>
+      <y>460</y>
       <w>30</w>
       <h>250</h>
     </coordinates>
@@ -289,7 +289,7 @@ Zonneschild
     <id>Relation</id>
     <coordinates>
       <x>610</x>
-      <y>450</y>
+      <y>460</y>
       <w>30</w>
       <h>250</h>
     </coordinates>
@@ -300,7 +300,7 @@ Zonneschild
     <id>Relation</id>
     <coordinates>
       <x>590</x>
-      <y>450</y>
+      <y>460</y>
       <w>30</w>
       <h>170</h>
     </coordinates>
@@ -311,7 +311,7 @@ Zonneschild
     <id>Relation</id>
     <coordinates>
       <x>570</x>
-      <y>450</y>
+      <y>460</y>
       <w>30</w>
       <h>90</h>
     </coordinates>
@@ -322,7 +322,7 @@ Zonneschild
     <id>UMLClass</id>
     <coordinates>
       <x>540</x>
-      <y>270</y>
+      <y>280</y>
       <w>200</w>
       <h>190</h>
     </coordinates>
@@ -336,7 +336,7 @@ Equipment
     <id>UMLClass</id>
     <coordinates>
       <x>1130</x>
-      <y>680</y>
+      <y>690</y>
       <w>140</w>
       <h>60</h>
     </coordinates>
@@ -350,7 +350,7 @@ Start
     <id>UMLClass</id>
     <coordinates>
       <x>1150</x>
-      <y>600</y>
+      <y>610</y>
       <w>140</w>
       <h>60</h>
     </coordinates>
@@ -364,7 +364,7 @@ Storm
     <id>UMLClass</id>
     <coordinates>
       <x>1170</x>
-      <y>520</y>
+      <y>530</y>
       <w>140</w>
       <h>60</h>
     </coordinates>
@@ -378,7 +378,7 @@ Tunnel
     <id>UMLClass</id>
     <coordinates>
       <x>1020</x>
-      <y>270</y>
+      <y>280</y>
       <w>200</w>
       <h>190</h>
     </coordinates>
@@ -392,7 +392,7 @@ Tile
     <id>UMLClass</id>
     <coordinates>
       <x>930</x>
-      <y>520</y>
+      <y>530</y>
       <w>140</w>
       <h>60</h>
     </coordinates>
@@ -406,7 +406,7 @@ FataMorgana
     <id>UMLClass</id>
     <coordinates>
       <x>950</x>
-      <y>600</y>
+      <y>610</y>
       <w>140</w>
       <h>60</h>
     </coordinates>
@@ -420,7 +420,7 @@ Waterput
     <id>UMLClass</id>
     <coordinates>
       <x>970</x>
-      <y>680</y>
+      <y>690</y>
       <w>140</w>
       <h>60</h>
     </coordinates>
@@ -434,7 +434,7 @@ Finish
     <id>Relation</id>
     <coordinates>
       <x>1050</x>
-      <y>450</y>
+      <y>460</y>
       <w>30</w>
       <h>90</h>
     </coordinates>
@@ -445,7 +445,7 @@ Finish
     <id>Relation</id>
     <coordinates>
       <x>1070</x>
-      <y>450</y>
+      <y>460</y>
       <w>30</w>
       <h>170</h>
     </coordinates>
@@ -456,7 +456,7 @@ Finish
     <id>Relation</id>
     <coordinates>
       <x>1090</x>
-      <y>450</y>
+      <y>460</y>
       <w>30</w>
       <h>250</h>
     </coordinates>
@@ -467,7 +467,7 @@ Finish
     <id>Relation</id>
     <coordinates>
       <x>1130</x>
-      <y>450</y>
+      <y>460</y>
       <w>30</w>
       <h>250</h>
     </coordinates>
@@ -478,7 +478,7 @@ Finish
     <id>Relation</id>
     <coordinates>
       <x>1150</x>
-      <y>450</y>
+      <y>460</y>
       <w>30</w>
       <h>170</h>
     </coordinates>
@@ -489,7 +489,7 @@ Finish
     <id>Relation</id>
     <coordinates>
       <x>1170</x>
-      <y>450</y>
+      <y>460</y>
       <w>30</w>
       <h>90</h>
     </coordinates>
@@ -500,7 +500,7 @@ Finish
     <id>Relation</id>
     <coordinates>
       <x>690</x>
-      <y>450</y>
+      <y>460</y>
       <w>30</w>
       <h>90</h>
     </coordinates>
@@ -511,7 +511,7 @@ Finish
     <id>Relation</id>
     <coordinates>
       <x>1110</x>
-      <y>450</y>
+      <y>460</y>
       <w>30</w>
       <h>330</h>
     </coordinates>
@@ -522,7 +522,7 @@ Finish
     <id>UMLClass</id>
     <coordinates>
       <x>1050</x>
-      <y>760</y>
+      <y>770</y>
       <w>140</w>
       <h>60</h>
     </coordinates>
@@ -536,7 +536,7 @@ Part
     <id>Relation</id>
     <coordinates>
       <x>280</x>
-      <y>340</y>
+      <y>350</y>
       <w>280</w>
       <h>50</h>
     </coordinates>
@@ -550,7 +550,7 @@ teaches to &gt;</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>740</x>
-      <y>140</y>
+      <y>150</y>
       <w>380</w>
       <h>150</h>
     </coordinates>
@@ -564,7 +564,7 @@ teaches to &gt;</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>180</x>
-      <y>100</y>
+      <y>110</y>
       <w>380</w>
       <h>190</h>
     </coordinates>

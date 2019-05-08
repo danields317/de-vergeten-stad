@@ -8,7 +8,7 @@ public class Archeoloog extends Player {
 	
 	public Archeoloog( String nickname ) {
 		
-		super( nickname, "Archeoloog", "PLACEHOLDER", 3, Color.ORANGE, "resources/placeholder.png" );
+		super( nickname, "Archeoloog", "PLACEHOLDER", 3, Color.RED, "resources/placeholder.png" );
 		
 	}
 

@@ -5,6 +5,8 @@ import vergetenstad.player.Player;
 
 public class Tile {
 
+	static int sandLayersUsed = 0;
+	
 	private int sandLayers = 0; // bij >=2 geblokkeerd
 	private Image image;
 	private Image undiscoveredImage;
