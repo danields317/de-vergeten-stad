@@ -1,8 +1,68 @@
 package Controller;
 
-public class Controller {
+import Controller.Bord_Controllers.Button_Controller;
+import Controller.Player_Controllers.*;
+import Model.player.Users;
+import javafx.animation.AnimationTimer;
+import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Button;
+import javafx.stage.Stage;
+import View.*;
+
+public class Controller extends Application  {
+
+    private int screenWidth = 1600;
+    private int screenHeight = 900;
+    private Users users = new Users();
+    private String self = "Klimmer";
 
     public Controller(){
+        users.setArcheoloogController(new Archeoloog_Controller("a"));
+        users.setKlimmerController(new Klimmer_Controller("b"));
+        users.setMeteooroloogController(new Meteooroloog_Controller("c"));
+        users.setNavigatorController(new Navigator_controller("d"));
+        users.setVerkennerController(new Verkenner_Controller("e"));
+        users.setWaterdragerController(new Waterdrager_Controller("f"));
+        System.out.println("Meteooroloog Water: " + users.getMeteooroloogController().getPlayer().getWater());
+        System.out.println("Acrcheoloog Water: " + users.getArcheoloogController().getPlayer().getWater());
+    }
+
+    @Override
+    public void start(Stage primaryStage) throws Exception{
+
+        Bord bord = new Bord();
+
+        Canvas canvas = new Canvas(screenWidth, screenHeight);
+        Group root = new Group(canvas);
+        Scene scene = new Scene(root);
+        Button_Controller button_controller = new Button_Controller(root, self);
+
+
+
+        primaryStage.setTitle("De Vergeten Stad");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+
+        ////////////////////////// Main Loop //////////////////////////
+        new AnimationTimer() {
+            @Override
+            public void handle(long now) {
+
+                GraphicsContext gc = canvas.getGraphicsContext2D();
+                bord.render(gc);
+
+            }
+        }.start();
+
+
+
+
 
     }
 }

@@ -1,36 +1,48 @@
 package Controller.Player_Controllers;
 
 import Model.player.Navigator;
+import Model.player.Player;
+import javafx.scene.paint.Color;
 
 public class Player_controller {
 
-    private boolean klimmer = false;
-    private boolean verkenner = false;
-    private boolean meteooroloog = false;
-    private boolean archeoloog = false;
-    private boolean waterdrager = false;
-    private boolean navigator = false;
-    private Klimmer_Controller klimmerCon;
-    private Verkenner_Controller verkennerCon;
-    private Meteooroloog_Controller meteooroloogCon;
-    private boolean Archeoloog = false;
-    private boolean Waterdrager = false;
-    //private Navigator_Controller navigatorCon;
+    private Player player;
 
-    public Player_controller(String nickname, String className){
-        switch(className){
-            case "Klimmer":
-                this.klimmer = true;
-                this.klimmerCon = new Klimmer_Controller(nickname);
-                break;
-            case "Verkenner":
-                this.verkenner = true;
-                this.verkennerCon = new Verkenner_Controller(nickname);
-                break;
+    public Player_controller(String nickname, String className, String description, int maxWater, Color color, String imagePath){
+        this.player = new Player(nickname,className, description, maxWater, color, imagePath);
+    }
 
+    public void move(){
+
+    }
+
+    public void zandWegScheppen(){
+
+    }
+
+    public void Uitgraven(){
+
+    }
+
+    public void eenOnderdeelOppakken(){
+
+    }
+
+    public void giveWater(Player receiver, int amount){
+        if(this.getPlayer().getWater() == 0){
+            System.out.println("You dont have any water to given");
+        } else if( receiver.getWater() >= receiver.getMaxWater()){
+            System.out.println(receiver.getClassName() + " has already full water");
+        }else{
+            this.player.subtractWater(amount);
+            receiver.addWater(amount);
         }
+
 
     }
 
 
+    public Player getPlayer() {
+        return player;
+    }
 }

@@ -37,7 +37,7 @@ public class Player {
 	}
 	
 	/////////////////////////////////////// Methods ///////////////////////////////////////
-	
+	/*
 	public void giveWater( Player reciever, int waterAmount ) {
 		
 		// Hoe veel water kunnen we echt geven?
@@ -51,16 +51,24 @@ public class Player {
 		this.setWater( this.getWater() + waterAmount );
 		
 	}
-	
+	*/
 	/////////////////////////////////////// Getters & Setters ///////////////////////////////////////
 	
 	public int getWater() {
 		return water;
 	}
-	
-	public void setWater(int water ) {
+
+	public void addWater(int water ) {
+
+		this.water = this.water + water;
+
+	}
+
+
+
+	public void subtractWater(int water ) {
 		
-		this.water = water;
+		this.water = this.water - water;
 		
 		if (water <= 0) {
 			// RIP
@@ -70,5 +78,37 @@ public class Player {
 	
 	public int getMaxWater() {
 		return maxWater;
+	}
+
+	public String getNickname() {
+		return nickname;
+	}
+
+	public Equipment[] getInventory() {
+		return inventory;
+	}
+
+	public int getActiesOver() {
+		return actiesOver;
+	}
+
+	public Tile getTile() {
+		return tile;
+	}
+
+	public String getClassName() {
+		return className;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public Color getColor() {
+		return color;
+	}
+
+	public Image getImage() {
+		return image;
 	}
 }

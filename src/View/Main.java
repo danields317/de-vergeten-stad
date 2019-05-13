@@ -1,5 +1,6 @@
 package View;
 
+import Controller.Controller;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Group;
@@ -8,16 +9,17 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.stage.Stage;
 
-public class Main extends Application{
+public class Main /*extends Application*/{
 	
 	private int screenWidth = 1600;
 	private int screenHeight = 900;
     
     public static void main(String[] args) {
-        launch(args);
+        Controller controller = new Controller();
+        controller.launch(args);
     }
     
-	@Override
+	/*@Override
 	public void start(Stage primaryStage) throws Exception {
 		
 		Bord bord = new Bord();
@@ -41,6 +43,6 @@ public class Main extends Application{
             }
         }.start();
 		
-	}
+	}*/
 	
 }
