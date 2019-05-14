@@ -1,17 +1,14 @@
 package Controller;
 
-import Controller.Bord_Controllers.Button_Controller;
+import Controller.Bord_Controllers.Bord_Controller;
 import Controller.Player_Controllers.*;
 import Model.player.Users;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import View.*;
 
@@ -21,6 +18,7 @@ public class Controller extends Application  {
     private int screenHeight = 900;
     private Users users = new Users();
     private String self = "Klimmer";
+    private Bord_Controller bordController;
 
     public Controller(){
         users.setArcheoloogController(new Archeoloog_Controller("a"));
@@ -41,7 +39,7 @@ public class Controller extends Application  {
         Canvas canvas = new Canvas(screenWidth, screenHeight);
         Group root = new Group(canvas);
         Scene scene = new Scene(root);
-        Button_Controller button_controller = new Button_Controller(root, self);
+        bordController = new Bord_Controller(root, self);
 
 
 

@@ -7,6 +7,6 @@ public class Storm extends Tile {
 	public Storm() {
 
 		super( "resources/placeholder.png", "resources/placeholder.png" );
-		
+
 	}
 }

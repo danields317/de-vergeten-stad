@@ -2,6 +2,7 @@ package Model.Tiles;
 
 import javafx.scene.image.Image;
 import Model.player.Player;
+import javafx.scene.paint.Color;
 
 public class Tile {
 
@@ -23,6 +24,13 @@ public class Tile {
 		this.image = new Image(imagePath);
 		this.undiscoveredImage = new Image(undiscoveredImagePath);
 		
+	}
+
+	public Tile(String imagePath, String undiscoveredImagePath, boolean direction, Color color) {
+
+		this.image = new Image(imagePath);
+		this.undiscoveredImage = new Image(undiscoveredImagePath);
+
 	}
 	
 	/////////////////////////////////////// Methods ///////////////////////////////////////
@@ -59,5 +67,12 @@ public class Tile {
 	public boolean isDiscovered() {
 		return discovered;
 	}
-	
+
+	public Image getImage() {
+		return image;
+	}
+
+	public Image getUndiscoveredImage() {
+		return undiscoveredImage;
+	}
 }

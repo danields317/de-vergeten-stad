@@ -8,7 +8,7 @@ import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 
-public class Button_Controller {
+public class Player_Menu_Controller {
 
     private Users users = new Users();
     private String character;
@@ -19,7 +19,7 @@ public class Button_Controller {
     private Button button5 = new Button("Verkenner");
     private Button button6 = new Button("Waterdrager");
 
-    public Button_Controller(Group root, String self) {
+    public Player_Menu_Controller(Group root, String self) {
 
         GridPane gridPane= new GridPane();
 
