@@ -82,41 +82,41 @@ public class Player_Menu_Controller {
         button2.setOnAction(new EventHandler<ActionEvent>(){
             @Override
             public void handle (ActionEvent event){
-                users.getArcheoloogController().giveWater(users.getKlimmerController().getPlayer(), 1);
-                System.out.println("Klimmer Water: " + users.getKlimmerController().getPlayer().getWater());
-                System.out.println("Archeoloog Water: " + users.getArcheoloogController().getPlayer().getWater());
+                Users.archeoloogController.giveWater(Users.klimmerController.getPlayer(), 1);
+                System.out.println("Klimmer Water: " + Users.klimmerController.getPlayer().getWater());
+                System.out.println("Archeoloog Water: " + Users.archeoloogController.getPlayer().getWater());
             }
         });
         button3.setOnAction(new EventHandler<ActionEvent>(){
             @Override
             public void handle (ActionEvent event){
-                users.getArcheoloogController().giveWater(users.getMeteooroloogController().getPlayer(), 1);
-                System.out.println("Meteooroloog Water: " + users.getMeteooroloogController().getPlayer().getWater());
-                System.out.println("Archeoloog Water: " + users.getArcheoloogController().getPlayer().getWater());
+                Users.archeoloogController.giveWater(Users.meteooroloogController.getPlayer(), 1);
+                System.out.println("Meteooroloog Water: " + Users.meteooroloogController.getPlayer().getWater());
+                System.out.println("Archeoloog Water: " + Users.archeoloogController.getPlayer().getWater());
             }
         });
         button4.setOnAction(new EventHandler<ActionEvent>(){
             @Override
             public void handle (ActionEvent event){
-                users.getArcheoloogController().giveWater(users.getNavigatorController().getPlayer(), 1);
-                System.out.println("Navigator Water: " + users.getNavigatorController().getPlayer().getWater());
-                System.out.println("Archeoloog Water: " + users.getArcheoloogController().getPlayer().getWater());
+                Users.archeoloogController.giveWater(Users.navigatorController.getPlayer(), 1);
+                System.out.println("Navigator Water: " + Users.navigatorController.getPlayer().getWater());
+                System.out.println("Archeoloog Water: " + Users.archeoloogController.getPlayer().getWater());
             }
         });
         button5.setOnAction(new EventHandler<ActionEvent>(){
             @Override
             public void handle (ActionEvent event){
-                users.getArcheoloogController().giveWater(users.getVerkennerController().getPlayer(), 1);
-                System.out.println("Verkenner Water: " + users.getVerkennerController().getPlayer().getWater());
-                System.out.println("Acrcheoloog Water: " + users.getArcheoloogController().getPlayer().getWater());
+                Users.archeoloogController.giveWater(Users.verkennerController.getPlayer(), 1);
+                System.out.println("Verkenner Water: " + Users.verkennerController.getPlayer().getWater());
+                System.out.println("Acrcheoloog Water: " + Users.archeoloogController.getPlayer().getWater());
             }
         });
         button6.setOnAction(new EventHandler<ActionEvent>(){
             @Override
             public void handle (ActionEvent event){
-                users.getArcheoloogController().giveWater(users.getWaterdragerController().getPlayer(), 1);
-                System.out.println("Waterdrager Water: " + users.getWaterdragerController().getPlayer().getWater());
-                System.out.println("Acrcheoloog Water: " + users.getArcheoloogController().getPlayer().getWater());
+                Users.archeoloogController.giveWater(Users.waterdragerController.getPlayer(), 1);
+                System.out.println("Waterdrager Water: " + Users.waterdragerController.getPlayer().getWater());
+                System.out.println("Acrcheoloog Water: " + Users.archeoloogController.getPlayer().getWater());
             }
         });
     }
@@ -125,9 +125,9 @@ public class Player_Menu_Controller {
         button1.setOnAction(new EventHandler<ActionEvent>(){
             @Override
             public void handle (ActionEvent event){
-                users.getKlimmerController().giveWater(users.getArcheoloogController().getPlayer(), 1);
-                System.out.println("Archeoloog Water: " + users.getArcheoloogController().getPlayer().getWater());
-                System.out.println("Klimmer Water: " + users.getKlimmerController().getPlayer().getWater());
+                Users.klimmerController.giveWater(Users.archeoloogController.getPlayer(), 1);
+                System.out.println("Archeoloog Water: " + Users.archeoloogController.getPlayer().getWater());
+                System.out.println("Klimmer Water: " + Users.klimmerController.getPlayer().getWater());
 
             }
         });
@@ -140,33 +140,33 @@ public class Player_Menu_Controller {
         button3.setOnAction(new EventHandler<ActionEvent>(){
             @Override
             public void handle (ActionEvent event){
-                users.getKlimmerController().giveWater(users.getMeteooroloogController().getPlayer(), 1);
-                System.out.println("Meteooroloog Water: " + users.getMeteooroloogController().getPlayer().getWater());
-                System.out.println("Klimmer Water: " + users.getKlimmerController().getPlayer().getWater());
+                Users.klimmerController.giveWater(Users.meteooroloogController.getPlayer(), 1);
+                System.out.println("Meteooroloog Water: " + Users.meteooroloogController.getPlayer().getWater());
+                System.out.println("Klimmer Water: " + Users.klimmerController.getPlayer().getWater());
             }
         });
         button4.setOnAction(new EventHandler<ActionEvent>(){
             @Override
             public void handle (ActionEvent event){
-                users.getKlimmerController().giveWater(users.getNavigatorController().getPlayer(), 1);
-                System.out.println("Navigator Water: " + users.getNavigatorController().getPlayer().getWater());
-                System.out.println("Klimmer Water: " + users.getKlimmerController().getPlayer().getWater());
+                Users.klimmerController.giveWater(Users.navigatorController.getPlayer(), 1);
+                System.out.println("Navigator Water: " + Users.navigatorController.getPlayer().getWater());
+                System.out.println("Klimmer Water: " + Users.klimmerController.getPlayer().getWater());
             }
         });
         button5.setOnAction(new EventHandler<ActionEvent>(){
             @Override
             public void handle (ActionEvent event){
-                users.getKlimmerController().giveWater(users.getVerkennerController().getPlayer(), 1);
-                System.out.println("Verkenner Water: " + users.getVerkennerController().getPlayer().getWater());
-                System.out.println("Klimmer Water: " + users.getKlimmerController().getPlayer().getWater());
+                Users.klimmerController.giveWater(Users.verkennerController.getPlayer(), 1);
+                System.out.println("Verkenner Water: " + Users.verkennerController.getPlayer().getWater());
+                System.out.println("Klimmer Water: " + Users.klimmerController.getPlayer().getWater());
             }
         });
         button6.setOnAction(new EventHandler<ActionEvent>(){
             @Override
             public void handle (ActionEvent event){
-                users.getKlimmerController().giveWater(users.getWaterdragerController().getPlayer(), 1);
-                System.out.println("Waterdrager Water: " + users.getWaterdragerController().getPlayer().getWater());
-                System.out.println("Klimmer Water: " + users.getKlimmerController().getPlayer().getWater());
+                Users.klimmerController.giveWater(Users.waterdragerController.getPlayer(), 1);
+                System.out.println("Waterdrager Water: " + Users.waterdragerController.getPlayer().getWater());
+                System.out.println("Klimmer Water: " + Users.klimmerController.getPlayer().getWater());
             }
         });
     }

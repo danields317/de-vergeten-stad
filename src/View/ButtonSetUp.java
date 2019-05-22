@@ -24,9 +24,9 @@ public class ButtonSetUp {
         {
             @Override
             public void handle (ActionEvent event){
-            Users.getArcheoloogController().giveWater(users.getMeteooroloogController().getPlayer(), 1);
-            System.out.println("Meteooroloog Water: " + users.getMeteooroloogController().getPlayer().getWater());
-            System.out.println("Acrcheoloog Water: " + users.getArcheoloogController().getPlayer().getWater());
+            Users.archeoloogController.giveWater(Users.meteooroloogController.getPlayer(), 1);
+            System.out.println("Meteooroloog Water: " + Users.meteooroloogController.getPlayer().getWater());
+            System.out.println("Acrcheoloog Water: " + Users.archeoloogController.getPlayer().getWater());
         }
         });
     }

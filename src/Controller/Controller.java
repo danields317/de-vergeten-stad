@@ -21,14 +21,14 @@ public class Controller extends Application  {
     private Bord_Controller bordController;
 
     public Controller(){
-        users.setArcheoloogController(new Archeoloog_Controller("a"));
-        users.setKlimmerController(new Klimmer_Controller("b"));
-        users.setMeteooroloogController(new Meteooroloog_Controller("c"));
-        users.setNavigatorController(new Navigator_controller("d"));
-        users.setVerkennerController(new Verkenner_Controller("e"));
-        users.setWaterdragerController(new Waterdrager_Controller("f"));
-        System.out.println("Meteooroloog Water: " + users.getMeteooroloogController().getPlayer().getWater());
-        System.out.println("Acrcheoloog Water: " + users.getArcheoloogController().getPlayer().getWater());
+        Users.archeoloogController = new Archeoloog_Controller("a");
+        Users.klimmerController = new Klimmer_Controller("b");
+        Users.meteooroloogController = new Meteooroloog_Controller("c");
+        Users.navigatorController = new Navigator_controller("d");
+        Users.verkennerController = new Verkenner_Controller("e");
+        Users.waterdragerController = new Waterdrager_Controller("f");
+        System.out.println("Meteooroloog Water: " + Users.meteooroloogController.getPlayer().getWater());
+        System.out.println("Acrcheoloog Water: " + Users.archeoloogController.getPlayer().getWater());
     }
 
     @Override
