@@ -2,9 +2,12 @@ package Controller.Bord_Controllers;
 
 import Controller.Tile_Controllers.Part_Controller;
 import Model.Tiles.Tile;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.image.Image ;
 import javafx.scene.layout.HBox;
@@ -14,6 +17,7 @@ import java.util.ArrayList;
 public class Field_Controller {
 
     private ArrayList<Tile> tiles = new ArrayList<Tile>();
+    private int value;
 
     public Field_Controller(Group root) {
         GridPane gridPane = new GridPane();
@@ -47,15 +51,26 @@ public class Field_Controller {
 
 
 
+
+
                     gridPane.add(imv, xAs, yAs);
                 } else {
                     ImageView imv = new ImageView();
                     Image image = tiles.get(xAs + (5 * yAs)).getUndiscoveredImage();
 
+                    value = (xAs + (5 * yAs));
                     imv.setImage(image);
                     imv.setFitWidth(size);
                     imv.setFitHeight(size);
 
+                    imv.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+
+                        @Override
+                        public void handle(MouseEvent event) {
+                            System.out.println("hallo");
+                            imv.setImage(tiles.get(value).getImage());
+                        }
+                    });
 
                     gridPane.add(imv, xAs, yAs);
                 }

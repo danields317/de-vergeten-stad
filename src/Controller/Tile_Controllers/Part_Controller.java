@@ -10,7 +10,7 @@ public class Part_Controller extends Tile_Controller{
 
     public Part_Controller() {
 
-        super( "resources/placeholder.png", "resources/placeholder.png", true, Color.BLUE );
+        super( "resources/placeholder.png", "resources/giphy.gif", true, Color.BLUE );
 
     }
 

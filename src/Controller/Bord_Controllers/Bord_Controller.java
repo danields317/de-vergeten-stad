@@ -22,19 +22,16 @@ public class Bord_Controller {
     private Group root;
     private String self;
 
-    public Bord_Controller(Group root, String self){
-        this.root = root;
-        this.self = self;
-        setUpBord();
+    public Bord_Controller(){
+       // this.root = root
+        // this.self = self;
+     // setUpBord();
 
     }
 
-    public void setUpBord(){
-        fieldController = new Field_Controller(root);
-        playerMenuController = new Player_Menu_Controller(root, self);
-
-
-
-
-    }
+//    public void setUpBord(){
+//        fieldController = new Field_Controller(root);
+//        playerMenuController = new Player_Menu_Controller(root, self);
+//
+//
 }
