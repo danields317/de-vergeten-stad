@@ -22,7 +22,7 @@ import observers.*;
 
 public class LoginView implements LoginObserver {
 
-    String kaart = "/Homescreenempty.png";
+    String kaart = "Homescreenempty.png";
     //String file = "C:\\Users\\mjboere\\workspace\\Hello FX World\\src\\wereldkaart.jpg";
     private double width = 1600;
     private double height = 900;
