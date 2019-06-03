@@ -12,8 +12,8 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.stage.Stage;
 import View.*;
 
-public class Controller extends Application  {
-
+public class Controller/* extends Application  */{
+/*
     private int screenWidth = 1600;
     private int screenHeight = 900;
     private Users users = new Users();
@@ -35,7 +35,6 @@ public class Controller extends Application  {
     public void start(Stage primaryStage) throws Exception{
 
         Bord bord = new Bord();
-
         Canvas canvas = new Canvas(screenWidth, screenHeight);
         Group root = new Group(canvas);
         Scene scene = new Scene(root);
@@ -63,4 +62,5 @@ public class Controller extends Application  {
 
 
     }
+    */
 }
