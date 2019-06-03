@@ -1,6 +1,5 @@
 package View;
 
-import Controller.Bord_Controllers.Bord_Controller;
 import Controller.Login_Controllers.Login_Controller;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -20,9 +19,10 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import observers.*;
 
+
 public class LoginView implements LoginObserver {
 
-    String kaart = "/resources/Homescreenempty.png";
+    String kaart = "/Homescreenempty.png";
     //String file = "C:\\Users\\mjboere\\workspace\\Hello FX World\\src\\wereldkaart.jpg";
     private double width = 1600;
     private double height = 900;
@@ -48,7 +48,7 @@ public class LoginView implements LoginObserver {
 
 
             GridPane root = gp;
-            Image backgroundImage = new Image("resources/Homescreenempty.png");
+            Image backgroundImage = new Image("Homescreenempty.png");
             Canvas canvas = new Canvas(width, height);
 
             Group group = new Group(canvas, root);
