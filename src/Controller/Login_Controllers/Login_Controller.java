@@ -23,6 +23,7 @@ public class Login_Controller {
         return loginController;
     }
 
+    
     public void checkLogin(String uName, String pass){
         login.checkLogin(uName, pass);
     }
