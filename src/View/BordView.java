@@ -1,5 +1,6 @@
 package View;
 
+import Controller.Bord_Controllers.Bord_Controller;
 import Controller.Login_Controllers.Login_Controller;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -14,8 +15,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import observers.SpelbordObservable;
-import observers.SpelbordObserver;
+import observers.*;
 
 public class BordView {
 
@@ -27,17 +27,17 @@ public class BordView {
     private double windowAnchorY= 50;
 
     Stage primaryStage;
-    Login_Controller loginController;
+    Bord_Controller bordController;
     TextField usernameField = new TextField();
     TextField passwordField = new TextField();
 
     public BordView(Stage s){
         primaryStage = s;
         loadPrimaryStageWithGridPane(createInitialGridPane());
-        loginController = loginController.getInstance();
+        bordController = bordController.getInstance();
 
         // PASS IT TO THE CONTROLLER WHO WILL PASS IT TO THE MODEL
-        loginController.registerObserver((SpelbordObserver) this);
+        bordController.registerObserver((BordObserver) this);
     }
 
     private void loadPrimaryStageWithGridPane(GridPane gp) {
@@ -82,7 +82,7 @@ public class BordView {
         return gridPane;
     }
 
-    private GridPane createUpdatedGridPane(SpelbordObservable sb){
+    private GridPane createUpdatedGridPane(BordObservable sb){
 /*
         if(sb.isLoginCorrect()){
             return loginCorrect(sb);
@@ -94,7 +94,7 @@ public class BordView {
 
     }
 
-    public GridPane loginCorrect(SpelbordObservable sb){
+    public GridPane loginCorrect(BordObservable sb){
         Text scoreText = new Text("Player Score");
         Button startButton = new Button("Start Game");
         //startButton.addEventFilter(MouseEvent.MOUSE_CLICKED, startClicked);

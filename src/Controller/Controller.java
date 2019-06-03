@@ -39,7 +39,7 @@ public class Controller extends Application  {
         Canvas canvas = new Canvas(screenWidth, screenHeight);
         Group root = new Group(canvas);
         Scene scene = new Scene(root);
-        bordController = new Bord_Controller();
+        //bordController = new Bord_Controller();
 
 
 

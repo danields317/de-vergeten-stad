@@ -2,7 +2,7 @@ package Controller.Login_Controllers;
 
 import Controller.Controller;
 import Model.Login.Login;
-import observers.SpelbordObserver;
+import observers.*;
 
 public class Login_Controller {
 
@@ -35,7 +35,7 @@ public class Login_Controller {
         login.increaseScore();
     }
 
-    public void registerObserver(SpelbordObserver sbv) {
+    public void registerObserver(LoginObserver sbv) {
         login.register(sbv);
     }
 }

@@ -18,10 +18,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import observers.SpelbordObservable;
-import observers.SpelbordObserver;
+import observers.*;
 
-public class LoginView implements SpelbordObserver {
+public class LoginView implements LoginObserver {
 
     String kaart = "/resources/Homescreenempty.png";
     //String file = "C:\\Users\\mjboere\\workspace\\Hello FX World\\src\\wereldkaart.jpg";
@@ -41,7 +40,7 @@ public class LoginView implements SpelbordObserver {
         loginController = loginController.getInstance();
 
         // PASS IT TO THE CONTROLLER WHO WILL PASS IT TO THE MODEL
-        loginController.registerObserver((SpelbordObserver) this);
+        loginController.registerObserver((LoginObserver) this);
     }
 
     private void loadPrimaryStageWithGridPane(GridPane gp) {
@@ -90,7 +89,7 @@ public class LoginView implements SpelbordObserver {
         return gridPane;
     }
 
-    private GridPane createUpdatedGridPane(SpelbordObservable sb){
+    private GridPane createUpdatedGridPane(LoginObservable sb){
 
         if(sb.isLoginCorrect()){
             return loginCorrect(sb);
@@ -100,7 +99,7 @@ public class LoginView implements SpelbordObserver {
 
     }
 
-    public GridPane loginCorrect(SpelbordObservable sb){
+    public GridPane loginCorrect(LoginObservable sb){
         Text scoreText = new Text("Player Score");
         Button startButton = new Button("Start Game");
         startButton.addEventFilter(MouseEvent.MOUSE_CLICKED, startClicked);
@@ -119,7 +118,7 @@ public class LoginView implements SpelbordObserver {
         return gridPane;
     }
 
-    public GridPane loginIncorrect(SpelbordObservable sb){
+    public GridPane loginIncorrect(LoginObservable sb){
         Text error = new Text("Username or password is not correct");
         error.setFill(Color.RED);
         Button submitButton = new Button("Submit");
@@ -175,7 +174,7 @@ public class LoginView implements SpelbordObserver {
     };
 
     @Override
-    public void update(SpelbordObservable sb) {
+    public void update(LoginObservable sb) {
         loadPrimaryStageWithGridPane(createUpdatedGridPane(sb));
     }
 

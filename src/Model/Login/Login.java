@@ -1,12 +1,11 @@
 package Model.Login;
 
-import observers.SpelbordObservable;
-import observers.SpelbordObserver;
+import observers.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Login implements SpelbordObservable {
+public class Login implements LoginObservable {
 
     private int scorePlayer1 = 0; 		// Should be in player model - but out of time;
     private String uName = "me";
@@ -16,7 +15,7 @@ public class Login implements SpelbordObservable {
     private boolean loginCorrect = false;
 
     // List of all Observers of this Observable Objects
-    private List<SpelbordObserver> observers = new ArrayList<SpelbordObserver>();
+    private List<LoginObserver> observers = new ArrayList<LoginObserver>();
 
     public Login() {
     }
@@ -68,14 +67,14 @@ public class Login implements SpelbordObservable {
     }
 
     // Add an observer to the list
-    public void register(SpelbordObserver observer){
+    public void register(LoginObserver observer){
         observers.add(observer);
     }
 
     // Signal all observers that something has changed.
     // Also send <<this>> object to the observers.
     public void notifyAllObservers(){
-        for (SpelbordObserver s : observers) {
+        for (LoginObserver s : observers) {
             s.update(this);
         }
     }
