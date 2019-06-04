@@ -1,6 +1,7 @@
 package View;
 
 import Controller.Bord_Controllers.Bord_Controller;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
@@ -10,12 +11,17 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import observers.*;
+import Controller.Controller;
 
 public class BordView {
+
+    Controller controller = Controller.getInstance();
+
 
     String kaart = "/gamescreenempty.png";
     //String file = "C:\\Users\\mjboere\\workspace\\Hello FX World\\src\\wereldkaart.jpg";
@@ -28,6 +34,8 @@ public class BordView {
     Bord_Controller bordController;
     TextField usernameField = new TextField();
     TextField passwordField = new TextField();
+    Button zonBrand = new Button("Burn");
+
 
     public BordView(Stage s){
         primaryStage = s;
@@ -45,7 +53,6 @@ public class BordView {
             GridPane root = gp;
             Image backgroundImage = new Image("gamescreenempty.png");
             Canvas canvas = new Canvas(width, height);
-
             Group group = new Group(canvas, root);
             Scene scene = new Scene(group);
             primaryStage.setScene(scene);
@@ -66,6 +73,7 @@ public class BordView {
 
         Button submitButton = new Button("Submit");
         //submitButton.addEventFilter(MouseEvent.MOUSE_CLICKED, submitClicked);
+        zonBrand.addEventFilter(MouseEvent.MOUSE_CLICKED, zonBrandClicked);
 
         GridPane gridPane = new GridPane();
         gridPane.setMinSize(400, 200);
@@ -73,6 +81,7 @@ public class BordView {
         gridPane.setVgap(5);
         gridPane.setHgap(5);
         gridPane.setAlignment(Pos.CENTER);
+        gridPane.add(zonBrand, 1, 2);
 
         //gridPane.add(image, 0, 0);
         //gridPane.add(scoreText, 1, 0);
@@ -111,8 +120,11 @@ public class BordView {
         return gridPane;
     }
 
-
-
-
-
+    EventHandler<javafx.scene.input.MouseEvent> zonBrandClicked = new EventHandler<javafx.scene.input.MouseEvent>() {
+        @Override
+        public void handle(javafx.scene.input.MouseEvent e) {
+            controller.verwijderZand();
+            System.out.println("button clicked");
+        }
+    };
 }

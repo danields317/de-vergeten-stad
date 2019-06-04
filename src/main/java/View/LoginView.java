@@ -82,9 +82,9 @@ public class LoginView implements LoginObserver {
         //gridPane.add(image, 0, 0);
         //gridPane.add(scoreText, 1, 0);
 
-        gridPane.add(usernameField, 0, 1);
-        gridPane.add(passwordField, 0,2);
-        gridPane.add(submitButton, 0,3);
+        gridPane.add(usernameField, 140, 70);
+        gridPane.add(passwordField, 140,71);
+        gridPane.add(submitButton, 140,72);
 
         return gridPane;
     }
