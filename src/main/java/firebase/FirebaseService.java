@@ -135,7 +135,6 @@ public class FirebaseService {
         // Add a new document (asynchronously) in collection "cities" with id "LA"
         ApiFuture<WriteResult> future = this.colRef.document(roomID).set(docData);
 
-
         try {
             System.out.println("Update time : " + future.get().getUpdateTime());
         } catch (InterruptedException e) {
@@ -145,11 +144,28 @@ public class FirebaseService {
         }
     }
 
-//    public List<QueryDocumentSnapshot> getRoomID(){
-//        DocumentReference docRef = this.colRef.document("rooms");
-//        ApiFuture<DocumentSnapshot> future = docRef.get();
-//        DocumentSnapshot document;
-//    }
+    /**
+     * Deze methode wordt gebruikt om alle roomId's op te halen van de db
+     *
+     * @return een list met alle roomids
+     *
+     * @author ryan
+     */
+    public List<QueryDocumentSnapshot> getAllRooms(){
+        try{
+            ApiFuture<QuerySnapshot> future = colRef.get();
+            List<QueryDocumentSnapshot> documents = future.get().getDocuments();
+            for(DocumentSnapshot doc : documents){
+                System.out.println(doc.getId());
+            }
+            return documents;
+        }catch (InterruptedException ie){
+            System.out.println("Interrupt: " + ie);
+        }catch (ExecutionException ee){
+            System.out.println("Execution: " + ee);
+        }
+        return null;
+    }
 
     /**
      * Deze methode is gebruikt om een spel op te vragen uit de database
@@ -190,23 +206,6 @@ public class FirebaseService {
      */
     public void delete(String documentId) {
         ApiFuture<WriteResult> writeResult = this.colRef.document(documentId).delete();
-    }
-
-
-    public static void main(String[] args){
-        FirebaseService fb = new FirebaseService();
-
-//        Map<String, Object> fieldData = new HashMap<>();
-//        fieldData.put("nickname", "Winterjas");
-//        fieldData.put("wachtwoord", "oppergod");
-//
-//        Map<String, Object> docData = new HashMap<>();
-//        docData.put("ryanr", fieldData);
-
-//        fb.addGebruiker(docData);
-
-//        fb.getGebruiker("ryanr");
-//        fb.getRoomID();
     }
 
 }
