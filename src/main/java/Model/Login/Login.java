@@ -22,7 +22,7 @@ public class Login implements LoginObservable {
 
     public boolean kijkOfKamerBestaat(String kamerId) {
         setError("");
-        if(kamerId.equals("huilen")){
+        if(kamerId.equals("t3PuQAWO6mrKfqaFISN0")){
             return true;
         }else{
             return false;

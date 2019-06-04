@@ -1,6 +1,8 @@
 package View;
 
 import Controller.Bord_Controllers.LoadBord_Controller;
+import firebase.FirebaseService;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
@@ -9,10 +11,16 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import observers.LoadBordObservable;
 import observers.LoadBordObserver;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 
 public class LoadBordView implements LoadBordObserver {
@@ -27,6 +35,8 @@ public class LoadBordView implements LoadBordObserver {
     Stage primaryStage;
     LoadBord_Controller loadBordController;
     String roomId;
+    FirebaseService firebaseService = new FirebaseService();
+    String tempString;
 
     public LoadBordView(Stage s, String roomId){
         primaryStage = s;
@@ -63,6 +73,8 @@ public class LoadBordView implements LoadBordObserver {
     }
 
     private GridPane createTestGridPane(){
+
+        Object roomInfo = firebaseService.getSpel(roomId).getData();
         GridPane gridPane = new GridPane();
         gridPane.setMinSize(400, 200);
         gridPane.setPadding(new Insets(10, 10, 10, 10));
@@ -70,25 +82,26 @@ public class LoadBordView implements LoadBordObserver {
         gridPane.setHgap(5);
         gridPane.setAlignment(Pos.CENTER);
 
-        ImageView image1 = createImageView("" + ".png");
-        ImageView image2 = createImageView("Klimmer" + ".png");
-        ImageView image3 = createImageView("Navigator" + ".png");
-        ImageView image4 = createImageView("Verkenner" + ".png");
-        ImageView image5 = createImageView("Waterdrager" + ".png");
-
-        gridPane.add(image1, 0, 0);
-        gridPane.add(image2, 1, 0);
-        gridPane.add(image3, 2, 0);
-        gridPane.add(image4, 3, 0);
-        gridPane.add(image5, 4, 0);
-
-        //gridPane.add(image, 0, 0);
-        //gridPane.add(scoreText, 1, 0);
+        ArrayList<String> classes = ((ArrayList<String>) ((Map) roomInfo).get("Selectable_classes"));
+        int count = 0;
+        for(String s : classes){
+            ImageView image = createImageView(s + ".png");
+            tempString = s;
+            image.setOnMouseClicked( e -> {myEvent(tempString);});
+            gridPane.add(image, count, 0);
+            count++;
+       }
 
 
 
         return gridPane;
     }
+
+    public void myEvent(String s){
+
+    }
+
+
 
     public ImageView createImageView(String name){
        return new ImageView(new Image(name));
