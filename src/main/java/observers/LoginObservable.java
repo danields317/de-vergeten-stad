@@ -6,5 +6,6 @@ public interface LoginObservable {
     public String getScore();
     public String getGivenUsername();
     public String getGivenPassword();
+    public String getError();
     public boolean isLoginCorrect();
 }
