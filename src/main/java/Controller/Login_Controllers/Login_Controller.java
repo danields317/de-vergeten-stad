@@ -2,6 +2,7 @@ package Controller.Login_Controllers;
 
 import Controller.Controller;
 import Model.Login.Login;
+import javafx.stage.Stage;
 import observers.*;
 
 public class Login_Controller {
@@ -25,6 +26,21 @@ public class Login_Controller {
 
     public void checkLogin(String uName, String pass){
         login.checkLogin(uName, pass);
+    }
+
+    public void startGame(String roomId){
+
+
+    }
+
+    public void loadGame(String roomId, Stage s){
+        if(login.kijkOfKamerBestaat(roomId)){
+            login.setError("Dat is wat je gaat doen zodra je vanavond thuiskomt");
+            login.laadKamer(roomId, s);
+
+        }else{
+            login.setError("De kamer bestaat nog niet");
+        }
     }
 
     public String getScore(){
