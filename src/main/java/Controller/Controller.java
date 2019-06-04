@@ -24,8 +24,7 @@ public class Controller/* extends Application  */{
         return controller;
     }
 
-    public void verwijderZand(){
-        playcont.drinkWater();
+    public void verwijderZand(){playcont.drinkWater();
     }
 
     /*
