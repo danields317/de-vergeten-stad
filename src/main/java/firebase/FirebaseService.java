@@ -1,7 +1,6 @@
 package firebase;
 
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
@@ -17,11 +16,12 @@ import com.google.firebase.database.annotations.Nullable;
  *
  * @author ryan
  */
-public class FirebaseService {
+public class FirebaseService{
 
     private Firestore firestore;
     private static final String GEBRUIKERS_PATH = "games";
     private CollectionReference colRef;
+//    private Controller controller;
 
 
     public FirebaseService() {
@@ -36,11 +36,13 @@ public class FirebaseService {
     /**
      * Geeft een update naar de meegeleverde controller
      * op het moment dat er een wijziging in het firebase document plaatsvindt.
-     * @param documentId
+     * @param roomId Dit is de roomId/ het spel wat gebruikt wordt.
+     *
+     * @author ryan
      */
-    public void listen(String documentId) {
+    public void listen(String roomId) {
 
-        DocumentReference docRef = this.colRef.document(documentId);
+        DocumentReference docRef = this.colRef.document(roomId);
 
         docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
 
@@ -52,8 +54,7 @@ public class FirebaseService {
                 }
 
                 if (snapshot != null && snapshot.exists()) {
-
-//                    controller.update(snapshot);
+//                    controller.updateFromFirebase(snapshot);
 
                     System.out.println("Current data: " + snapshot.getData());
                 } else {
