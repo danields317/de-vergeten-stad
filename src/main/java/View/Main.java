@@ -17,8 +17,6 @@ public class Main extends Application{
     @Override
     public void start(Stage primaryStage){
         LoginView b = new LoginView(primaryStage);
-        FirebaseService fb = new FirebaseService();
-        fb.listen("huilen");
     }
     public static void main(String[] args) {launch(args);}
 

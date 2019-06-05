@@ -1,6 +1,8 @@
 package firebase;
 
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
@@ -18,6 +20,9 @@ import com.google.firebase.database.annotations.Nullable;
  */
 public class FirebaseService{
 
+
+    static FirebaseService firebaseService;
+
     private Firestore firestore;
     private static final String GEBRUIKERS_PATH = "games";
     private CollectionReference colRef;
@@ -28,10 +33,15 @@ public class FirebaseService{
         Database db = new Database();
         this.firestore = db.getFirestoreDatabase();
 
-        this.colRef = this.firestore.collection(GEBRUIKERS_PATH);		// Een generieke referentie naar de games documents.
+        this.colRef = this.firestore.collection(GEBRUIKERS_PATH);		// Een generieke referentie naar de games documents
     }
 
-
+    public static FirebaseService getInstance() {
+        if (firebaseService == null) {
+            firebaseService = new FirebaseService();
+        }
+        return firebaseService;
+    }
 
     /**
      * Geeft een update naar de meegeleverde controller
@@ -95,20 +105,16 @@ public class FirebaseService{
      *
      * @author ryan
      */
-    public Object getGebruiker(String gebruiker) {
-
+    public Map<String, String> getGebruiker(String gebruiker) {
         DocumentReference docRef = this.colRef.document("gebruikers");
         ApiFuture<DocumentSnapshot> future = docRef.get();
         DocumentSnapshot document;
 
         try {
             document = future.get();
-
-            if (document.exists()) {
-                System.out.println(document.get(gebruiker));
-                return document.get(gebruiker);
+            if (document.exists() && document.get(gebruiker)!=null) {
+                return ((Map<String, String>)document.get(gebruiker));
             } else {
-
                 System.out.println("No such document!");
             }
         } catch (InterruptedException e) {
@@ -152,14 +158,15 @@ public class FirebaseService{
      *
      * @author ryan
      */
-    public List<QueryDocumentSnapshot> getAllRooms(){
+    public ArrayList<String> getAllRooms(){
         try{
             ApiFuture<QuerySnapshot> future = colRef.get();
             List<QueryDocumentSnapshot> documents = future.get().getDocuments();
+            ArrayList<String> rooms = new ArrayList<>();
             for(DocumentSnapshot doc : documents){
-                System.out.println(doc.getId());
+                rooms.add(doc.getId());
             }
-            return documents;
+            return rooms;
         }catch (InterruptedException ie){
             System.out.println("Interrupt: " + ie);
         }catch (ExecutionException ee){
@@ -208,5 +215,9 @@ public class FirebaseService{
     public void delete(String documentId) {
         ApiFuture<WriteResult> writeResult = this.colRef.document(documentId).delete();
     }
+
+//    public static void main(String[] args){
+//        System.out.println(getInstance().getGebruiker("ryanr").get("wachtwoord"));
+//    }
 
 }
