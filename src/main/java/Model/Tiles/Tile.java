@@ -14,10 +14,14 @@ public class Tile {
 	private boolean discovered = false;
 	private Player[] players; // Alle spelers die op deze tile staan
 	
-	private boolean hasArtifactPropeller = false;
-	private boolean hasArtifactMotor = false;
-	private boolean hasArtifactZonnekristal = false;
-	private boolean hasArtifactKompas = false;
+	public boolean hasArtifactPropeller = false;
+	public boolean hasArtifactMotor = false;
+	public boolean hasArtifactZonnekristal = false;
+	public boolean hasArtifactKompas = false;
+
+	public double x;
+	public double y;
+	public double size = 10;
 	
 	/////////////////////////////////////// Constructor ///////////////////////////////////////
 	

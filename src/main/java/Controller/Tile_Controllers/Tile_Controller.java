@@ -1,10 +1,9 @@
 package Controller.Tile_Controllers;
 
-import Engine.behavior.behaviors.Collidable;
 import Model.Tiles.Tile;
 import javafx.scene.paint.Color;
 
-public class Tile_Controller implements Collidable{
+public class Tile_Controller{
 
     private Tile tile;
 
@@ -24,10 +23,16 @@ public class Tile_Controller implements Collidable{
         this.tile = tile;
     }
 
-    @Override
-    public void handleCollision(Collidable collidable){
-        /*if(collidable instanceof tile){
-
-        }*/
+    /**
+     * Check if this tile collides with another.
+     * @param tile Tile to check collision with.
+     * @return boolean True if the tiles collide, otherwise false.
+     * @author Tim
+     */
+    public boolean checkCollision(Tile tile) {
+        return this.tile.x + this.tile.size > tile.x
+                && this.tile.x < tile.x + tile.size
+                && this.tile.y + this.tile.size > tile.y
+                && this.tile.y < tile.y + tile.size;
     }
 }
