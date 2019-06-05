@@ -33,6 +33,7 @@ public class LoginView implements LoginObserver {
     Login_Controller loginController;
     TextField usernameField = new TextField();
     TextField passwordField = new TextField();
+    TextField roomId = new TextField("Place here your room id");
 
     public LoginView(Stage s){
         primaryStage = s;
@@ -100,10 +101,12 @@ public class LoginView implements LoginObserver {
     }
 
     public GridPane loginCorrect(LoginObservable sb){
-        Text scoreText = new Text("Player Score");
+        Text error = new Text(sb.getError());
+        error.setFill(Color.RED);
         Button startButton = new Button("Start Game");
+        Button loadButton = new Button("Load Game");
         startButton.addEventFilter(MouseEvent.MOUSE_CLICKED, startClicked);
-
+        loadButton.addEventFilter(MouseEvent.MOUSE_CLICKED, loadClicked);
 
 
         GridPane gridPane = new GridPane();
@@ -112,14 +115,19 @@ public class LoginView implements LoginObserver {
         gridPane.setVgap(5);
         gridPane.setHgap(5);
         gridPane.setAlignment(Pos.CENTER);
-
-        gridPane.add(startButton, 0,0);
+        System.out.println("rip");
+        if(!sb.getError().isEmpty()){
+            gridPane.add(error, 0 ,0);
+        }
+        gridPane.add(roomId, 0,1);
+        gridPane.add(startButton, 0,2);
+        gridPane.add(loadButton, 0 ,3);
 
         return gridPane;
     }
 
     public GridPane loginIncorrect(LoginObservable sb){
-        Text error = new Text("Username or password is not correct");
+        Text error = new Text(sb.getError());
         error.setFill(Color.RED);
         Button submitButton = new Button("Submit");
         submitButton.addEventFilter(MouseEvent.MOUSE_CLICKED, submitClicked);
@@ -163,6 +171,13 @@ public class LoginView implements LoginObserver {
         @Override
         public void handle(MouseEvent e) {
             new BordView(primaryStage);
+
+        }
+    };
+    EventHandler<MouseEvent> loadClicked = new EventHandler<MouseEvent>() {
+        @Override
+        public void handle(MouseEvent e ) {
+            loginController.loadGame(roomId.getText(), primaryStage);
 
         }
     };

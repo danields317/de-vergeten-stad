@@ -1,5 +1,8 @@
 package Model.Login;
 
+import View.LoadBordView;
+import com.google.cloud.firestore.QueryDocumentSnapshot;
+import javafx.stage.Stage;
 import observers.*;
 
 import java.util.ArrayList;
@@ -13,15 +16,37 @@ public class Login implements LoginObservable {
     private String givenUsername;
     private String givenPassword;
     private boolean loginCorrect = false;
+    private String error = "";
 
     // List of all Observers of this Observable Objects
     private List<LoginObserver> observers = new ArrayList<LoginObserver>();
 
-    public Login() {
+    public boolean kijkOfKamerBestaat(String kamerId, ArrayList<String> kamers) {
+        setError("");
+        if(kamers.contains(kamerId)){
+            return true;
+//        if(kamerId.equals("huilen")){
+//            return true;
+        }else{
+            return false;
+        }
     }
 
+    public void laadKamer(String roomId, Stage s){
+        new LoadBordView(s , roomId);
+
+    }
     public String getScore(){
         return Integer.toString(scorePlayer1);
+    }
+
+    public void setError(String error){
+        this.error = error;
+        notifyAllObservers();
+    }
+
+    public String getError(){
+        return error;
     }
 
     public void LoginCorrect(){
@@ -49,13 +74,18 @@ public class Login implements LoginObservable {
     }
 
 
-    public void checkLogin(String uName, String pass){
+    public void checkLogin(String uName, String pass, String fbPass){
         setGivenUsername(uName);
         setGivenPassword(pass);
-        if((this.uName.equals(uName)) && (this.pass.equals(pass))){
+        if (pass.equals(fbPass)){
             LoginCorrect();
+            setError("");
+//        if(((this.uName.equals(uName)) && (this.pass.equals(pass))) || true){
+//            LoginCorrect();
+//            setError("");
+        }else{
+            setError("Password of username klopt niet");
         }
-        notifyAllObservers();
     }
 
     public void increaseScore(){
