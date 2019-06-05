@@ -13,7 +13,22 @@ import javafx.stage.Stage;
 import View.*;
 
 public class Controller/* extends Application  */{
-/*
+
+    static Controller controller;
+    //Player_controller playcont = Player_controller.getInstance();
+
+    public static Controller getInstance() {
+        if (controller == null) {
+            controller = new Controller();
+        }
+        return controller;
+    }
+
+   // public void verwijderZand(){
+        //playcont.drinkWater();
+   //}
+
+    /*
     private int screenWidth = 1600;
     private int screenHeight = 900;
     private Users users = new Users();
