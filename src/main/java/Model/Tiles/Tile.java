@@ -18,6 +18,10 @@ public class Tile {
 	public boolean hasArtifactMotor = false;
 	public boolean hasArtifactZonnekristal = false;
 	public boolean hasArtifactKompas = false;
+
+	public double x;
+	public double y;
+	public double size = 10;
 	
 	/////////////////////////////////////// Constructor ///////////////////////////////////////
 	
