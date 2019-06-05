@@ -10,7 +10,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.stage.Stage;
 
-public class Main extends Application{
+public class  Main extends Application{
 	
 	private int screenWidth = 1600;
 	private int screenHeight = 900;

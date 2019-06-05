@@ -11,6 +11,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
@@ -22,6 +23,7 @@ public class BordView {
 
     Controller controller = Controller.getInstance();
 
+    public static GridPane gridPane;
 
     String kaart = "/gamescreenempty.png";
     //String file = "C:\\Users\\mjboere\\workspace\\Hello FX World\\src\\wereldkaart.jpg";
@@ -42,8 +44,14 @@ public class BordView {
         loadPrimaryStageWithGridPane(createInitialGridPane());
         bordController = bordController.getInstance();
 
+
+        WaterflesView  waterflesView = new WaterflesView(3);
+        ImageView waterflesImageView = waterflesView.loadWaterfles();
+        gridPane.add(waterflesImageView, 1, 1 );
+
         // PASS IT TO THE CONTROLLER WHO WILL PASS IT TO THE MODEL
         bordController.registerObserver((BordObserver) this);
+
     }
 
     private void loadPrimaryStageWithGridPane(GridPane gp) {
@@ -51,6 +59,7 @@ public class BordView {
 
 
             GridPane root = gp;
+            gridPane = root;
             Image backgroundImage = new Image("gamescreenempty.png");
             Canvas canvas = new Canvas(width, height);
             Group group = new Group(canvas, root);
