@@ -1,6 +1,7 @@
 package View;
 
 import Controller.Controller;
+import firebase.FirebaseService;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Group;
@@ -14,7 +15,9 @@ public class Main extends Application{
 	private int screenWidth = 1600;
 	private int screenHeight = 900;
     @Override
-    public void start(Stage primaryStage){LoginView b = new LoginView(primaryStage);}
+    public void start(Stage primaryStage){
+        LoginView b = new LoginView(primaryStage);
+    }
     public static void main(String[] args) {launch(args);}
 
 

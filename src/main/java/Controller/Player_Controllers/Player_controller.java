@@ -12,18 +12,20 @@ public class Player_controller {
 
 
     static Player_controller playercont;
+    StaticData staticData = StaticData.getInstance();
     Player player;
 
 
 
 
+
     public Player_controller(String className, String imagePath){
-        player = new Player("a",className, "b", 4, Color.BLUE, imagePath);
+        player = new Player(staticData.getUsername(),className, "b", 4, Color.BLUE, imagePath);
     }
 
 
     public Player_controller(String n, String className, String b, int maxwater, Color color, String imagePath){
-        player = new Player("a",className, "b", 4, Color.BLUE, imagePath);
+        player = new Player(staticData.getUsername(),className, "b", 4, Color.BLUE, imagePath);
     }
     // Singleton Pattern.
     // now we can call: SpelbordController.getInstance()  from everywhere

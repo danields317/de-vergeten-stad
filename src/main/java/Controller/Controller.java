@@ -15,7 +15,7 @@ import View.*;
 public class Controller/* extends Application  */{
 
     static Controller controller;
-    //Player_controller playcont = Player_controller.getInstance();
+    Player_controller playcont = Player_controller.getInstance();
 
     public static Controller getInstance() {
         if (controller == null) {
@@ -24,9 +24,8 @@ public class Controller/* extends Application  */{
         return controller;
     }
 
-   // public void verwijderZand(){
-        //playcont.drinkWater();
-   //}
+    public void verwijderZand(){playcont.drinkWater();
+    }
 
     /*
     private int screenWidth = 1600;

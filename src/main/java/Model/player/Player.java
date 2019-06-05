@@ -52,6 +52,13 @@ public class Player {
 		
 	}
 	*/
+
+	public void giveWater(Player reciever){
+		if((this.water > 0 && reciever.water < reciever.maxWater) && (this.tile == reciever.tile)){
+			this.subtractWater(1);
+			reciever.addWater(1);
+		}
+	}
 	/////////////////////////////////////// Getters & Setters ///////////////////////////////////////
 	
 	public int getWater() {

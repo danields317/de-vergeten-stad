@@ -35,13 +35,12 @@ public class LoadBordView implements LoadBordObserver {
     Stage primaryStage;
     LoadBord_Controller loadBordController;
     String roomId;
-    FirebaseService firebaseService = new FirebaseService();
 
     public LoadBordView(Stage s, String roomId){
         primaryStage = s;
         this.roomId = roomId;
         //loadPrimaryStageWithGridPane(createInitialGridPane());
-        loadPrimaryStageWithGridPane(createTestGridPane());
+        loadPrimaryStageWithGridPane(createInitialGridPane());
         loadBordController = loadBordController.getInstance();
 
         // PASS IT TO THE CONTROLLER WHO WILL PASS IT TO THE MODEL
@@ -53,7 +52,7 @@ public class LoadBordView implements LoadBordObserver {
 
 
             GridPane root = gp;
-            Image backgroundImage = new Image("background.png");
+            Image backgroundImage = new Image("giphy2.gif");
             Canvas canvas = new Canvas(width, height);
 
             Group group = new Group(canvas, root);
@@ -71,8 +70,8 @@ public class LoadBordView implements LoadBordObserver {
         }
     }
 
-    private GridPane createTestGridPane(){
-
+    private GridPane createUpdatedGridPane(LoadBordObservable sb){
+        FirebaseService firebaseService = FirebaseService.getInstance();
         Object roomInfo = firebaseService.getSpel(roomId).getData();
         (StaticData.getInstance()).setRoomInfo(roomInfo);
         Object classes = ((Map) roomInfo).get("Selectable_classes");
@@ -89,8 +88,10 @@ public class LoadBordView implements LoadBordObserver {
             Object killMe = ((Map) classes).get(Integer.toString(i));
             final String tempString = ( ((Map) killMe).get("name")).toString();
             ImageView image = createImageView(tempString + ".png");
-            image.setOnMouseClicked(e -> {Player_controller.getInstance();
-            System.out.println(tempString);});
+            image.setOnMouseClicked(e -> {
+                Player_controller.getInstance();
+                System.out.println(tempString);
+            });
             gridPane.add(image, count, 0);
             count++;
         }
@@ -125,10 +126,7 @@ public class LoadBordView implements LoadBordObserver {
         return gridPane;
     }
 
-    private GridPane createUpdatedGridPane(LoadBordObservable sb){
-        return new GridPane();
 
-    }
 
 
 
