@@ -2,14 +2,14 @@ package Model.storm;
 
 public class StormEventBeweging extends StormEvent{
 
-    public enum Rightingen{NOORD,OOST,ZUID,WEST}
-    private Rightingen righting;
+    public enum Richtingen{NOORD,OOST,ZUID,WEST}
+    public Richtingen richting;
 
-    private Stappen stappen;
+    public Stappen stappen;
 
-    public StormEventBeweging(Namen naam, Rightingen righting, Stappen stappen) {
+    public StormEventBeweging(Namen naam, Richtingen richting, Stappen stappen) {
         super(naam);
-        this.righting = righting;
+        this.richting = richting;
         this.stappen = stappen;
     }
 

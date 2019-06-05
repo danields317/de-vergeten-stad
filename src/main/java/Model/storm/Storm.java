@@ -13,6 +13,7 @@ public class Storm {
     private int x;
     private int y;
     private int sterkte;
+    private int subSterkte;
     private ArrayList<StormEvent> stormEvents = new ArrayList<>();
     private ArrayList<StormEvent> randomStormEvents = new ArrayList<>();
     private Random random = new Random();
@@ -23,6 +24,7 @@ public class Storm {
         x = 2;
         y = 2;
         sterkte = 2;
+        subSterkte = 1;
         makeEvents();
         randomizeEvents(stormEvents);
     }
@@ -34,29 +36,29 @@ public class Storm {
             }else if (i < 7){
                 stormEvents.add(new StormEvent(StormEvent.Namen.STERKER));
             }else if (i < 10){
-                stormEvents.add(new StormEventBeweging(StormEvent.Namen.BEWEGING, StormEventBeweging.Rightingen.NOORD, StormEventBeweging.Stappen.ONE));
+                stormEvents.add(new StormEventBeweging(StormEvent.Namen.BEWEGING, StormEventBeweging.Richtingen.NOORD, StormEventBeweging.Stappen.ONE));
             }else if (i < 13){
-                stormEvents.add(new StormEventBeweging(StormEvent.Namen.BEWEGING, StormEventBeweging.Rightingen.OOST, StormEventBeweging.Stappen.ONE));
+                stormEvents.add(new StormEventBeweging(StormEvent.Namen.BEWEGING, StormEventBeweging.Richtingen.OOST, StormEventBeweging.Stappen.ONE));
             }else if (i < 16){
-                stormEvents.add(new StormEventBeweging(StormEvent.Namen.BEWEGING, StormEventBeweging.Rightingen.ZUID, StormEventBeweging.Stappen.ONE));
+                stormEvents.add(new StormEventBeweging(StormEvent.Namen.BEWEGING, StormEventBeweging.Richtingen.ZUID, StormEventBeweging.Stappen.ONE));
             }else if (i < 19){
-                stormEvents.add(new StormEventBeweging(StormEvent.Namen.BEWEGING, StormEventBeweging.Rightingen.WEST, StormEventBeweging.Stappen.ONE));
+                stormEvents.add(new StormEventBeweging(StormEvent.Namen.BEWEGING, StormEventBeweging.Richtingen.WEST, StormEventBeweging.Stappen.ONE));
             }else if (i < 21){
-                stormEvents.add(new StormEventBeweging(StormEvent.Namen.BEWEGING, StormEventBeweging.Rightingen.NOORD, StormEventBeweging.Stappen.TWO));
+                stormEvents.add(new StormEventBeweging(StormEvent.Namen.BEWEGING, StormEventBeweging.Richtingen.NOORD, StormEventBeweging.Stappen.TWO));
             }else if (i < 23){
-                stormEvents.add(new StormEventBeweging(StormEvent.Namen.BEWEGING, StormEventBeweging.Rightingen.OOST, StormEventBeweging.Stappen.TWO));
+                stormEvents.add(new StormEventBeweging(StormEvent.Namen.BEWEGING, StormEventBeweging.Richtingen.OOST, StormEventBeweging.Stappen.TWO));
             }else if (i < 25){
-                stormEvents.add(new StormEventBeweging(StormEvent.Namen.BEWEGING, StormEventBeweging.Rightingen.ZUID, StormEventBeweging.Stappen.TWO));
+                stormEvents.add(new StormEventBeweging(StormEvent.Namen.BEWEGING, StormEventBeweging.Richtingen.ZUID, StormEventBeweging.Stappen.TWO));
             }else if (i < 27){
-                stormEvents.add(new StormEventBeweging(StormEvent.Namen.BEWEGING, StormEventBeweging.Rightingen.WEST, StormEventBeweging.Stappen.TWO));
+                stormEvents.add(new StormEventBeweging(StormEvent.Namen.BEWEGING, StormEventBeweging.Richtingen.WEST, StormEventBeweging.Stappen.TWO));
             }else if (i < 28){
-                stormEvents.add(new StormEventBeweging(StormEvent.Namen.BEWEGING, StormEventBeweging.Rightingen.NOORD, StormEventBeweging.Stappen.THREE));
+                stormEvents.add(new StormEventBeweging(StormEvent.Namen.BEWEGING, StormEventBeweging.Richtingen.NOORD, StormEventBeweging.Stappen.THREE));
             }else if (i < 29){
-                stormEvents.add(new StormEventBeweging(StormEvent.Namen.BEWEGING, StormEventBeweging.Rightingen.OOST, StormEventBeweging.Stappen.THREE));
+                stormEvents.add(new StormEventBeweging(StormEvent.Namen.BEWEGING, StormEventBeweging.Richtingen.OOST, StormEventBeweging.Stappen.THREE));
             }else if (i < 30){
-                stormEvents.add(new StormEventBeweging(StormEvent.Namen.BEWEGING, StormEventBeweging.Rightingen.ZUID, StormEventBeweging.Stappen.THREE));
+                stormEvents.add(new StormEventBeweging(StormEvent.Namen.BEWEGING, StormEventBeweging.Richtingen.ZUID, StormEventBeweging.Stappen.THREE));
             }else if (i < 31){
-                stormEvents.add(new StormEventBeweging(StormEvent.Namen.BEWEGING, StormEventBeweging.Rightingen.WEST, StormEventBeweging.Stappen.THREE));
+                stormEvents.add(new StormEventBeweging(StormEvent.Namen.BEWEGING, StormEventBeweging.Richtingen.WEST, StormEventBeweging.Stappen.THREE));
             }
         }
     }
@@ -75,34 +77,48 @@ public class Storm {
     }
 
 
-    public void voerStormEventsUit(){
-        for (int i = 0; i < sterkte; i++){
-            switch (randomStormEvents.get(stapelCounter).getNaam()){
+    public void voerStormEventsUit(ArrayList<StormEvent> stormEvents){
+        int tmpSterkte = sterkte;
+        for (int i = 0; i < tmpSterkte; i++){
+            StormEvent stormEvent = stormEvents.get(stapelCounter);
+            switch (stormEvent.naam){
                 case BEWEGING:
+                    beweegStorm(((StormEventBeweging) stormEvent).richting, ((StormEventBeweging) stormEvent).stappen);
                     break;
                 case BRANDT:
+//                    zonBrandt();
                     break;
                 case STERKER:
+                    stormWordtSterker();
                     break;
                 default:
                     System.out.println("DIT HOORT NIET");
             }
+            stapelCounter++;
         }
     }
 
-    public void beweegStorm(StormEventBeweging.Rightingen righting, StormEventBeweging.Stappen stappen){
-        switch (righting){
+    public void beweegStorm(StormEventBeweging.Richtingen richting, StormEventBeweging.Stappen stappen){
+        switch (richting){
             case NOORD:
-                y -= stappen.getNumber();
+                if (y-stappen.getNumber() >= 0){
+                    y -= stappen.getNumber();
+                }else y = 0;
                 break;
             case OOST:
-                x += stappen.getNumber();
+                if (x+stappen.getNumber() <= 4){
+                    x += stappen.getNumber();
+                }else x = 4;
                 break;
             case ZUID:
-                y += stappen.getNumber();
+                if (y+stappen.getNumber() <= 4){
+                    y += stappen.getNumber();
+                }else y = 4;
                 break;
             case WEST:
-                x -= stappen.getNumber();
+                if (x-stappen.getNumber() >= 0){
+                    x -= stappen.getNumber();
+                }else x = 0;
                 break;
             default:
                 System.out.println("DIT HOORT NIET");
@@ -110,6 +126,18 @@ public class Storm {
     }
 
 
+    public void stormWordtSterker(){
+        subSterkte++;
+        if (subSterkte < 7){
+            sterkte = 3;
+        }else if (subSterkte < 11){
+            sterkte = 4;
+        }else if (subSterkte < 14){
+            sterkte = 5;
+        }else if (subSterkte < 16){
+            sterkte = 6;
+        }else return;                        //dood()
+    }
 
 
     public ArrayList<StormEvent> getStormEvents() {
@@ -124,10 +152,18 @@ public class Storm {
         return y;
     }
 
+    public int getSubSterkte(){
+        return subSterkte;
+    }
+
+    public int getSterkte(){
+        return sterkte;
+    }
+
     public static void main(String[] args){
         Storm storm = new Storm();
         for (StormEvent s : storm.getStormEvents()){
-            System.out.println(s.getNaam());
+            System.out.println(s.naam);
         }
 
     }
