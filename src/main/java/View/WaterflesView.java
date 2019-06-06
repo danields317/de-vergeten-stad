@@ -21,8 +21,8 @@ public class WaterflesView {
         imageView = new ImageView(placeholder);
         imageView.setFitWidth(200);
         imageView.setFitHeight(220);
-        imageView.setX(60);
-        imageView.setY(800);
+        imageView.setX(40);
+        imageView.setY(666);
 
     }
 

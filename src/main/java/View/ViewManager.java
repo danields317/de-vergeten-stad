@@ -12,32 +12,20 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 public class ViewManager extends Application{
-    BordView bordAchtergrond = new BordView();  //maak achtergrond
-    ActieKnoppenView AKV = new ActieKnoppenView();  //maak beweeg knoppen
-    GraafKnoppenView GKV = new GraafKnoppenView();  //maak graaf knoppen
-    //LoadBordView LBV = new LoadBordView();  //geen idee wat deze doet
-    //LoginView login = new LoginView();  //maak login
-    OnderdeelView onderdeel = new OnderdeelView();  //maak onderdelen
-    SpeelbordView speelbord = new SpeelbordView();  //maak speelbord tiles
-//    SpelerView speler = new SpelerView();           //maak speler poppetjes en zijkant informatie
-    StormView storm = new StormView();              //maak storm en stormmeter
-    UitrustingView uitrusting = new UitrustingView();   //maak uitrusting plaatsen
-//    WaterflesView waterfles = new WaterflesView();      //maak waterfles stand
 
     static Stage primaryStage;
     String kaart = "/gamescreenempty.png";
-    private double width = 1600;
-    private double height = 900;
+    private double windowWidth = 1600;
+    private double windowHeight = 900;
     private double windowAnchorX = 50;
     private double windowAnchorY= 50;
 
-    Image achtergrond = bordAchtergrond.maakAchtergrond();
-    GridPane knoppen = AKV.maakActieKnoppen();
 
     @Override
     public void start(Stage primaryStage) throws Exception {
         this.primaryStage = primaryStage;
-        loadLoginView();
+        //loadLoginView();
+        loadGameView();
     }
 
     public void loadLoginView() {
@@ -49,14 +37,25 @@ public class ViewManager extends Application{
     public void loadGameView() {
         try {
 
-            ImageView background = new ImageView(achtergrond);
-            background.setX(0);
-            background.setY(0);
-            background.setFitWidth(width);
-            background.setFitHeight(height);
+            BordView bordView = new BordView();  //maak achtergrond
+            ActieKnoppenView actieknoppenview = new ActieKnoppenView();  //maak beweeg knoppen
+            GraafKnoppenView graafknoppenview = new GraafKnoppenView();  //maak graaf knoppen
+            //LoadBordView loadbordview = new LoadBordView();  //geen idee wat deze doet
+            OnderdeelView onderdeelview = new OnderdeelView();  //maak onderdelen
+            SpeelbordView speelbordview = new SpeelbordView();  //maak speelbord tiles
+            //    SpelerView spelerview = new SpelerView();           //maak speler poppetjes en zijkant informatie
+            StormView stormview = new StormView();              //maak storm en stormmeter
+            UitrustingView uitrustingview = new UitrustingView();   //maak uitrusting plaatsen
+            WaterflesView waterflesView = new WaterflesView(4);      //maak waterfles stand
 
-            Group group = new Group(background, knoppen);
-            Scene scene = new Scene(group);
+            ImageView waterfles = waterflesView.loadWaterfles();
+            waterflesView.updateWaterFles(0);
+
+            ImageView achtergrond = bordView.maakAchtergrond(windowWidth, windowHeight);
+            GridPane knoppen = actieknoppenview.maakActieKnoppen();
+
+            Group group = new Group(achtergrond, knoppen, waterfles);
+            Scene scene = new Scene(group, windowWidth, windowHeight);
             primaryStage.setScene(scene);
             primaryStage.setTitle("WELCOME TO THE GAME");
             primaryStage.setX(windowAnchorX);
