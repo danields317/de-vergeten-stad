@@ -40,7 +40,7 @@ public class BordView {
 
 
     /*public BordView(){
-       maakAchtergrond();
+       maakAchtergrond();/
 
         // PASS IT TO THE CONTROLLER WHO WILL PASS IT TO THE MODEL
         bordController.registerObserver((BordObserver) this);
