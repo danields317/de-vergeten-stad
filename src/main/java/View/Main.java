@@ -18,7 +18,10 @@ public class Main extends Application{
     public void start(Stage primaryStage){
         LoginView b = new LoginView(primaryStage);
     }
-    public static void main(String[] args) {launch(args);}
+
+    public static void main(String [ ] args){
+        ViewManager viewManager = new ViewManager();
+    }
 
 
     

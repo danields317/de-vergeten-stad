@@ -39,13 +39,16 @@ public class BordView {
     Button zonBrand = new Button("Burn");
 
 
-    public BordView(Stage s){
-        primaryStage = s;
-        loadPrimaryStageWithGridPane(createInitialGridPane(), createButtons());
-        bordController = bordController.getInstance();
+    public BordView(){
+       maakAchtergrond();
 
         // PASS IT TO THE CONTROLLER WHO WILL PASS IT TO THE MODEL
         bordController.registerObserver((BordObserver) this);
+    }
+
+    public Image maakAchtergrond(){
+        Image achtergrond = new Image("gamescreenempty.png");
+        return achtergrond;
     }
 
     private void loadPrimaryStageWithGridPane(GridPane gp, GridPane actie) {
@@ -76,7 +79,7 @@ public class BordView {
 
         Button submitButton = new Button("Submit");
         //submitButton.addEventFilter(MouseEvent.MOUSE_CLICKED, submitClicked);
-        zonBrand.addEventFilter(MouseEvent.MOUSE_CLICKED, zonBrandClicked);
+
 
         GridPane gridPane = new GridPane();
         gridPane.setMinSize(400, 200);
@@ -104,7 +107,7 @@ public class BordView {
 
     }
 
-    public GridPane loginCorrect(BordObservable sb){
+    /*public GridPane loginCorrect(BordObservable sb){
         Text scoreText = new Text("Player Score");
         Button startButton = new Button("Start Game");
         //startButton.addEventFilter(MouseEvent.MOUSE_CLICKED, startClicked);
@@ -121,18 +124,6 @@ public class BordView {
         gridPane.add(startButton, 0,0);
 
         return gridPane;
-    }
+    }*/
 
-    public GridPane createButtons(){
-        GridPane buttonsPane = AKV.maakActieKnoppen();
-        return buttonsPane;
-    }
-
-    EventHandler<javafx.scene.input.MouseEvent> zonBrandClicked = new EventHandler<javafx.scene.input.MouseEvent>() {
-        @Override
-        public void handle(javafx.scene.input.MouseEvent e) {
-            controller.verwijderZand();
-            System.out.println("button clicked");
-        }
-    };
 }

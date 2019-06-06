@@ -8,6 +8,10 @@ import java.awt.*;
 
 public class ActieKnoppenView {
 
+    public ActieKnoppenView(){
+
+    }
+
     public GridPane maakActieKnoppen(){
         Button up = new Button("▲");
         Button down = new Button("▼");

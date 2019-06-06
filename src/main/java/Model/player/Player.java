@@ -7,6 +7,8 @@ import Model.equipment.Equipment;
 
 public class Player {
 
+	private int x;
+	private int y;
 	private String nickname; // Naam ingevoerd door de speler
 	private Equipment[] inventory;
 	private int water;
@@ -53,6 +55,47 @@ public class Player {
 	}
 	*/
 
+	public void moveUp(){
+		if(this.tile.y > 0){
+			this.y += 1;
+			findCurrentTile();
+		}
+		else{
+			return;
+		}
+	}
+
+	public void moveDown(){
+		if(this.tile.y < 5){
+			this.y += 1;
+			findCurrentTile();
+		}
+		else{
+			return;
+		}
+	}
+
+	public void moveLeft(){
+		if(this.tile.x > 0){
+			this.x -= 1;
+			findCurrentTile();
+		}
+		else{
+			return;
+		}
+	}
+
+
+	public void moveRight(){
+		if(this.tile.x < 5){
+			this.x += 1;
+			findCurrentTile();
+		}
+		else{
+			return;
+		}
+	}
+
 	public void giveWater(Player reciever){
 		if((this.water > 0 && reciever.water < reciever.maxWater) && (this.tile == reciever.tile)){
 			this.subtractWater(1);
@@ -81,6 +124,17 @@ public class Player {
 			// RIP
 		}
 	
+	}
+
+	public void findCurrentTile(){
+		int locX = this.x;
+		int locY = this.y;
+		setTile(locX, locY);
+	}
+
+	public void setTile(int x, int y){
+		//vind de tile waar de speler op staat.
+		//zoek door alle tiles en vind degene met de juiste coordianten en plaast deze in tile variabel.
 	}
 	
 	public int getMaxWater() {

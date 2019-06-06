@@ -19,8 +19,8 @@ public class Tile {
 	public boolean hasArtifactZonnekristal = false;
 	public boolean hasArtifactKompas = false;
 
-	public double x;
-	public double y;
+	public int x;
+	public int y;
 	public double size = 10;
 	
 	/////////////////////////////////////// Constructor ///////////////////////////////////////
