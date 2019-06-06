@@ -18,10 +18,10 @@ public class ViewManager extends Application{
     //LoginView login = new LoginView();  //maak login
     OnderdeelView onderdeel = new OnderdeelView();  //maak onderdelen
     SpeelbordView speelbord = new SpeelbordView();  //maak speelbord tiles
-    SpelerView speler = new SpelerView();           //maak speler poppetjes en zijkant informatie
+//    SpelerView speler = new SpelerView();           //maak speler poppetjes en zijkant informatie
     StormView storm = new StormView();              //maak storm en stormmeter
     UitrustingView uitrusting = new UitrustingView();   //maak uitrusting plaatsen
-    WaterflesView waterfles = new WaterflesView();      //maak waterfles stand
+//    WaterflesView waterfles = new WaterflesView();      //maak waterfles stand
 
     static Stage primaryStage;
     String kaart = "/gamescreenempty.png";

@@ -170,7 +170,7 @@ public class LoginView implements LoginObserver {
     EventHandler<MouseEvent> startClicked = new EventHandler<MouseEvent>() {
         @Override
         public void handle(MouseEvent e) {
-            new BordView(primaryStage);
+            new BordView();
 
         }
     };
