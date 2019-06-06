@@ -7,6 +7,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
@@ -35,22 +36,33 @@ public class ViewManager extends Application{
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        loadPrimaryStageWithGridPane(primaryStage);
+        this.primaryStage = primaryStage;
+        loadLoginView();
     }
 
-    private void loadPrimaryStageWithGridPane(Stage primaryStage) {
+    public void loadLoginView() {
+
+        new LoginView(primaryStage, this);
+
+    }
+
+    public void loadGameView() {
         try {
-            Canvas canvas = new Canvas(width, height);
-            Group group = new Group(canvas, knoppen);
+
+            ImageView background = new ImageView(achtergrond);
+            background.setX(0);
+            background.setY(0);
+            background.setFitWidth(width);
+            background.setFitHeight(height);
+
+            Group group = new Group(background, knoppen);
             Scene scene = new Scene(group);
             primaryStage.setScene(scene);
             primaryStage.setTitle("WELCOME TO THE GAME");
             primaryStage.setX(windowAnchorX);
             primaryStage.setY(windowAnchorY);
             primaryStage.show();
-            GraphicsContext gc = canvas.getGraphicsContext2D();
-            gc.drawImage(achtergrond, 0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
-            /*Bord_Controller b = new Bord_Controller(root);*/
+
         } catch(Exception e) {
             e.printStackTrace();
         }

@@ -10,15 +10,14 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.stage.Stage;
 
-public class  Main extends Application{
+public class  Main {
 	
 	private int screenWidth = 1600;
 	private int screenHeight = 900;
-    @Override
-    public void start(Stage primaryStage){
-        LoginView b = new LoginView(primaryStage);
+    public static void main(String[] args) {
+        ViewManager viewManager = new ViewManager();
+        Application.launch(ViewManager.class, args);
     }
-    public static void main(String[] args) {launch(args);}
 
 
     
