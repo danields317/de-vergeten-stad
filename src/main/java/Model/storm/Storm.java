@@ -1,8 +1,10 @@
 package Model.storm;
 
+import javafx.scene.image.Image;
 import observers.BordObservable;
 import observers.BordObserver;
 
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +19,7 @@ public class Storm implements BordObservable{
     private int y;
     private int sterkte;
     private int subSterkte;
+    private Image image;
 
     private List<BordObserver> observers = new ArrayList<>();
 
@@ -25,6 +28,7 @@ public class Storm implements BordObservable{
         y = 2;
         sterkte = 2;
         subSterkte = 1;
+        image = new Image(getImagePath());
     }
 
     public void beweegNoord(StormEventBeweging.Stappen stappen){
@@ -84,6 +88,19 @@ public class Storm implements BordObservable{
         return sterkte;
     }
 
+    public String getImagePath(){
+        try {
+            return getClass().getResource("/placeholder.png").toURI().getPath();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public Image getImage(){
+        return image;
+    }
+
     public void register(BordObserver observer){
         observers.add(observer);
     }
@@ -93,5 +110,4 @@ public class Storm implements BordObservable{
             s.update(this);
         }
     }
-
 }
