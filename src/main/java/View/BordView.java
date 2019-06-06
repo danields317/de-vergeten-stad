@@ -39,12 +39,12 @@ public class BordView {
     Button zonBrand = new Button("Burn");
 
 
-    public BordView(){
+    /*public BordView(){
        maakAchtergrond();
 
         // PASS IT TO THE CONTROLLER WHO WILL PASS IT TO THE MODEL
         bordController.registerObserver((BordObserver) this);
-    }
+    }*/
 
     public Image maakAchtergrond(){
         Image achtergrond = new Image("gamescreenempty.png");
@@ -96,7 +96,7 @@ public class BordView {
     }
 
     private GridPane createUpdatedGridPane(BordObservable sb){
-/*
+    /*
         if(sb.isLoginCorrect()){
             return loginCorrect(sb);
         }else{

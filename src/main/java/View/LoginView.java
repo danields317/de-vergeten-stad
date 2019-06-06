@@ -19,6 +19,8 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import observers.*;
 
+import javax.swing.text.View;
+
 
 public class LoginView implements LoginObserver {
 
@@ -170,7 +172,7 @@ public class LoginView implements LoginObserver {
     EventHandler<MouseEvent> startClicked = new EventHandler<MouseEvent>() {
         @Override
         public void handle(MouseEvent e) {
-            new BordView(primaryStage);
+            new ViewManager();
 
         }
     };
