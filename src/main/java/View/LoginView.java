@@ -29,13 +29,16 @@ public class LoginView implements LoginObserver {
     private double windowAnchorX = 50;
     private double windowAnchorY= 50;
 
+    private ViewManager viewManager;
+
     Stage primaryStage;
     Login_Controller loginController;
     TextField usernameField = new TextField();
     TextField passwordField = new TextField();
     TextField roomId = new TextField("Place here your room id");
 
-    public LoginView(Stage s){
+    public LoginView(Stage s, ViewManager viewManager){
+        this.viewManager = viewManager;
         primaryStage = s;
         loadPrimaryStageWithGridPane(createInitialGridPane());
         loginController = loginController.getInstance();
