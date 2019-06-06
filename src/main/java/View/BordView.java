@@ -15,6 +15,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import observers.*;
@@ -43,37 +44,41 @@ public class BordView {
 
     public BordView(Stage s){
         primaryStage = s;
-        loadPrimaryStageWithGridPane(createInitialGridPane(), createButtons());
+        loadPrimaryStage(createInitialGridPane(), createButtons());
         bordController = bordController.getInstance();
 
 
-        WaterflesView  waterflesView = new WaterflesView(3);
-        ImageView waterflesImageView = waterflesView.loadWaterfles();
-        gridPane.add(waterflesImageView, 1, 1 );
+        //WaterflesView  waterflesView = new WaterflesView(5);
+        //ImageView waterflesImageView = waterflesView.loadWaterfles();
+        //gridPane.add(waterflesImageView,0,0 );
+        //waterflesView.updateWaterFles(0);
 
         // PASS IT TO THE CONTROLLER WHO WILL PASS IT TO THE MODEL
-        bordController.registerObserver((BordObserver) this);
+        //bordController.registerObserver((BordObserver) this);
 
     }
 
-    private void loadPrimaryStageWithGridPane(GridPane gp, GridPane actie) {
+    private void loadPrimaryStage(GridPane gp, GridPane actie) {
         try {
 
 
-            GridPane root = gp;
-            gridPane = root;
-            GridPane acties = actie;
-            Image backgroundImage = new Image("gamescreenempty.png");
-            Canvas canvas = new Canvas(width, height);
-            Group group = new Group(canvas, root, acties);
-            Scene scene = new Scene(group);
+            Pane root = new Pane();
+            Scene scene = new Scene(root);
             primaryStage.setScene(scene);
-            primaryStage.setTitle("WELCOME TO THE GAME");
+            primaryStage.setTitle("De Vergeten Stad");
             primaryStage.setX(windowAnchorX);
             primaryStage.setY(windowAnchorY);
             primaryStage.show();
-            GraphicsContext gc = canvas.getGraphicsContext2D();
-            gc.drawImage(backgroundImage, 0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
+
+            Image backgroundImage = new Image("/background.png");
+            ImageView backgroundImageView = new ImageView(backgroundImage);
+            root.getChildren().add(backgroundImageView);
+            backgroundImageView.setX(0);
+            backgroundImageView.setY(0);
+            backgroundImageView.setFitWidth(width);
+            backgroundImageView.setFitHeight(height);
+
+            // gc.drawImage(backgroundImage, 0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
             /*Bord_Controller b = new Bord_Controller(root);*/
         } catch(Exception e) {
             e.printStackTrace();
