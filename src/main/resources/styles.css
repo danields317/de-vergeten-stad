@@ -1,0 +1,19 @@
+.button
+{
+    -fx-background-color: none;
+    -fx-border-style: none;
+    -fx-font-size: 1.5em;
+    -fx-cursor: hand;
+}
+
+.button:hover
+{
+    -fx-border: 0;
+    -fx-border-radius: 0.25rem;
+    -fx-background: #1E88E5;
+}
+
+.button:pressed
+{
+    -fx-padding: 0.5em 0 0 0.5em;
+}

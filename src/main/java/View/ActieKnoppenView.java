@@ -31,6 +31,7 @@ public class ActieKnoppenView {
         acties.setLayoutX(319);
         acties.setLayoutY(685);
 
+
         return acties;
     }
 

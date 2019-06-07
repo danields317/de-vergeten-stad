@@ -41,6 +41,7 @@ public class ViewManager extends Application{
             BordView bordView = new BordView();  //maak achtergrond
             ActieKnoppenView actieknoppenview = new ActieKnoppenView();  //maak beweeg knoppen
             GraafKnoppenView graafknoppenview = new GraafKnoppenView();  //maak graaf knoppen
+            EindigBeurtView eindigBeurtView = new EindigBeurtView();  //maak eindig beurt knop
             //LoadBordView loadbordview = new LoadBordView();  //geen idee wat deze doet
             OnderdeelView onderdeelview = new OnderdeelView();  //maak onderdelen
             SpeelbordView speelbordview = new SpeelbordView();  //maak speelbord tiles
@@ -60,11 +61,12 @@ public class ViewManager extends Application{
             StackPane zonnewijzer = onderdeelview.loadZonneWijzer("?", "?");
             GridPane knoppen = actieknoppenview.maakActieKnoppen();
             GridPane graafknoppen = graafknoppenview.maakGraafKnoppen();
+            Button eindigbeurtKnop = eindigBeurtView.maakEindigbeurtKnop();
             GridPane spelbord = speelbordView.loadSpelBord();
 
-
-            Group group = new Group(achtergrond, knoppen, graafknoppen, waterfles, propellor, beacon, motor, zonnewijzer, spelbord);
+            Group group = new Group(achtergrond, knoppen, graafknoppen, eindigbeurtKnop, waterfles, propellor, beacon, motor, zonnewijzer, spelbord);
             Scene scene = new Scene(group, windowWidth, windowHeight);
+            scene.getStylesheets().add("/styles.css");
             primaryStage.setScene(scene);
             primaryStage.setTitle("WELCOME TO THE GAME");
             primaryStage.setX(windowAnchorX);
