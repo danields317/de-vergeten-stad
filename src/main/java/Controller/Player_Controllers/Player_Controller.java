@@ -1,47 +1,31 @@
 package Controller.Player_Controllers;
 
-import Model.player.Navigator;
+import Controller.Equipment_Controllers.Equipment_Controller;
 import Model.player.Player;
 import javafx.scene.paint.Color;
 
-public class Player_controller {
+public class Player_Controller {
 
 
-    static Player_controller playercont;
+    static Player_Controller playercont;
     Player player;
 
-
-
-
-    public Player_controller(String nickname, String className, String description, int maxWater, Color color, String imagePath){
-//        player = new Player(nickname,className, description, maxWater, color, imagePath);
-//        player = new Player();
+    public Player_Controller(String nickname, String className, String description, int maxWater, Color color, String imagePath){
+        player = new Player(nickname,className, description, maxWater, color, imagePath);
     }
 
     // Singleton Pattern.
     // now we can call: SpelbordController.getInstance()  from everywhere
     // AND it guarantees there is only 1 instance.
-    public static Player_controller getInstance() {
+    public static Player_Controller getInstance() {
         if (playercont == null) {
-            playercont = new Player_controller("a", "a", "a", 5, Color.BLUE, "Homescreenempty.png");
+            playercont = new Player_Controller("a", "a", "a", 5, Color.BLUE, "Homescreenempty.png");
         }
         return playercont;
     }
 
-    public void beweegSpelerNoord(){
-        player.beweegNoord();
-    }
+    public void move(){
 
-    public void beweegSpelerZuid(){
-        player.beweegZuid();
-    }
-
-    public void beweegSpelerOost(){
-        player.beweegOost();
-    }
-
-    public void beweegSpelerWest(){
-        player.beweegWest();
     }
 
     public void zandWegScheppen(){
@@ -75,6 +59,7 @@ public class Player_controller {
 
     }
 
+    public Equipment_Controller[] getInventory() { return player.getInventory(); }
 
     public Player getPlayer() {
         return player;

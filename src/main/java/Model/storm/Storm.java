@@ -1,10 +1,9 @@
 package Model.storm;
 
 import javafx.scene.image.Image;
-import observers.BordObservable;
-import observers.BordObserver;
+import observers.StormObservable;
+import observers.StormObserver;
 
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +12,7 @@ import java.util.List;
  * @author ryanr
  * @author daniel
  */
-public class Storm implements BordObservable{
+public class Storm implements StormObservable{
 
     private int x;
     private int y;
@@ -21,7 +20,7 @@ public class Storm implements BordObservable{
     private int subSterkte;
     private Image image;
 
-    private List<BordObserver> observers = new ArrayList<>();
+    private List<StormObserver> observers = new ArrayList<>();
 
     public Storm(){
         x = 2;
@@ -57,7 +56,6 @@ public class Storm implements BordObservable{
     }
 
     public void stormWordtSterker(){
-        System.out.println("Storm subSterkte increased");
         subSterkte++;
         if (subSterkte < 7){
             sterkte = 3;
@@ -88,16 +86,17 @@ public class Storm implements BordObservable{
         return sterkte;
     }
 
+
     public Image getImage(){
         return image;
     }
 
-    public void register(BordObserver observer){
+    public void register(StormObserver observer){
         observers.add(observer);
     }
 
     public void notifyAllObservers(){
-        for (BordObserver s : observers){
+        for (StormObserver s : observers){
             s.update(this);
         }
     }

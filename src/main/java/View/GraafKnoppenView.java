@@ -1,19 +1,16 @@
 package View;
 
 import javafx.scene.control.Button;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 
-import java.awt.*;
+public class GraafKnoppenView {
 
-public class ActieKnoppenView {
-
-    public GridPane maakActieKnoppen(){
+    public GridPane maakGraafKnoppen(){
         Button up = new Button("▲");
         Button down = new Button("▼");
         Button left = new Button("◄");
         Button right = new Button("►");
-        Button TileActions = new Button("Actie");
+        Button TileActions = new Button("Graaf");
         up.setPrefSize(60, 60);
         down.setPrefSize(60, 60);
         left.setPrefSize(60, 60);
@@ -28,10 +25,9 @@ public class ActieKnoppenView {
         acties.add(right, 2, 1);
         acties.add(TileActions, 1, 1);
 
-        acties.setLayoutX(319);
+        acties.setLayoutX(525);
         acties.setLayoutY(685);
 
         return acties;
     }
-
 }

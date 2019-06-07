@@ -23,11 +23,12 @@ import observers.*;
 public class LoginView implements LoginObserver {
 
     String kaart = "Homescreenempty.png";
-    //String file = "C:\\Users\\mjboere\\workspace\\Hello FX World\\src\\wereldkaart.jpg";
     private double width = 1600;
     private double height = 900;
     private double windowAnchorX = 50;
     private double windowAnchorY= 50;
+
+    private ViewManager viewManager;
 
     Stage primaryStage;
     Login_Controller loginController;
@@ -35,7 +36,8 @@ public class LoginView implements LoginObserver {
     TextField passwordField = new TextField();
     TextField roomId = new TextField("Place here your room id");
 
-    public LoginView(Stage s){
+    public LoginView(Stage s, ViewManager viewManager){
+        this.viewManager = viewManager;
         primaryStage = s;
         loadPrimaryStageWithGridPane(createInitialGridPane());
         loginController = loginController.getInstance();
@@ -170,7 +172,7 @@ public class LoginView implements LoginObserver {
     EventHandler<MouseEvent> startClicked = new EventHandler<MouseEvent>() {
         @Override
         public void handle(MouseEvent e) {
-            new BordView(primaryStage);
+            viewManager.loadGameView();
 
         }
     };

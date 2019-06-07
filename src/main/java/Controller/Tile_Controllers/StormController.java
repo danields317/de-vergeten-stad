@@ -3,7 +3,7 @@ package Controller.Tile_Controllers;
 import Model.storm.Storm;
 import Model.storm.StormEvent;
 import Model.storm.StormEventBeweging;
-import observers.BordObserver;
+import observers.StormObserver;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -86,20 +86,23 @@ public class StormController {
         randomizeEvents(stormEvents);
     }
 
-    public void voerStormEventsUit(ArrayList<StormEvent> stormEvents){
+    public void voerStormEventsUit(){
         int tmpSterkte = storm.getSterkte();
         for (int i = 0; i < tmpSterkte; i++){
             if (stapelCounter < randomStormEvents.size()){
-                StormEvent stormEvent = stormEvents.get(stapelCounter);
+                StormEvent stormEvent = randomStormEvents.get(stapelCounter);
                 switch (stormEvent.naam){
                     case BEWEGING:
                         beweegStorm(((StormEventBeweging) stormEvent).richting, ((StormEventBeweging) stormEvent).stappen);
+                        System.out.println("Storm beweegt");
                         break;
                     case BRANDT:
 //                    zonBrandt();
+                        System.out.println("Zon brandt");
                         break;
                     case STERKER:
                         storm.stormWordtSterker();
+                        System.out.println("Storm subSterkte increased");
                         break;
                     default:
                         System.out.println("DIT HOORT NIET");
@@ -132,7 +135,7 @@ public class StormController {
         }
     }
 
-    public void registerObserver(BordObserver bo){ storm.register(bo); }
+    public void registerObserver(StormObserver bo){ storm.register(bo); }
 
 
 }

@@ -1,18 +1,20 @@
 package View;
 
 import Controller.Tile_Controllers.StormController;
-import javafx.stage.Stage;
-import observers.BordObservable;
-import observers.BordObserver;
+import observers.StormObservable;
+import observers.StormObserver;
 
-public class StormView implements BordObserver{
+public class StormView implements StormObserver {
 
     StormController stormController;
+    StormObservable bo;
 
     public StormView(){
         stormController = StormController.getInstance();
         stormController.registerObserver(this);
     }
 
-    public void update(BordObservable bo){ }
+    public void update(StormObservable bo){
+        this.bo = bo;
+    }
 }
