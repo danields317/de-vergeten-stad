@@ -19,7 +19,7 @@ import javafx.stage.Stage;
 import observers.*;
 import Controller.Controller;
 
-public class BordView {
+public class BordView implements BordObserver {
 
     ActieKnoppenView AKV = new ActieKnoppenView();
     Controller controller = Controller.getInstance();
@@ -128,10 +128,17 @@ public class BordView {
         return buttonsPane;
     }
 
+
+    @Override
+    public void update(BordObservable sb) {
+        loadPrimaryStageWithGridPane(createUpdatedGridPane(sb));
+    }
+
+
     EventHandler<javafx.scene.input.MouseEvent> zonBrandClicked = new EventHandler<javafx.scene.input.MouseEvent>() {
         @Override
         public void handle(javafx.scene.input.MouseEvent e) {
-           // controller.verwijderZand();
+            controller.verwijderZand();
             System.out.println("button clicked");
         }
     };

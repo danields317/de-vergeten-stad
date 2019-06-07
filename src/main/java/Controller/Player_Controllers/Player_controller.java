@@ -61,7 +61,7 @@ public class Player_controller {
 
     }
 
-    public void drinkWater(){
+    public void removeWater(){
         player.subtractWater(1);
         System.out.println(player.getWater());
     }

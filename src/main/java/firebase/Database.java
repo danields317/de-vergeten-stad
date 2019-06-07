@@ -2,6 +2,7 @@ package firebase;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.cloud.firestore.Firestore;
@@ -11,7 +12,7 @@ import com.google.firebase.cloud.FirestoreClient;
 
 public class Database {
 
-    private static final String PRIVATEKEYLOCATION = "C:\\Users\\Jason\\IdeaProjects\\de-vergeten-stad\\src\\main\\java\\firebase\\iipsen-f7b65-firebase-adminsdk-si9zo-13167bfb98.json";
+    private  final String PRIVATEKEYLOCATION = getPRIVATEKEYLOCATION();
     private static final String DATABASEURL = "https://iipsen-f7b65.firebaseio.com";
     private Firestore db;
 
@@ -39,5 +40,15 @@ public class Database {
     public Firestore getFirestoreDatabase() {
         return this.db;
     }
+
+    public String getPRIVATEKEYLOCATION(){
+        try {
+            return getClass().getResource("/iipsen-f7b65-firebase-adminsdk-si9zo-13167bfb98.json").toURI().getPath();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 
 }

@@ -22,6 +22,9 @@ public class LoadBord_Controller {
         return loadBordController;
     }
 
+    public void updateView(){
+        loadBord.notifyAllObservers();
+    }
     public void registerObserver(LoadBordObserver sbv) {
         loadBord.register(sbv);
     }

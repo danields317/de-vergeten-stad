@@ -21,6 +21,7 @@ import observers.LoadBordObserver;
 
 import java.lang.reflect.Array;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 
 public class LoadBordView implements LoadBordObserver {
@@ -45,6 +46,8 @@ public class LoadBordView implements LoadBordObserver {
 
         // PASS IT TO THE CONTROLLER WHO WILL PASS IT TO THE MODEL
         loadBordController.registerObserver( this);
+
+        loadBordController.updateView();
     }
 
     private void loadPrimaryStageWithGridPane(GridPane gp) {
@@ -52,7 +55,7 @@ public class LoadBordView implements LoadBordObserver {
 
 
             GridPane root = gp;
-            Image backgroundImage = new Image("giphy2.gif");
+            Image backgroundImage = new Image("background.png");
             Canvas canvas = new Canvas(width, height);
 
             Group group = new Group(canvas, root);
@@ -89,8 +92,8 @@ public class LoadBordView implements LoadBordObserver {
             final String tempString = ( ((Map) killMe).get("name")).toString();
             ImageView image = createImageView(tempString + ".png");
             image.setOnMouseClicked(e -> {
-                Player_controller.getInstance();
-                System.out.println(tempString);
+                Player_controller.getInstance(true, tempString);
+                new BordView(primaryStage);
             });
             gridPane.add(image, count, 0);
             count++;
@@ -118,6 +121,11 @@ public class LoadBordView implements LoadBordObserver {
         gridPane.setVgap(5);
         gridPane.setHgap(5);
         gridPane.setAlignment(Pos.CENTER);
+
+
+        ImageView image = createImageView("giphy2.gif");
+        gridPane.add(image, 0, 0);
+
 
         //gridPane.add(image, 0, 0);
         //gridPane.add(scoreText, 1, 0);
