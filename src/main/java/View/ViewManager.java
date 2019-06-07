@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 public class ViewManager extends Application{
@@ -52,12 +53,15 @@ public class ViewManager extends Application{
             waterflesView.updateWaterFles(0);
 
             ImageView achtergrond = bordView.maakAchtergrond(windowWidth, windowHeight);
-            ImageView propellor = onderdeelview.loadPropeller();
+            StackPane propellor = onderdeelview.loadPropeller("?", "?");
+            StackPane beacon = onderdeelview.loadBeacon("?", "?");
+            StackPane motor = onderdeelview.loadMotor("?", "?");
+            StackPane zonnewijzer = onderdeelview.loadZonneWijzer("?", "?");
             GridPane knoppen = actieknoppenview.maakActieKnoppen();
             GridPane graafknoppen = graafknoppenview.maakGraafKnoppen();
 
 
-            Group group = new Group(achtergrond, knoppen, graafknoppen, waterfles, propellor);
+            Group group = new Group(achtergrond, knoppen, graafknoppen, waterfles, propellor, beacon, motor, zonnewijzer);
             Scene scene = new Scene(group, windowWidth, windowHeight);
             primaryStage.setScene(scene);
             primaryStage.setTitle("WELCOME TO THE GAME");
