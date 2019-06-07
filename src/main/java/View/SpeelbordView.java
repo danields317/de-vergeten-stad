@@ -2,6 +2,7 @@ package View;
 
 import Controller.Tile_Controllers.TileController;
 import Model.Tiles.Tile;
+import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -28,8 +29,11 @@ public class SpeelbordView {
 
                 //ImageView tile = new ImageView(tiles[i][j].getImage());
                 //tile.setFitHeight(115);
-                //tile.setFitWidth(115);
-                spelbord.add(tileView.maakTileImage(), i , j);;
+                //tile.setFitWidth(115)
+                ImageView tile = tileView.maakTileImage();
+                spelbord.setMargin(tile, new Insets(5,5,5,5));
+
+                spelbord.add(tile, i , j);;
                 System.out.println(i + " " + j);
             }
         }

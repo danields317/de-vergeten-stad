@@ -8,12 +8,28 @@
 
 .button:hover
 {
-    -fx-border: 0;
-    -fx-border-radius: 0.25rem;
-    -fx-background: #1E88E5;
+    -fx-background-radius: 3,2,1;
+    -fx-background-color: rgba(0,0,0,0.25);
 }
 
 .button:pressed
 {
-    -fx-padding: 0.5em 0 0 0.5em;
+    -fx-padding: 0.3em 0 0 0.3em;
+}
+
+.label
+{
+    -fx-effect: dropshadow( gaussian, rgb(255,255,255) , 2,2,0,0 );
+    -fx-font-weight: bold;
+}
+
+.tile
+{
+    -fx-cursor: hand;
+}
+
+.tile:hover
+{
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
 }

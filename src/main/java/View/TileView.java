@@ -11,13 +11,15 @@ public class TileView implements BordObserver{
 
     TileController tileController;
     ImageView imageView;
+    public final int tileSize = 105;
 
     public TileView(Image image){
         tileController = TileController.getInstance();
         tileController.registerObserver(this);
         imageView = new ImageView(image);
-        imageView.setFitHeight(115);
-        imageView.setFitWidth(115);
+        imageView.setFitHeight(tileSize);
+        imageView.setFitWidth(tileSize);
+        imageView.getStyleClass().add("tile");
     }
 
     public ImageView maakTileImage() {
