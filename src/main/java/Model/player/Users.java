@@ -6,7 +6,7 @@ public class Users {
     public static Archeoloog_Controller archeoloogController = new Archeoloog_Controller("test");
     public static Klimmer_Controller klimmerController;
     public static Meteooroloog_Controller meteooroloogController;
-    public static Navigator_controller navigatorController;
+    public static Navigator_Controller navigatorController;
     public static Verkenner_Controller verkennerController;
     public static Waterdrager_Controller waterdragerController;
     static Object local;
@@ -35,11 +35,11 @@ public class Users {
 //        Users.meteooroloogController = meteooroloogController;
 //    }
 //
-//    public static Navigator_controller getNavigatorController() {
+//    public static Navigator_Controller getNavigatorController() {
 //        return navigatorController;
 //    }
 //
-//    public static void setNavigatorController(Navigator_controller navigatorController) {
+//    public static void setNavigatorController(Navigator_Controller navigatorController) {
 //        Users.navigatorController = navigatorController;
 //    }
 //

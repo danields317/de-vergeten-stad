@@ -1,7 +1,7 @@
 package View;
 
 import Controller.Bord_Controllers.LoadBord_Controller;
-import Controller.Player_Controllers.Player_controller;
+import Controller.Player_Controllers.Player_Controller;
 import Model.data.StaticData;
 import firebase.FirebaseService;
 import javafx.event.EventHandler;
@@ -92,7 +92,7 @@ public class LoadBordView implements LoadBordObserver {
             final String tempString = ( ((Map) killMe).get("name")).toString();
             ImageView image = createImageView(tempString + ".png");
             image.setOnMouseClicked(e -> {
-                Player_controller.getInstance(true, tempString);
+                Player_Controller.getInstance(true, tempString);
                 new BordView(primaryStage);
             });
             gridPane.add(image, count, 0);
@@ -102,10 +102,6 @@ public class LoadBordView implements LoadBordObserver {
         return gridPane;
     }
 
-    public void myEvent(ImageView image){
-
-
-    }
 
 
 

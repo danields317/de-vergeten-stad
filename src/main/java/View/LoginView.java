@@ -29,13 +29,16 @@ public class LoginView implements LoginObserver {
     private double windowAnchorX = 50;
     private double windowAnchorY= 50;
 
+    private ViewManager viewManager;
+
     Stage primaryStage;
     Login_Controller loginController;
     TextField usernameField = new TextField();
     TextField passwordField = new TextField();
     TextField roomId = new TextField("t3PuQAWO6mrKfqaFISN0");
 
-    public LoginView(Stage s){
+    public LoginView(Stage s, ViewManager viewManager){
+        this.viewManager = viewManager;
         primaryStage = s;
         loadPrimaryStageWithGridPane(createInitialGridPane());
         loginController = loginController.getInstance();
@@ -169,7 +172,7 @@ public class LoginView implements LoginObserver {
     EventHandler<MouseEvent> startClicked = new EventHandler<MouseEvent>() {
         @Override
         public void handle(MouseEvent e) {
-            new BordView(primaryStage);
+            viewManager.loadGameView();
 
         }
     };

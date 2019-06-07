@@ -2,7 +2,7 @@ package View;
 
 import Controller.Bord_Controllers.LoadBord_Controller;
 import Controller.Bord_Controllers.Water_Controller;
-import Controller.Player_Controllers.Player_controller;
+import Controller.Player_Controllers.Player_Controller;
 import Model.data.StaticData;
 import firebase.FirebaseService;
 import javafx.geometry.Insets;

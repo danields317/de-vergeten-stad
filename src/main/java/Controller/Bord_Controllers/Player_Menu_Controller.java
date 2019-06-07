@@ -9,7 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 
 public class Player_Menu_Controller {
-
+/*
     private Users users = new Users();
     private String character;
     private Button button1 = new Button("Archeoloog");
@@ -173,6 +173,6 @@ public class Player_Menu_Controller {
 
 
 
-
+*/
 
 }

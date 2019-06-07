@@ -1,21 +1,11 @@
 package Controller;
 
-import Controller.Bord_Controllers.Bord_Controller;
 import Controller.Player_Controllers.*;
-import Model.player.Users;
-import javafx.animation.AnimationTimer;
-import javafx.application.Application;
-import javafx.scene.Group;
-import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.stage.Stage;
-import View.*;
 
 public class Controller/* extends Application  */{
 
     static Controller controller;
-    Player_controller playcont = Player_controller.getInstance();
+    Player_Controller playcont = Player_Controller.getInstance();
 
     public static Controller getInstance() {
         if (controller == null) {
@@ -38,7 +28,7 @@ public class Controller/* extends Application  */{
         Users.archeoloogController = new Archeoloog_Controller("a");
         Users.klimmerController = new Klimmer_Controller("b");
         Users.meteooroloogController = new Meteooroloog_Controller("c");
-        Users.navigatorController = new Navigator_controller("d");
+        Users.navigatorController = new Navigator_Controller("d");
         Users.verkennerController = new Verkenner_Controller("e");
         Users.waterdragerController = new Waterdrager_Controller("f");
         System.out.println("Meteooroloog Water: " + Users.meteooroloogController.getPlayer().getWater());

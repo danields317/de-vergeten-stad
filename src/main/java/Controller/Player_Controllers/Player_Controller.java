@@ -8,10 +8,10 @@ import javafx.scene.paint.Color;
 
 import java.util.Map;
 
-public class Player_controller {
+public class Player_Controller {
 
 
-    static Player_controller playercont;
+    static Player_Controller playercont;
     StaticData staticData = StaticData.getInstance();
     Player player;
 
@@ -19,29 +19,29 @@ public class Player_controller {
 
 
 
-    public Player_controller(String className, String imagePath){
+    public Player_Controller(String className, String imagePath){
         player = new Player(staticData.getUsername(),className, "b", 4, Color.BLUE, imagePath);
     }
 
 
-    public Player_controller(String n, String className, String b, int maxwater, Color color, String imagePath){
+    public Player_Controller(String n, String className, String b, int maxwater, Color color, String imagePath){
         player = new Player(staticData.getUsername(),className, "b", 4, Color.BLUE, imagePath);
     }
     // Singleton Pattern.
     // now we can call: SpelbordController.getInstance()  from everywhere
     // AND it guarantees there is only 1 instance.
-    public static Player_controller getInstance(boolean loadGame, String className) {
+    public static Player_Controller getInstance(boolean loadGame, String className) {
         if (playercont == null) {
             if( loadGame){
 
                 System.out.println(((Map)(StaticData.getInstance()).getRoomInfo()).get("archeoloog"));
-                playercont = new Player_controller(className, className +".png");
+                playercont = new Player_Controller(className, className +".png");
             }else{}
         }
         return playercont;
     }
 
-    public static Player_controller getInstance() {
+    public static Player_Controller getInstance() {
         return playercont;
     }
 

@@ -1,5 +1,6 @@
 package Model.player;
 
+import Controller.Equipment_Controllers.Equipment_Controller;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import Model.Tiles.Tile;
@@ -8,7 +9,7 @@ import Model.equipment.Equipment;
 public class Player {
 
 	private String nickname; // Naam ingevoerd door de speler
-	private Equipment[] inventory;
+	private Equipment_Controller[] inventory;
 	private int water;
 	private int actiesOver;
 	private Tile tile; // De tile waar de speler op staat
@@ -91,7 +92,7 @@ public class Player {
 		return nickname;
 	}
 
-	public Equipment[] getInventory() {
+	public Equipment_Controller[] getInventory() {
 		return inventory;
 	}
 

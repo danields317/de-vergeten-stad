@@ -3,11 +3,11 @@ package Controller.Player_Controllers;
 import Model.player.*;
 import javafx.scene.paint.Color;
 
-public class Navigator_controller extends Player_controller implements SpecialMove {
+public class Navigator_Controller extends Player_Controller implements SpecialMove {
 
     /////////////////////////////////////// Constructor ///////////////////////////////////////
 
-    public Navigator_controller( String nickname ) {
+    public Navigator_Controller(String nickname ) {
 
         super( nickname, "Navigator", "PLACEHOLDER", 4, Color.YELLOW, "placeholder.png");
 

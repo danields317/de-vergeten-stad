@@ -11,6 +11,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -27,8 +28,8 @@ public class BordView implements BordObserver {
 
     String kaart = "/gamescreenempty.png";
     //String file = "C:\\Users\\mjboere\\workspace\\Hello FX World\\src\\wereldkaart.jpg";
-    private double width = 1600;
-    private double height = 900;
+    private int screenWidth = 1600;
+    private int screenHeight = 900;
     private double windowAnchorX = 50;
     private double windowAnchorY= 50;
 
@@ -55,7 +56,7 @@ public class BordView implements BordObserver {
             GridPane root = gp;
             GridPane acties = actie;
             Image backgroundImage = new Image("gamescreenempty.png");
-            Canvas canvas = new Canvas(width, height);
+            Canvas canvas = new Canvas(screenWidth, screenHeight);
             Group group = new Group(canvas, root, acties);
             Scene scene = new Scene(group);
             primaryStage.setScene(scene);
