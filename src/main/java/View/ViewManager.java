@@ -22,7 +22,7 @@ public class ViewManager extends Application{
 //    SpelerView speler = new SpelerView();           //maak speler poppetjes en zijkant informatie
     StormView storm = new StormView();              //maak storm en stormmeter
     UitrustingView uitrusting = new UitrustingView();   //maak uitrusting plaatsen
-//    WaterflesView waterfles = new WaterflesView();      //maak waterfles stand
+//    WaterflesView wate rfles = new WaterflesView();      //maak waterfles stand
 
     static Stage primaryStage;
     String kaart = "/gamescreenempty.png";
