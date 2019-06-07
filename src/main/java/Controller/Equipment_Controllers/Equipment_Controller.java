@@ -15,6 +15,11 @@ public class Equipment_Controller {
         System.out.println("Gebruik equipment!");
     }
 
+
+    public Equipment getEquipment(){
+        return equipment;
+    }
+
     public Image getImage() {
         return equipment.getImage();
     }

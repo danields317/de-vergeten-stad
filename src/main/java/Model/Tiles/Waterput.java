@@ -4,7 +4,7 @@ public class Waterput extends Tile {
 
 
 	public Waterput() {
-		super("/placeholder.png", "/placeholder.png", Varianten.WATERPUT);
+		super("/Tiles/Undiscovered_Water.png", "/Tiles/Water_Well.png", Varianten.WATERPUT);
 	}
 	
 }
