@@ -1,84 +1,74 @@
 package Model.Tiles;
 
-import javafx.scene.image.Image;
 import Model.player.Player;
-import javafx.scene.paint.Color;
+import javafx.scene.image.Image;
+import observers.BordObservable;
+import observers.BordObserver;
 
-public class Tile {
+import java.net.URISyntaxException;
+import java.util.ArrayList;
 
-	static int sandLayersUsed = 0;
-	
-	private int sandLayers = 0; // bij >=2 geblokkeerd
-	private Image image;
-	private Image undiscoveredImage;
-	private boolean discovered = false;
-	private Player[] players; // Alle spelers die op deze tile staan
-	
-	public boolean hasArtifactPropeller = false;
-	public boolean hasArtifactMotor = false;
-	public boolean hasArtifactZonnekristal = false;
-	public boolean hasArtifactKompas = false;
+public class Tile implements BordObservable{
 
-	public double x;
-	public double y;
-	public double size = 10;
-	
-	/////////////////////////////////////// Constructor ///////////////////////////////////////
-	
-	public Tile( String imagePath, String undiscoveredImagePath ) {
-		
-		this.image = new Image(imagePath);
-		this.undiscoveredImage = new Image(undiscoveredImagePath);
-		
-	}
+    private ArrayList<BordObserver> observers = new ArrayList<>();
 
-	public Tile(String imagePath, String undiscoveredImagePath, boolean direction, Color color) {
+    public enum Varianten{EQUIPMENT, FATAMORGANA, PART, TUNNEL, WATERPUT, FINISH}
+    private Varianten variant;
 
-		this.image = new Image(imagePath);
-		this.undiscoveredImage = new Image(undiscoveredImagePath);
+    private boolean isDiscovered;
+    private Image undiscoveredImage;
+    private Image discoveredImage;
 
-	}
-	
-	/////////////////////////////////////// Methods ///////////////////////////////////////
-	
-	public void dig( int layers ) {
-		
-		// Haal x lagen zand weg
-		// sandLayers kan niet minder dan 0 zijn
-		sandLayers = Math.max( sandLayers - layers, 0);
-		
-	}
-	
-	public void dig() {
-		dig(1);
-	}
-	
-	public void discover() {
-		
-		discovered = true;
-		
-	}
-	
-	public boolean isBlocked() {
-		// Geblokkeerd waneer er 2 of meer zand op zit
-		return sandLayers > 1;
-	}
-	
-	/////////////////////////////////////// Getters & Setters ///////////////////////////////////////
-	
-	public int getSandLayers() {
-		return sandLayers;
-	}
-	
-	public boolean isDiscovered() {
-		return discovered;
-	}
+    private int aantalZandTegels;
 
-	public Image getImage() {
-		return image;
-	}
+    private ArrayList<PartTile> onderdelen;
+    private ArrayList<Player> spelers;
 
-	public Image getUndiscoveredImage() {
-		return undiscoveredImage;
-	}
+    public Tile(String undiscovered, String discovered, Varianten variant){
+        onderdelen = new ArrayList<>();
+        spelers = new ArrayList<>();
+        isDiscovered = false;
+        this.undiscoveredImage = new Image(undiscovered);
+        this.discoveredImage = new Image(discovered);
+        this.variant = variant;
+    }
+
+    public void addZandTegel(){
+        aantalZandTegels += 1;
+    }
+
+    public void removeZandTegel(){
+        if (aantalZandTegels > 0){
+            aantalZandTegels -= 1;
+        }
+    }
+
+    public void removeTweeZandTegels(){
+        if (aantalZandTegels == 1){
+            aantalZandTegels -= 1;
+        }
+        else if (aantalZandTegels > 1){
+            aantalZandTegels -= 2;
+        }
+    }
+
+    public void discoverTile(){
+        if (!isDiscovered){
+            isDiscovered = true;
+        }
+    }
+
+    public Varianten getVariant(){
+        return variant;
+    }
+
+	public void register(BordObserver bo){
+	    observers.add(bo);
+    }
+
+    public void notifyAllObservers(){
+	    for (BordObserver b : observers){
+	        b.update(this);
+        }
+    }
 }

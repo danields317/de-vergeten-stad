@@ -15,7 +15,7 @@ public class Player_controller {
 
     public Player_controller(String nickname, String className, String description, int maxWater, Color color, String imagePath){
 //        player = new Player(nickname,className, description, maxWater, color, imagePath);
-        player = new Player();
+//        player = new Player();
     }
 
     // Singleton Pattern.

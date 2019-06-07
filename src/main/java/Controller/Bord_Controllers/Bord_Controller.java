@@ -1,22 +1,13 @@
 package Controller.Bord_Controllers;
 
-import Controller.Login_Controllers.Login_Controller;
-import Controller.Player_Controllers.Waterdrager_Controller;
-import Controller.Tile_Controllers.Part_Controller;
-import Controller.Tile_Controllers.Tile_Controller;
 import Model.Bord.Bord;
-import Model.Tiles.Tile;
-import javafx.geometry.Insets;
 import javafx.scene.Group;
-import javafx.scene.layout.GridPane;
 import observers.*;
-
-import java.util.ArrayList;
 
 public class Bord_Controller {
 
     private End_Controller endController;
-    private Field_Controller fieldController;
+//    private Field_Controller fieldController;
     private Item_Controller itemController;
     private Menu_Controller menuController;
     private Player_Menu_Controller playerMenuController;

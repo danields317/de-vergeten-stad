@@ -28,7 +28,7 @@ public class Storm implements BordObservable{
         y = 2;
         sterkte = 2;
         subSterkte = 1;
-        image = new Image(getImagePath());
+        image = new Image("/placeholder.png");
     }
 
     public void beweegNoord(StormEventBeweging.Stappen stappen){
@@ -86,15 +86,6 @@ public class Storm implements BordObservable{
 
     public int getSterkte(){
         return sterkte;
-    }
-
-    public String getImagePath(){
-        try {
-            return getClass().getResource("/placeholder.png").toURI().getPath();
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        }
-        return null;
     }
 
     public Image getImage(){

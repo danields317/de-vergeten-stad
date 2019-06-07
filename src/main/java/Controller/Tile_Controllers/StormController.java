@@ -39,7 +39,7 @@ public class StormController {
      * Deze functie maakt alle stormevents aan die kunnen gebeuren.
      * Volgens de spel regels zijn er 31 stormevents in totaal dus daarom loopt de for loop tot 31.
      */
-    public void makeEvents(){
+    private void makeEvents(){
         for (int i = 0; i < 31; i++){
             if (i < 4) {
                 stormEvents.add(new StormEvent(StormEvent.Namen.BRANDT));
@@ -67,13 +67,13 @@ public class StormController {
                 stormEvents.add(new StormEventBeweging(StormEvent.Namen.BEWEGING, StormEventBeweging.Richtingen.OOST, StormEventBeweging.Stappen.THREE));
             }else if (i < 30){
                 stormEvents.add(new StormEventBeweging(StormEvent.Namen.BEWEGING, StormEventBeweging.Richtingen.ZUID, StormEventBeweging.Stappen.THREE));
-            }else if (i < 31){
+            }else{
                 stormEvents.add(new StormEventBeweging(StormEvent.Namen.BEWEGING, StormEventBeweging.Richtingen.WEST, StormEventBeweging.Stappen.THREE));
             }
         }
     }
 
-    public void randomizeEvents(ArrayList<StormEvent> stormEvents){
+    private void randomizeEvents(ArrayList<StormEvent> stormEvents){
 
         if (stormEvents.isEmpty()){
             return;
@@ -89,28 +89,31 @@ public class StormController {
     public void voerStormEventsUit(ArrayList<StormEvent> stormEvents){
         int tmpSterkte = storm.getSterkte();
         for (int i = 0; i < tmpSterkte; i++){
-            StormEvent stormEvent = stormEvents.get(stapelCounter);
-            switch (stormEvent.naam){
-                case BEWEGING:
-                    beweegStorm(((StormEventBeweging) stormEvent).richting, ((StormEventBeweging) stormEvent).stappen);
-                    break;
-                case BRANDT:
+            if (stapelCounter < randomStormEvents.size()){
+                StormEvent stormEvent = stormEvents.get(stapelCounter);
+                switch (stormEvent.naam){
+                    case BEWEGING:
+                        beweegStorm(((StormEventBeweging) stormEvent).richting, ((StormEventBeweging) stormEvent).stappen);
+                        break;
+                    case BRANDT:
 //                    zonBrandt();
-                    break;
-                case STERKER:
-                    storm.stormWordtSterker();
-                    break;
-                default:
-                    System.out.println("DIT HOORT NIET");
+                        break;
+                    case STERKER:
+                        storm.stormWordtSterker();
+                        break;
+                    default:
+                        System.out.println("DIT HOORT NIET");
+                }
+                stapelCounter++;
+            }else{
+                stapelCounter = 0;
+                makeEvents();
+                randomizeEvents(stormEvents);
             }
-            stapelCounter++;
         }
     }
 
-    public void beweegStorm(StormEventBeweging.Richtingen richting, StormEventBeweging.Stappen stappen){
-        System.out.println("------------Begin-----------" + richting.toString());
-        System.out.println(storm.getX());
-        System.out.println(storm.getY());
+    private void beweegStorm(StormEventBeweging.Richtingen richting, StormEventBeweging.Stappen stappen){
         switch (richting){
             case NOORD:
                 storm.beweegNoord(stappen);
@@ -127,9 +130,6 @@ public class StormController {
             default:
                 System.out.println("DIT HOORT NIET");
         }
-        System.out.println("------------Bewogen-----------");
-        System.out.println(storm.getX());
-        System.out.println(storm.getY());
     }
 
     public void registerObserver(BordObserver bo){ storm.register(bo); }
