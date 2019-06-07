@@ -48,6 +48,7 @@ public class ViewManager extends Application{
             StormView stormview = new StormView();              //maak storm en stormmeter
             UitrustingView uitrustingview = new UitrustingView();   //maak uitrusting plaatsen
             WaterflesView waterflesView = new WaterflesView(4);      //maak waterfles stand
+            SpeelbordView speelbordView = new SpeelbordView();
 
             ImageView waterfles = waterflesView.loadWaterfles();
             waterflesView.updateWaterFles(0);
@@ -59,9 +60,10 @@ public class ViewManager extends Application{
             StackPane zonnewijzer = onderdeelview.loadZonneWijzer("?", "?");
             GridPane knoppen = actieknoppenview.maakActieKnoppen();
             GridPane graafknoppen = graafknoppenview.maakGraafKnoppen();
+            GridPane spelbord = speelbordView.loadSpelBord();
 
 
-            Group group = new Group(achtergrond, knoppen, graafknoppen, waterfles, propellor, beacon, motor, zonnewijzer);
+            Group group = new Group(achtergrond, knoppen, graafknoppen, waterfles, propellor, beacon, motor, zonnewijzer, spelbord);
             Scene scene = new Scene(group, windowWidth, windowHeight);
             primaryStage.setScene(scene);
             primaryStage.setTitle("WELCOME TO THE GAME");

@@ -9,7 +9,7 @@ public class PartTile extends Tile {
 	private Soorten soort;
 
 	public PartTile(Richtingen richting, Soorten soort) {
-		super("/placeholder.png", "/placeholder.png", Varianten.PART);
+		super("/Tiles/Undiscovered.png", "/Tiles/Motor_Y.png", Varianten.PART);
 		this.richting = richting;
 		this.soort = soort;
 	}

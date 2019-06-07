@@ -3,7 +3,7 @@ package Model.Tiles;
 public class FataMorgana extends Tile {
 
 	public FataMorgana() {
-		super("/placeholder.png", "/placeholder.png", Varianten.FATAMORGANA);
+		super("/Tiles/Undiscovered_Water.png", "/Tiles/Fata_Morgana.png", Varianten.FATAMORGANA);
 	}
 	
 }

@@ -3,7 +3,7 @@ package Model.Tiles;
 public class Finish extends Tile {
 
 	public Finish() {
-		super("/placeholder.png", "/placeholder.png", Varianten.FINISH);
+		super("/Tiles/Undiscovered.png", "/Tiles/Landing_Place.png", Varianten.FINISH);
 	}
 	
 }
