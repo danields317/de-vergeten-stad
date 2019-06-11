@@ -1,6 +1,7 @@
 package View;
 
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 
@@ -19,6 +20,9 @@ public class ActieKnoppenView {
         left.setPrefSize(60, 60);
         right.setPrefSize(60, 60);
         TileActions.setPrefSize(60, 60);
+        TileActions.setOnAction(click -> {
+
+        });
 
         GridPane acties = new GridPane();
 

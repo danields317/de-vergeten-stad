@@ -23,9 +23,7 @@ public class TileView implements BordObserver{
     }
 
     public ImageView maakTileImage() {
-
         return imageView;
-
     }
 
     public void update(BordObservable bo){
