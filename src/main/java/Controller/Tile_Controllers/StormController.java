@@ -1,5 +1,6 @@
 package Controller.Tile_Controllers;
 
+import Controller.Controller;
 import Model.storm.Storm;
 import Model.storm.StormEvent;
 import Model.storm.StormEventBeweging;
@@ -100,7 +101,8 @@ public class StormController {
                         System.out.println("Storm beweegt");
                         break;
                     case BRANDT:
-//                    zonBrandt();
+                        Controller controller = Controller.getInstance();
+                        controller.verwijderZand();
                         System.out.println("Zon brandt");
                         break;
                     case STERKER:
