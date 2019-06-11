@@ -4,13 +4,17 @@ import javafx.scene.image.Image;
 
 public class Equipment {
 
+	enum equipmentKaarten {AARDEKIJKER, DUINKANON, JETPACK, TIJDSCHAKELAAR, WATERRESERVE, ZONNESCHILD};
+
+	private String naam;
 	private String description;
 	private Image image;
 	
 	/////////////////////////////////////// Constructor ///////////////////////////////////////
 	
-	public Equipment(String description, String imagePath) {
-		
+	public Equipment(String naam, String description, String imagePath) {
+
+		this.naam = naam;
 		this.description = description;
 		this.image = new Image(imagePath);
 		
@@ -21,7 +25,11 @@ public class Equipment {
 	
 	
 	/////////////////////////////////////// Getters & Setters ///////////////////////////////////////
-	
+
+	public String getNaam() {
+		return naam;
+	}
+
 	public String getDescription() {
 		return description;
 	}
