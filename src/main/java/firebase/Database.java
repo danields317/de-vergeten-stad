@@ -3,8 +3,6 @@ package firebase;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.file.Paths;
 
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.cloud.firestore.Firestore;
@@ -14,7 +12,7 @@ import com.google.firebase.cloud.FirestoreClient;
 
 public class Database {
 
-    private final String PRIVATEKEYLOCATION = getPRIVATEKEYLOCATION();
+    private  final String PRIVATEKEYLOCATION = getPRIVATEKEYLOCATION();
     private static final String DATABASEURL = "https://iipsen-f7b65.firebaseio.com";
     private Firestore db;
 
@@ -51,5 +49,6 @@ public class Database {
         }
         return null;
     }
+
 
 }

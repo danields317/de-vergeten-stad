@@ -5,16 +5,20 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import Model.Tiles.Tile;
 import Model.equipment.Equipment;
+import observers.PlayerObservable;
+import observers.PlayerObserver;
+import observers.WaterObserver;
 
-public class Player {
+import java.util.ArrayList;
+import java.util.List;
+
+public class Player implements PlayerObservable {
 
 	private String nickname; // Naam ingevoerd door de speler
 	private Equipment_Controller[] inventory;
 	private int water;
 	private int actiesOver;
 	private Tile tile; // De tile waar de speler op staat
-	private int X;
-	private int Y;
 	
 	// Informatie over de speler klasse
 	private String className;
@@ -22,23 +26,37 @@ public class Player {
 	private int maxWater;
 	private Color color;
 	private Image image;
-	
-	
+
+
+	// List of all Observers of this Observable Objects
+	private List<PlayerObserver> observers = new ArrayList<PlayerObserver>();
+
+
 	/////////////////////////////////////// Constructor ///////////////////////////////////////
 	
 	public Player( String nickname, String className, String description, int maxWater, Color color, String imagePath ) {
-		
+
 		this.nickname = nickname;
 		this.className = className;
 		this.description = description;
 		this.color = color;
 		this.image = new Image( imagePath );
-		this.X = 0;
-		this.Y = 0;
-		
+
 		this.maxWater = maxWater;
 		water = maxWater;
-		
+
+	}
+	public Player( String nickname, String className, String description, int maxWater, int water, Color color, String imagePath ) {
+
+		this.nickname = nickname;
+		this.className = className;
+		this.description = description;
+		this.color = color;
+		this.image = new Image( imagePath );
+
+		this.maxWater = maxWater;
+		this.water = water;
+
 	}
 	
 	/////////////////////////////////////// Methods ///////////////////////////////////////
@@ -58,38 +76,12 @@ public class Player {
 	}
 	*/
 
-	public void beweegNoord(){
-		if (Y != 0) {
-			this.Y--;
-			actieGedaan();
-		} else System.out.println("Je kan niet verder naar het noorden.");
-	}
-
-	public void beweegZuid(){
-		if (Y != 4) {
-			this.Y++;
-			actieGedaan();
-		} else System.out.println("Je kan niet verder naar het zuiden.");
-	}
-
-	public void beweegOost(){
-		if (X != 0) {
-			this.X--;
-			actieGedaan();
-		} else System.out.println("Je kan niet verder naar het oosten..");
-	}
-
-	public void beweegWest(){
-		if (X != 4) {
-			this.X++;
-			actieGedaan();
-		} else System.out.println("Je kan niet verder naar het westen.");
-	}
-
 	public void giveWater(Player reciever){
 		if((this.water > 0 && reciever.water < reciever.maxWater) && (this.tile == reciever.tile)){
 			this.subtractWater(1);
 			reciever.addWater(1);
+			notifyAllObservers();
+
 		}
 	}
 	/////////////////////////////////////// Getters & Setters ///////////////////////////////////////
@@ -104,13 +96,18 @@ public class Player {
 
 	}
 
+
+
 	public void subtractWater(int water ) {
 		
 		this.water = this.water - water;
-		
+		System.out.println(observers);
+		notifyAllObservers();
 		if (water <= 0) {
 			// RIP
 		}
+
+
 	
 	}
 	
@@ -150,9 +147,18 @@ public class Player {
 		return image;
 	}
 
-	public int getX() {return this.X;}
+	public void register(PlayerObserver observer){
+		observers.add(observer);
+	}
 
-	public int getY() {return this.Y;}
+	// Signal all observers that something has changed.
+	// Also send <<this>> object to the observers.
+	public void notifyAllObservers(){
+		for (PlayerObserver s : observers) {
+			System.out.println(s);
 
-	public int actieGedaan() {return this.actiesOver--;}
+			s.update(this);
+		}
+	}
+
 }

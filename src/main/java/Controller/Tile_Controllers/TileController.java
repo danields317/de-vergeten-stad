@@ -20,11 +20,11 @@ public class TileController {
     private TileController(){
         makeTiles();
         randomizeTiles();
-        for (Tile[] subTiles : randomTiles) {
+        /*for (Tile[] subTiles : randomTiles) {
             for (Tile tile : subTiles){
                 System.out.println(tile.getVariant());
             }
-        }
+        }*/
     }
 
     public static TileController getInstance(){
@@ -38,7 +38,7 @@ public class TileController {
      * Volgens de spel regels zijn er in totaal 24 tiles, dus loopt de for loop tot 24.
      */
     private void makeTiles(){
-        for (int i = 0; i < 24; i++){
+        for (int i = 0; i <= 24; i++){
             if (i < 1){
                 tiles.add(new Finish());
             }else if (i < 2){
@@ -46,7 +46,7 @@ public class TileController {
             }else if (i < 4){
                 tiles.add(new Waterput());
             }else if (i < 7){
-                tiles.add(new Tunnel(equipmentController.getEquipment()));
+                tiles.add(new Tunnel(/*equipmentController.getEquipment()*/));
             }else if (i < 8){
                 tiles.add(new PartTile(PartTile.Richtingen.OMHOOG, PartTile.Soorten.KOMPAS));
             }else if (i < 9){
@@ -63,18 +63,25 @@ public class TileController {
                 tiles.add(new PartTile(PartTile.Richtingen.OPZIJ, PartTile.Soorten.MOTOR));
             }else if (i < 15){
                 tiles.add(new PartTile(PartTile.Richtingen.OPZIJ, PartTile.Soorten.OBELISK));
-            }else {
-                tiles.add(new EquipmentTile(equipmentController.getEquipment()));
+            }else if (i < 16){
+                tiles.add(new Storm());
+            }
+            else {
+                tiles.add(new EquipmentTile(/*equipmentController.getEquipment()*/));
             }
         }
     }
 
     private void randomizeTiles(){
-        for (int i = 0; i < randomTiles.length; i++){
-            for (int j = 0; j < randomTiles[i].length; j++){
-                int randomInt = random.nextInt(tiles.size());
-                randomTiles[i][j] = tiles.get(randomInt);
-                tiles.remove(randomInt);
+        for (int i = 0; i < randomTiles.length; i++) {
+            for (int j = 0; j < randomTiles[i].length; j++) {
+                if(!tiles.isEmpty()) {
+                    int randomInt = random.nextInt(tiles.size());
+                    System.out.println(randomInt);
+                    randomTiles[i][j] = tiles.get(randomInt);
+                    tiles.remove(randomInt);
+                }
+                else continue;
             }
         }
     }
@@ -130,5 +137,9 @@ public class TileController {
                 tile.register(bo);
             }
         }
+    }
+
+    public Tile[][] getTiles(){
+        return this.randomTiles;
     }
 }
