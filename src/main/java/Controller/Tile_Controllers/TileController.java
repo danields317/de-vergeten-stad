@@ -11,8 +11,8 @@ public class TileController {
 
     Random random = new Random();
 
-    static TileController tileController;
-    static EquipmentController equipmentController;
+    private static TileController tileController;
+    private static EquipmentController equipmentController = EquipmentController.getInstance();
 
     ArrayList<Tile> tiles = new ArrayList<>();
     Tile[][] randomTiles = new Tile[5][5];
@@ -34,6 +34,10 @@ public class TileController {
         return tileController;
     }
 
+    public void tileClicked(int x, int y) {
+        Tile tile = randomTiles[y][x];
+    }
+
     /**
      * Volgens de spel regels zijn er in totaal 24 tiles, dus loopt de for loop tot 24.
      */
@@ -46,7 +50,7 @@ public class TileController {
             }else if (i < 4){
                 tiles.add(new Waterput());
             }else if (i < 7){
-                tiles.add(new Tunnel(/*equipmentController.getEquipment()*/));
+                tiles.add(new Tunnel(equipmentController.getEquipment()));
             }else if (i < 8){
                 tiles.add(new PartTile(PartTile.Richtingen.OMHOOG, PartTile.Soorten.KOMPAS));
             }else if (i < 9){
@@ -67,7 +71,7 @@ public class TileController {
                 tiles.add(new Storm());
             }
             else {
-                tiles.add(new EquipmentTile(/*equipmentController.getEquipment()*/));
+                tiles.add(new EquipmentTile(equipmentController.getEquipment()));
             }
         }
     }

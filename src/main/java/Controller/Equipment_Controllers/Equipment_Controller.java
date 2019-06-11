@@ -8,7 +8,7 @@ public class Equipment_Controller {
     Equipment equipment;
 
     public Equipment_Controller() {
-        equipment = new Equipment("DUMMY", "placeholder.png");
+        equipment = new Equipment("Zonneschild", "DUMMY", "placeholder.png");
     }
 
     public void gebruikEquipment() {
