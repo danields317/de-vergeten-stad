@@ -72,9 +72,11 @@ public class TileController {
     private void randomizeTiles(){
         for (int i = 0; i < randomTiles.length; i++){
             for (int j = 0; j < randomTiles[i].length; j++){
-                int randomInt = random.nextInt(tiles.size());
-                randomTiles[i][j] = tiles.get(randomInt);
-                tiles.remove(randomInt);
+                if (i != 2 && j != 2){
+                    int randomInt = random.nextInt(tiles.size());
+                    randomTiles[i][j] = tiles.get(randomInt);
+                    tiles.remove(randomInt);
+                }
             }
         }
     }
