@@ -104,7 +104,7 @@ public class WaterflesView implements WaterObserver {
         gridPane.setAlignment(Pos.CENTER);
 
 
-        ImageView waterImage = new ImageView(new Image("Fles0_4.png"));
+        ImageView waterImage = new ImageView(new Image("/Fles0_4.png"));
         waterImage.setFitWidth(60.0);
         waterImage.setFitHeight(60.0);
         gridPane.add(waterImage, 20, 20);
@@ -119,9 +119,9 @@ public class WaterflesView implements WaterObserver {
     }
 
 
-
-
-
+    public static GridPane getView() {
+        return view;
+    }
 
     @Override
     public void update(WaterObservable sb) {

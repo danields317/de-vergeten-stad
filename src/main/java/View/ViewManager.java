@@ -14,10 +14,25 @@ public class ViewManager extends Application{
 
     static Stage primaryStage;
     String kaart = "/gamescreenempty.png";
+    //BordView bordView = new BordView();  //maak achtergrond
+    ActieKnoppenView actieknoppenview = new ActieKnoppenView();  //maak beweeg knoppen
+    GraafKnoppenView graafknoppenview = new GraafKnoppenView();  //maak graaf knoppen
+    EindigBeurtView eindigBeurtView = new EindigBeurtView();  //maak eindig beurt knop
+    //LoadBordView loadbordview = new LoadBordView();  //geen idee wat deze doet
+    OnderdeelView onderdeelview = new OnderdeelView();  //maak onderdelen
+    SpeelbordView speelbordview = new SpeelbordView();  //maak speelbord tiles
+    //    SpelerView spelerview = new SpelerView();           //maak speler poppetjes en zijkant informatie
+    //StormView stormview = new StormView();              //maak storm en stormmeter
+    UitrustingView uitrustingview = new UitrustingView();   //maak uitrusting plaatsen
+    WaterflesView waterflesView = new WaterflesView();      //maak waterfles stand
+    SpeelbordView speelbordView = new SpeelbordView();
+
+
     private double windowWidth = 1600;
     private double windowHeight = 900;
     private double windowAnchorX = 50;
     private double windowAnchorY= 50;
+    private boolean torf = true;
 
 
     @Override
@@ -34,19 +49,14 @@ public class ViewManager extends Application{
 
     public void loadGameView() {
         try {
+            GridPane waterfles;
+            if(torf){
+                waterfles = waterflesView.createInitialGridPane();
+                torf = false;
+            }else{
+                waterfles = waterflesView.getView();
+            }
 
-            //BordView bordView = new BordView();  //maak achtergrond
-            ActieKnoppenView actieknoppenview = new ActieKnoppenView();  //maak beweeg knoppen
-            GraafKnoppenView graafknoppenview = new GraafKnoppenView();  //maak graaf knoppen
-            EindigBeurtView eindigBeurtView = new EindigBeurtView();  //maak eindig beurt knop
-            //LoadBordView loadbordview = new LoadBordView();  //geen idee wat deze doet
-            OnderdeelView onderdeelview = new OnderdeelView();  //maak onderdelen
-            SpeelbordView speelbordview = new SpeelbordView();  //maak speelbord tiles
-            //    SpelerView spelerview = new SpelerView();           //maak speler poppetjes en zijkant informatie
-            StormView stormview = new StormView();              //maak storm en stormmeter
-            UitrustingView uitrustingview = new UitrustingView();   //maak uitrusting plaatsen
-            WaterflesView waterflesView = new WaterflesView();      //maak waterfles stand
-            SpeelbordView speelbordView = new SpeelbordView();
 
            // ImageView achtergrond = bordView.maakAchtergrond(windowWidth, windowHeight);
             StackPane propellor = onderdeelview.loadPropeller("?", "?");
@@ -54,13 +64,21 @@ public class ViewManager extends Application{
             StackPane motor = onderdeelview.loadMotor("?", "?");
             StackPane zonnewijzer = onderdeelview.loadZonneWijzer("?", "?");
             GridPane knoppen = actieknoppenview.maakActieKnoppen();
-            GridPane waterfles = waterflesView.createInitialGridPane();
+
             GridPane graafknoppen = graafknoppenview.maakGraafKnoppen();
             Button eindigbeurtKnop = eindigBeurtView.maakEindigbeurtKnop();
             GridPane spelbord = speelbordView.loadSpelBord();
 
             //Group group = new Group(knoppen, waterfles);
-            Group group = new Group(knoppen, graafknoppen, eindigbeurtKnop, waterfles, propellor, beacon, motor, zonnewijzer, spelbord);
+            Group group = new Group(knoppen,
+                    graafknoppen,
+                    eindigbeurtKnop,
+                    waterfles,
+                    propellor,
+                    beacon,
+                    motor,
+                    zonnewijzer,
+                    spelbord);
             Scene scene = new Scene(group, windowWidth, windowHeight);
             scene.getStylesheets().add("/styles.css");
             primaryStage.setScene(scene);
