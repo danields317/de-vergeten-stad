@@ -5,8 +5,14 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import Model.Tiles.Tile;
 import Model.equipment.Equipment;
+import observers.PlayerObservable;
+import observers.PlayerObserver;
+import observers.WaterObserver;
 
-public class Player {
+import java.util.ArrayList;
+import java.util.List;
+
+public class Player implements PlayerObservable {
 
 	private String nickname; // Naam ingevoerd door de speler
 	private Equipment_Controller[] inventory;
@@ -15,15 +21,19 @@ public class Player {
 	private Tile tile; // De tile waar de speler op staat
 	private int X;
 	private int Y;
-	
+
 	// Informatie over de speler klasse
 	private String className;
 	private String description;
 	private int maxWater;
 	private Color color;
 	private Image image;
-	
-	
+
+
+	// List of all Observers of this Observable Objects
+	private List<PlayerObserver> observers = new ArrayList<PlayerObserver>();
+
+
 	/////////////////////////////////////// Constructor ///////////////////////////////////////
 	
 	public Player( String nickname, String className, String description, int maxWater, Color color, String imagePath ) {
@@ -35,7 +45,7 @@ public class Player {
 		this.image = new Image( imagePath );
 		this.X = 0;
 		this.Y = 0;
-		
+
 		this.maxWater = maxWater;
 		water = maxWater;
 		
@@ -90,6 +100,8 @@ public class Player {
 		if((this.water > 0 && reciever.water < reciever.maxWater) && (this.tile == reciever.tile)){
 			this.subtractWater(1);
 			reciever.addWater(1);
+			notifyAllObservers();
+
 		}
 	}
 	/////////////////////////////////////// Getters & Setters ///////////////////////////////////////
@@ -107,7 +119,8 @@ public class Player {
 	public void subtractWater(int water ) {
 		
 		this.water = this.water - water;
-		
+		System.out.println(observers);
+		notifyAllObservers();
 		if (water <= 0) {
 			// RIP
 		}
@@ -155,4 +168,19 @@ public class Player {
 	public int getY() {return this.Y;}
 
 	public int actieGedaan() {return this.actiesOver--;}
+
+	public void register(PlayerObserver observer){
+		observers.add(observer);
+	}
+
+	// Signal all observers that something has changed.
+	// Also send <<this>> object to the observers.
+	public void notifyAllObservers(){
+		for (PlayerObserver s : observers) {
+			System.out.println(s);
+
+			s.update(this);
+		}
+	}
+
 }

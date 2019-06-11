@@ -1,5 +1,6 @@
 package Model.Login;
 
+import Model.data.StaticData;
 import View.LoadBordView;
 import com.google.cloud.firestore.QueryDocumentSnapshot;
 import javafx.stage.Stage;
@@ -78,6 +79,8 @@ public class Login implements LoginObservable {
         setGivenUsername(uName);
         setGivenPassword(pass);
         if (pass.equals(fbPass)){
+            StaticData staticData = StaticData.getInstance();
+            staticData.setUsername(uName);
             LoginCorrect();
             setError("");
 //        if(((this.uName.equals(uName)) && (this.pass.equals(pass))) || true){

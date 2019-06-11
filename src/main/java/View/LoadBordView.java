@@ -1,6 +1,10 @@
 package View;
 
 import Controller.Bord_Controllers.LoadBord_Controller;
+import Controller.Player_Controllers.Player_Controller;
+import Model.data.StaticData;
+import View.bord_views.BordView;
+import firebase.FirebaseService;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
@@ -13,6 +17,8 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import observers.LoadBordObservable;
 import observers.LoadBordObserver;
+
+import java.util.*;
 
 
 public class LoadBordView implements LoadBordObserver {
@@ -32,11 +38,13 @@ public class LoadBordView implements LoadBordObserver {
         primaryStage = s;
         this.roomId = roomId;
         //loadPrimaryStageWithGridPane(createInitialGridPane());
-        loadPrimaryStageWithGridPane(createTestGridPane());
+        loadPrimaryStageWithGridPane(createInitialGridPane());
         loadBordController = loadBordController.getInstance();
 
         // PASS IT TO THE CONTROLLER WHO WILL PASS IT TO THE MODEL
         loadBordController.registerObserver( this);
+
+        loadBordController.updateView();
     }
 
     private void loadPrimaryStageWithGridPane(GridPane gp) {
@@ -62,7 +70,11 @@ public class LoadBordView implements LoadBordObserver {
         }
     }
 
-    private GridPane createTestGridPane(){
+    private GridPane createUpdatedGridPane(LoadBordObservable sb){
+        FirebaseService firebaseService = FirebaseService.getInstance();
+        Object roomInfo = firebaseService.getSpel(roomId).getData();
+        (StaticData.getInstance()).setRoomInfo(roomInfo);
+        Object classes = ((Map) roomInfo).get("Selectable_classes");
         GridPane gridPane = new GridPane();
         gridPane.setMinSize(400, 200);
         gridPane.setPadding(new Insets(10, 10, 10, 10));
@@ -70,25 +82,25 @@ public class LoadBordView implements LoadBordObserver {
         gridPane.setHgap(5);
         gridPane.setAlignment(Pos.CENTER);
 
-        ImageView image1 = createImageView("" + ".png");
-        ImageView image2 = createImageView("Klimmer" + ".png");
-        ImageView image3 = createImageView("Navigator" + ".png");
-        ImageView image4 = createImageView("Verkenner" + ".png");
-        ImageView image5 = createImageView("Waterdrager" + ".png");
+        int count = 0;
+        for(int i = 0; i < ((Map) classes).size(); i++){
 
-        gridPane.add(image1, 0, 0);
-        gridPane.add(image2, 1, 0);
-        gridPane.add(image3, 2, 0);
-        gridPane.add(image4, 3, 0);
-        gridPane.add(image5, 4, 0);
-
-        //gridPane.add(image, 0, 0);
-        //gridPane.add(scoreText, 1, 0);
-
-
+            Object killMe = ((Map) classes).get(Integer.toString(i));
+            final String tempString = ( ((Map) killMe).get("name")).toString();
+            ImageView image = createImageView(tempString + ".png");
+            image.setOnMouseClicked(e -> {
+                Player_Controller.getInstance(true, tempString);
+                new BordView(primaryStage);
+            });
+            gridPane.add(image, count, 0);
+            count++;
+        }
 
         return gridPane;
     }
+
+
+
 
     public ImageView createImageView(String name){
        return new ImageView(new Image(name));
@@ -103,6 +115,11 @@ public class LoadBordView implements LoadBordObserver {
         gridPane.setHgap(5);
         gridPane.setAlignment(Pos.CENTER);
 
+
+        ImageView image = createImageView("giphy2.gif");
+        gridPane.add(image, 0, 0);
+
+
         //gridPane.add(image, 0, 0);
         //gridPane.add(scoreText, 1, 0);
 
@@ -110,10 +127,7 @@ public class LoadBordView implements LoadBordObserver {
         return gridPane;
     }
 
-    private GridPane createUpdatedGridPane(LoadBordObservable sb){
-        return new GridPane();
 
-    }
 
 
 

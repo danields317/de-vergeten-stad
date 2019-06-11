@@ -34,7 +34,7 @@ public class LoginView implements LoginObserver {
     Login_Controller loginController;
     TextField usernameField = new TextField();
     TextField passwordField = new TextField();
-    TextField roomId = new TextField("Place here your room id");
+    TextField roomId = new TextField("t3PuQAWO6mrKfqaFISN0");
 
     public LoginView(Stage s, ViewManager viewManager){
         this.viewManager = viewManager;
@@ -117,7 +117,6 @@ public class LoginView implements LoginObserver {
         gridPane.setVgap(5);
         gridPane.setHgap(5);
         gridPane.setAlignment(Pos.CENTER);
-        System.out.println("rip");
         if(!sb.getError().isEmpty()){
             gridPane.add(error, 0 ,0);
         }

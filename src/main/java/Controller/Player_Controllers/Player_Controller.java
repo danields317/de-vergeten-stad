@@ -1,26 +1,47 @@
 package Controller.Player_Controllers;
 
-import Controller.Equipment_Controllers.Equipment_Controller;
+import Model.data.StaticData;
 import Model.player.Player;
 import javafx.scene.paint.Color;
+import observers.LoadBordObserver;
+import observers.PlayerObserver;
+
+import java.util.Map;
 
 public class Player_Controller {
 
 
     static Player_Controller playercont;
+    StaticData staticData = StaticData.getInstance();
     Player player;
 
-    public Player_Controller(String nickname, String className, String description, int maxWater, Color color, String imagePath){
-        player = new Player(nickname,className, description, maxWater, color, imagePath);
+
+
+
+
+    public Player_Controller(String className, String imagePath){
+        player = new Player(staticData.getUsername(),className, "b", 4, Color.BLUE, imagePath);
     }
 
+
+    public Player_Controller(String n, String className, String b, int maxwater, Color color, String imagePath){
+        player = new Player(staticData.getUsername(),className, "b", 4, Color.BLUE, imagePath);
+    }
     // Singleton Pattern.
     // now we can call: SpelbordController.getInstance()  from everywhere
     // AND it guarantees there is only 1 instance.
-    public static Player_Controller getInstance() {
+    public static Player_Controller getInstance(boolean loadGame, String className) {
         if (playercont == null) {
-            playercont = new Player_Controller("a", "a", "a", 5, Color.BLUE, "Homescreenempty.png");
+            if( loadGame){
+
+                System.out.println(((Map)(StaticData.getInstance()).getRoomInfo()).get("archeoloog"));
+                playercont = new Player_Controller(className, className +".png");
+            }else{}
         }
+        return playercont;
+    }
+
+    public static Player_Controller getInstance() {
         return playercont;
     }
 
@@ -40,7 +61,7 @@ public class Player_Controller {
 
     }
 
-    public void drinkWater(){
+    public void removeWater(){
         player.subtractWater(1);
         System.out.println(player.getWater());
     }
@@ -48,7 +69,7 @@ public class Player_Controller {
 
     public void giveWater(Player receiver, int amount){
         if(this.getPlayer().getWater() == 0){
-            System.out.println("You dont have any water to given");
+            System.out.println("You dont have any water to give");
         } else if( receiver.getWater() >= receiver.getMaxWater()){
             System.out.println(receiver.getClassName() + " has already full water");
         }else{
@@ -58,8 +79,9 @@ public class Player_Controller {
 
 
     }
-
-    public Equipment_Controller[] getInventory() { return player.getInventory(); }
+    public void registerObserver(PlayerObserver sbv) {
+        player.register(sbv);
+    }
 
     public Player getPlayer() {
         return player;
