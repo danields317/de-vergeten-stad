@@ -35,7 +35,7 @@ public class ViewManager extends Application{
     public void loadGameView() {
         try {
 
-            //BordView bordView = new BordView();  //maak achtergrond
+            BordView bordView = new BordView();  //maak achtergrond
             ActieKnoppenView actieknoppenview = new ActieKnoppenView();  //maak beweeg knoppen
             GraafKnoppenView graafknoppenview = new GraafKnoppenView();  //maak graaf knoppen
             EindigBeurtView eindigBeurtView = new EindigBeurtView();  //maak eindig beurt knop
@@ -48,7 +48,7 @@ public class ViewManager extends Application{
             WaterflesView waterflesView = new WaterflesView();      //maak waterfles stand
             SpeelbordView speelbordView = new SpeelbordView();
 
-           // ImageView achtergrond = bordView.maakAchtergrond(windowWidth, windowHeight);
+            ImageView achtergrond = bordView.maakAchtergrond(windowWidth, windowHeight);
             StackPane propellor = onderdeelview.loadPropeller("?", "?");
             StackPane beacon = onderdeelview.loadBeacon("?", "?");
             StackPane motor = onderdeelview.loadMotor("?", "?");
@@ -60,7 +60,7 @@ public class ViewManager extends Application{
             GridPane spelbord = speelbordView.loadSpelBord();
 
             //Group group = new Group(knoppen, waterfles);
-            Group group = new Group(knoppen, graafknoppen, eindigbeurtKnop, waterfles, propellor, beacon, motor, zonnewijzer, spelbord);
+            Group group = new Group(achtergrond, knoppen, graafknoppen, eindigbeurtKnop, waterfles, propellor, beacon, motor, zonnewijzer, spelbord);
             Scene scene = new Scene(group, windowWidth, windowHeight);
             scene.getStylesheets().add("/styles.css");
             primaryStage.setScene(scene);
