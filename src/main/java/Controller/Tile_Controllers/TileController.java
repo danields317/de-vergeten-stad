@@ -20,11 +20,6 @@ public class TileController {
     private TileController(){
         makeTiles();
         randomizeTiles();
-        /*for (Tile[] subTiles : randomTiles) {
-            for (Tile tile : subTiles){
-                System.out.println(tile.getVariant());
-            }
-        }*/
     }
 
     public static TileController getInstance(){
@@ -38,7 +33,7 @@ public class TileController {
      * Volgens de spel regels zijn er in totaal 24 tiles, dus loopt de for loop tot 24.
      */
     private void makeTiles(){
-        for (int i = 0; i <= 24; i++){
+        for (int i = 0; i < 24; i++){
             if (i < 1){
                 tiles.add(new Finish());
             }else if (i < 2){
@@ -63,25 +58,20 @@ public class TileController {
                 tiles.add(new PartTile(PartTile.Richtingen.OPZIJ, PartTile.Soorten.MOTOR));
             }else if (i < 15){
                 tiles.add(new PartTile(PartTile.Richtingen.OPZIJ, PartTile.Soorten.OBELISK));
-            }else if (i < 16){
-                tiles.add(new Storm());
-            }
-            else {
+            }else {
                 tiles.add(new EquipmentTile(/*equipmentController.getEquipment()*/));
             }
         }
     }
 
     private void randomizeTiles(){
-        for (int i = 0; i < randomTiles.length; i++) {
-            for (int j = 0; j < randomTiles[i].length; j++) {
-                if(!tiles.isEmpty()) {
+        for (int i = 0; i < randomTiles.length; i++){
+            for (int j = 0; j < randomTiles[i].length; j++){
+                if (i != 2 && j != 2){
                     int randomInt = random.nextInt(tiles.size());
-                    System.out.println(randomInt);
                     randomTiles[i][j] = tiles.get(randomInt);
                     tiles.remove(randomInt);
                 }
-                else continue;
             }
         }
     }
@@ -130,16 +120,15 @@ public class TileController {
         }
     }
 
+    public Tile[][] getTiles() {return randomTiles;}
 
     public void registerObserver(BordObserver bo){
         for (Tile[] subTiles : randomTiles) {
             for (Tile tile : subTiles){
-                tile.register(bo);
+                if (tile != null){
+                    tile.register(bo);
+                }
             }
         }
-    }
-
-    public Tile[][] getTiles(){
-        return this.randomTiles;
     }
 }
