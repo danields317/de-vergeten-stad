@@ -26,18 +26,16 @@ public class SpeelbordView {
         for(int i = 0; i < tiles.length; i ++){
             for(int j = 0; j < tiles[i].length; j ++){
 
-                if (tiles[i][j] != null){
-                    TileView tileView = new TileView(tiles[i][j].getImage());
+                TileView tileView = new TileView(tiles[i][j].getImage());
 
-                    //ImageView tile = new ImageView(tiles[i][j].getImage());
-                    //tile.setFitHeight(115);
-                    //tile.setFitWidth(115)
-                    ImageView tile = tileView.maakTileImage();
-                    spelbord.setMargin(tile, new Insets(5,5,5,5));
+                //ImageView tile = new ImageView(tiles[i][j].getImage());
+                //tile.setFitHeight(115);
+                //tile.setFitWidth(115)
+                ImageView tile = tileView.maakTileImage();
+                spelbord.setMargin(tile, new Insets(5,5,5,5));
 
-                    spelbord.add(tile, i , j);;
-                    System.out.println(i + " " + j);
-                }
+                spelbord.add(tile, i , j);;
+                System.out.println(i + " " + j);
 
             }
         }

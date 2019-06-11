@@ -125,9 +125,7 @@ public class TileController {
     public void registerObserver(BordObserver bo){
         for (Tile[] subTiles : randomTiles) {
             for (Tile tile : subTiles){
-                if (tile != null){
-                    tile.register(bo);
-                }
+                tile.register(bo);
             }
         }
     }
