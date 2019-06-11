@@ -5,6 +5,8 @@ import javafx.scene.layout.GridPane;
 
 public class GraafKnoppenView {
 
+    static GridPane view = new GridPane();
+
     public GridPane maakGraafKnoppen(){
         Button up = new Button("▲");
         Button down = new Button("▼");
@@ -28,6 +30,11 @@ public class GraafKnoppenView {
         acties.setLayoutX(525);
         acties.setLayoutY(685);
 
+        view = acties;
         return acties;
+    }
+
+    public static GridPane getView() {
+        return view;
     }
 }

@@ -41,6 +41,8 @@ public class WaterflesView implements WaterObserver {
         //loadPrimaryStageWithGridPane(createInitialGridPane());
         loadPrimaryStageWithGridPane(createInitialGridPane());*/
         waterController = waterController.getInstance();
+        waterController.registerObserver();
+        waterController.registerObserver((WaterObserver) this);
 
     }
 
@@ -111,9 +113,10 @@ public class WaterflesView implements WaterObserver {
 
 
 
+
         //gridPane.add(image, 0, 0);
         //gridPane.add(scoreText, 1, 0);
-
+        view = gridPane;
 
         return gridPane;
     }
@@ -126,7 +129,7 @@ public class WaterflesView implements WaterObserver {
     @Override
     public void update(WaterObservable sb) {
         createUpdatedGridPane(sb);
-        loadPrimaryStageWithGridPane();
+       // loadPrimaryStageWithGridPane();
     }
 
 

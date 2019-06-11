@@ -12,6 +12,7 @@ public class Water_Controller implements PlayerObserver {
     Water water;
 
     public Water_Controller(){
+        water = new Water();
     }
 
 
@@ -30,8 +31,9 @@ public class Water_Controller implements PlayerObserver {
         water.register(sbv);
     }
     public void registerObserver() {
-        playerController.registerObserver(this);
+        playerController.registerObserver((PlayerObserver) this);
     }
-    public void update(PlayerObservable sb){ water.updateWater(sb);}
+    public void update(PlayerObservable sb){
+        water.updateWater(sb.getMaxWater(), sb.getWater());}
 
 }

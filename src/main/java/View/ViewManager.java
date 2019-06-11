@@ -1,11 +1,13 @@
 package View;
 
+import Controller.Controller;
+import Controller.Player_Controllers.Player_Controller;
 import View.bord_views.*;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.image.ImageView;
+import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -24,7 +26,7 @@ public class ViewManager extends Application{
     //    SpelerView spelerview = new SpelerView();           //maak speler poppetjes en zijkant informatie
     //StormView stormview = new StormView();              //maak storm en stormmeter
     UitrustingView uitrustingview = new UitrustingView();   //maak uitrusting plaatsen
-    WaterflesView waterflesView = new WaterflesView();      //maak waterfles stand
+    WaterflesView waterflesView;      //maak waterfles stand
     SpeelbordView speelbordView = new SpeelbordView();
 
 
@@ -49,36 +51,14 @@ public class ViewManager extends Application{
 
     public void loadGameView() {
         try {
-            GridPane waterfles;
+            Group group;
             if(torf){
-                waterfles = waterflesView.createInitialGridPane();
+                group = firstBordload();
                 torf = false;
             }else{
-                waterfles = waterflesView.getView();
+                group = makeGroup();
             }
 
-
-           // ImageView achtergrond = bordView.maakAchtergrond(windowWidth, windowHeight);
-            StackPane propellor = onderdeelview.loadPropeller("?", "?");
-            StackPane beacon = onderdeelview.loadBeacon("?", "?");
-            StackPane motor = onderdeelview.loadMotor("?", "?");
-            StackPane zonnewijzer = onderdeelview.loadZonneWijzer("?", "?");
-            GridPane knoppen = actieknoppenview.maakActieKnoppen();
-
-            GridPane graafknoppen = graafknoppenview.maakGraafKnoppen();
-            Button eindigbeurtKnop = eindigBeurtView.maakEindigbeurtKnop();
-            GridPane spelbord = speelbordView.loadSpelBord();
-
-            //Group group = new Group(knoppen, waterfles);
-            Group group = new Group(knoppen,
-                    graafknoppen,
-                    eindigbeurtKnop,
-                    waterfles,
-                    propellor,
-                    beacon,
-                    motor,
-                    zonnewijzer,
-                    spelbord);
             Scene scene = new Scene(group, windowWidth, windowHeight);
             scene.getStylesheets().add("/styles.css");
             primaryStage.setScene(scene);
@@ -92,4 +72,89 @@ public class ViewManager extends Application{
         }
     }
 
+    public Group firstBordload(){
+        waterflesView = new WaterflesView();
+        GridPane waterfles;
+
+        waterfles = waterflesView.createInitialGridPane();
+
+
+
+        // ImageView achtergrond = bordView.maakAchtergrond(windowWidth, windowHeight);
+        StackPane propellor = onderdeelview.loadPropeller("?", "?");
+        StackPane beacon = onderdeelview.loadBeacon("?", "?");
+        StackPane motor = onderdeelview.loadMotor("?", "?");
+        StackPane zonnewijzer = onderdeelview.loadZonneWijzer("?", "?");
+        GridPane knoppen = actieknoppenview.maakActieKnoppen();
+
+        GridPane graafknoppen = graafknoppenview.maakGraafKnoppen();
+        Button eindigbeurtKnop = eindigBeurtView.maakEindigbeurtKnop();
+        GridPane spelbord = speelbordView.loadSpelBord();
+
+        Button burn = butje();
+        burn.setOnMouseClicked(e -> {
+
+            update();
+        });
+        //Group group = new Group(knoppen, waterfles);
+        return  new Group(knoppen,
+                burn,
+                graafknoppen,
+                eindigbeurtKnop,
+                waterfles,
+                propellor,
+                beacon,
+                motor,
+                zonnewijzer,
+                spelbord);
+
+    }
+
+    public Button butje(){
+        Button burn = new Button("burn");
+        burn.setPrefSize(152,57);
+        burn.setLayoutX(1092);
+        burn.setLayoutY(432);
+        burn.setOnMouseClicked(e -> {
+            Controller con = new Controller();
+            con.verwijderZand();
+            //update();
+        });
+        return burn;
+
+    }
+
+    private void loadPrimaryStageWithGroup(Group group) {
+        try {
+
+            Image backgroundImage = new Image("background.png");
+            Scene scene = new Scene(group, windowWidth, windowHeight);
+            scene.getStylesheets().add("/styles.css");
+
+            primaryStage.setScene(scene);
+            primaryStage.setTitle("De Vergeten Stad");
+            primaryStage.setX(windowAnchorX);
+            primaryStage.setY(windowAnchorY);
+            primaryStage.show();
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private Group makeGroup(){
+        System.out.println("help");
+        Button burn = butje();
+        GridPane knoppen = actieknoppenview.getView();
+        GridPane graafKnoppen = graafknoppenview.getView();
+        Button eindigbeurt = eindigBeurtView.maakEindigbeurtKnop();
+        GridPane waterfles = waterflesView.getView();
+        waterfles.setLayoutX(592);
+        waterfles.setLayoutY(232);
+
+
+        Group group = new Group(burn, knoppen, graafKnoppen, eindigbeurt, waterfles);
+        return group;
+    }
+
+    public void update(){loadGameView();}
 }
