@@ -76,8 +76,19 @@ public class OnderdeelView {
         return coordinaten;
     }
 
+    public StackPane getPropellerView() {
+        return propellerView;
+    }
 
+    public StackPane getBeaconView() {
+        return beaconView;
+    }
 
+    public StackPane getMotorView() {
+        return motorView;
+    }
 
-
+    public StackPane getZonnewijzerView() {
+        return zonnewijzerView;
+    }
 }

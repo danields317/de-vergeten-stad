@@ -6,6 +6,8 @@ import View.bord_views.*;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
@@ -53,10 +55,12 @@ public class ViewManager extends Application{
         try {
             Group group;
             if(torf){
+                System.out.println("rararara");
                 group = firstBordload();
                 torf = false;
             }else{
                 group = makeGroup();
+                System.out.println("lolololo");
             }
 
             Scene scene = new Scene(group, windowWidth, windowHeight);
@@ -92,10 +96,7 @@ public class ViewManager extends Application{
         GridPane spelbord = speelbordView.loadSpelBord();
 
         Button burn = butje();
-        burn.setOnMouseClicked(e -> {
 
-            update();
-        });
         //Group group = new Group(knoppen, waterfles);
         return  new Group(knoppen,
                 burn,
@@ -118,7 +119,7 @@ public class ViewManager extends Application{
         burn.setOnMouseClicked(e -> {
             Controller con = new Controller();
             con.verwijderZand();
-            //update();
+            update();
         });
         return burn;
 
@@ -144,15 +145,26 @@ public class ViewManager extends Application{
     private Group makeGroup(){
         System.out.println("help");
         Button burn = butje();
+
+
+        Image backgroundImage = new Image("gamescreenempty.png");
+        Canvas canvas = new Canvas(windowWidth, windowHeight);
         GridPane knoppen = actieknoppenview.getView();
         GridPane graafKnoppen = graafknoppenview.getView();
         Button eindigbeurt = eindigBeurtView.maakEindigbeurtKnop();
         GridPane waterfles = waterflesView.getView();
-        waterfles.setLayoutX(592);
-        waterfles.setLayoutY(232);
+
+        StackPane propellor = onderdeelview.getPropellerView();
+        StackPane beacon = onderdeelview.getBeaconView();
+        StackPane motor = onderdeelview.getMotorView();
+        StackPane zonnewijzer = onderdeelview.getZonnewijzerView();
+
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+        gc.drawImage(backgroundImage, 0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
 
 
-        Group group = new Group(burn, knoppen, graafKnoppen, eindigbeurt, waterfles);
+
+        Group group = new Group(canvas,burn, knoppen, graafKnoppen, eindigbeurt, waterfles, propellor,beacon,motor,zonnewijzer);
         return group;
     }
 
