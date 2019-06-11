@@ -42,7 +42,7 @@ public class WaterflesView implements WaterObserver {
 
     Stage primaryStage;
     Water_Controller waterController;
-    String roomId;
+    static GridPane view;
 
 
     public WaterflesView(){
@@ -51,16 +51,13 @@ public class WaterflesView implements WaterObserver {
         loadPrimaryStageWithGridPane(createInitialGridPane());*/
         waterController = waterController.getInstance();
 
-        // PASS IT TO THE CONTROLLER WHO WILL PASS IT TO THE MODEL/\
-        waterController.registerObserver( );
-
     }
 
-    private void loadPrimaryStageWithGridPane(GridPane gp) {
+    private void loadPrimaryStageWithGridPane() {
         try {
 
 
-            GridPane root = gp;
+            GridPane root = view;
             Image backgroundImage = new Image("background.png");
             Canvas canvas = new Canvas(width, height);
 
@@ -80,7 +77,7 @@ public class WaterflesView implements WaterObserver {
         }
     }
 
-    private GridPane createUpdatedGridPane(WaterObservable sb){
+    private void createUpdatedGridPane(WaterObservable sb){
         GridPane gridPane = new GridPane();
         gridPane.setMinSize(400, 200);
         gridPane.setPadding(new Insets(10, 10, 10, 10));
@@ -90,7 +87,7 @@ public class WaterflesView implements WaterObserver {
         ImageView waterImage = new ImageView(new Image(sb.getImgWater()));
 
         gridPane.add(waterImage, 50,50);
-        return gridPane;
+        view = gridPane;
     }
 
     public void myEvent(ImageView image){
@@ -137,7 +134,8 @@ public class WaterflesView implements WaterObserver {
 
     @Override
     public void update(WaterObservable sb) {
-        loadPrimaryStageWithGridPane(createUpdatedGridPane(sb));
+        createUpdatedGridPane(sb);
+        loadPrimaryStageWithGridPane();
     }
 
 

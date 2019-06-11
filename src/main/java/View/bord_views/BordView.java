@@ -26,12 +26,12 @@ public class BordView implements BordObserver {
 
     static BordView bordView;
 
-    public static BordView getInstance(){
+    /*public static BordView getInstance(){
         if (bordView == null){
             bordView = new BordView();
         }
         return bordView;
-    }
+    }*/
 
 
     String kaart = "/gamescreenempty.png";

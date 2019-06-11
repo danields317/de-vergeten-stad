@@ -21,11 +21,14 @@ public class StormController {
     private Random random = new Random();
     private int stapelCounter;
 
+    TileController tileController;
+
     private StormController(){
         storm = new Storm();
         makeEvents();
         randomizeEvents(stormEvents);
         stapelCounter = 0;
+        tileController = TileController.getInstance();
     }
 
     public static StormController getInstance(){
@@ -119,15 +122,19 @@ public class StormController {
     private void beweegStorm(StormEventBeweging.Richtingen richting, StormEventBeweging.Stappen stappen){
         switch (richting){
             case NOORD:
+                tileController.moveTiles(richting, stappen, storm.getX(), storm.getY());
                 storm.beweegNoord(stappen);
                 break;
             case OOST:
+                tileController.moveTiles(richting, stappen, storm.getX(), storm.getY());
                 storm.beweegOost(stappen);
                 break;
             case ZUID:
+                tileController.moveTiles(richting, stappen, storm.getX(), storm.getY());
                 storm.beweegZuid(stappen);
                 break;
             case WEST:
+                tileController.moveTiles(richting, stappen, storm.getX(), storm.getY());
                 storm.beweegWest(stappen);
                 break;
             default:

@@ -1,7 +1,9 @@
 package View.bord_views;
 
 import Controller.Tile_Controllers.TileController;
+import Model.Tiles.EquipmentTile;
 import Model.Tiles.Tile;
+import Model.Tiles.Tunnel;
 import View.TileView;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
@@ -10,18 +12,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 
 public class SpeelbordView {
-
-    static SpeelbordView speelbordView;
-
+    //een gridpane met per pane een tile
+    //foto's hier opslaan en alleen de coordianten ophalen
+    //bij update juiste coordinaat bij juiste image zetten.
     private TileController tileController;
     public GridPane spelbord;
-
-    public static SpeelbordView getInstance(){
-        if (speelbordView == null){
-            speelbordView = new SpeelbordView();
-        }
-        return speelbordView;
-    }
 
 
     public GridPane loadSpelBord(){
@@ -33,16 +28,22 @@ public class SpeelbordView {
         for(int i = 0; i < tiles.length; i ++){
             for(int j = 0; j < tiles[i].length; j ++){
 
-                TileView tileView = new TileView(tiles[i][j].getImage());
+                Tile tile = tiles[i][j];
+                TileView tileView = new TileView(tile.getImage());
 
                 //ImageView tile = new ImageView(tiles[i][j].getImage());
                 //tile.setFitHeight(115);
                 //tile.setFitWidth(115)
-                ImageView tile = tileView.maakTileImage();
-                spelbord.setMargin(tile, new Insets(5,5,5,5));
+                ImageView tileImage = tileView.maakTileImage();
+                spelbord.setMargin(tileImage, new Insets(5,5,5,5));
 
-                spelbord.add(tile, i , j);;
+                tileImage.setOnMouseClicked(e -> {
+                    tileController.tileClicked( spelbord.getColumnIndex(tileImage), spelbord.getRowIndex(tileImage) );
+                } );
+
+                spelbord.add(tileImage, i , j);;
                 System.out.println(i + " " + j);
+
             }
         }
         return spelbord;

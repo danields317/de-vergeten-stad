@@ -19,8 +19,8 @@ public class Player_Controller {
 
 
 
-    public Player_Controller(String className, String imagePath){
-        player = new Player(staticData.getUsername(),className, "b", 4, Color.BLUE, imagePath);
+    public Player_Controller(String className, int maxWater, int water, String imagePath){
+        player = new Player(staticData.getUsername(),className, "b", maxWater, water, Color.BLUE, imagePath);
     }
 
 
@@ -30,12 +30,21 @@ public class Player_Controller {
     // Singleton Pattern.
     // now we can call: SpelbordController.getInstance()  from everywhere
     // AND it guarantees there is only 1 instance.
-    public static Player_Controller getInstance(boolean loadGame, String className) {
+    public static Player_Controller getInstance(boolean loadGame, Object classInfo) {
         if (playercont == null) {
             if( loadGame){
 
+
+                System.out.println(((Map)(StaticData.getInstance()).getRoomInfo()).get("Selectable_classes"));
+                System.out.println(classInfo);
+                Map classIn =((Map)(classInfo));
+                System.out.println(((Long)(classIn.get("maxWater"))).intValue());
                 System.out.println(((Map)(StaticData.getInstance()).getRoomInfo()).get("archeoloog"));
-                playercont = new Player_Controller(className, className +".png");
+                playercont = new Player_Controller(((String)(classIn.get("name"))),
+                        ((Long)(classIn.get("maxWater"))).intValue(),
+                        ((Long)(classIn.get("water"))).intValue(),
+                        ((String)(classIn.get("name"))) +".png");
+
             }else{}
         }
         return playercont;
