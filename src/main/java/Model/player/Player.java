@@ -35,16 +35,28 @@ public class Player implements PlayerObservable {
 	/////////////////////////////////////// Constructor ///////////////////////////////////////
 	
 	public Player( String nickname, String className, String description, int maxWater, Color color, String imagePath ) {
-		
+
 		this.nickname = nickname;
 		this.className = className;
 		this.description = description;
 		this.color = color;
 		this.image = new Image( imagePath );
-		
+
 		this.maxWater = maxWater;
 		water = maxWater;
-		
+
+	}
+	public Player( String nickname, String className, String description, int maxWater, int water, Color color, String imagePath ) {
+
+		this.nickname = nickname;
+		this.className = className;
+		this.description = description;
+		this.color = color;
+		this.image = new Image( imagePath );
+
+		this.maxWater = maxWater;
+		this.water = water;
+
 	}
 	
 	/////////////////////////////////////// Methods ///////////////////////////////////////

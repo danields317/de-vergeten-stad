@@ -89,8 +89,9 @@ public class LoadBordView implements LoadBordObserver {
             final String tempString = ( ((Map) killMe).get("name")).toString();
             ImageView image = createImageView(tempString + ".png");
             image.setOnMouseClicked(e -> {
-                Player_Controller.getInstance(true, tempString);
-                new BordView(primaryStage);
+                Player_Controller.getInstance(true, killMe);
+                ViewManager view = new ViewManager();
+                view.loadGameView();
             });
             gridPane.add(image, count, 0);
             count++;
