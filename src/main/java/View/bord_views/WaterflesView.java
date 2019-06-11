@@ -41,6 +41,8 @@ public class WaterflesView implements WaterObserver {
         //loadPrimaryStageWithGridPane(createInitialGridPane());
         loadPrimaryStageWithGridPane(createInitialGridPane());*/
         waterController = waterController.getInstance();
+        waterController.registerObserver();
+        waterController.registerObserver((WaterObserver) this);
 
     }
 
@@ -75,8 +77,16 @@ public class WaterflesView implements WaterObserver {
         gridPane.setVgap(5);
         gridPane.setHgap(5);
         gridPane.setAlignment(Pos.CENTER);
+
         ImageView waterImage = new ImageView(new Image(sb.getImgWater()));
 
+        waterImage.prefWidth(160.0);
+        waterImage.prefHeight(160.0);
+        waterImage.setFitWidth(160.0);
+        waterImage.setFitHeight(160.0);
+
+        System.out.println(waterImage);
+        System.out.println(sb.getImgWater());
         gridPane.add(waterImage, 50,50);
         view = gridPane;
     }
@@ -104,29 +114,33 @@ public class WaterflesView implements WaterObserver {
         gridPane.setAlignment(Pos.CENTER);
 
 
-        ImageView waterImage = new ImageView(new Image("Fles0_4.png"));
-        waterImage.setFitWidth(60.0);
-        waterImage.setFitHeight(60.0);
+        ImageView waterImage = new ImageView(new Image("/Fles0_4.png"));
+        waterImage.prefWidth(160.0);
+        waterImage.prefHeight(160.0);
+        waterImage.setFitWidth(160.0);
+        waterImage.setFitHeight(160.0);
+        System.out.println("ofofof");
         gridPane.add(waterImage, 20, 20);
+
 
 
 
         //gridPane.add(image, 0, 0);
         //gridPane.add(scoreText, 1, 0);
-
+        view = gridPane;
 
         return gridPane;
     }
 
 
-
-
-
+    public static GridPane getView() {
+        return view;
+    }
 
     @Override
     public void update(WaterObservable sb) {
         createUpdatedGridPane(sb);
-        loadPrimaryStageWithGridPane();
+       // loadPrimaryStageWithGridPane();
     }
 
 

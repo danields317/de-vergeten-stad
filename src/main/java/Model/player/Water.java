@@ -11,9 +11,9 @@ public class Water implements WaterObservable {
     // List of all Observers of this Observable Objects
     private List<WaterObserver> observers = new ArrayList<WaterObserver>();
 
-    public void updateWater(PlayerObservable sb){
+    public void updateWater(int maxWater, int water){
 
-        imgWater = "Fles " + sb.getWater() + "_" + sb.getMaxWater() + ".png" ;
+        imgWater = "/veldfles/Fles" + water + "_" + maxWater + ".png" ;
 
         notifyAllObservers();
     }

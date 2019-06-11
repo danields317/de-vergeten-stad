@@ -45,6 +45,7 @@ public class Player_Controller {
                         ((Long)(classIn.get("water"))).intValue(),
                         ((String)(classIn.get("name"))) +".png");
 
+
             }else{}
         }
         return playercont;
@@ -94,5 +95,9 @@ public class Player_Controller {
 
     public Player getPlayer() {
         return player;
+    }
+
+    public void update(){
+        player.notifyAllObservers();
     }
 }

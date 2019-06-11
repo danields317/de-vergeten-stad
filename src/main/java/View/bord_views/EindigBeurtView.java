@@ -1,4 +1,4 @@
-package View;
+package View.bord_views;
 
 import javafx.scene.Group;
 import javafx.scene.control.Button;
@@ -8,6 +8,7 @@ import javafx.scene.layout.GridPane;
 import java.awt.*;
 
 public class EindigBeurtView {
+
 
     public Button maakEindigbeurtKnop(){
 
