@@ -1,13 +1,9 @@
 package View;
 
+import View.bord_views.*;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
@@ -24,8 +20,7 @@ public class ViewManager extends Application{
     @Override
     public void start(Stage primaryStage) throws Exception {
         this.primaryStage = primaryStage;
-        //loadLoginView();
-        loadGameView();
+        loadLoginView();
     }
 
     public void loadLoginView() {
@@ -37,7 +32,7 @@ public class ViewManager extends Application{
     public void loadGameView() {
         try {
 
-            BordView bordView = new BordView();  //maak achtergrond
+           // BordView bordView = new BordView();  //maak achtergrond
             ActieKnoppenView actieknoppenview = new ActieKnoppenView();  //maak beweeg knoppen
             GraafKnoppenView graafknoppenview = new GraafKnoppenView();  //maak graaf knoppen
             //LoadBordView loadbordview = new LoadBordView();  //geen idee wat deze doet
@@ -51,8 +46,9 @@ public class ViewManager extends Application{
 
            // ImageView achtergrond = bordView.maakAchtergrond(windowWidth, windowHeight);
             GridPane knoppen = actieknoppenview.maakActieKnoppen();
+            GridPane waterfles = waterflesView.createInitialGridPane();
 
-            Group group = new Group(knoppen);
+            Group group = new Group(knoppen, waterfles);
             Scene scene = new Scene(group, windowWidth, windowHeight);
             primaryStage.setScene(scene);
             primaryStage.setTitle("WELCOME TO THE GAME");

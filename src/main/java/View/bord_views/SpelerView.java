@@ -1,4 +1,4 @@
-package View;
+package View.bord_views;
 
 import Controller.Equipment_Controllers.Equipment_Controller;
 import Controller.Player_Controllers.Archeoloog_Controller;

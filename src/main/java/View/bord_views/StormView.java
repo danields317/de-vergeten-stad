@@ -1,4 +1,4 @@
-package View;
+package View.bord_views;
 
 public class StormView {
 }

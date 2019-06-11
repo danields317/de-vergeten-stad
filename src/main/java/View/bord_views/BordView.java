@@ -1,6 +1,7 @@
-package View;
+package View.bord_views;
 
 import Controller.Bord_Controllers.Bord_Controller;
+import View.bord_views.ActieKnoppenView;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -11,9 +12,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -92,19 +91,19 @@ public class BordView implements BordObserver {
 
         return gridPane;
     }
-
-    private GridPane createUpdatedGridPane(BordObservable sb){
+/*
+    private GridPane createUpdatedGridPane(){
 /*
         if(sb.isLoginCorrect()){
             return loginCorrect(sb);
         }else{
             return loginIncorrect(sb);
-        }*/
+        }
 
         return new GridPane();
 
     }
-
+*/
     public GridPane loginCorrect(BordObservable sb){
         Text scoreText = new Text("Player Score");
         Button startButton = new Button("Start Game");
@@ -132,7 +131,7 @@ public class BordView implements BordObserver {
 
     @Override
     public void update(BordObservable sb) {
-        loadPrimaryStageWithGridPane(createUpdatedGridPane(sb));
+       /* loadPrimaryStageWithGridPane(createUpdatedGridPane());*/
     }
 
 

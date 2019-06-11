@@ -1,10 +1,10 @@
 package Controller.Player_Controllers;
 
 import Model.data.StaticData;
-import Model.player.Navigator;
 import Model.player.Player;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import javafx.scene.paint.Color;
+import observers.LoadBordObserver;
+import observers.PlayerObserver;
 
 import java.util.Map;
 
@@ -69,7 +69,7 @@ public class Player_Controller {
 
     public void giveWater(Player receiver, int amount){
         if(this.getPlayer().getWater() == 0){
-            System.out.println("You dont have any water to given");
+            System.out.println("You dont have any water to give");
         } else if( receiver.getWater() >= receiver.getMaxWater()){
             System.out.println(receiver.getClassName() + " has already full water");
         }else{
@@ -79,7 +79,9 @@ public class Player_Controller {
 
 
     }
-
+    public void registerObserver(PlayerObserver sbv) {
+        player.register(sbv);
+    }
 
     public Player getPlayer() {
         return player;

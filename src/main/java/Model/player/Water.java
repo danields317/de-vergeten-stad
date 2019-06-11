@@ -1,8 +1,6 @@
 package Model.player;
 
-import observers.SpelerObservable;
-import observers.WaterObservable;
-import observers.WaterObserver;
+import observers.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +11,7 @@ public class Water implements WaterObservable {
     // List of all Observers of this Observable Objects
     private List<WaterObserver> observers = new ArrayList<WaterObserver>();
 
-    public void updateWater(SpelerObservable sb){
+    public void updateWater(PlayerObservable sb){
 
         imgWater = "Fles " + sb.getWater() + "_" + sb.getMaxWater() + ".png" ;
 
@@ -26,6 +24,7 @@ public class Water implements WaterObservable {
 
 
     // Add an observer to the list
+
     public void register(WaterObserver observer){
         observers.add(observer);
     }

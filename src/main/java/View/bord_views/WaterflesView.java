@@ -1,4 +1,4 @@
-package View;
+package View.bord_views;
 
 import Controller.Bord_Controllers.LoadBord_Controller;
 import Controller.Bord_Controllers.Water_Controller;
@@ -36,15 +36,14 @@ public class WaterflesView implements WaterObserver {
     String roomId;
 
 
-    public WaterflesView(Stage s, String roomId){
-        primaryStage = s;
-        this.roomId = roomId;
+    public WaterflesView(){
+        /*primaryStage = s;
         //loadPrimaryStageWithGridPane(createInitialGridPane());
-        loadPrimaryStageWithGridPane(createInitialGridPane());
+        loadPrimaryStageWithGridPane(createInitialGridPane());*/
         waterController = waterController.getInstance();
 
-        // PASS IT TO THE CONTROLLER WHO WILL PASS IT TO THE MODEL
-        waterController.registerObserver( this);
+        // PASS IT TO THE CONTROLLER WHO WILL PASS IT TO THE MODEL/\
+        waterController.registerObserver( );
 
     }
 
@@ -58,6 +57,7 @@ public class WaterflesView implements WaterObserver {
 
             Group group = new Group(canvas, root);
             Scene scene = new Scene(group);
+
             primaryStage.setScene(scene);
             primaryStage.setTitle("WELCOME TO THE GAME");
             primaryStage.setX(windowAnchorX);
@@ -95,7 +95,7 @@ public class WaterflesView implements WaterObserver {
         return new ImageView(new Image(name));
     }
 
-    private GridPane createInitialGridPane(){
+    public GridPane createInitialGridPane(){
 
 
 
@@ -107,8 +107,11 @@ public class WaterflesView implements WaterObserver {
         gridPane.setAlignment(Pos.CENTER);
 
 
-        ImageView image = createImageView("giphy2.gif");
-        gridPane.add(image, 0, 0);
+        ImageView waterImage = new ImageView(new Image("Fles0_4.png"));
+        waterImage.setFitWidth(60.0);
+        waterImage.setFitHeight(60.0);
+        gridPane.add(waterImage, 20, 20);
+
 
 
         //gridPane.add(image, 0, 0);

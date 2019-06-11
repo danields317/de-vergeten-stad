@@ -1,14 +1,14 @@
 package Controller.Bord_Controllers;
 
+import Controller.Player_Controllers.Player_Controller;
 import Model.player.Water;
-import observers.SpelerObservable;
-import observers.SpelerObserver;
-import observers.WaterObserver;
+import observers.*;
 
-public class Water_Controller implements SpelerObserver {
+public class Water_Controller implements PlayerObserver {
 
 
     static Water_Controller waterController;
+    Player_Controller playerController = Player_Controller.getInstance();
     Water water;
 
     public Water_Controller(){
@@ -29,7 +29,9 @@ public class Water_Controller implements SpelerObserver {
     public void registerObserver(WaterObserver sbv) {
         water.register(sbv);
     }
-
-    public void update(SpelerObservable sb){ water.updateWater(sb);}
+    public void registerObserver() {
+        playerController.registerObserver(this);
+    }
+    public void update(PlayerObservable sb){ water.updateWater(sb);}
 
 }

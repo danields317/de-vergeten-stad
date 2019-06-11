@@ -3,8 +3,8 @@ package View;
 import Controller.Bord_Controllers.LoadBord_Controller;
 import Controller.Player_Controllers.Player_Controller;
 import Model.data.StaticData;
+import View.bord_views.BordView;
 import firebase.FirebaseService;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
@@ -13,15 +13,12 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import observers.LoadBordObservable;
 import observers.LoadBordObserver;
 
-import java.lang.reflect.Array;
 import java.util.*;
-import java.util.concurrent.TimeUnit;
 
 
 public class LoadBordView implements LoadBordObserver {

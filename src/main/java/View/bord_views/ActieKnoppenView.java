@@ -1,4 +1,4 @@
-package View;
+package View.bord_views;
 
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
