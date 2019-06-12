@@ -98,16 +98,13 @@ public class StormController {
                 switch (stormEvent.naam){
                     case BEWEGING:
                         beweegStorm(((StormEventBeweging) stormEvent).richting, ((StormEventBeweging) stormEvent).stappen);
-                        System.out.println("Storm beweegt");
                         break;
                     case BRANDT:
                         Controller controller = Controller.getInstance();
                         controller.verwijderZand();
-                        System.out.println("Zon brandt");
                         break;
                     case STERKER:
                         storm.stormWordtSterker();
-                        System.out.println("Storm subSterkte increased");
                         break;
                     default:
                         System.out.println("DIT HOORT NIET");

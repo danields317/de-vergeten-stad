@@ -57,12 +57,10 @@ public class ViewManager extends Application{
         try {
             Group group;
             if(torf){
-                System.out.println("rararara");
                 group = firstBordload();
                 torf = false;
             }else{
                 group = makeGroup();
-                System.out.println("lolololo");
             }
 
             Scene scene = new Scene(group, windowWidth, windowHeight);
@@ -89,17 +87,16 @@ public class ViewManager extends Application{
         GridPane waterfles = waterflesView.createInitialGridPane();
         GridPane graafknoppen = graafknoppenview.maakGraafKnoppen();
         Button eindigbeurtKnop = eindigBeurtView.maakEindigbeurtKnop();
+        Button eindigBeurt = eindigBeurtKnop(eindigbeurtKnop);
         GridPane spelbord = speelbordView.loadSpelBord();
 
             //Group group = new Group(knoppen, waterfles);
-        Group group = new Group(knoppen, graafknoppen, eindigbeurtKnop, waterfles, propellor, beacon, motor, zonnewijzer, spelbord);
-        Button burn = butje();
+        Group group = new Group(knoppen, graafknoppen, eindigBeurt, waterfles, propellor, beacon, motor, zonnewijzer, spelbord);
 
         //Group group = new Group(knoppen, waterfles);
         return  new Group(knoppen,
-                burn,
                 graafknoppen,
-                eindigbeurtKnop,
+                eindigBeurt,
                 waterfles,
                 propellor,
                 beacon,
@@ -109,18 +106,13 @@ public class ViewManager extends Application{
 
     }
 
-    public Button butje(){
-        Button burn = new Button("burn");
-        burn.setPrefSize(152,57);
-        burn.setLayoutX(1092);
-        burn.setLayoutY(432);
-        burn.setOnMouseClicked(e -> {
+    public Button eindigBeurtKnop(Button eindigBeurt){
+        eindigBeurt.setOnMouseClicked(e -> {
             StormController stormController = StormController.getInstance();
             stormController.voerStormEventsUit();
             update();
         });
-        return burn;
-
+        return eindigBeurt;
     }
 
     private void loadPrimaryStageWithGroup(Group group) {
@@ -141,15 +133,14 @@ public class ViewManager extends Application{
     }
 
     private Group makeGroup(){
-        System.out.println("help");
-        Button burn = butje();
 
 
         Image backgroundImage = new Image("gamescreenempty.png");
         Canvas canvas = new Canvas(windowWidth, windowHeight);
         GridPane knoppen = actieknoppenview.getView();
         GridPane graafKnoppen = graafknoppenview.getView();
-        Button eindigbeurt = eindigBeurtView.maakEindigbeurtKnop();
+        Button eindigbeurtKnop = eindigBeurtView.maakEindigbeurtKnop();
+        Button eindigBeurt = eindigBeurtKnop(eindigbeurtKnop);
         GridPane waterfles = waterflesView.getView();
 
         StackPane propellor = onderdeelview.getPropellerView();
@@ -162,7 +153,7 @@ public class ViewManager extends Application{
 
 
 
-        Group group = new Group(canvas,burn, knoppen, graafKnoppen, eindigbeurt, waterfles, propellor,beacon,motor,zonnewijzer);
+        Group group = new Group(canvas, knoppen, graafKnoppen, eindigBeurt, waterfles, propellor,beacon,motor,zonnewijzer);
         return group;
     }
 

@@ -85,8 +85,6 @@ public class WaterflesView implements WaterObserver {
         waterImage.setFitWidth(160.0);
         waterImage.setFitHeight(160.0);
 
-        System.out.println(waterImage);
-        System.out.println(sb.getImgWater());
         gridPane.add(waterImage, 50,50);
         view = gridPane;
     }
@@ -119,7 +117,6 @@ public class WaterflesView implements WaterObserver {
         waterImage.prefHeight(160.0);
         waterImage.setFitWidth(160.0);
         waterImage.setFitHeight(160.0);
-        System.out.println("ofofof");
         gridPane.add(waterImage, 20, 20);
 
 

@@ -124,8 +124,6 @@ public class Player implements PlayerObservable {
 
 	}
 
-
-
 	public void subtractWater(int water ) {
 		
 		this.water = this.water - water;
@@ -135,7 +133,14 @@ public class Player implements PlayerObservable {
 			// RIP
 		}
 	}
-	
+
+	public void useAction(){
+        if (actiesOver > 0){
+            actiesOver -= 1;
+        }
+    }
+
+
 	public int getMaxWater() {
 		return maxWater;
 	}
