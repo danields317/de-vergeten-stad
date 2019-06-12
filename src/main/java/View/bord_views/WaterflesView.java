@@ -119,7 +119,7 @@ public class WaterflesView implements WaterObserver {
         waterImage.prefHeight(220.0);
         waterImage.setFitWidth(220.0);
         waterImage.setFitHeight(240.0);
-        gridPane.add(waterImage, 20, 20);
+        gridPane.add(waterImage, 0, 0);
         gridPane.setLayoutX(-62);
         gridPane.setLayoutY(649);
 

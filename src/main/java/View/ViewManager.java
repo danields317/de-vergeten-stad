@@ -85,8 +85,6 @@ public class ViewManager extends Application{
 
         Image backgroundImage = new Image("gamescreenempty.png");
         Canvas canvas = new Canvas(windowWidth, windowHeight);
-        // ImageView achtergrond = bordView.maakAchtergrond(windowWidth, windowHeight);
-//            ImageView achtergrond = bordView.maakAchtergrond(windowWidth, windowHeight);
         StackPane propellor = onderdeelview.loadPropeller("?", "?");
         StackPane beacon = onderdeelview.loadBeacon("?", "?");
         StackPane motor = onderdeelview.loadMotor("?", "?");
@@ -98,21 +96,11 @@ public class ViewManager extends Application{
         Button eindigBeurt = eindigBeurtKnop(eindigbeurtKnop);
         GridPane spelbord = speelbordView.loadSpelBord();
 
-            //Group group = new Group(knoppen, waterfles);
-        Group group = new Group(knoppen, graafknoppen, eindigbeurtKnop, waterfles, propellor, beacon, motor, zonnewijzer, spelbord);
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.drawImage(backgroundImage, 0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
-        //Group group = new Group(knoppen, waterfles);
-        return  new Group(knoppen,
-                graafknoppen,
-                eindigBeurt,
-                waterfles,
-                propellor,
-                beacon,
-                motor,
-                zonnewijzer,
-                spelbord);
 
+        Group group = new Group(canvas, knoppen, graafknoppen, eindigbeurtKnop, waterfles, propellor, beacon, motor, zonnewijzer, spelbord);
+        return  group;
     }
 
     public Button eindigBeurtKnop(Button eindigBeurt){
@@ -160,8 +148,6 @@ public class ViewManager extends Application{
 
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.drawImage(backgroundImage, 0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
-
-
 
         Group group = new Group(canvas, knoppen, graafKnoppen, eindigBeurt, waterfles, propellor,beacon,motor,zonnewijzer, spelbord);
         return group;
