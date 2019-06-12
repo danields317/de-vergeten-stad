@@ -128,10 +128,11 @@ public class Player implements PlayerObservable {
 		
 		this.water = this.water - water;
 		System.out.println(observers);
-		notifyAllObservers();
-		if (water <= 0) {
-			// RIP
+
+		if (this.water <= 0) {
+			this.water++;
 		}
+		notifyAllObservers();
 	}
 
 	public void useAction(){

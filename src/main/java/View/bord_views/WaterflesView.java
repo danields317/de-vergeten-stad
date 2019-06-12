@@ -80,12 +80,14 @@ public class WaterflesView implements WaterObserver {
 
         ImageView waterImage = new ImageView(new Image(sb.getImgWater()));
 
-        waterImage.prefWidth(160.0);
-        waterImage.prefHeight(160.0);
-        waterImage.setFitWidth(160.0);
-        waterImage.setFitHeight(160.0);
+        waterImage.prefWidth(240.0);
+        waterImage.prefHeight(220.0);
+        waterImage.setFitWidth(220.0);
+        waterImage.setFitHeight(240.0);
 
-        gridPane.add(waterImage, 50,50);
+        gridPane.add(waterImage, 0,0);
+        gridPane.setLayoutX(-62);
+        gridPane.setLayoutY(649);
         view = gridPane;
     }
 
@@ -112,13 +114,14 @@ public class WaterflesView implements WaterObserver {
         gridPane.setAlignment(Pos.CENTER);
 
 
-        ImageView waterImage = new ImageView(new Image("/Fles0_4.png"));
-        waterImage.prefWidth(160.0);
-        waterImage.prefHeight(160.0);
-        waterImage.setFitWidth(160.0);
-        waterImage.setFitHeight(160.0);
+        ImageView waterImage = new ImageView(new Image("/veldfles/Fles3_3.png"));
+        waterImage.prefWidth(240.0);
+        waterImage.prefHeight(220.0);
+        waterImage.setFitWidth(220.0);
+        waterImage.setFitHeight(240.0);
         gridPane.add(waterImage, 20, 20);
-
+        gridPane.setLayoutX(-62);
+        gridPane.setLayoutY(649);
 
 
 
