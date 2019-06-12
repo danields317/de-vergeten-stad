@@ -13,6 +13,7 @@ public class TileView implements BordObserver{
     TileController tileController;
     ImageView imageView;
     public final int tileSize = 105;
+    ImageView currentZand =
 
     public TileView(Image image){
         tileController = TileController.getInstance();
@@ -23,6 +24,20 @@ public class TileView implements BordObserver{
         imageView.getStyleClass().add("tile");
     }
 
+    public void checkZand(int zand){
+        switch (zand){
+            case 1:
+                //laag zand
+                break;
+            case 0:
+                //null
+                break;
+            default:
+                //hoog zand
+        }
+        //plaats zand ook ff in label hiero
+    }
+
     public ImageView maakTileImage() {
         return imageView;
     }
@@ -31,5 +46,6 @@ public class TileView implements BordObserver{
 
         Tile tile = (Tile) bo;
         imageView.setImage(tile.getImage());
+        checkZand(tile.getZand());
     }
 }

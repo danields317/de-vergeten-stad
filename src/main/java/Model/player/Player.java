@@ -18,7 +18,8 @@ public class Player implements PlayerObservable {
 	private Equipment_Controller[] inventory;
 	private int water;
 	private int actiesOver;
-	private Tile tile; // De tile waar de speler op staat
+	private int x;
+	private int y;
 	
 	// Informatie over de speler klasse
 	private String className;
@@ -127,8 +128,12 @@ public class Player implements PlayerObservable {
 		return actiesOver;
 	}
 
-	public Tile getTile() {
-		return tile;
+	public int getX() {
+		return x;
+	}
+
+	public int getY() {
+		return y;
 	}
 
 	public String getClassName() {
