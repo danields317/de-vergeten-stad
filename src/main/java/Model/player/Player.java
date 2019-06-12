@@ -20,6 +20,7 @@ public class Player implements PlayerObservable {
 	private int actiesOver;
 	private int x;
 	private int y;
+	private Tile tile;
 	
 	// Informatie over de speler klasse
 	private String className;
