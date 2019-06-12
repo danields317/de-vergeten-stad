@@ -83,7 +83,8 @@ public class ViewManager extends Application{
         waterfles = waterflesView.createInitialGridPane();
 
 
-
+        Image backgroundImage = new Image("gamescreenempty.png");
+        Canvas canvas = new Canvas(windowWidth, windowHeight);
         // ImageView achtergrond = bordView.maakAchtergrond(windowWidth, windowHeight);
         StackPane propellor = onderdeelview.loadPropeller("?", "?");
         StackPane beacon = onderdeelview.loadBeacon("?", "?");
@@ -96,9 +97,10 @@ public class ViewManager extends Application{
         GridPane spelbord = speelbordView.loadSpelBord();
 
         Button burn = butje();
-
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+        gc.drawImage(backgroundImage, 0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
         //Group group = new Group(knoppen, waterfles);
-        return  new Group(knoppen,
+        return  new Group(canvas, knoppen,
                 burn,
                 graafknoppen,
                 eindigbeurtKnop,
@@ -158,13 +160,14 @@ public class ViewManager extends Application{
         StackPane beacon = onderdeelview.getBeaconView();
         StackPane motor = onderdeelview.getMotorView();
         StackPane zonnewijzer = onderdeelview.getZonnewijzerView();
+        GridPane spelbord = speelbordView.getSpelbord();
 
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.drawImage(backgroundImage, 0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
 
 
 
-        Group group = new Group(canvas,burn, knoppen, graafKnoppen, eindigbeurt, waterfles, propellor,beacon,motor,zonnewijzer);
+        Group group = new Group(canvas,burn, knoppen, graafKnoppen, eindigbeurt, waterfles, propellor,beacon,motor,zonnewijzer, spelbord);
         return group;
     }
 

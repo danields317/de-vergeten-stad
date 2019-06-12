@@ -40,4 +40,8 @@ public class SpeelbordView {
         }
         return spelbord;
     }
+
+    public GridPane getSpelbord() {
+        return spelbord;
+    }
 }
