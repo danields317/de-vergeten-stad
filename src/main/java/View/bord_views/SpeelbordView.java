@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 
 public class SpeelbordView {
     //een gridpane met per pane een tile
@@ -34,14 +35,14 @@ public class SpeelbordView {
                 //ImageView tile = new ImageView(tiles[i][j].getImage());
                 //tile.setFitHeight(115);
                 //tile.setFitWidth(115)
-                ImageView tileImage = tileView.maakTileImage();
-                spelbord.setMargin(tileImage, new Insets(5,5,5,5));
+                StackPane tilePane = tileView.maakTile();
+                spelbord.setMargin(tilePane, new Insets(5,5,5,5));
 
-                tileImage.setOnMouseClicked(e -> {
-                    tileController.tileClicked( spelbord.getColumnIndex(tileImage), spelbord.getRowIndex(tileImage) );
+                tilePane.setOnMouseClicked(e -> {
+                    tileController.tileClicked( spelbord.getColumnIndex(tilePane), spelbord.getRowIndex(tilePane) );
                 } );
 
-                spelbord.add(tileImage, i , j);;
+                spelbord.add(tilePane, i , j);;
                 System.out.println(i + " " + j);
 
             }
