@@ -18,6 +18,8 @@ import javafx.stage.Stage;
 
 public class ViewManager extends Application{
 
+    private static ViewManager viewManager;
+
     static Stage primaryStage;
     String kaart = "/gamescreenempty.png";
     //BordView bordView = new BordView();  //maak achtergrond
@@ -39,6 +41,13 @@ public class ViewManager extends Application{
     private double windowAnchorX = 50;
     private double windowAnchorY= 50;
     private boolean torf = true;
+
+    public static ViewManager getInstance(){
+        if (viewManager == null){
+            viewManager = new ViewManager();
+        }
+        return viewManager;
+    }
 
 
     @Override
@@ -94,7 +103,7 @@ public class ViewManager extends Application{
         GridPane graafknoppen = graafknoppenview.maakGraafKnoppen();
         Button eindigbeurtKnop = eindigBeurtView.maakEindigbeurtKnop();
         Button eindigBeurt = eindigBeurtKnop(eindigbeurtKnop);
-        GridPane spelbord = speelbordView.loadSpelBord();
+        GridPane spelbord = speelbordView.getSpelbord();
 
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.drawImage(backgroundImage, 0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());

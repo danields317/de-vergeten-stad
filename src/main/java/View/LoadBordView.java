@@ -102,8 +102,6 @@ public class LoadBordView implements LoadBordObserver {
     }
 
 
-
-
     public ImageView createImageView(String name){
        return new ImageView(new Image(name));
     }
