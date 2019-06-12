@@ -89,4 +89,6 @@ public class Tile implements BordObservable{
     public Image getImage(){
         return currentImage;
     }
+
+    public int getZand() { return aantalZandTegels; }
 }
