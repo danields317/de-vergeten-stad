@@ -4,6 +4,7 @@ import Model.Tiles.*;
 import Model.storm.StormEventBeweging;
 import observers.BordObserver;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -82,7 +83,6 @@ public class TileController {
             for (int j = 0; j < randomTiles[i].length; j++) {
                 if(!tiles.isEmpty()) {
                     int randomInt = random.nextInt(tiles.size());
-                    System.out.println(randomInt);
                     randomTiles[i][j] = tiles.get(randomInt);
                     tiles.remove(randomInt);
                 }
@@ -128,7 +128,6 @@ public class TileController {
             if (stormY < 4 && stormX > 0 && stormY > 0 && stormX < 4){
                 randomTiles[stormY][stormX] = randomTiles[stormY+moveStormY][stormX+moveStormX];
                 randomTiles[stormY][stormX].addZandTegel();
-                randomTiles[stormY+moveStormY][stormX+moveStormX] = null;
                 stormY = stormY + moveStormY;
                 stormX = stormX + moveStormX;
             }

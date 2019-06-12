@@ -9,6 +9,8 @@ import java.awt.*;
 
 public class ActieKnoppenView {
 
+    static GridPane view = new GridPane();
+
     static ActieKnoppenView actieKnoppenView;
 
     public static ActieKnoppenView getInstance(){
@@ -44,8 +46,11 @@ public class ActieKnoppenView {
         acties.setLayoutX(319);
         acties.setLayoutY(685);
 
-
+        view = acties;
         return acties;
     }
 
+    public static GridPane getView() {
+        return view;
+    }
 }

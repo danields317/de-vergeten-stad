@@ -35,15 +35,16 @@ public class Player_Controller {
             if( loadGame){
 
 
-                System.out.println(((Map)(StaticData.getInstance()).getRoomInfo()).get("Selectable_classes"));
-                System.out.println(classInfo);
+//                System.out.println(((Map)(StaticData.getInstance()).getRoomInfo()).get("Selectable_classes"));
+//                System.out.println(classInfo);
                 Map classIn =((Map)(classInfo));
-                System.out.println(((Long)(classIn.get("maxWater"))).intValue());
-                System.out.println(((Map)(StaticData.getInstance()).getRoomInfo()).get("archeoloog"));
+//                System.out.println(((Long)(classIn.get("maxWater"))).intValue());
+//                System.out.println(((Map)(StaticData.getInstance()).getRoomInfo()).get("archeoloog"));
                 playercont = new Player_Controller(((String)(classIn.get("name"))),
                         ((Long)(classIn.get("maxWater"))).intValue(),
                         ((Long)(classIn.get("water"))).intValue(),
                         ((String)(classIn.get("name"))) +".png");
+
 
             }else{}
         }
@@ -72,7 +73,6 @@ public class Player_Controller {
 
     public void removeWater(){
         player.subtractWater(1);
-        System.out.println(player.getWater());
     }
 
 
@@ -94,5 +94,9 @@ public class Player_Controller {
 
     public Player getPlayer() {
         return player;
+    }
+
+    public void update(){
+        player.notifyAllObservers();
     }
 }
