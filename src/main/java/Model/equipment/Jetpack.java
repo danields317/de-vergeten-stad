@@ -6,7 +6,7 @@ public class Jetpack extends Equipment {
 
 	public Jetpack() {
 	
-		super( "Verplaats naar een niet-geblokkeerde tegel naar keuze. ��n andere speler op de tegel waarop je staat mag meevliegen.", "placeholder.png");
+		super( "Jetpack","Verplaats naar een niet-geblokkeerde tegel naar keuze. ��n andere speler op de tegel waarop je staat mag meevliegen.", "placeholder.png");
 	
 	}
 

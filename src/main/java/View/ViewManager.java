@@ -2,6 +2,7 @@ package View;
 
 import Controller.Controller;
 import Controller.Player_Controllers.Player_Controller;
+import Controller.Tile_Controllers.StormController;
 import View.bord_views.*;
 import javafx.application.Application;
 import javafx.scene.Group;
@@ -10,6 +11,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -55,12 +57,10 @@ public class ViewManager extends Application{
         try {
             Group group;
             if(torf){
-                System.out.println("rararara");
                 group = firstBordload();
                 torf = false;
             }else{
                 group = makeGroup();
-                System.out.println("lolololo");
             }
 
             Scene scene = new Scene(group, windowWidth, windowHeight);
@@ -86,6 +86,7 @@ public class ViewManager extends Application{
         Image backgroundImage = new Image("gamescreenempty.png");
         Canvas canvas = new Canvas(windowWidth, windowHeight);
         // ImageView achtergrond = bordView.maakAchtergrond(windowWidth, windowHeight);
+//            ImageView achtergrond = bordView.maakAchtergrond(windowWidth, windowHeight);
         StackPane propellor = onderdeelview.loadPropeller("?", "?");
         StackPane beacon = onderdeelview.loadBeacon("?", "?");
         StackPane motor = onderdeelview.loadMotor("?", "?");
@@ -96,6 +97,8 @@ public class ViewManager extends Application{
         Button eindigbeurtKnop = eindigBeurtView.maakEindigbeurtKnop();
         GridPane spelbord = speelbordView.loadSpelBord();
 
+            //Group group = new Group(knoppen, waterfles);
+        Group group = new Group(knoppen, graafknoppen, eindigbeurtKnop, waterfles, propellor, beacon, motor, zonnewijzer, spelbord);
         Button burn = butje();
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.drawImage(backgroundImage, 0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
@@ -119,8 +122,8 @@ public class ViewManager extends Application{
         burn.setLayoutX(1092);
         burn.setLayoutY(432);
         burn.setOnMouseClicked(e -> {
-            Controller con = new Controller();
-            con.verwijderZand();
+            StormController stormController = StormController.getInstance();
+            stormController.voerStormEventsUit();
             update();
         });
         return burn;
@@ -145,7 +148,6 @@ public class ViewManager extends Application{
     }
 
     private Group makeGroup(){
-        System.out.println("help");
         Button burn = butje();
 
 

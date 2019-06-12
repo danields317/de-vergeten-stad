@@ -6,7 +6,7 @@ public class Aardekijker extends Equipment {
 
 	public Aardekijker() {
 	
-		super( "Bekijk een niet-uitgegraven tegel", "placeholder.png");
+		super( "Aardekijker","Bekijk een niet-uitgegraven tegel", "placeholder.png");
 	
 	}
 

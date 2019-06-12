@@ -1,6 +1,7 @@
 package Controller.Tile_Controllers;
 
 import Model.Tiles.*;
+import Model.storm.StormEventBeweging;
 import observers.BordObserver;
 
 import java.util.ArrayList;
@@ -10,8 +11,8 @@ public class TileController {
 
     Random random = new Random();
 
-    static TileController tileController;
-    static EquipmentController equipmentController;
+    private static TileController tileController;
+    private static EquipmentController equipmentController = EquipmentController.getInstance();
 
     ArrayList<Tile> tiles = new ArrayList<>();
     Tile[][] randomTiles = new Tile[5][5];
@@ -33,6 +34,10 @@ public class TileController {
         return tileController;
     }
 
+    public void tileClicked(int x, int y) {
+        Tile tile = randomTiles[y][x];
+    }
+
     /**
      * Volgens de spel regels zijn er in totaal 24 tiles, dus loopt de for loop tot 24.
      */
@@ -45,7 +50,7 @@ public class TileController {
             }else if (i < 4){
                 tiles.add(new Waterput());
             }else if (i < 7){
-                tiles.add(new Tunnel(/*equipmentController.getEquipment()*/));
+                tiles.add(new Tunnel(equipmentController.getEquipment()));
             }else if (i < 8){
                 tiles.add(new PartTile(PartTile.Richtingen.OMHOOG, PartTile.Soorten.KOMPAS));
             }else if (i < 9){
@@ -66,7 +71,7 @@ public class TileController {
                 tiles.add(new Storm());
             }
             else {
-                tiles.add(new EquipmentTile(/*equipmentController.getEquipment()*/));
+                tiles.add(new EquipmentTile(equipmentController.getEquipment()));
             }
         }
     }
@@ -84,6 +89,51 @@ public class TileController {
             }
         }
     }
+
+    public void moveTiles(StormEventBeweging.Richtingen stormRichting, StormEventBeweging.Stappen stappen, int stormX, int stormY){
+        switch (stormRichting){
+            case NOORD:
+                moveTileZuid(stappen, stormX, stormY);
+                break;
+            case OOST:
+                moveTileWest(stappen, stormX, stormY);
+                break;
+            case ZUID:
+                moveTileNoord(stappen, stormX, stormY);;
+                break;
+            case WEST:
+                moveTileOost(stappen, stormX, stormY);
+                break;
+            default:
+                System.out.println("Dit hoort niet");
+        }
+    }
+
+    private void moveTileNoord(StormEventBeweging.Stappen stappen, int stormX, int stormY){
+        moveTile(stappen, stormX, stormY,0,1);
+    }
+    private void moveTileOost(StormEventBeweging.Stappen stappen, int stormX, int stormY){
+        moveTile(stappen, stormX, stormY, -1, 0);
+    }
+    private void moveTileZuid(StormEventBeweging.Stappen stappen, int stormX, int stormY){
+        moveTile(stappen, stormX, stormY, 0, -1);
+    }
+    private void moveTileWest(StormEventBeweging.Stappen stappen, int stormX, int stormY){
+        moveTile(stappen, stormX, stormY, 1, 0);
+    }
+
+    private void moveTile(StormEventBeweging.Stappen stappen, int stormX, int stormY, int moveStormX, int moveStormY){
+        for (int i = 0; i < stappen.getNumber(); i++){
+            if (stormY < 4 && stormX > 0 && stormY > 0 && stormX < 4){
+                randomTiles[stormY][stormX] = randomTiles[stormY+moveStormY][stormX+moveStormX];
+                randomTiles[stormY][stormX].addZandTegel();
+                randomTiles[stormY+moveStormY][stormX+moveStormX] = null;
+                stormY = stormY + moveStormY;
+                stormX = stormX + moveStormX;
+            }
+        }
+    }
+
 
     public void registerObserver(BordObserver bo){
         for (Tile[] subTiles : randomTiles) {

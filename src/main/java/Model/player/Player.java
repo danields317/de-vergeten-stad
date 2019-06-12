@@ -1,6 +1,7 @@
 package Model.player;
 
 import Controller.Equipment_Controllers.Equipment_Controller;
+import Model.storm.StormEventBeweging;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import Model.Tiles.Tile;
@@ -26,7 +27,10 @@ public class Player implements PlayerObservable {
 	private int maxWater;
 	private Color color;
 	private Image image;
+	private int x;
+	private int y;
 
+	public enum Richingen {NOORD, OOST, WEST, ZUID}
 
 	// List of all Observers of this Observable Objects
 	private List<PlayerObserver> observers = new ArrayList<PlayerObserver>();
@@ -84,6 +88,30 @@ public class Player implements PlayerObservable {
 
 		}
 	}
+
+	public void movePlayer(Richingen riching){
+	    switch (riching){
+            case NOORD:
+                move(0, -1);
+                break;
+            case OOST:
+                move(1, 0);
+                break;
+            case ZUID:
+                move(0, 1);
+                break;
+            case WEST:
+                move(-1, 0);
+                break;
+        }
+    }
+
+    private void move(int moveX, int moveY){
+	    if (x < 5 && x >= 0 && y < 5 && y >= 0){
+	        x = x + moveX;
+	        y = y + moveY;
+        }
+    }
 	/////////////////////////////////////// Getters & Setters ///////////////////////////////////////
 	
 	public int getWater() {
@@ -102,13 +130,11 @@ public class Player implements PlayerObservable {
 		
 		this.water = this.water - water;
 		System.out.println(observers);
-		notifyAllObservers();
-		if (water <= 0) {
-			// RIP
+
+		if (this.water <= 0) {
+			this.water++;
 		}
-
-
-	
+		notifyAllObservers();
 	}
 	
 	public int getMaxWater() {
