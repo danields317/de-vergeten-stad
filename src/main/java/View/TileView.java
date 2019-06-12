@@ -1,6 +1,7 @@
 package View;
 
 import Controller.Tile_Controllers.TileController;
+import Model.Tiles.PartTile;
 import Model.Tiles.Tile;
 import Model.player.Player;
 import javafx.scene.control.Label;
@@ -161,16 +162,53 @@ public class TileView implements BordObserver{
     }
 
     public void checkSpelers(ArrayList<Player> spelers){
+        archeoloogImageView.setOpacity(0);
+        klimmerImageView.setOpacity(0);
+        meteooroloogImageView.setOpacity(0);
+        navigatorImageView.setOpacity(0);
+        verkennerImageView.setOpacity(0);
+        waterdragerImageView.setOpacity(0);
         for(Player speler :spelers){
-
+            switch (speler.getClassName()){
+                case "Archeoloog":
+                    archeoloogImageView.setOpacity(1);
+                    break;
+                case "Klimmer":
+                    klimmerImageView.setOpacity(1);
+                    break;
+                case "Meteroloog":
+                    meteooroloogImageView.setOpacity(1);
+                    break;
+                case "Navigator":
+                    navigatorImageView.setOpacity(1);
+                    break;
+                case "Verkenner":
+                    verkennerImageView.setOpacity(1);
+                    break;
+                case "Waterdrager":
+                    waterdragerImageView.setOpacity(1);
+                    break;
+                default: continue;
+            }
         }
     }
+
+    /*public void checkOnderdelen(ArrayList<PartTile> onderdelen){
+        beaconImageView.setOpacity(0);
+        propellerImageView.setOpacity(0);
+        engineImageView.setOpacity(0);
+        zonnewijzerImageView.setOpacity(0);
+        for ( )
+    }*/
+
+
 
     public void update(BordObservable bo){
         Tile tile = (Tile) bo;
         tileImageView.setImage(tile.getImage());
         checkZand(tile.getZand());
         checkSpelers(tile.getSpelers());
+
     }
 }
 
