@@ -129,7 +129,6 @@ public class TileView implements BordObserver{
     }
 
     public void update(BordObservable bo){
-
         Tile tile = (Tile) bo;
         tileImageView.setImage(tile.getImage());
         checkZand(tile.getZand());

@@ -16,16 +16,15 @@ public class TileController {
     private static EquipmentController equipmentController = EquipmentController.getInstance();
 
     ArrayList<Tile> tiles = new ArrayList<>();
-    Tile[][] randomTiles = new Tile[5][5];
+    ArrayList<Tile> randomTiles = new ArrayList<>();
 
     private TileController(){
         makeTiles();
-        randomizeTiles();
-        /*for (Tile[] subTiles : randomTiles) {
-            for (Tile tile : subTiles){
-                System.out.println(tile.getVariant());
-            }
-        }*/
+        randomizeTiles(tiles);
+        setTileLocations();
+        for (Tile tile : randomTiles){
+            System.out.println(tile.getX() + " " + tile.getY());
+        }
     }
 
     public static TileController getInstance(){
@@ -36,8 +35,7 @@ public class TileController {
     }
 
     public void tileClicked(int x, int y) {
-        Tile tile = randomTiles[y][x];
-
+//        Tile tile = randomTiles[y][x];
     }
 
     /**
@@ -78,15 +76,25 @@ public class TileController {
         }
     }
 
-    private void randomizeTiles(){
-        for (int i = 0; i < randomTiles.length; i++) {
-            for (int j = 0; j < randomTiles[i].length; j++) {
-                if(!tiles.isEmpty()) {
-                    int randomInt = random.nextInt(tiles.size());
-                    randomTiles[i][j] = tiles.get(randomInt);
-                    tiles.remove(randomInt);
-                }
-                else continue;
+    private void randomizeTiles(ArrayList<Tile> tiles){
+
+        if (tiles.isEmpty()){
+            return;
+        }
+
+        int randomInt = random.nextInt(tiles.size());
+        randomTiles.add(tiles.get(randomInt));
+        tiles.remove(randomInt);
+
+        randomizeTiles(tiles);
+    }
+
+    private void setTileLocations(){
+        int counter = 0;
+        for (int i = 0; i < 5; i++){
+            for (int j = 0; j < 5; j++){
+                randomTiles.get(counter).setLocation(i, j);
+                counter++;
             }
         }
     }
@@ -126,8 +134,13 @@ public class TileController {
     private void moveTile(StormEventBeweging.Stappen stappen, int stormX, int stormY, int moveStormX, int moveStormY){
         for (int i = 0; i < stappen.getNumber(); i++){
             if (stormY < 4 && stormX > 0 && stormY > 0 && stormX < 4){
-                randomTiles[stormY][stormX] = randomTiles[stormY+moveStormY][stormX+moveStormX];
-                randomTiles[stormY][stormX].addZandTegel();
+
+                Tile stormTile = getTileByLocation(stormY, stormX);
+                Tile tmp = getTileByLocation(stormY+moveStormY, stormX+moveStormX);
+
+                stormTile.setLocation(stormX+moveStormX, stormY+moveStormY);
+                tmp.setLocation(stormX, stormY);
+
                 stormY = stormY + moveStormY;
                 stormX = stormX + moveStormX;
             }
@@ -135,15 +148,22 @@ public class TileController {
     }
 
 
-    public void registerObserver(BordObserver bo){
-        for (Tile[] subTiles : randomTiles) {
-            for (Tile tile : subTiles){
-                tile.register(bo);
+    private Tile getTileByLocation(int y, int x){
+        for (Tile tile : randomTiles){
+            if (tile.getX() == x && tile.getY() == y){
+                return tile;
             }
+        }
+        return null;
+    }
+
+    public void registerObserver(BordObserver bo){
+        for (Tile tile : randomTiles){
+            tile.register(bo);
         }
     }
 
-    public Tile[][] getTiles(){
+    public ArrayList<Tile> getTiles(){
         return this.randomTiles;
     }
 }

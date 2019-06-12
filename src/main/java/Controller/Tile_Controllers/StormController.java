@@ -1,6 +1,7 @@
 package Controller.Tile_Controllers;
 
 import Controller.Controller;
+import Model.Tiles.Tile;
 import Model.storm.Storm;
 import Model.storm.StormEvent;
 import Model.storm.StormEventBeweging;
@@ -116,6 +117,7 @@ public class StormController {
                 randomizeEvents(stormEvents);
             }
         }
+        storm.notifyAllObservers();
     }
 
     private void beweegStorm(StormEventBeweging.Richtingen richting, StormEventBeweging.Stappen stappen){
@@ -139,6 +141,7 @@ public class StormController {
             default:
                 System.out.println("DIT HOORT NIET");
         }
+
     }
 
     public void registerObserver(StormObserver bo){ storm.register(bo); }

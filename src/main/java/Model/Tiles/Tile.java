@@ -25,6 +25,9 @@ public class Tile implements BordObservable{
     private ArrayList<PartTile> onderdelen;
     private ArrayList<Player> spelers;
 
+    private int x;
+    private int y;
+
     public Tile(String undiscovered, String discovered, Varianten variant){
         undiscoveredImage = new Image(undiscovered);
         discoveredImage = new Image(discovered);
@@ -91,4 +94,17 @@ public class Tile implements BordObservable{
     }
 
     public int getZand() { return aantalZandTegels; }
+
+    public void setLocation(int x, int y){
+        this.x = x;
+        this.y = y;
+    }
+
+    public int getX(){
+        return x;
+    }
+
+    public int getY(){
+        return y;
+    }
 }
