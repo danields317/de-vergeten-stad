@@ -157,8 +157,12 @@ public class Player implements PlayerObservable {
 		return actiesOver;
 	}
 
-	public Tile getTile() {
-		return tile;
+	public int getX() {
+		return x;
+	}
+
+	public int getY() {
+		return y;
 	}
 
 	public String getClassName() {
