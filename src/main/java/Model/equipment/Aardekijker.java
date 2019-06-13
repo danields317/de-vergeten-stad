@@ -7,7 +7,7 @@ public class Aardekijker extends Equipment {
 	public Aardekijker() {
 	
 		super( "Aardekijker","Bekijk een niet-uitgegraven tegel", "/placeholder.png");
-
+        this.equipmentKaart = EquipmentKaarten.AARDEKIJKER;
 	}
 
 }

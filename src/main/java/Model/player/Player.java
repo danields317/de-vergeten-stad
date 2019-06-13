@@ -1,14 +1,11 @@
 package Model.player;
 
-import Controller.Equipment_Controllers.Equipment_Controller;
-import Model.storm.StormEventBeweging;
+import Controller.Equipment_Controllers.EquipmentController;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import Model.Tiles.Tile;
-import Model.equipment.Equipment;
 import observers.PlayerObservable;
 import observers.PlayerObserver;
-import observers.WaterObserver;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +13,7 @@ import java.util.List;
 public class Player implements PlayerObservable {
 
 	private String nickname; // Naam ingevoerd door de speler
-	private Equipment_Controller[] inventory;
+	private EquipmentController[] inventory;
 	private int water;
 	private int actiesOver;
 	private Tile tile; // De tile waar de speler op staat
@@ -149,7 +146,7 @@ public class Player implements PlayerObservable {
 		return nickname;
 	}
 
-	public Equipment_Controller[] getInventory() {
+	public EquipmentController[] getInventory() {
 		return inventory;
 	}
 

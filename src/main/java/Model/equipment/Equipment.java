@@ -4,7 +4,8 @@ import javafx.scene.image.Image;
 
 public class Equipment {
 
-	enum equipmentKaarten {AARDEKIJKER, DUINKANON, JETPACK, TIJDSCHAKELAAR, WATERRESERVE, ZONNESCHILD};
+	enum EquipmentKaarten {AARDEKIJKER, DUINKANON, JETPACK, TIJDSCHAKELAAR, WATERRESERVE, ZONNESCHILD};
+	EquipmentKaarten equipmentKaart;
 
 	private String naam;
 	private String description;
@@ -17,7 +18,6 @@ public class Equipment {
 		this.naam = naam;
 		this.description = description;
 		this.image = new Image(imagePath);
-		
 	}
 	
 	/////////////////////////////////////// Methods ///////////////////////////////////////
