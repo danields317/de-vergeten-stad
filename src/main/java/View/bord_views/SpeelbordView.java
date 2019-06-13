@@ -14,12 +14,23 @@ import javafx.scene.layout.StackPane;
 
 import java.util.ArrayList;
 
-public class SpeelbordView {
+public class SpeelbordView{
     //een gridpane met per pane een tile
     //foto's hier opslaan en alleen de coordianten ophalen
     //bij update juiste coordinaat bij juiste image zetten.
     private TileController tileController;
     public GridPane spelbord;
+
+    private ArrayList<TileView> tileViews = new ArrayList<>();
+
+    static SpeelbordView speelbordView;
+
+    public static SpeelbordView getInstance(){
+        if (speelbordView == null){
+            speelbordView = new SpeelbordView();
+        }
+        return speelbordView;
+    }
 
 
     public GridPane loadSpelBord(){
@@ -33,6 +44,8 @@ public class SpeelbordView {
 
             Tile tile = tiles.get(i);
             TileView tileView = new TileView(tile.getImage());
+            tileViews.add(tileView);
+            tileView.update(tile);
 
             //ImageView tile = new ImageView(tiles[i][j].getImage());
             //tile.setFitHeight(115);
@@ -48,6 +61,17 @@ public class SpeelbordView {
 
         }
         return spelbord;
+    }
+
+    public void updateSpelBord(Tile tile, Tile tile2){
+        tileController = TileController.getInstance();
+        ArrayList<Tile> tiles = tileController.getTiles();
+
+        spelbord.getChildren().remove(tileViews.get(tiles.indexOf(tile)).maakTile());
+        spelbord.getChildren().remove(tileViews.get(tiles.indexOf(tile2)).maakTile());
+
+        spelbord.add(tileViews.get(tiles.indexOf(tile2)).maakTile(), tile2.getX(), tile2.getY());
+        spelbord.add(tileViews.get(tiles.indexOf(tile)).maakTile(), tile.getX(), tile.getY());
     }
 
     public GridPane getSpelbord() {

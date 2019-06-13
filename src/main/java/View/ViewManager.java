@@ -31,7 +31,7 @@ public class ViewManager extends Application{
     //StormView stormview = new StormView();              //maak storm en stormmeter
     UitrustingView uitrustingview = new UitrustingView();   //maak uitrusting plaatsen
     WaterflesView waterflesView;      //maak waterfles stand
-    SpeelbordView speelbordView = new SpeelbordView();
+    SpeelbordView speelbordView = SpeelbordView.getInstance();
 
 
     private double windowWidth = 1600;
@@ -130,7 +130,6 @@ public class ViewManager extends Application{
     }
 
     private Group makeGroup(){
-
 
         Image backgroundImage = new Image("gamescreenempty.png");
         Canvas canvas = new Canvas(windowWidth, windowHeight);

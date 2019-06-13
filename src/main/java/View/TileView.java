@@ -2,6 +2,7 @@ package View;
 
 import Controller.Tile_Controllers.TileController;
 import Model.Tiles.Tile;
+import View.bord_views.SpeelbordView;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -31,8 +32,8 @@ public class TileView implements BordObserver{
     ImageView verkennerImageView;
     ImageView waterdragerImageView;
 
-    Image zandImage = new Image("/placeholder.png");
-    Image zandImageGeblokkeerd = new Image("/placeholder.png");
+    Image zandImage = new Image("/Tiles/Low_Sand.png");
+    Image zandImageGeblokkeerd = new Image("/Tiles/High_Sand.png");
     Image zonneschildImage = new Image("/placeholder.png");
 
     Image archeoloogImage = new Image("/placeholder.png");
@@ -60,24 +61,30 @@ public class TileView implements BordObserver{
         archeoloogImageView = new ImageView(archeoloogImage);
         archeoloogImageView.setFitWidth(tileSize/3);
         archeoloogImageView.setFitHeight(tileSize/3);
+        archeoloogImageView.setOpacity(0);
         klimmerImageView = new ImageView(klimmerImage);
         klimmerImageView.setFitWidth(tileSize/3);
         klimmerImageView.setFitHeight(tileSize/3);
+        klimmerImageView.setOpacity(0);
         meteooroloogImageView = new ImageView(meteooroloogImage);
         meteooroloogImageView.setFitWidth(tileSize/3);
         meteooroloogImageView.setFitHeight(tileSize/3);
+        meteooroloogImageView.setOpacity(0);
         navigatorImageView = new ImageView(navigatorImage);
         navigatorImageView.setFitWidth(tileSize/3);
         navigatorImageView.setFitHeight(tileSize/3);
+        navigatorImageView.setOpacity(0);
         verkennerImageView = new ImageView(verkennerImage);
         verkennerImageView.setFitWidth(tileSize/3);
         verkennerImageView.setFitHeight(tileSize/3);
+        verkennerImageView.setOpacity(0);
         waterdragerImageView = new ImageView(waterdragerImage);
         waterdragerImageView.setFitWidth(tileSize/3);
         waterdragerImageView.setFitHeight(tileSize/3);
+        waterdragerImageView.setOpacity(0);
 
         onderdeelStackPane = new StackPane();
-        zandLabel = new Label(" 1");
+        zandLabel = new Label(" ");
         zandLabel.setMinWidth(tileSize/3);
         zandLabel.setMinHeight(tileSize/3);
 
