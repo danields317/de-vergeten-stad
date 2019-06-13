@@ -37,7 +37,9 @@ public class TileController {
     }
 
     public void tileClicked(int x, int y) {
-//        Tile tile = randomTiles[y][x];
+        Tile tile = getTileByLocation(y,x);
+        tile.discoverTile();
+        tile.removeZandTegel();
     }
 
     /**
@@ -69,11 +71,14 @@ public class TileController {
                 tiles.add(new PartTile(PartTile.Richtingen.OPZIJ, PartTile.Soorten.MOTOR));
             }else if (i < 15) {
                 tiles.add(new PartTile(PartTile.Richtingen.OPZIJ, PartTile.Soorten.OBELISK));
+            }else if (i < 16) {
+                tiles.add(new StartTile(equipmentController.getEquipment()));
             }else{
                 tiles.add(new EquipmentTile(equipmentController.getEquipment()));
             }
         }
     }
+
 
     private void randomizeTiles(ArrayList<Tile> tiles){
 

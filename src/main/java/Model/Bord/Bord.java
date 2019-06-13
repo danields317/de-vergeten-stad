@@ -17,20 +17,6 @@ public class Bord implements BordObservable {
     // List of all Observers of this Observable Objects
     private List<BordObserver> observers = new ArrayList<BordObserver>();
 
-
-
-
-
-
-
-    public void increaseScore(){
-        System.out.println("Spelbord - score increased");
-        scorePlayer1++;
-
-        // SOMETHING Changed !!  - We need to notify the observers !
-        notifyAllObservers();
-    }
-
     // Add an observer to the list
     public void register(BordObserver observer){
         observers.add(observer);

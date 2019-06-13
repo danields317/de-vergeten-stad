@@ -52,14 +52,6 @@ public class Login_Controller {
         }
     }
 
-    public String getScore(){
-        return login.getScore();
-    }
-
-    public void setScore() {
-        login.increaseScore();
-    }
-
     public void registerObserver(LoginObserver sbv) {
         login.register(sbv);
     }

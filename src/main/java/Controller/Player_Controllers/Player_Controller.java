@@ -1,11 +1,15 @@
 package Controller.Player_Controllers;
 
+import Controller.Tile_Controllers.TileController;
+import Model.Tiles.StartTile;
+import Model.Tiles.Tile;
 import Model.data.StaticData;
 import Model.player.Player;
 import javafx.scene.paint.Color;
 import observers.LoadBordObserver;
 import observers.PlayerObserver;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 public class Player_Controller {
@@ -15,12 +19,11 @@ public class Player_Controller {
     StaticData staticData = StaticData.getInstance();
     Player player;
 
-
-
-
+    TileController tileController = TileController.getInstance();
 
     public Player_Controller(String className, int maxWater, int water, String imagePath){
         player = new Player(staticData.getUsername(),className, "b", maxWater, water, Color.BLUE, imagePath);
+        spawnSpelers();
     }
 
 
@@ -54,6 +57,21 @@ public class Player_Controller {
     public static Player_Controller getInstance() {
         return playercont;
     }
+
+    public void spawnSpelers(){
+        ArrayList<Tile> tiles = tileController.getTiles();
+        Tile spawnTile = null;
+        for(Tile tile:tiles){
+            if (tile.getClass().equals(StartTile.class)){
+                spawnTile = tile;
+                break;
+            }
+        }
+        player.setLocatie(spawnTile.getX(), spawnTile.getY());
+        System.out.println(spawnTile.getX() + " " +  spawnTile.getY());
+        System.out.println("set spawn playercontroller");
+    }
+
 
     public void move(){
 
