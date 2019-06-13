@@ -4,6 +4,7 @@ import Controller.Tile_Controllers.TileController;
 import Model.Tiles.Tile;
 import View.bord_views.SpeelbordView;
 import javafx.scene.control.Label;
+import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
