@@ -5,7 +5,7 @@ public class SpelerView {
     /*public enum spelerKlasse {ARCHEOLOOG, KLIMMER, METEOOROLOOG, NAVIGATOR, VERKENNER, WATERDRAGER };
 
     static HBox inventoryView;
-    Player_Controller spelerController;
+    PlayerController spelerController;
 
     public SpelerView(spelerKlasse klasse, String nickname) {
 

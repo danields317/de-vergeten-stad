@@ -171,7 +171,7 @@ public class TileController {
     }
 
 
-    private Tile getTileByLocation(int y, int x){
+    public Tile getTileByLocation(int y, int x){
         for (Tile tile : randomTiles){
             if (tile.getX() == x && tile.getY() == y){
                 return tile;

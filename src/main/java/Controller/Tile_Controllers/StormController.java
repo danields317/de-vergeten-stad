@@ -1,7 +1,7 @@
 package Controller.Tile_Controllers;
 
 import Controller.Controller;
-import Model.Tiles.Tile;
+import Controller.Player_Controllers.PlayerController;
 import Model.storm.Storm;
 import Model.storm.StormEvent;
 import Model.storm.StormEventBeweging;
@@ -24,6 +24,7 @@ public class StormController {
     private int stapelCounter;
 
     TileController tileController;
+    PlayerController playerController;
 
     private StormController(){
         storm = new Storm();
@@ -31,6 +32,7 @@ public class StormController {
         randomizeEvents(stormEvents);
         stapelCounter = 0;
         tileController = TileController.getInstance();
+        playerController = PlayerController.getInstance();
     }
 
     public static StormController getInstance(){
@@ -124,18 +126,22 @@ public class StormController {
         switch (richting){
             case NOORD:
                 tileController.moveTiles(richting, stappen, storm.getX(), storm.getY());
+                playerController.moveSpeler(richting, stappen, storm.getX(), storm.getY());
                 storm.beweegNoord(stappen);
                 break;
             case OOST:
                 tileController.moveTiles(richting, stappen, storm.getX(), storm.getY());
+                playerController.moveSpeler(richting, stappen, storm.getX(), storm.getY());
                 storm.beweegOost(stappen);
                 break;
             case ZUID:
                 tileController.moveTiles(richting, stappen, storm.getX(), storm.getY());
+                playerController.moveSpeler(richting, stappen, storm.getX(), storm.getY());
                 storm.beweegZuid(stappen);
                 break;
             case WEST:
                 tileController.moveTiles(richting, stappen, storm.getX(), storm.getY());
+                playerController.moveSpeler(richting, stappen, storm.getX(), storm.getY());
                 storm.beweegWest(stappen);
                 break;
             default:

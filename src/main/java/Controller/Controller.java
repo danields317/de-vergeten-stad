@@ -5,7 +5,7 @@ import Controller.Player_Controllers.*;
 public class Controller/* extends Application  */{
 
     static Controller controller;
-    Player_Controller playcont = Player_Controller.getInstance();
+    PlayerController playcont = PlayerController.getInstance();
 
     public static Controller getInstance() {
         if (controller == null) {

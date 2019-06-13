@@ -1,9 +1,8 @@
 package View;
 
 import Controller.Bord_Controllers.LoadBord_Controller;
-import Controller.Player_Controllers.Player_Controller;
+import Controller.Player_Controllers.PlayerController;
 import Model.data.StaticData;
-import View.bord_views.BordView;
 import firebase.FirebaseService;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -89,7 +88,7 @@ public class LoadBordView implements LoadBordObserver {
             final String tempString = ( ((Map) killMe).get("name")).toString();
             ImageView image = createImageView(tempString + ".png");
             image.setOnMouseClicked(e -> {
-                Player_Controller player = Player_Controller.getInstance(true, killMe);
+                PlayerController player = PlayerController.getInstance(true, killMe);
                 player.update();
                 ViewManager view = new ViewManager();
                 view.loadGameView();
