@@ -1,7 +1,9 @@
 package View;
 
+import Controller.Player_Controllers.Player_Controller;
 import Controller.Tile_Controllers.TileController;
 import Model.Tiles.Tile;
+import Model.player.Player;
 import View.bord_views.SpeelbordView;
 import javafx.scene.control.Label;
 import javafx.scene.effect.ColorAdjust;
@@ -16,6 +18,7 @@ import observers.BordObserver;
 public class TileView implements BordObserver{
 
     TileController tileController;
+    Player_Controller playerController = Player_Controller.getInstance();
     public final int tileSize = 105;
 
     StackPane stackPane;
@@ -114,6 +117,27 @@ public class TileView implements BordObserver{
 
     }
 
+    public void checkSpelers(int x, int y){
+
+        archeoloogImageView.setOpacity(0);
+        klimmerImageView.setOpacity(0);
+        meteooroloogImageView.setOpacity(0);
+        navigatorImageView.setOpacity(0);
+        verkennerImageView.setOpacity(0);
+        waterdragerImageView.setOpacity(0);
+
+
+        int pX = playerController.getPlayer().getX();
+        int pY = playerController.getPlayer().getY();
+
+        if(pX == x && pY == y){
+            System.out.println("tileX:" + x + " tileY:" + y + "TileView");
+            System.out.println("spelerX:" + pX + " spelerY" + pY);
+            archeoloogImageView.setOpacity(1);
+            klimmerImageView.setOpacity(1);
+        }
+    }
+
     public void checkZand(int zand){
         switch(zand){
             case 0:
@@ -140,5 +164,6 @@ public class TileView implements BordObserver{
         Tile tile = (Tile) bo;
         tileImageView.setImage(tile.getImage());
         checkZand(tile.getZand());
+        checkSpelers(tile.getX(), tile.getY());
     }
 }
