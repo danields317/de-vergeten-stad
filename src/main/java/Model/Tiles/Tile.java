@@ -20,7 +20,6 @@ public class Tile implements BordObservable{
     private Image discoveredImage;
     private Image currentImage; //zet hier de discoverd of undiscoverd image en geef deze door naar de manager
 
-    private boolean zonneschild = false;
     private int aantalZandTegels;
 
     private ArrayList<PartTile> onderdelen;
@@ -83,7 +82,6 @@ public class Tile implements BordObservable{
     public void setDiscoveredImage(String pad){
         this.discoveredImage = new Image(pad);
         setCurrentImage(discoveredImage);
-        notifyAllObservers();
     }
 
     public void setCurrentImage(Image image){
@@ -95,6 +93,9 @@ public class Tile implements BordObservable{
     }
 
     public int getZand() { return aantalZandTegels; }
+
+
+    public ArrayList getSpelers(){ return spelers;}
 
     public void setLocation(int x, int y){
         this.x = x;
@@ -109,5 +110,4 @@ public class Tile implements BordObservable{
         return y;
     }
 
-    public boolean heeftZonneschild() {return zonneschild;}
 }

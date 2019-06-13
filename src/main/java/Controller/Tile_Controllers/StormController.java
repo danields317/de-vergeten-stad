@@ -99,16 +99,19 @@ public class StormController {
                 switch (stormEvent.naam){
                     case BEWEGING:
                         beweegStorm(((StormEventBeweging) stormEvent).richting, ((StormEventBeweging) stormEvent).stappen);
+                        System.out.println("Beweeg, StormController");
                         break;
                     case BRANDT:
                         Controller controller = Controller.getInstance();
                         controller.verwijderZand();
+                        System.out.println("NU DOE IK WATER, StormController");
                         break;
                     case STERKER:
                         storm.stormWordtSterker();
+                        System.out.println("NU DOE IK STERKERDER WORDEN, StormController");
                         break;
                     default:
-                        System.out.println("DIT HOORT NIET");
+                        System.out.println("DIT HOORT NIET, StormController");
                 }
                 stapelCounter++;
             }else{
@@ -118,6 +121,7 @@ public class StormController {
             }
         }
         storm.notifyAllObservers();
+        tileController.notifyObservers();
     }
 
     private void beweegStorm(StormEventBeweging.Richtingen richting, StormEventBeweging.Stappen stappen){

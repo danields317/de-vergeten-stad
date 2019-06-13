@@ -1,11 +1,13 @@
 package View;
 
 import Controller.Tile_Controllers.TileController;
+import Model.Tiles.PartTile;
 import Model.Tiles.Tile;
 import Model.player.Player;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import observers.BordObservable;
@@ -56,7 +58,7 @@ public class TileView implements BordObserver{
 
     public TileView(Image image, Tile tile){
         tileController = TileController.getInstance();
-        tileController.registerObserver(this, tile);
+        //tileController.registerObserver(this);
 
         stackPane = new StackPane();
         stackPane.getStyleClass().add("tile");
@@ -111,7 +113,7 @@ public class TileView implements BordObserver{
         onderdeelStackPane = new StackPane();
         onderdeelStackPane.getChildren().addAll(zonnewijzerImageView, propellerImageView, beaconImageView, engineImageView);
 
-        zandLabel = new Label("");
+        zandLabel = new Label(" 1");
         zandLabel.setMinWidth(tileSize/3);
         zandLabel.setMinHeight(tileSize/3);
 
@@ -192,6 +194,10 @@ public class TileView implements BordObserver{
                     break;
                 default: continue;
             }
+    public static TileView getInstance(int nummer, Image image){
+        if((tiles.size() - 1) < nummer){
+            TileView tileView = new TileView(image);
+            tiles.add(nummer, tileView);
         }
     }
 
@@ -203,21 +209,15 @@ public class TileView implements BordObserver{
         for ( )
     }*/
 
-    public void checkZonneSchild(boolean heeftZonneschild) {
-        if (heeftZonneschild) {
-            zonneschildImageView.setOpacity(0.40);
-        } else {
-            zonneschildImageView.setOpacity(0);
-        }
-    }
-
     public void update(BordObservable bo){
-
         Tile tile = (Tile) bo;
-        tileImageView.setImage(tile.getImage());
-        checkZand(tile.getZand());
-        checkZonneSchild(tile.heeftZonneschild());
-        //checkSpelers(tile.getSpelers());
+        for(TileView tille : tiless){
+            tille.checkZand(tile.getZand());
+        }
+
+        speelbordView.loadSpelBord();
+
+        //tileImageView.setImage(tile.getImage());
 
     }
 }

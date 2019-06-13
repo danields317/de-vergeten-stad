@@ -22,9 +22,6 @@ public class TileController {
         makeTiles();
         randomizeTiles(tiles);
         setTileLocations();
-        for (Tile tile : randomTiles){
-            System.out.println(tile.getX() + " " + tile.getY());
-        }
     }
 
     public static TileController getInstance(){
@@ -159,6 +156,10 @@ public class TileController {
 
     public void registerObserver(BordObserver bo, Tile tile) {
         tile.register(bo);
+    }
+
+    public void notifyObservers(){
+        randomTiles.get(0).notifyAllObservers();
     }
 
     public ArrayList<Tile> getTiles(){
