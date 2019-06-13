@@ -127,7 +127,6 @@ public class Player implements PlayerObservable {
 	public void subtractWater(int water ) {
 		
 		this.water = this.water - water;
-		System.out.println(observers);
 
 		if (this.water <= 0) {
 			this.water++;
@@ -186,8 +185,6 @@ public class Player implements PlayerObservable {
 	// Also send <<this>> object to the observers.
 	public void notifyAllObservers(){
 		for (PlayerObserver s : observers) {
-			System.out.println(s);
-
 			s.update(this);
 		}
 	}

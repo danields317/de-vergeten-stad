@@ -18,13 +18,15 @@ public class TileController {
     ArrayList<Tile> tiles = new ArrayList<>();
     ArrayList<Tile> randomTiles = new ArrayList<>();
 
+    public int counter = 0;
+
     private TileController(){
         makeTiles();
         randomizeTiles(tiles);
         setTileLocations();
-        for (Tile tile : randomTiles){
-            System.out.println(tile.getX() + " " + tile.getY());
-        }
+//        for (Tile tile : randomTiles){
+//            System.out.println(tile.getX() + " " + tile.getY());
+//        }
     }
 
     public static TileController getInstance(){
@@ -132,6 +134,7 @@ public class TileController {
     }
 
     private void moveTile(StormEventBeweging.Stappen stappen, int stormX, int stormY, int moveStormX, int moveStormY){
+
         for (int i = 0; i < stappen.getNumber(); i++){
             if (stormY < 4 && stormX > 0 && stormY > 0 && stormX < 4){
 
@@ -140,6 +143,11 @@ public class TileController {
 
                 stormTile.setLocation(stormX+moveStormX, stormY+moveStormY);
                 tmp.setLocation(stormX, stormY);
+
+                tmp.addZandTegel();
+
+                tmp.notifyAllObservers();
+                stormTile.notifyAllObservers();
 
                 stormY = stormY + moveStormY;
                 stormX = stormX + moveStormX;
@@ -157,10 +165,9 @@ public class TileController {
         return null;
     }
 
-    public void registerObserver(BordObserver bo){
-        for (Tile tile : randomTiles){
-            tile.register(bo);
-        }
+    public void registerObserver(BordObserver bo, int counter){
+        randomTiles.get(counter).register(bo);
+        this.counter++;
     }
 
     public ArrayList<Tile> getTiles(){

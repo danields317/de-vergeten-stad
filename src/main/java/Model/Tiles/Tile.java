@@ -5,7 +5,6 @@ import javafx.scene.image.Image;
 import observers.BordObservable;
 import observers.BordObserver;
 
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 
 public class Tile implements BordObservable{

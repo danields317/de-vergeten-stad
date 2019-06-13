@@ -44,7 +44,7 @@ public class TileView implements BordObserver{
 
     public TileView(Image image){
         tileController = TileController.getInstance();
-        tileController.registerObserver(this);
+        tileController.registerObserver(this, tileController.counter);
 
         stackPane = new StackPane();
         stackPane.getStyleClass().add("tile");
