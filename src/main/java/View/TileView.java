@@ -54,7 +54,7 @@ public class TileView implements BordObserver{
         tileImageView.setFitHeight(tileSize);
         tileImageView.setFitWidth(tileSize);
 
-        zandImageView = new ImageView(image);
+        zandImageView = new ImageView(zandImage);
         zandImageView.setFitHeight(tileSize);
         zandImageView.setFitWidth(tileSize);
 
