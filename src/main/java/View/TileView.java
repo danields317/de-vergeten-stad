@@ -40,12 +40,12 @@ public class TileView implements BordObserver{
     Image zandImageGeblokkeerd = new Image("/Tiles/High_Sand.png");
     Image zonneschildImage = new Image("/placeholder.png");
 
-    Image archeoloogImage = new Image("/placeholder.png");
-    Image klimmerImage = new Image("/placeholder.png");
-    Image meteooroloogImage = new Image("/placeholder.png");
-    Image navigatorImage = new Image("/placeholder.png");
-    Image verkennerImage = new Image("/placeholder.png");
-    Image waterdragerImage = new Image("/placeholder.png");
+    Image archeoloogImage = new Image("/Players/Archeoloog.png");
+    Image klimmerImage = new Image("/Players/Klimmer.png");
+    Image meteooroloogImage = new Image("/Players/Meteoroloog.png");
+    Image navigatorImage = new Image("/Players/Navigator.png");
+    Image verkennerImage = new Image("/Players/Verkenner.png");
+    Image waterdragerImage = new Image("/Players/Waterdrager.png");
 
     public TileView(Image image){
         tileController = TileController.getInstance();
