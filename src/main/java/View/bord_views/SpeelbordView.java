@@ -41,7 +41,6 @@ public class SpeelbordView{
         spelbord.setLayoutY(75);
         tileController = TileController.getInstance();
         ArrayList<Tile> tiles = tileController.getTiles();
-        System.out.println("ewa");
         for(int i = 0; i < tiles.size(); i ++){
 
             Tile tile = tiles.get(i);
