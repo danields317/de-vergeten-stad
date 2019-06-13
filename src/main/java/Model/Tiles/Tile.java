@@ -20,6 +20,7 @@ public class Tile implements BordObservable{
     private Image discoveredImage;
     private Image currentImage; //zet hier de discoverd of undiscoverd image en geef deze door naar de manager
 
+    private boolean zonneschild = false;
     private int aantalZandTegels;
 
     private ArrayList<PartTile> onderdelen;
@@ -107,4 +108,6 @@ public class Tile implements BordObservable{
     public int getY(){
         return y;
     }
+
+    public boolean heeftZonneschild() {return zonneschild;}
 }

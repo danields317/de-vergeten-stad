@@ -9,10 +9,19 @@ import javafx.scene.text.Font;
 
 public class OnderdeelView {
 
+    static OnderdeelView onderdeelView;
+
     private StackPane propellerView;
     private StackPane beaconView;
     private StackPane motorView;
     private StackPane zonnewijzerView;
+
+    public static OnderdeelView getInstance(){
+        if (onderdeelView == null){
+            onderdeelView = new OnderdeelView();
+        }
+        return onderdeelView;
+    }
 
     public StackPane loadPropeller(String X, String Y){
         Label coordinaten = maakLabel(X, Y);

@@ -39,7 +39,7 @@ public class Storm implements StormObservable{
     public void beweegOost(StormEventBeweging.Stappen stappen){
         if (x+stappen.getNumber() <= 4){
             x += stappen.getNumber();
-        }else x = 4;;
+        }else x = 4;
         notifyAllObservers();
     }
     public void beweegZuid(StormEventBeweging.Stappen stappen){

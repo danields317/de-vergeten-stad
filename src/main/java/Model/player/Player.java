@@ -19,7 +19,9 @@ public class Player implements PlayerObservable {
 	private Equipment_Controller[] inventory;
 	private int water;
 	private int actiesOver;
-	private Tile tile; // De tile waar de speler op staat
+	private int x;
+	private int y;
+	private Tile tile;
 	
 	// Informatie over de speler klasse
 	private String className;
@@ -27,8 +29,6 @@ public class Player implements PlayerObservable {
 	private int maxWater;
 	private Color color;
 	private Image image;
-	private int x;
-	private int y;
 
 	public enum Richingen {NOORD, OOST, WEST, ZUID}
 
@@ -158,8 +158,12 @@ public class Player implements PlayerObservable {
 		return actiesOver;
 	}
 
-	public Tile getTile() {
-		return tile;
+	public int getX() {
+		return x;
+	}
+
+	public int getY() {
+		return y;
 	}
 
 	public String getClassName() {

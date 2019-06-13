@@ -1,6 +1,7 @@
 package View.bord_views;
 
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 
@@ -9,6 +10,15 @@ import java.awt.*;
 public class ActieKnoppenView {
 
     static GridPane view = new GridPane();
+
+    static ActieKnoppenView actieKnoppenView;
+
+    public static ActieKnoppenView getInstance(){
+        if (actieKnoppenView == null){
+            actieKnoppenView = new ActieKnoppenView();
+        }
+        return actieKnoppenView;
+    }
 
     public GridPane maakActieKnoppen(){
         Button up = new Button("▲");
@@ -21,6 +31,9 @@ public class ActieKnoppenView {
         left.setPrefSize(60, 60);
         right.setPrefSize(60, 60);
         TileActions.setPrefSize(60, 60);
+        TileActions.setOnAction(click -> {
+
+        });
 
         GridPane acties = new GridPane();
 

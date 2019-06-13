@@ -5,6 +5,15 @@ import javafx.scene.layout.GridPane;
 
 public class GraafKnoppenView {
 
+    static GraafKnoppenView graafKnoppenView;
+
+    public static GraafKnoppenView getInstance(){
+        if (graafKnoppenView == null){
+            graafKnoppenView = new GraafKnoppenView();
+        }
+        return graafKnoppenView;
+    }
+
     static GridPane view = new GridPane();
 
     public GridPane maakGraafKnoppen(){

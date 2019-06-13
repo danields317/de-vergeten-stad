@@ -157,10 +157,8 @@ public class TileController {
         return null;
     }
 
-    public void registerObserver(BordObserver bo){
-        for (Tile tile : randomTiles){
-            tile.register(bo);
-        }
+    public void registerObserver(BordObserver bo, Tile tile) {
+        tile.register(bo);
     }
 
     public ArrayList<Tile> getTiles(){

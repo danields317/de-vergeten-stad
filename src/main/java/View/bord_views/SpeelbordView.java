@@ -11,8 +11,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import observers.BordObserver;
 
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 
 public class SpeelbordView {
     //een gridpane met per pane een tile
@@ -27,12 +30,13 @@ public class SpeelbordView {
         spelbord.setLayoutX(410);
         spelbord.setLayoutY(75);
         tileController = TileController.getInstance();
+
         ArrayList<Tile> tiles = tileController.getTiles();
-        System.out.println(tiles.size());
+        //System.out.println(tiles.size());
         for(int i = 0; i < tiles.size(); i ++){
 
             Tile tile = tiles.get(i);
-            TileView tileView = new TileView(tile.getImage());
+            TileView tileView = new TileView(tile.getImage(), tile);
 
             //ImageView tile = new ImageView(tiles[i][j].getImage());
             //tile.setFitHeight(115);

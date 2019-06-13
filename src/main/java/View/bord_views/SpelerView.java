@@ -10,11 +10,20 @@ import Controller.Player_Controllers.Waterdrager_Controller;
 import Controller.Player_Controllers.Player_Controller;
 import Model.equipment.Equipment;
 import javafx.event.EventHandler;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 
+import java.util.ArrayList;
+
 public class SpelerView {
+
+    public GridPane maakSpelerGrid(ArrayList spelers){
+        GridPane spelerGrid = new GridPane();
+        return spelerGrid;
+    }
 
     /*public enum spelerKlasse {ARCHEOLOOG, KLIMMER, METEOOROLOOG, NAVIGATOR, VERKENNER, WATERDRAGER };
 
