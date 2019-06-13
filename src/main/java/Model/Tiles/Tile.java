@@ -99,6 +99,8 @@ public class Tile implements BordObservable{
         this.y = y;
     }
 
+    public boolean isDiscovered() { return discovered; }
+
     public int getX(){
         return x;
     }

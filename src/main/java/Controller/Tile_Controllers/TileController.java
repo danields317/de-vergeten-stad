@@ -171,7 +171,7 @@ public class TileController {
     }
 
 
-    private Tile getTileByLocation(int y, int x){
+    public Tile getTileByLocation(int y, int x){
         for (Tile tile : randomTiles){
             if (tile.getX() == x && tile.getY() == y){
                 return tile;
@@ -183,6 +183,10 @@ public class TileController {
     public void registerObserver(BordObserver bo, int counter){
         randomTiles.get(counter).register(bo);
         this.counter++;
+    }
+
+    public void notifyView(){
+        randomTiles.get(0).notifyAllObservers();
     }
 
     public ArrayList<Tile> getTiles(){

@@ -6,14 +6,12 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import Model.Tiles.Tile;
 import Model.equipment.Equipment;
-import observers.PlayerObservable;
-import observers.PlayerObserver;
-import observers.WaterObserver;
+import observers.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Player implements PlayerObservable {
+public class Player implements PlayerObservable{
 
 	private String nickname; // Naam ingevoerd door de speler
 	private Equipment_Controller[] inventory;
@@ -34,6 +32,7 @@ public class Player implements PlayerObservable {
 
 	// List of all Observers of this Observable Objects
 	private List<PlayerObserver> observers = new ArrayList<PlayerObserver>();
+	private List<BordObserver> bordObservers = new ArrayList<>();
 
 
 	/////////////////////////////////////// Constructor ///////////////////////////////////////
@@ -107,10 +106,8 @@ public class Player implements PlayerObservable {
     }
 
     private void move(int moveX, int moveY){
-	    if (x < 5 && x >= 0 && y < 5 && y >= 0){
-	        x = x + moveX;
-	        y = y + moveY;
-        }
+		x = x + moveX;
+		y = y + moveY;
     }
 	/////////////////////////////////////// Getters & Setters ///////////////////////////////////////
 	
