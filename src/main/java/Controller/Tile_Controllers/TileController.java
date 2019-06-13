@@ -101,7 +101,6 @@ public class TileController {
     public void moveTiles(StormEventBeweging.Richtingen stormRichting, StormEventBeweging.Stappen stappen, int stormX, int stormY){
         switch (stormRichting){
             case NOORD:
-                System.out.println("NOORDDDDDDDDDDDDDD");
                 moveTileZuid(stappen, stormX, stormY);
                 break;
             case OOST:
@@ -111,7 +110,6 @@ public class TileController {
                 moveTileNoord(stappen, stormX, stormY);;
                 break;
             case WEST:
-                System.out.println("WESTTTTTTTTTTt");
                 moveTileOost(stappen, stormX, stormY);
                 break;
             default:
