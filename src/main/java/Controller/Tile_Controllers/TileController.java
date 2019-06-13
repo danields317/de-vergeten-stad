@@ -2,6 +2,7 @@ package Controller.Tile_Controllers;
 
 import Model.Tiles.*;
 import Model.storm.StormEventBeweging;
+import View.bord_views.SpeelbordView;
 import observers.BordObserver;
 
 import java.awt.*;
@@ -18,9 +19,13 @@ public class TileController {
     ArrayList<Tile> tiles = new ArrayList<>();
     ArrayList<Tile> randomTiles = new ArrayList<>();
 
+    public int counter = 0;
+
     private TileController(){
         makeTiles();
         randomizeTiles(tiles);
+        randomTiles.add(12, new Storm());
+        beginZand();
         setTileLocations();
     }
 
@@ -39,7 +44,7 @@ public class TileController {
      * Volgens de spel regels zijn er in totaal 24 tiles, dus loopt de for loop tot 24.
      */
     private void makeTiles(){
-        for (int i = 0; i <= 24; i++){
+        for (int i = 0; i < 24; i++){
             if (i < 1){
                 tiles.add(new Finish());
             }else if (i < 2){
@@ -62,12 +67,9 @@ public class TileController {
                 tiles.add(new PartTile(PartTile.Richtingen.OPZIJ, PartTile.Soorten.PROPELOR));
             }else if (i < 14){
                 tiles.add(new PartTile(PartTile.Richtingen.OPZIJ, PartTile.Soorten.MOTOR));
-            }else if (i < 15){
+            }else if (i < 15) {
                 tiles.add(new PartTile(PartTile.Richtingen.OPZIJ, PartTile.Soorten.OBELISK));
-            }else if (i < 16){
-                tiles.add(new Storm());
-            }
-            else {
+            }else{
                 tiles.add(new EquipmentTile(equipmentController.getEquipment()));
             }
         }
@@ -129,8 +131,9 @@ public class TileController {
     }
 
     private void moveTile(StormEventBeweging.Stappen stappen, int stormX, int stormY, int moveStormX, int moveStormY){
+
         for (int i = 0; i < stappen.getNumber(); i++){
-            if (stormY < 4 && stormX > 0 && stormY > 0 && stormX < 4){
+            if (stormY+moveStormY <= 4 && stormX+moveStormX >= 0 && stormY+moveStormY >= 0 && stormX+moveStormX <= 4){
 
                 Tile stormTile = getTileByLocation(stormY, stormX);
                 Tile tmp = getTileByLocation(stormY+moveStormY, stormX+moveStormX);
@@ -138,10 +141,28 @@ public class TileController {
                 stormTile.setLocation(stormX+moveStormX, stormY+moveStormY);
                 tmp.setLocation(stormX, stormY);
 
+                tmp.addZandTegel();
+
+                tmp.notifyAllObservers();
+                stormTile.notifyAllObservers();
+
+                SpeelbordView.getInstance().updateSpelBord(tmp, stormTile);
+
                 stormY = stormY + moveStormY;
                 stormX = stormX + moveStormX;
             }
         }
+    }
+
+    public void beginZand(){
+        randomTiles.get(2).addZandTegel();
+        randomTiles.get(6).addZandTegel();
+        randomTiles.get(8).addZandTegel();
+        randomTiles.get(10).addZandTegel();
+        randomTiles.get(14).addZandTegel();
+        randomTiles.get(16).addZandTegel();
+        randomTiles.get(18).addZandTegel();
+        randomTiles.get(22).addZandTegel();
     }
 
 
@@ -154,12 +175,9 @@ public class TileController {
         return null;
     }
 
-    public void registerObserver(BordObserver bo, Tile tile) {
-        tile.register(bo);
-    }
-
-    public void notifyObservers(){
-        randomTiles.get(0).notifyAllObservers();
+    public void registerObserver(BordObserver bo, int counter){
+        randomTiles.get(counter).register(bo);
+        this.counter++;
     }
 
     public ArrayList<Tile> getTiles(){

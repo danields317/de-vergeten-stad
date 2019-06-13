@@ -23,15 +23,6 @@ import java.util.Map;
 
 public class WaterflesView implements WaterObserver {
 
-    static WaterflesView waterflesView;
-
-    public static WaterflesView getInstance(){
-        if (waterflesView == null){
-            waterflesView = new WaterflesView();
-        }
-        return waterflesView;
-    }
-
 
     String kaart = "Homescreenempty.png";
     //String file = "C:\\Users\\mjboere\\workspace\\Hello FX World\\src\\wereldkaart.jpg";

@@ -19,9 +19,7 @@ public class Player implements PlayerObservable {
 	private Equipment_Controller[] inventory;
 	private int water;
 	private int actiesOver;
-	private int x;
-	private int y;
-	private Tile tile;
+	private Tile tile; // De tile waar de speler op staat
 	
 	// Informatie over de speler klasse
 	private String className;
@@ -29,6 +27,8 @@ public class Player implements PlayerObservable {
 	private int maxWater;
 	private Color color;
 	private Image image;
+	private int x;
+	private int y;
 
 	public enum Richingen {NOORD, OOST, WEST, ZUID}
 
@@ -127,7 +127,7 @@ public class Player implements PlayerObservable {
 	public void subtractWater(int water ) {
 		
 		this.water = this.water - water;
-		System.out.println("Ikzit inde water");
+
 		if (this.water <= 0) {
 			this.water++;
 		}
@@ -188,11 +188,7 @@ public class Player implements PlayerObservable {
 	// Signal all observers that something has changed.
 	// Also send <<this>> object to the observers.
 	public void notifyAllObservers(){
-		System.out.println("Notify");
-
 		for (PlayerObserver s : observers) {
-			System.out.println(s + "Player Model");
-
 			s.update(this);
 		}
 	}

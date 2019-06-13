@@ -5,7 +5,6 @@ import javafx.scene.image.Image;
 import observers.BordObservable;
 import observers.BordObserver;
 
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 
 public class Tile implements BordObservable{
@@ -82,6 +81,7 @@ public class Tile implements BordObservable{
     public void setDiscoveredImage(String pad){
         this.discoveredImage = new Image(pad);
         setCurrentImage(discoveredImage);
+        notifyAllObservers();
     }
 
     public void setCurrentImage(Image image){
@@ -93,9 +93,6 @@ public class Tile implements BordObservable{
     }
 
     public int getZand() { return aantalZandTegels; }
-
-
-    public ArrayList getSpelers(){ return spelers;}
 
     public void setLocation(int x, int y){
         this.x = x;
@@ -109,5 +106,4 @@ public class Tile implements BordObservable{
     public int getY(){
         return y;
     }
-
 }

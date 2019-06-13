@@ -33,8 +33,9 @@ public class ViewManager extends Application{
     //StormView stormview = new StormView();              //maak storm en stormmeter
     UitrustingView uitrustingview = new UitrustingView();   //maak uitrusting plaatsen
     WaterflesView waterflesView;      //maak waterfles stand
-    SpeelbordView speelbordView = new SpeelbordView();
     StormMeterView stormMeterView = new StormMeterView(); //maak stormmetertekentje
+    SpeelbordView speelbordView = SpeelbordView.getInstance();
+
 
     private double windowWidth = 1600;
     private double windowHeight = 900;
@@ -104,7 +105,7 @@ public class ViewManager extends Application{
         GridPane graafknoppen = graafknoppenview.maakGraafKnoppen();
         Button eindigbeurtKnop = eindigBeurtView.maakEindigbeurtKnop();
         Button eindigBeurt = eindigBeurtKnop(eindigbeurtKnop);
-        GridPane spelbord = speelbordView.getSpelbord();
+        GridPane spelbord = speelbordView.loadSpelBord();
 
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.drawImage(backgroundImage, 0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
@@ -140,7 +141,6 @@ public class ViewManager extends Application{
     }
 
     private Group makeGroup(){
-
 
         Image backgroundImage = new Image("gamescreenempty.png");
         Canvas canvas = new Canvas(windowWidth, windowHeight);
