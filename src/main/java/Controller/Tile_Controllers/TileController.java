@@ -79,6 +79,7 @@ public class TileController {
         }
     }
 
+
     private void randomizeTiles(ArrayList<Tile> tiles){
 
         if (tiles.isEmpty()){
