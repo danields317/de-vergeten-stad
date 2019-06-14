@@ -1,15 +1,12 @@
 package View;
 
-import Controller.Player_Controllers.Player_Controller;
+import Controller.Player_Controllers.PlayerController;
 import Controller.Tile_Controllers.TileController;
 import Model.Tiles.Tile;
-import Model.player.Player;
-import View.bord_views.SpeelbordView;
 import javafx.scene.control.Label;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import observers.BordObservable;
@@ -18,7 +15,7 @@ import observers.BordObserver;
 public class TileView implements BordObserver{
 
     TileController tileController;
-    Player_Controller playerController = Player_Controller.getInstance();
+    PlayerController playerController = PlayerController.getInstance();
     public final int tileSize = 105;
 
     StackPane stackPane;
@@ -123,28 +120,29 @@ public class TileView implements BordObserver{
 
     }
 
-    public void checkSpelers(int x, int y){
-
+    private void clearSpelers(){
         archeoloogImageView.setOpacity(0);
         klimmerImageView.setOpacity(0);
         meteooroloogImageView.setOpacity(0);
         navigatorImageView.setOpacity(0);
         verkennerImageView.setOpacity(0);
         waterdragerImageView.setOpacity(0);
+    }
 
+    private void checkSpelers(int x, int y){
 
         int pX = playerController.getPlayer().getX();
         int pY = playerController.getPlayer().getY();
 
         if(pX == x && pY == y){
-            System.out.println("tileX:" + x + " tileY:" + y + "TileView");
-            System.out.println("spelerX:" + pX + " spelerY" + pY);
+//            System.out.println("tileX:" + x + " tileY:" + y + "TileView");
+//            System.out.println("spelerX:" + pX + " spelerY" + pY);
             archeoloogImageView.setOpacity(1);
             klimmerImageView.setOpacity(1);
         }
     }
 
-    public void checkZand(int zand){
+    private void checkZand(int zand){
         switch(zand){
             case 0:
                 // Geen zand
@@ -168,6 +166,7 @@ public class TileView implements BordObserver{
 
     public void update(BordObservable bo){
         Tile tile = (Tile) bo;
+        clearSpelers();
         tileImageView.setImage(tile.getImage());
         checkZand(tile.getZand());
         checkSpelers(tile.getX(), tile.getY());

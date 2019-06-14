@@ -1,20 +1,20 @@
 package Controller.Equipment_Controllers;
 
 import Model.equipment.Equipment;
+import Model.equipment.Zonneschild;
 import javafx.scene.image.Image;
 
-public class Equipment_Controller {
+public class EquipmentController {
 
     Equipment equipment;
 
-    public Equipment_Controller() {
-        equipment = new Equipment("Zonneschild", "DUMMY", "placeholder.png");
+    public EquipmentController() {
+        equipment = new Zonneschild();
     }
 
     public void gebruikEquipment() {
-        System.out.println("Gebruik equipment!");
-    }
 
+    }
 
     public Equipment getEquipment(){
         return equipment;

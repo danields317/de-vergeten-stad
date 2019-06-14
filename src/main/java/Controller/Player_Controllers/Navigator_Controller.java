@@ -3,7 +3,7 @@ package Controller.Player_Controllers;
 import Model.player.*;
 import javafx.scene.paint.Color;
 
-public class Navigator_Controller extends Player_Controller implements SpecialMove {
+public class Navigator_Controller extends PlayerController implements SpecialMove {
 
     /////////////////////////////////////// Constructor ///////////////////////////////////////
 

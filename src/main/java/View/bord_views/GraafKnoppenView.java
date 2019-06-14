@@ -1,6 +1,6 @@
 package View.bord_views;
 
-import Controller.Player_Controllers.Player_Controller;
+import Controller.Player_Controllers.PlayerController;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 
@@ -32,27 +32,27 @@ public class GraafKnoppenView {
         acties.setLayoutY(685);
 
         digUp.setOnMouseClicked(e -> {
-            Player_Controller playerController = Player_Controller.getInstance();
+            PlayerController playerController = PlayerController.getInstance();
             playerController.digNoord();
         });
 
         digDown.setOnMouseClicked(e -> {
-            Player_Controller playerController = Player_Controller.getInstance();
+            PlayerController playerController = PlayerController.getInstance();
             playerController.digZuid();
         });
 
         digRight.setOnMouseClicked(e -> {
-            Player_Controller playerController = Player_Controller.getInstance();
+            PlayerController playerController = PlayerController.getInstance();
             playerController.digOost();
         });
 
         digLeft.setOnMouseClicked(e -> {
-            Player_Controller playerController = Player_Controller.getInstance();
+            PlayerController playerController = PlayerController.getInstance();
             playerController.digWest();
         });
 
         dig.setOnMouseClicked(e -> {
-            Player_Controller playerController = Player_Controller.getInstance();
+            PlayerController playerController = PlayerController.getInstance();
             playerController.digHere();
         });
 
