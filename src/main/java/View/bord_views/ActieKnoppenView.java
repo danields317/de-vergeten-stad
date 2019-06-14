@@ -1,6 +1,6 @@
 package View.bord_views;
 
-import Controller.Player_Controllers.Player_Controller;
+import Controller.Player_Controllers.PlayerController;
 import Model.Tiles.Tile;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
@@ -36,27 +36,27 @@ public class ActieKnoppenView {
         acties.setLayoutY(685);
 
         up.setOnMouseClicked(e -> {
-            Player_Controller playerController = Player_Controller.getInstance();
+            PlayerController playerController = PlayerController.getInstance();
             playerController.moveNoord();
         });
 
         down.setOnMouseClicked(e -> {
-            Player_Controller playerController = Player_Controller.getInstance();
+            PlayerController playerController = PlayerController.getInstance();
             playerController.moveZuid();
         });
 
         right.setOnMouseClicked(e -> {
-            Player_Controller playerController = Player_Controller.getInstance();
+            PlayerController playerController = PlayerController.getInstance();
             playerController.moveOost();
         });
 
         left.setOnMouseClicked(e -> {
-            Player_Controller playerController = Player_Controller.getInstance();
+            PlayerController playerController = PlayerController.getInstance();
             playerController.moveWest();
         });
 
         TileActions.setOnMouseClicked(e -> {
-            Player_Controller playerController = Player_Controller.getInstance();
+            PlayerController playerController = PlayerController.getInstance();
             playerController.tileActies();
         });
 

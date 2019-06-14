@@ -126,22 +126,18 @@ public class StormController {
         switch (richting){
             case NOORD:
                 tileController.moveTiles(richting, stappen, storm.getX(), storm.getY());
-                playerController.moveSpeler(richting, stappen, storm.getX(), storm.getY());
                 storm.beweegNoord(stappen);
                 break;
             case OOST:
                 tileController.moveTiles(richting, stappen, storm.getX(), storm.getY());
-                playerController.moveSpeler(richting, stappen, storm.getX(), storm.getY());
                 storm.beweegOost(stappen);
                 break;
             case ZUID:
                 tileController.moveTiles(richting, stappen, storm.getX(), storm.getY());
-                playerController.moveSpeler(richting, stappen, storm.getX(), storm.getY());
                 storm.beweegZuid(stappen);
                 break;
             case WEST:
                 tileController.moveTiles(richting, stappen, storm.getX(), storm.getY());
-                playerController.moveSpeler(richting, stappen, storm.getX(), storm.getY());
                 storm.beweegWest(stappen);
                 break;
             default:

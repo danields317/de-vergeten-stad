@@ -6,10 +6,7 @@ import Model.Tiles.Storm;
 import Model.Tiles.Tile;
 import Model.data.StaticData;
 import Model.player.Player;
-import Model.storm.StormEventBeweging;
 import javafx.scene.paint.Color;
-import observers.BordObserver;
-import observers.LoadBordObserver;
 import observers.PlayerObserver;
 
 import java.util.ArrayList;
