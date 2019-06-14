@@ -1,14 +1,12 @@
 package View;
 
-import Controller.Player_Controllers.Player_Controller;
+import Controller.Player_Controllers.PlayerController;
 import Controller.Tile_Controllers.TileController;
 import Model.Tiles.Tile;
-import Model.player.Player;
-import View.bord_views.SpeelbordView;
 import javafx.scene.control.Label;
+import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import observers.BordObservable;
@@ -17,7 +15,7 @@ import observers.BordObserver;
 public class TileView implements BordObserver{
 
     TileController tileController;
-    Player_Controller playerController = Player_Controller.getInstance();
+    PlayerController playerController = PlayerController.getInstance();
     public final int tileSize = 105;
 
     StackPane stackPane;
@@ -39,12 +37,12 @@ public class TileView implements BordObserver{
     Image zandImageGeblokkeerd = new Image("/Tiles/High_Sand.png");
     Image zonneschildImage = new Image("/placeholder.png");
 
-    Image archeoloogImage = new Image("/placeholder.png");
-    Image klimmerImage = new Image("/placeholder.png");
-    Image meteooroloogImage = new Image("/placeholder.png");
-    Image navigatorImage = new Image("/placeholder.png");
-    Image verkennerImage = new Image("/placeholder.png");
-    Image waterdragerImage = new Image("/placeholder.png");
+    Image archeoloogImage = new Image("/Players/Archeoloog.png");
+    Image klimmerImage = new Image("/Players/Klimmer.png");
+    Image meteooroloogImage = new Image("/Players/Meteoroloog.png");
+    Image navigatorImage = new Image("/Players/Navigator.png");
+    Image verkennerImage = new Image("/Players/Verkenner.png");
+    Image waterdragerImage = new Image("/Players/Waterdrager.png");
 
     public TileView(Image image){
         tileController = TileController.getInstance();
@@ -65,26 +63,32 @@ public class TileView implements BordObserver{
         archeoloogImageView.setFitWidth(tileSize/3);
         archeoloogImageView.setFitHeight(tileSize/3);
         archeoloogImageView.setOpacity(0);
+        archeoloogImageView.getStyleClass().add("speler");
         klimmerImageView = new ImageView(klimmerImage);
         klimmerImageView.setFitWidth(tileSize/3);
         klimmerImageView.setFitHeight(tileSize/3);
         klimmerImageView.setOpacity(0);
+        klimmerImageView.getStyleClass().add("speler");
         meteooroloogImageView = new ImageView(meteooroloogImage);
         meteooroloogImageView.setFitWidth(tileSize/3);
         meteooroloogImageView.setFitHeight(tileSize/3);
         meteooroloogImageView.setOpacity(0);
+        meteooroloogImageView.getStyleClass().add("speler");
         navigatorImageView = new ImageView(navigatorImage);
         navigatorImageView.setFitWidth(tileSize/3);
         navigatorImageView.setFitHeight(tileSize/3);
         navigatorImageView.setOpacity(0);
+        navigatorImageView.getStyleClass().add("speler");
         verkennerImageView = new ImageView(verkennerImage);
         verkennerImageView.setFitWidth(tileSize/3);
         verkennerImageView.setFitHeight(tileSize/3);
         verkennerImageView.setOpacity(0);
+        verkennerImageView.getStyleClass().add("speler");
         waterdragerImageView = new ImageView(waterdragerImage);
         waterdragerImageView.setFitWidth(tileSize/3);
         waterdragerImageView.setFitHeight(tileSize/3);
         waterdragerImageView.setOpacity(0);
+        waterdragerImageView.getStyleClass().add("speler");
 
         onderdeelStackPane = new StackPane();
         zandLabel = new Label(" ");
@@ -116,28 +120,29 @@ public class TileView implements BordObserver{
 
     }
 
-    public void checkSpelers(int x, int y){
-
+    private void clearSpelers(){
         archeoloogImageView.setOpacity(0);
         klimmerImageView.setOpacity(0);
         meteooroloogImageView.setOpacity(0);
         navigatorImageView.setOpacity(0);
         verkennerImageView.setOpacity(0);
         waterdragerImageView.setOpacity(0);
+    }
 
+    private void checkSpelers(int x, int y){
 
         int pX = playerController.getPlayer().getX();
         int pY = playerController.getPlayer().getY();
 
         if(pX == x && pY == y){
-            System.out.println("tileX:" + x + " tileY:" + y + "TileView");
-            System.out.println("spelerX:" + pX + " spelerY" + pY);
+//            System.out.println("tileX:" + x + " tileY:" + y + "TileView");
+//            System.out.println("spelerX:" + pX + " spelerY" + pY);
             archeoloogImageView.setOpacity(1);
             klimmerImageView.setOpacity(1);
         }
     }
 
-    public void checkZand(int zand){
+    private void checkZand(int zand){
         switch(zand){
             case 0:
                 // Geen zand
@@ -161,6 +166,7 @@ public class TileView implements BordObserver{
 
     public void update(BordObservable bo){
         Tile tile = (Tile) bo;
+        clearSpelers();
         tileImageView.setImage(tile.getImage());
         checkZand(tile.getZand());
         checkSpelers(tile.getX(), tile.getY());

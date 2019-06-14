@@ -1,6 +1,8 @@
 package Controller.Tile_Controllers;
 
+import Controller.Player_Controllers.PlayerController;
 import Model.Tiles.*;
+import Model.player.Player;
 import Model.storm.StormEventBeweging;
 import View.bord_views.SpeelbordView;
 import observers.BordObserver;
@@ -18,6 +20,8 @@ public class TileController {
 
     ArrayList<Tile> tiles = new ArrayList<>();
     ArrayList<Tile> randomTiles = new ArrayList<>();
+
+    PlayerController playerController;
 
     public int counter = 0;
 
@@ -103,40 +107,21 @@ public class TileController {
         }
     }
 
-    public void moveTiles(StormEventBeweging.Richtingen stormRichting, StormEventBeweging.Stappen stappen, int stormX, int stormY){
-        switch (stormRichting){
-            case NOORD:
-                moveTileZuid(stappen, stormX, stormY);
-                break;
-            case OOST:
-                moveTileWest(stappen, stormX, stormY);
-                break;
-            case ZUID:
-                moveTileNoord(stappen, stormX, stormY);;
-                break;
-            case WEST:
-                moveTileOost(stappen, stormX, stormY);
-                break;
-            default:
-                System.out.println("Dit hoort niet");
-        }
-    }
-
-    private void moveTileNoord(StormEventBeweging.Stappen stappen, int stormX, int stormY){
+    public void moveTileNoord(StormEventBeweging.Stappen stappen, int stormX, int stormY){
         moveTile(stappen, stormX, stormY,0,1);
     }
-    private void moveTileOost(StormEventBeweging.Stappen stappen, int stormX, int stormY){
+    public void moveTileOost(StormEventBeweging.Stappen stappen, int stormX, int stormY){
         moveTile(stappen, stormX, stormY, -1, 0);
     }
-    private void moveTileZuid(StormEventBeweging.Stappen stappen, int stormX, int stormY){
+    public void moveTileZuid(StormEventBeweging.Stappen stappen, int stormX, int stormY){
         moveTile(stappen, stormX, stormY, 0, -1);
     }
-    private void moveTileWest(StormEventBeweging.Stappen stappen, int stormX, int stormY){
+    public void moveTileWest(StormEventBeweging.Stappen stappen, int stormX, int stormY){
         moveTile(stappen, stormX, stormY, 1, 0);
     }
 
     private void moveTile(StormEventBeweging.Stappen stappen, int stormX, int stormY, int moveStormX, int moveStormY){
-
+        playerController = PlayerController.getInstance();
         for (int i = 0; i < stappen.getNumber(); i++){
             if (stormY+moveStormY <= 4 && stormX+moveStormX >= 0 && stormY+moveStormY >= 0 && stormX+moveStormX <= 4){
 
@@ -155,11 +140,30 @@ public class TileController {
 
                 stormY = stormY + moveStormY;
                 stormX = stormX + moveStormX;
+
+                moveSpeler(stormX, stormY, moveStormX, moveStormY);
             }
         }
     }
 
-    public void beginZand(){
+    private void moveSpeler(int tileX, int tileY,int moveStormX, int moveStormY){
+        Player player = playerController.getPlayer();
+        int playerX = player.getX();
+        int playerY = player.getY();
+        if (playerX == tileX && playerY == tileY){
+            if (moveStormX == -1){
+                playerController.moveOost(false);
+            } else if (moveStormX == 1){
+                playerController.moveWest(false);
+            } else if (moveStormY == -1){
+                playerController.moveZuid(false);
+            } else if (moveStormY == 1){
+                playerController.moveNoord(false);
+            }
+        }
+    }
+
+    private void beginZand(){
         randomTiles.get(2).addZandTegel();
         randomTiles.get(6).addZandTegel();
         randomTiles.get(8).addZandTegel();
