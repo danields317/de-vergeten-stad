@@ -1,5 +1,6 @@
 package View;
 
+import Controller.Player_Controllers.PlayerController;
 import Controller.Tile_Controllers.StormController;
 import View.bord_views.*;
 import javafx.application.Application;
@@ -115,6 +116,8 @@ public class ViewManager extends Application{
         eindigBeurt.setOnMouseClicked(e -> {
             StormController stormController = StormController.getInstance();
             stormController.voerStormEventsUit();
+            PlayerController playerController = PlayerController.getInstance();
+            playerController.getPlayer().refillActions();
             update();
         });
         return eindigBeurt;

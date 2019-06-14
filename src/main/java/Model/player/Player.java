@@ -48,6 +48,8 @@ public class Player implements PlayerObservable{
 		this.maxWater = maxWater;
 		water = maxWater;
 
+        actiesOver = 4;
+
 	}
 	public Player( String nickname, String className, String description, int maxWater, int water, Color color, String imagePath ) {
 
@@ -59,6 +61,8 @@ public class Player implements PlayerObservable{
 
 		this.maxWater = maxWater;
 		this.water = water;
+
+        actiesOver = 4;
 
 	}
 	
@@ -137,6 +141,13 @@ public class Player implements PlayerObservable{
         }
     }
 
+    public boolean actiesOver(){
+        return actiesOver > 0;
+    }
+
+    public void refillActions(){
+        actiesOver = 4;
+    }
 
 	public int getMaxWater() {
 		return maxWater;
@@ -150,7 +161,7 @@ public class Player implements PlayerObservable{
 		return inventory;
 	}
 
-	public int getActiesOver() {
+	public int getActies() {
 		return actiesOver;
 	}
 

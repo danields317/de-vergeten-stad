@@ -70,61 +70,66 @@ public class PlayerController {
 
 
     public void moveNoord(boolean check){
-        if(player.getY() > 0){
+        if(player.getY() > 0 && player.actiesOver()){
             Tile tileAbove = tileController.getTileByLocation((player.getY() - 1), player.getX());
             if(tileAbove.getZand() < 2 && !tileAbove.getClass().equals(Storm.class) && check) {
                 player.movePlayer(Player.Richingen.NOORD);
             } else if (!check && !tileAbove.getClass().equals(Storm.class)){
                 player.movePlayer(Player.Richingen.NOORD);
             }
+            player.useAction();
+            tileController.getTileByLocation((player.getY() + 1), player.getX()).notifyAllObservers();
+            tileController.getTileByLocation(player.getY(), player.getX()).notifyAllObservers();
         }
-        tileController.getTileByLocation((player.getY() + 1), player.getX()).notifyAllObservers();
-        tileController.getTileByLocation(player.getY(), player.getX()).notifyAllObservers();
     }
 
     public void moveZuid(boolean check){
-        if(player.getY() < 4){
+        if(player.getY() < 4 && player.actiesOver()){
             Tile tileBeneath = tileController.getTileByLocation((player.getY() + 1), player.getX());
             if(tileBeneath.getZand() < 2 && !tileBeneath.getClass().equals(Storm.class) && check){
                 player.movePlayer(Player.Richingen.ZUID);
             } else if (!check && !tileBeneath.getClass().equals(Storm.class)){
                 player.movePlayer(Player.Richingen.ZUID);
             }
+            player.useAction();
+            tileController.getTileByLocation((player.getY() - 1), player.getX()).notifyAllObservers();
+            tileController.getTileByLocation(player.getY(), player.getX()).notifyAllObservers();
         }
-        tileController.getTileByLocation((player.getY() - 1), player.getX()).notifyAllObservers();
-        tileController.getTileByLocation(player.getY(), player.getX()).notifyAllObservers();
     }
 
     public void moveOost(boolean check){
-        if(player.getX() < 4){
+        if(player.getX() < 4 && player.actiesOver()){
             Tile tileRight = tileController.getTileByLocation(player.getY(), (player.getX() + 1));
             if(tileRight.getZand() < 2 && !tileRight.getClass().equals(Storm.class) && check){
                 player.movePlayer(Player.Richingen.OOST);
             } else if (!check && !tileRight.getClass().equals(Storm.class)){
                 player.movePlayer(Player.Richingen.OOST);
             }
+            player.useAction();
+            tileController.getTileByLocation(player.getY(), (player.getX() - 1)).notifyAllObservers();
+            tileController.getTileByLocation(player.getY(), player.getX()).notifyAllObservers();
         }
-        tileController.getTileByLocation(player.getY(), (player.getX() - 1)).notifyAllObservers();
-        tileController.getTileByLocation(player.getY(), player.getX()).notifyAllObservers();
     }
 
     public void moveWest(boolean check){
-        if(player.getX() > 0){
+        if(player.getX() > 0 && player.actiesOver()){
             Tile tileLeft = tileController.getTileByLocation(player.getY(), (player.getX() -  1));
             if(tileLeft.getZand()  < 2 && !tileLeft.getClass().equals(Storm.class) && check){
                 player.movePlayer(Player.Richingen.WEST);
             } else if (!check && !tileLeft.getClass().equals(Storm.class)){
                 player.movePlayer(Player.Richingen.WEST);
             }
+            player.useAction();
+            tileController.getTileByLocation(player.getY(), (player.getX() + 1)).notifyAllObservers();
+            tileController.getTileByLocation(player.getY(), player.getX()).notifyAllObservers();
         }
-        tileController.getTileByLocation(player.getY(), (player.getX() + 1)).notifyAllObservers();
-        tileController.getTileByLocation(player.getY(), player.getX()).notifyAllObservers();
     }
 
     public void tileActies(){
         Tile locatie = tileController.getTileByLocation(player.getY(), player.getX());
-        if (!locatie.isDiscovered()){
+        if (!locatie.isDiscovered() && player.actiesOver()){
             locatie.discoverTile();
+            player.useAction();
         }
         else {
             //oppakken onderdeel
@@ -132,35 +137,42 @@ public class PlayerController {
     }
 
     public void digHere(){
-        Tile locatie = tileController.getTileByLocation(player.getY(), player.getX());
-        locatie.removeZandTegel();
+        if (player.actiesOver()){
+            Tile locatie = tileController.getTileByLocation(player.getY(), player.getX());
+            locatie.removeZandTegel();
+            player.useAction();
+        }
     }
 
     public void digNoord(){
-        if(player.getY() > 0) {
+        if(player.getY() > 0 && player.actiesOver()) {
             Tile locatie = tileController.getTileByLocation((player.getY() - 1), player.getX());
             locatie.removeZandTegel();
+            player.useAction();
         }
     }
 
     public void digZuid(){
-        if(player.getY() < 4) {
+        if(player.getY() < 4 && player.actiesOver()) {
             Tile locatie = tileController.getTileByLocation((player.getY() + 1), player.getX());
             locatie.removeZandTegel();
+            player.useAction();
         }
     }
 
     public void digOost(){
-        if(player.getX() < 4) {
+        if(player.getX() < 4 && player.actiesOver()) {
             Tile locatie = tileController.getTileByLocation(player.getY(), (player.getX() + 1));
             locatie.removeZandTegel();
+            player.useAction();
         }
     }
 
     public void digWest(){
-        if(player.getX() > 0) {
+        if(player.getX() > 0 && player.actiesOver()) {
             Tile locatie = tileController.getTileByLocation(player.getY(), (player.getX() - 1));
             locatie.removeZandTegel();
+            player.useAction();
         }
     }
 
