@@ -37,22 +37,22 @@ public class ActieKnoppenView {
 
         up.setOnMouseClicked(e -> {
             PlayerController playerController = PlayerController.getInstance();
-            playerController.moveNoord();
+            playerController.moveNoord(true);
         });
 
         down.setOnMouseClicked(e -> {
             PlayerController playerController = PlayerController.getInstance();
-            playerController.moveZuid();
+            playerController.moveZuid(true);
         });
 
         right.setOnMouseClicked(e -> {
             PlayerController playerController = PlayerController.getInstance();
-            playerController.moveOost();
+            playerController.moveOost(true);
         });
 
         left.setOnMouseClicked(e -> {
             PlayerController playerController = PlayerController.getInstance();
-            playerController.moveWest();
+            playerController.moveWest(true);
         });
 
         TileActions.setOnMouseClicked(e -> {

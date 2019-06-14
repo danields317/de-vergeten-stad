@@ -128,8 +128,8 @@ public class TileView implements BordObserver{
         int pY = playerController.getPlayer().getY();
 
         if(pX == x && pY == y){
-            System.out.println("tileX:" + x + " tileY:" + y + "TileView");
-            System.out.println("spelerX:" + pX + " spelerY" + pY);
+//            System.out.println("tileX:" + x + " tileY:" + y + "TileView");
+//            System.out.println("spelerX:" + pX + " spelerY" + pY);
             archeoloogImageView.setOpacity(1);
             klimmerImageView.setOpacity(1);
         }

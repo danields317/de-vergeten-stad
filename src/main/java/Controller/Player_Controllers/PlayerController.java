@@ -35,9 +35,7 @@ public class PlayerController {
     // AND it guarantees there is only 1 instance.
     public static PlayerController getInstance(boolean loadGame, Object classInfo) {
         if (playercont == null) {
-            if( loadGame){
-
-
+            if(loadGame){
 //                System.out.println(((Map)(StaticData.getInstance()).getRoomInfo()).get("Selectable_classes"));
 //                System.out.println(classInfo);
                 Map classIn =((Map)(classInfo));
@@ -47,9 +45,7 @@ public class PlayerController {
                         ((Long)(classIn.get("maxWater"))).intValue(),
                         ((Long)(classIn.get("water"))).intValue(),
                         ((String)(classIn.get("name"))) +".png");
-
-
-            }else{}
+            }
         }
         return playercont;
     }
@@ -73,10 +69,12 @@ public class PlayerController {
     }
 
 
-    public void moveNoord(){
+    public void moveNoord(boolean check){
         if(player.getY() > 0){
             Tile tileAbove = tileController.getTileByLocation((player.getY() - 1), player.getX());
-            if(tileAbove.getZand() < 2 && !tileAbove.getClass().equals(Storm.class)) {
+            if(tileAbove.getZand() < 2 && !tileAbove.getClass().equals(Storm.class) && check) {
+                player.movePlayer(Player.Richingen.NOORD);
+            } else if (!check && !tileAbove.getClass().equals(Storm.class)){
                 player.movePlayer(Player.Richingen.NOORD);
             }
         }
@@ -84,10 +82,12 @@ public class PlayerController {
         tileController.getTileByLocation(player.getY(), player.getX()).notifyAllObservers();
     }
 
-    public void moveZuid(){
+    public void moveZuid(boolean check){
         if(player.getY() < 4){
             Tile tileBeneath = tileController.getTileByLocation((player.getY() + 1), player.getX());
-            if(tileBeneath.getZand() < 2 && !tileBeneath.getClass().equals(Storm.class)){
+            if(tileBeneath.getZand() < 2 && !tileBeneath.getClass().equals(Storm.class) && check){
+                player.movePlayer(Player.Richingen.ZUID);
+            } else if (!check && !tileBeneath.getClass().equals(Storm.class)){
                 player.movePlayer(Player.Richingen.ZUID);
             }
         }
@@ -95,10 +95,12 @@ public class PlayerController {
         tileController.getTileByLocation(player.getY(), player.getX()).notifyAllObservers();
     }
 
-    public void moveOost(){
+    public void moveOost(boolean check){
         if(player.getX() < 4){
             Tile tileRight = tileController.getTileByLocation(player.getY(), (player.getX() + 1));
-            if(tileRight.getZand() < 2 && !tileRight.getClass().equals(Storm.class)){
+            if(tileRight.getZand() < 2 && !tileRight.getClass().equals(Storm.class) && check){
+                player.movePlayer(Player.Richingen.OOST);
+            } else if (!check && !tileRight.getClass().equals(Storm.class)){
                 player.movePlayer(Player.Richingen.OOST);
             }
         }
@@ -106,10 +108,12 @@ public class PlayerController {
         tileController.getTileByLocation(player.getY(), player.getX()).notifyAllObservers();
     }
 
-    public void moveWest(){
+    public void moveWest(boolean check){
         if(player.getX() > 0){
             Tile tileLeft = tileController.getTileByLocation(player.getY(), (player.getX() -  1));
-            if(tileLeft.getZand()  < 2 && !tileLeft.getClass().equals(Storm.class)){
+            if(tileLeft.getZand()  < 2 && !tileLeft.getClass().equals(Storm.class) && check){
+                player.movePlayer(Player.Richingen.WEST);
+            } else if (!check && !tileLeft.getClass().equals(Storm.class)){
                 player.movePlayer(Player.Richingen.WEST);
             }
         }
