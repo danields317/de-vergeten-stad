@@ -129,6 +129,7 @@ public class PlayerController {
         Tile locatie = tileController.getTileByLocation(player.getY(), player.getX());
         if (!locatie.isDiscovered() && player.actiesOver()){
             locatie.discoverTile();
+            tileController.useTileDiscoveredAction(player.getX(), player.getY());
             player.useAction();
         }
         else {

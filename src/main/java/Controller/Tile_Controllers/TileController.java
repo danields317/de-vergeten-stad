@@ -189,6 +189,39 @@ public class TileController {
         this.counter++;
     }
 
+    public void useTileDiscoveredAction(int x, int y){
+        System.out.println(getTileByLocation(y, x).getClass());
+        Tile tile = (getTileByLocation(y, x));
+        if(tile.getClass().equals(EquipmentTile.class) || tile.getClass().equals(StartTile.class)){
+            EquipmentTile Etile = (EquipmentTile) tile;
+            Etile.geefEquipment();
+            //geef equipment
+        }
+        else if (tile.getClass().equals(Waterput.class)){
+            Waterput Wtile = (Waterput) tile;
+            Wtile.geefWater();
+            //geef water
+        }
+        else if (tile.getClass().equals(Tunnel.class)){
+            Tunnel Ttile = (Tunnel) tile;
+            Ttile.geefSchaduw();
+            //geen zon brand
+        }
+        else if (tile.getClass().equals(PartTile.class)){
+            PartTile Ptile = (PartTile) tile;
+            Ptile.geefHint();
+            //ontdek hint
+        }
+        else if (tile.getClass().equals(Finish.class)){
+            Finish Ftile = (Finish) tile;
+            Ftile.isSpelKlaar();
+            //ga ff checken of je hebt gewonnen
+        }
+        else{
+            System.out.println("zon kanker tile die geen kanker doet (Tilecontroller)");
+        }
+    }
+
     public void notifyView(){
         randomTiles.get(0).notifyAllObservers();
     }
