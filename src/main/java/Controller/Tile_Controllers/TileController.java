@@ -185,6 +185,10 @@ public class TileController {
         this.counter++;
     }
 
+    public void notifyView(){
+        randomTiles.get(0).notifyAllObservers();
+    }
+
     public ArrayList<Tile> getTiles(){
         return this.randomTiles;
     }
