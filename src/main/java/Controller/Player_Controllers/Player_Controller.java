@@ -125,7 +125,7 @@ public class Player_Controller {
             locatie.discoverTile();
         }
         else {
-            //oppakken onderdeel
+            //pak een onderdeel op.
         }
     }
 
