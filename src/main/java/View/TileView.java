@@ -40,6 +40,11 @@ public class TileView implements BordObserver {
     ImageView verkennerImageView;
     ImageView waterdragerImageView;
 
+    ImageView beaconImageView;
+    ImageView motorImageView;
+    ImageView propellerImageView;
+    ImageView wijzerImageView;
+
     Image zandImage = new Image("/Tiles/Low_Sand.png");
     Image zandImageGeblokkeerd = new Image("/Tiles/High_Sand.png");
     Image zonneschildImage = new Image("/placeholder.png");
@@ -50,6 +55,12 @@ public class TileView implements BordObserver {
     Image navigatorImage = new Image("/Players/Navigator.png");
     Image verkennerImage = new Image("/Players/Verkenner.png");
     Image waterdragerImage = new Image("/Players/Waterdrager.png");
+
+    Image beacon = new Image("/Onderdelen/Beacon boven.png");
+    Image motor = new Image("/Onderdelen/Engine boven.png");
+    Image propeller = new Image("/Onderdelen/PropBoven.png");
+    Image wijzer = new Image("/Onderdelen/ZonnewijzerBoven.png");
+
 
     public TileView(Image image){
         tileController = TileController.getInstance();
@@ -97,7 +108,26 @@ public class TileView implements BordObserver {
         waterdragerImageView.setOpacity(0);
         waterdragerImageView.getStyleClass().add("speler");
 
+        beaconImageView = new ImageView(beacon);
+        beaconImageView.setFitWidth(tileSize/3);
+        beaconImageView.setFitHeight(tileSize/3);
+        beaconImageView.setOpacity(0);
+        motorImageView = new ImageView(motor);
+        motorImageView.setFitWidth(tileSize/3);
+        motorImageView.setFitHeight(tileSize/3);
+        motorImageView.setOpacity(0);
+        propellerImageView = new ImageView(propeller);
+        propellerImageView.setFitWidth(tileSize/3);
+        propellerImageView.setFitHeight(tileSize/3);
+        propellerImageView.setOpacity(0);
+        wijzerImageView = new ImageView(wijzer);
+        wijzerImageView.setFitWidth(tileSize/3);
+        wijzerImageView.setFitHeight(tileSize/3);
+        wijzerImageView.setOpacity(0);
+
         onderdeelStackPane = new StackPane();
+        onderdeelStackPane.getChildren().addAll(wijzerImageView, propellerImageView, motorImageView , beaconImageView);
+
         zandLabel = new Label(" ");
         zandLabel.setMinWidth(tileSize/3);
         zandLabel.setMinHeight(tileSize/3);
@@ -173,7 +203,22 @@ public class TileView implements BordObserver {
 
     public void checkOnderdelen(ArrayList<PartTile.Soorten> onderdelen){
         for(PartTile.Soorten soort: onderdelen){
-
+            if (soort.equals(PartTile.Soorten.OBELISK)){
+                beaconImageView.setOpacity(1);
+                System.out.println("het lukt");
+            }
+            else if (soort.equals(PartTile.Soorten.MOTOR)){
+                motorImageView.setOpacity(1);
+                System.out.println("het lukt");
+            }
+            else if(soort.equals(PartTile.Soorten.PROPELOR)){
+                propellerImageView.setOpacity(1);
+                System.out.println("het lukt");
+            }
+            else if(soort.equals(PartTile.Soorten.KOMPAS)){
+                wijzerImageView.setOpacity(1);
+                System.out.println("het lukt");
+            }
         }
     }
 
