@@ -42,11 +42,6 @@ public class PartTile extends Tile {
 		return pad;
 	}
 
-	public void geefHint(){
-		System.out.println("Hoi ik ben een onderdeelTile");
-	}
-
-
     public Richtingen getRichting() {
         return richting;
     }

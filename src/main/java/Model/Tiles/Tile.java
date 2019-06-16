@@ -20,7 +20,7 @@ public class Tile implements BordObservable{
 
     private int aantalZandTegels;
 
-    private ArrayList<PartTile> onderdelen;
+    private ArrayList<PartTile.Soorten> onderdelen;
     private ArrayList<Player> spelers;
 
     private int x;
@@ -92,12 +92,22 @@ public class Tile implements BordObservable{
         }
     }
 
+    public void setOnderdeel(PartTile.Soorten onderdeel){
+        onderdelen.add(onderdeel);
+        notifyAllObservers();
+    }
+
     public int getZand() { return aantalZandTegels; }
 
     public void setLocation(int x, int y){
         this.x = x;
         this.y = y;
     }
+
+    public ArrayList <PartTile.Soorten> getOnderdelen(){
+        return onderdelen;
+    }
+
 
     public boolean isDiscovered() { return discovered; }
 

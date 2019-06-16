@@ -2,7 +2,10 @@ package View;
 
 import Controller.Player_Controllers.PlayerController;
 import Controller.Tile_Controllers.TileController;
+import Model.Bord.Onderdeel;
+import Model.Tiles.PartTile;
 import Model.Tiles.Tile;
+import com.google.api.client.http.MultipartContent;
 import javafx.scene.control.Label;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
@@ -11,8 +14,12 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import observers.BordObservable;
 import observers.BordObserver;
+import observers.OnderdeelObservable;
+import observers.OnderdeelObserver;
 
-public class TileView implements BordObserver{
+import java.util.ArrayList;
+
+public class TileView implements BordObserver {
 
     TileController tileController;
     PlayerController playerController = PlayerController.getInstance();
@@ -164,11 +171,19 @@ public class TileView implements BordObserver{
 
     }
 
+    public void checkOnderdelen(ArrayList<PartTile.Soorten> onderdelen){
+        for(PartTile.Soorten soort: onderdelen){
+
+        }
+    }
+
     public void update(BordObservable bo){
         Tile tile = (Tile) bo;
         clearSpelers();
         tileImageView.setImage(tile.getImage());
         checkZand(tile.getZand());
         checkSpelers(tile.getX(), tile.getY());
+        checkOnderdelen(tile.getOnderdelen());
     }
+
 }
