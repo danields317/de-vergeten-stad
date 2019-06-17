@@ -1,6 +1,8 @@
 package Controller.Player_Controllers;
 
 import Controller.Tile_Controllers.TileController;
+import Model.Bord.Onderdeel;
+import Model.Tiles.PartTile;
 import Model.Tiles.StartTile;
 import Model.Tiles.Storm;
 import Model.Tiles.Tile;
@@ -136,43 +138,44 @@ public class PlayerController {
     public void digHere(){
         if (player.actiesOver()){
             Tile locatie = tileController.getTileByLocation(player.getY(), player.getX());
-            locatie.removeZandTegel();
-            player.useAction();
+            digLogica(locatie);
         }
     }
 
     public void digNoord(){
         if(player.getY() > 0 && player.actiesOver()) {
             Tile locatie = tileController.getTileByLocation((player.getY() - 1), player.getX());
-            locatie.removeZandTegel();
-            player.useAction();
+            digLogica(locatie);
         }
     }
 
     public void digZuid(){
         if(player.getY() < 4 && player.actiesOver()) {
             Tile locatie = tileController.getTileByLocation((player.getY() + 1), player.getX());
-            locatie.removeZandTegel();
-            player.useAction();
+            digLogica(locatie);
         }
     }
 
     public void digOost(){
         if(player.getX() < 4 && player.actiesOver()) {
             Tile locatie = tileController.getTileByLocation(player.getY(), (player.getX() + 1));
-            locatie.removeZandTegel();
-            player.useAction();
+            digLogica(locatie);
         }
     }
 
     public void digWest(){
         if(player.getX() > 0 && player.actiesOver()) {
             Tile locatie = tileController.getTileByLocation(player.getY(), (player.getX() - 1));
+            digLogica(locatie);
+        }
+    }
+
+    private void digLogica(Tile locatie){
+        if (locatie.hasZand()){
             locatie.removeZandTegel();
             player.useAction();
         }
     }
-
 
 
     public void Uitgraven(){

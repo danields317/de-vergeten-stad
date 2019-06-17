@@ -99,6 +99,10 @@ public class Tile implements BordObservable{
 
     public int getZand() { return aantalZandTegels; }
 
+    public boolean hasZand(){
+        return aantalZandTegels > 0;
+    }
+
     public void setLocation(int x, int y){
         this.x = x;
         this.y = y;
