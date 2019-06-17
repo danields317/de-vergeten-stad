@@ -3,8 +3,8 @@ package Model.player;
 import Controller.Player_Controllers.*;
 
 public class Users {
-    public static Archeoloog_Controller archeoloogController = new Archeoloog_Controller("test");
-    public static Klimmer_Controller klimmerController;
+    public static Archeoloog_Controller archeoloogController = new Archeoloog_Controller("Archeoloog");
+    public static Klimmer_Controller klimmerController = new Klimmer_Controller("Klimmer");
     public static Meteooroloog_Controller meteooroloogController;
     public static Navigator_Controller navigatorController;
     public static Verkenner_Controller verkennerController;

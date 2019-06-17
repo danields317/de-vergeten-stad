@@ -98,6 +98,7 @@ public class StormController {
                 StormEvent stormEvent = randomStormEvents.get(stapelCounter);
                 switch (stormEvent.naam){
                     case BEWEGING:
+                        System.out.println(((StormEventBeweging) stormEvent).richting + " " + ((StormEventBeweging) stormEvent).stappen);
                         beweegStorm(((StormEventBeweging) stormEvent).richting, ((StormEventBeweging) stormEvent).stappen);
                         break;
                     case BRANDT:
@@ -145,6 +146,8 @@ public class StormController {
     }
 
     public void registerObserver(StormObserver bo){ storm.register(bo); }
+
+    public void update(){storm.notifyAllObservers();};
 
 
 }

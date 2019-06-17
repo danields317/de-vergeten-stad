@@ -47,6 +47,7 @@ public class Player implements PlayerObservable{
 
 		this.maxWater = maxWater;
 		water = maxWater;
+		actiesOver = 4;
 
         actiesOver = 4;
 
@@ -60,6 +61,7 @@ public class Player implements PlayerObservable{
 		this.image = new Image( imagePath );
 
 		this.maxWater = maxWater;
+		actiesOver = 4;
 		this.water = water;
 
         actiesOver = 4;
@@ -96,15 +98,19 @@ public class Player implements PlayerObservable{
 	    switch (riching){
             case NOORD:
                 move(0, -1);
+                useAction();
                 break;
             case OOST:
                 move(1, 0);
+                useAction();
                 break;
             case ZUID:
                 move(0, 1);
+                useAction();
                 break;
             case WEST:
                 move(-1, 0);
+                useAction();
                 break;
         }
     }
@@ -136,9 +142,11 @@ public class Player implements PlayerObservable{
 	}
 
 	public void useAction(){
+		System.out.println(actiesOver);
         if (actiesOver > 0){
-            actiesOver -= 1;
+            actiesOver--;
         }
+        notifyAllObservers();
     }
 
     public boolean actiesOver(){

@@ -5,4 +5,5 @@ public interface PlayerObservable {
     public void notifyAllObservers();
     public int getMaxWater();
     public int getWater();
+    public int getActiesOver();
 }

@@ -14,8 +14,6 @@ public class Storm_Meter_Controller implements StormObserver {
 
     public Storm_Meter_Controller() {
         this.stormMeter = new StormMeter();
-
-
     }
 
     public static Storm_Meter_Controller getInstance(){
