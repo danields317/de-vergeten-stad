@@ -37,20 +37,20 @@ public class UpdateFirebaseController {
         for(int i = 0; i < ((Map) classes).size(); i++) {
             Object singeClass = ((Map) classes).get(Integer.toString(i));
             if(((((Map) singeClass).get("name")).toString()).equals(staticData.getClassName())){
-                Map<String, String> obj = new HashMap<String, String>() {
+                Map<String, Object> obj = new HashMap<String, Object>() {
                     {
                         put("name", staticData.getClassName());
-                        put("maxWater", String.valueOf(playerController.getPlayer().getMaxWater()));
-                        put("water", String.valueOf(playerController.getPlayer().getWater()));
+                        put("maxWater", playerController.getPlayer().getMaxWater());
+                        put("water", playerController.getPlayer().getWater());
                     }
                 };
                 myObject.put(String.valueOf(i), obj);
             }else{
-                Map<String, String> obj = new HashMap<String, String>() {
+                Map<String, Object> obj = new HashMap<String, Object>() {
                     {
                         put("name", ((((Map) singeClass).get("name")).toString()));
-                        put("maxWater", ((((Map) singeClass).get("maxWater")).toString()));
-                        put("water", ((((Map) singeClass).get("water")).toString()));
+                        put("maxWater", (((Map) singeClass).get("maxWater")));
+                        put("water", (((Map) singeClass).get("water")));
                     }
                 };
                 myObject.put(String.valueOf(i), obj);
