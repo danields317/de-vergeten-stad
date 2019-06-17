@@ -242,11 +242,12 @@ public class TileController {
         for(Onderdeel onderdeel:onderdelen){
             if(tile.getSoort().equals(onderdeel.getSoort())){
                 if (tile.getRichting() == PartTile.Richtingen.OPZIJ){
-                    onderdeel.setX((tile.getX()));
+                    onderdeel.setY((tile.getY()));
                     checkOnderdeelSpawned(onderdeel);
                 }
                 else if(tile.getRichting() == PartTile.Richtingen.OMHOOG){
-                    onderdeel.setY((tile.getY()));
+                    onderdeel.setX((tile.getX()));
+                    checkOnderdeelSpawned(onderdeel);
                 }
                 else{
                     System.out.println("gaat fout lol (tilecontroller)");
