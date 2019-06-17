@@ -52,8 +52,8 @@ public class EquipmentView implements PlayerObserver {
                     break;
             }
 
-            ImageView imageView = new ImageView(equipment.getImage());
-            hbox.getChildren().add(imageView);
+            //ImageView imageView = new ImageView(equipment.getImage());
+            //hbox.getChildren().add(imageView);
         }
 
         return hbox;
