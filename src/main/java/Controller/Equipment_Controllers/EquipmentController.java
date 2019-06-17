@@ -20,8 +20,4 @@ public class EquipmentController {
         return equipment;
     }
 
-    public Image getImage() {
-        return equipment.getImage();
-    }
-
 }

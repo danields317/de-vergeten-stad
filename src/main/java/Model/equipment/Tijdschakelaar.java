@@ -6,7 +6,8 @@ public class Tijdschakelaar extends Equipment {
 
 	public Tijdschakelaar() {
 	
-		super( "Tijdschakelaar","Voer 2 extra acties uit tijdens je beurt.", "/placeholder.png", EquipmentKaarten.TIJDSCHAKELAAR);
+		super( "Tijdschakelaar","Voer 2 extra acties uit tijdens je beurt.", EquipmentKaarten.TIJDSCHAKELAAR);
+		this.equipmentKaart = EquipmentKaarten.TIJDSCHAKELAAR;
 	}
 
 }

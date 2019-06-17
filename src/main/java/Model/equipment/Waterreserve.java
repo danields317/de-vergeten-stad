@@ -6,7 +6,8 @@ public class Waterreserve extends Equipment{
 
 	public Waterreserve() {
 	
-		super("Waterreserve", "Alle spelers die met jou op dezelfde tegel staan ontvangen 2 water.", "/placeholder.png", EquipmentKaarten.WATERRESERVE);
+		super("Waterreserve", "Alle spelers die met jou op dezelfde tegel staan ontvangen 2 water.", EquipmentKaarten.WATERRESERVE);
+		this.equipmentKaart = EquipmentKaarten.WATERRESERVE;
 	}
 
 }
