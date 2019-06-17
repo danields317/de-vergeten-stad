@@ -1,5 +1,6 @@
 package Controller.Player_Controllers;
 
+import Controller.Bord_Controllers.Water_Controller;
 import Controller.Tile_Controllers.TileController;
 import Model.Bord.Onderdeel;
 import Model.Tiles.PartTile;
@@ -10,6 +11,7 @@ import Model.data.StaticData;
 import Model.player.Player;
 import javafx.scene.paint.Color;
 import observers.PlayerObserver;
+import observers.WaterObserver;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -30,7 +32,7 @@ public class PlayerController {
 
 
     public PlayerController(String n, String className, String b, int maxwater, Color color, String imagePath, Player.SpelerKlassen klasse){
-        player = new Player(staticData.getUsername(),className, "b", 4, Color.BLUE, imagePath, klasse);
+        player = new Player(staticData.getUsername(),className, "b", maxwater, Color.BLUE, imagePath, klasse);
     }
 
     // Singleton Pattern.
