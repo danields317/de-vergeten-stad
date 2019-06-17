@@ -26,7 +26,7 @@ public class SoundController implements Runnable {
 
     public void run()
     {
-        String[] songs = {"n.wav", "i.wav", "tati.wav", "m.wav", "C.wav", "k.wav", "dat_boi.wav", "g.wav", "i_am.wav", "s.wav", "hey.wav"};
+        String[] songs = {"n.wav", "i.wav", "tati.wav", "m.wav", "C.wav", "k.wav", "dat_boi.wav", "g.wav", "i_am.wav", "s.wav"};
         while(true) {
             System.out.println("start");
             int random = (int) (Math.random() * songs.length);
