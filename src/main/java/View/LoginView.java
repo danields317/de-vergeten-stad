@@ -1,6 +1,8 @@
 package View;
 
 import Controller.Login_Controllers.Login_Controller;
+import Controller.Player_Controllers.FunctieController;
+import Controller.firebase_controllers.UpdateFirebaseController;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -73,6 +75,7 @@ public class LoginView implements LoginObserver {
     }
 
     private GridPane createInitialGridPane(){
+
         Text text1 = new Text("Username:");
         Text text2 = new Text("Password:");
 
@@ -193,7 +196,8 @@ public class LoginView implements LoginObserver {
     EventHandler<MouseEvent> startClicked = new EventHandler<MouseEvent>() {
         @Override
         public void handle(MouseEvent e) {
-            viewManager.loadGameView();
+            (UpdateFirebaseController.getInstance()).makeFirebase(roomId.getText());
+            //
 
         }
     };
