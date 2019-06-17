@@ -31,25 +31,26 @@ public class PlayerController {
         player = new Player(staticData.getUsername(),className, "b", 4, Color.BLUE, imagePath, klasse);
     }
 
-//    // Singleton Pattern.
-//    // now we can call: SpelbordController.getInstance()  from everywhere
-//    // AND it guarantees there is only 1 instance.
-//    public static PlayerController getInstance(boolean loadGame, Object classInfo) {
-//        if (playercont == null) {
-//            if(loadGame){
-////                System.out.println(((Map)(StaticData.getInstance()).getRoomInfo()).get("Selectable_classes"));
-////                System.out.println(classInfo);
-//                Map classIn =((Map)(classInfo));
-////                System.out.println(((Long)(classIn.get("maxWater"))).intValue());
-////                System.out.println(((Map)(StaticData.getInstance()).getRoomInfo()).get("archeoloog"));
-//                playercont = new PlayerController(((String)(classIn.get("name"))),
-//                        ((Long)(classIn.get("maxWater"))).intValue(),
-//                        ((Long)(classIn.get("water"))).intValue(),
-//                        ((String)(classIn.get("name"))) +".png");
-//            }
-//        }
-//        return playercont;
-//    }
+    // Singleton Pattern.
+    // now we can call: SpelbordController.getInstance()  from everywhere
+    // AND it guarantees there is only 1 instance.
+    public static PlayerController getInstance(boolean loadGame, Object classInfo) {
+        if (playercont == null) {
+            if(loadGame){
+//                System.out.println(((Map)(StaticData.getInstance()).getRoomInfo()).get("Selectable_classes"));
+//                System.out.println(classInfo);
+                Map classIn =((Map)(classInfo));
+//                System.out.println(((Long)(classIn.get("maxWater"))).intValue());
+//                System.out.println(((Map)(StaticData.getInstance()).getRoomInfo()).get("archeoloog"));
+                playercont = new PlayerController( ((String)(classIn.get("name"))),
+                        ((Long)(classIn.get("maxWater"))).intValue(),
+                        ((Long)(classIn.get("water"))).intValue(),
+                        ((String)(classIn.get("name"))) +".png",
+                        Player.SpelerKlassen.WATERDRAGER);
+            }
+        }
+        return playercont;
+    }
 
     public static PlayerController getInstance() {
         return playercont;
@@ -74,9 +75,7 @@ public class PlayerController {
             Tile tileAbove = tileController.getTileByLocation((player.getY() - 1), player.getX());
             if(tileAbove.getZand() < 2 && !tileAbove.getClass().equals(Storm.class) && check) {
                 moveLogica(tileAbove, Player.Richingen.NOORD);
-            } //else if (!check && !tileAbove.getClass().equals(Storm.class)){
-//                player.movePlayer(Player.Richingen.NOORD);
-//            }
+            }
             tileController.getTileByLocation((player.getY() + 1), player.getX()).notifyAllObservers();
             tileController.getTileByLocation(player.getY(), player.getX()).notifyAllObservers();
         }
@@ -87,9 +86,7 @@ public class PlayerController {
             Tile tileBeneath = tileController.getTileByLocation((player.getY() + 1), player.getX());
             if(tileBeneath.getZand() < 2 && !tileBeneath.getClass().equals(Storm.class) && check){
                 moveLogica(tileBeneath, Player.Richingen.ZUID);
-            } //else if (!check && !tileBeneath.getClass().equals(Storm.class)){
-//                player.movePlayer(Player.Richingen.ZUID);
-//            }
+            }
             tileController.getTileByLocation((player.getY() - 1), player.getX()).notifyAllObservers();
             tileController.getTileByLocation(player.getY(), player.getX()).notifyAllObservers();
         }
@@ -100,9 +97,7 @@ public class PlayerController {
             Tile tileRight = tileController.getTileByLocation(player.getY(), (player.getX() + 1));
             if(tileRight.getZand() < 2 && !tileRight.getClass().equals(Storm.class) && check){
                 moveLogica(tileRight, Player.Richingen.OOST);
-            } //else if (!check && !tileRight.getClass().equals(Storm.class)){
-//                player.movePlayer(Player.Richingen.OOST);
-//            }
+            }
             tileController.getTileByLocation(player.getY(), (player.getX() - 1)).notifyAllObservers();
             tileController.getTileByLocation(player.getY(), player.getX()).notifyAllObservers();
         }
@@ -113,9 +108,7 @@ public class PlayerController {
             Tile tileLeft = tileController.getTileByLocation(player.getY(), (player.getX() -  1));
             if(tileLeft.getZand()  < 2 && !tileLeft.getClass().equals(Storm.class) && check){
                 moveLogica(tileLeft, Player.Richingen.WEST);
-            } //else if (!check && !tileLeft.getClass().equals(Storm.class)){
-//                player.movePlayer(Player.Richingen.WEST);
-//            }
+            }
             tileController.getTileByLocation(player.getY(), (player.getX() + 1)).notifyAllObservers();
             tileController.getTileByLocation(player.getY(), player.getX()).notifyAllObservers();
         }

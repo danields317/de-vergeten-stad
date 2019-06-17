@@ -167,22 +167,18 @@ public class TileView implements BordObserver {
         waterdragerImageView.setOpacity(0);
     }
 
-//    private void checkSpelers(int x, int y){
-//
-//        int pX = playerController.getPlayer().getX();
-//        int pY = playerController.getPlayer().getY();
-//
-//        if(pX == x && pY == y){
-////            System.out.println("tileX:" + x + " tileY:" + y + "TileView");
-////            System.out.println("spelerX:" + pX + " spelerY" + pY);
-//            archeoloogImageView.setOpacity(1);
-//            klimmerImageView.setOpacity(1);
-//        }
-//    }
 
-    public void checkSpelers(Tile tile){
+    private void checkSpelers(Tile tile){
         for (Player speler : tile.getSpelers()){
-
+            if (speler.getKlasse().equals(Player.SpelerKlassen.KLIMMER)){
+                klimmerImageView.setOpacity(1);
+            } else if (speler.getKlasse().equals(Player.SpelerKlassen.ARCHEOLOOG)){
+                archeoloogImageView.setOpacity(1);
+            } else if (speler.getKlasse().equals(Player.SpelerKlassen.VERKENNER)){
+                verkennerImageView.setOpacity(1);
+            } else if (speler.getKlasse().equals(Player.SpelerKlassen.WATERDRAGER)){
+                waterdragerImageView.setOpacity(1);
+            }
         }
     }
 

@@ -32,7 +32,34 @@ public class Player implements PlayerObservable{
 
 	public enum Richingen {NOORD, OOST, WEST, ZUID}
 
-	public enum SpelerKlassen {ARCHEOLOOG, VERKENNER, WATERDRAGGER, KLIMMER}
+	public enum SpelerKlassen {
+
+	    ARCHEOLOOG("Archeoloog"),
+        VERKENNER("Verkenner"),
+        WATERDRAGER("Waterdrager"),
+        KLIMMER("Klimmer"),
+	    NAVIGATOR("Navigator"),
+        METEOROLOOG("Meteoroloog");
+
+        private String klasse;
+
+        SpelerKlassen(String klasse) {
+            this.klasse = klasse;
+        }
+
+	    public SpelerKlassen getKlasse(String klasse){
+	        if (klasse.equals(SpelerKlassen.ARCHEOLOOG.toString())){
+	            return ARCHEOLOOG;
+            } else if (klasse.equals(SpelerKlassen.VERKENNER.toString())){
+                return VERKENNER;
+            } else if (klasse.equals(SpelerKlassen.WATERDRAGER.toString())){
+                return WATERDRAGER;
+            } else if (klasse.equals(SpelerKlassen.KLIMMER.toString())){
+                return KLIMMER;
+            }
+            return null;
+        }
+    }
 	SpelerKlassen klasse;
 
 	// List of all Observers of this Observable Objects
@@ -199,6 +226,10 @@ public class Player implements PlayerObservable{
 	public Image getImage() {
 		return image;
 	}
+
+	public SpelerKlassen getKlasse(){
+	    return klasse;
+    }
 
 	public void register(PlayerObserver observer){
 		observers.add(observer);
