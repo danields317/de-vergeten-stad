@@ -150,10 +150,12 @@ public class TileController {
 
                 SpeelbordView.getInstance().updateSpelBord(tmp, stormTile);
 
+                for (Player speler : tmp.getSpelers()){
+                    speler.setLocatie(stormX, stormY);
+                }
+
                 stormY = stormY + moveStormY;
                 stormX = stormX + moveStormX;
-
-//                moveSpeler(stormX, stormY, moveStormX, moveStormY);
             }
         }
     }
