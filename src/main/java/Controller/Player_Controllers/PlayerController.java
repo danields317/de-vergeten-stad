@@ -48,7 +48,7 @@ public class PlayerController {
                         ((Long)(classIn.get("maxWater"))).intValue(),
                         ((Long)(classIn.get("water"))).intValue(),
                         ((String)(classIn.get("name"))) +".png",
-                        Player.SpelerKlassen.WATERDRAGER);
+                        getKlasse(classIn.get("name").toString().toLowerCase()));
             }
         }
         return playercont;
@@ -211,6 +211,19 @@ public class PlayerController {
 
     public Player getPlayer() {
         return player;
+    }
+
+    private static Player.SpelerKlassen getKlasse(String klasse){
+        if (klasse.equals(Player.SpelerKlassen.ARCHEOLOOG.toString().toLowerCase())){
+            return Player.SpelerKlassen.ARCHEOLOOG;
+        } else if (klasse.equals(Player.SpelerKlassen.VERKENNER.toString().toLowerCase())){
+            return Player.SpelerKlassen.VERKENNER;
+        } else if (klasse.equals(Player.SpelerKlassen.WATERDRAGER.toString().toLowerCase())){
+            return Player.SpelerKlassen.WATERDRAGER;
+        } else if (klasse.equals(Player.SpelerKlassen.KLIMMER.toString().toLowerCase())){
+            return Player.SpelerKlassen.KLIMMER;
+        }
+        return null;
     }
 
     public void update(){
