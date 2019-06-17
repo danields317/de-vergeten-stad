@@ -7,9 +7,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
+import Controller.Player_Controllers.PlayerController;
+import Controller.firebase_controllers.ListenUpdateController;
+import Model.player.Player;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.*;
 import com.google.firebase.database.annotations.Nullable;
+import javafx.application.Platform;
 
 
 /**
@@ -26,7 +30,7 @@ public class FirebaseService{
     private Firestore firestore;
     private static final String GEBRUIKERS_PATH = "games";
     private CollectionReference colRef;
-//    private Controller controller;
+   //private Controller controller;
 
 
     public FirebaseService() {
@@ -65,6 +69,16 @@ public class FirebaseService{
 
                 if (snapshot != null && snapshot.exists()) {
 //                    controller.updateFromFirebase(snapshot);
+                    System.out.println("iets");
+                    ListenUpdateController listenUpdateController = ListenUpdateController.getInstance();
+                    listenUpdateController.setFirebaseData();
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            (PlayerController.getInstance()).update();
+                        }
+                    });
+
 
                     System.out.println("Current data: " + snapshot.getData());
                 } else {
@@ -72,6 +86,7 @@ public class FirebaseService{
                 }
             }
         });
+        System.out.println("ik wil luistern");
     }
 
 

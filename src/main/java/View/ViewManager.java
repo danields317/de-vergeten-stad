@@ -3,6 +3,7 @@ package View;
 import Controller.Player_Controllers.PlayerController;
 import Controller.Tile_Controllers.StormController;
 import Controller.Tile_Controllers.TileController;
+import Controller.firebase_controllers.UpdateFirebaseController;
 import View.bord_views.*;
 import javafx.application.Application;
 import javafx.scene.Group;
@@ -14,8 +15,9 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import observers.*;
 
-public class ViewManager extends Application{
+public class ViewManager extends Application implements PlayerObserver, StormObserver {
 
     private static ViewManager viewManager;
 
@@ -117,8 +119,11 @@ public class ViewManager extends Application{
         return  group;
 
          */
-        (Player_Controller.getInstance()).update();
+        (PlayerController.getInstance()).update();
         (StormController.getInstance()).update();
+
+        (PlayerController.getInstance()).registerObserver(this);
+        (StormController.getInstance()).registerObserver(this);
 
         return new Group( new GridPane());
     }
@@ -129,7 +134,9 @@ public class ViewManager extends Application{
             stormController.voerStormEventsUit();
             PlayerController playerController = PlayerController.getInstance();
             playerController.getPlayer().refillActions();
-            update();
+            (PlayerController.getInstance()).getPlayer().subtractWater(1);
+            (UpdateFirebaseController.getInstance()).updateFirebase();
+            //update();
         });
         return eindigBeurt;
     }
@@ -161,6 +168,7 @@ public class ViewManager extends Application{
         Button eindigBeurt = eindigBeurtKnop(eindigbeurtKnop);
         GridPane waterfles = waterflesView.getView();
 
+
         StackPane propellor = onderdeelview.getPropellerView();
         StackPane beacon = onderdeelview.getBeaconView();
         StackPane motor = onderdeelview.getMotorView();
@@ -173,9 +181,20 @@ public class ViewManager extends Application{
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.drawImage(backgroundImage, 0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
 
-        Group group = new Group(canvas, stormTeken, knoppen, graafKnoppen, eindigBeurt, waterfles, propellor,beacon,motor,zonnewijzer, spelbord, acties);
+        Group group = new Group( canvas, stormTeken, knoppen, graafKnoppen, eindigBeurt, waterfles, propellor,beacon,motor,zonnewijzer, spelbord, acties);
         return group;
     }
 
     public void update(){loadGameView();}
+
+
+    @Override
+    public void update(PlayerObservable sb) {
+        loadGameView();
+    }
+
+    @Override
+    public void update(StormObservable sb) {
+        loadGameView();
+    }
 }

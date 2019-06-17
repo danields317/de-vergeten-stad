@@ -5,9 +5,11 @@ import Controller.Login_Controllers.Login_Controller;
 public class StaticData {
 
     static StaticData staticData;
+    private String roomName;
     private Object roomInfo;
     private String username;
     private String allias;
+    private String className;
 
     public static StaticData getInstance() {
         if (staticData == null) {
@@ -26,6 +28,22 @@ public class StaticData {
 
     public String getAllias() {
         return allias;
+    }
+
+    public String getRoomName() {
+        return roomName;
+    }
+
+    public String getClassName() {
+        return className;
+    }
+
+    public void setClassName(String className) {
+        this.className = className;
+    }
+
+    public void setRoomName(String roomName) {
+        this.roomName = roomName;
     }
 
     public void setRoomInfo(Object roomInfo) {

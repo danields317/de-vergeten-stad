@@ -212,6 +212,11 @@ public class PlayerController {
         return player;
     }
 
+    public void updateData(){
+        System.out.println("hala");
+        player.updateData();
+    }
+
     public void update(){
         player.notifyAllObservers();
     }
