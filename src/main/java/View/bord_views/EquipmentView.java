@@ -5,6 +5,8 @@ import Model.equipment.Duinkanon;
 import Model.equipment.Equipment;
 import Model.equipment.Jetpack;
 import Model.player.Player;
+import javafx.scene.Group;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -19,7 +21,9 @@ import java.util.ArrayList;
 public class EquipmentView implements PlayerObserver {
 
     private ArrayList<Equipment> inventory;
-    private VBox box;
+    private Group group;
+    private VBox upBox;
+    private VBox downBox;
 
     private HBox hboxUp;
     private HBox hboxDown;
@@ -41,13 +45,25 @@ public class EquipmentView implements PlayerObserver {
 
 
 
-    public VBox createEquipmentView(){
+    public Group createEquipmentView(){
         ImageView aardekijker = new ImageView(new Image("/Equipment/Ground_Watcher.png"));
+        aardekijker.setFitWidth(136);
+        aardekijker.setFitHeight(192);
         ImageView duinkanon = new ImageView(new Image("/Equipment/Dune_Cannon.png"));
+        duinkanon.setFitWidth(136);
+        duinkanon.setFitHeight(192);
         ImageView jetpack = new ImageView(new Image("/Equipment/Jetpack.png"));
+        jetpack.setFitWidth(136);
+        jetpack.setFitHeight(192);
         ImageView tijdschakelaar = new ImageView(new Image("/Equipment/Time_Switch.png"));
+        tijdschakelaar.setFitWidth(136);
+        tijdschakelaar.setFitHeight(192);
         ImageView waterreserve = new ImageView(new Image("/Equipment/Water_Reserve.png"));
+        waterreserve.setFitWidth(136);
+        waterreserve.setFitHeight(192);
         ImageView zonneschild = new ImageView(new Image("/Equipment/Sun_Shield.png"));
+        zonneschild.setFitWidth(136);
+        zonneschild.setFitHeight(192);
 
         aardekijkerLabel = new Label();
         duinkanonLabel = new Label();
@@ -63,17 +79,35 @@ public class EquipmentView implements PlayerObserver {
         waterreserveStack = new StackPane(waterreserve, waterreserveLabel);
         zonneschildStack = new StackPane(zonneschild, zonneschildLabel);
 
-
+        Button switchknopDown = new Button("1/2");
+        Button switchknopUp = new Button("2/2");
 
         hboxUp = new HBox(aardekijker, duinkanon, jetpack);
+        hboxUp.setSpacing(7);
         hboxDown = new HBox(tijdschakelaar, waterreserve, zonneschild);
-        box = new VBox(hboxUp, hboxDown);
+        hboxDown.setSpacing(7);
+        upBox = new VBox(hboxUp, switchknopDown);
+        downBox = new VBox(hboxDown, switchknopUp);
 
-        return box;
+        group = new Group(upBox);
+        group.setLayoutX(721);
+        group.setLayoutY(677);
+
+        switchknopDown.setOnMouseClicked(e -> {
+            group.getChildren().remove(upBox);
+            group.getChildren().add(downBox);
+        });
+
+        switchknopUp.setOnMouseClicked(e -> {
+            group.getChildren().remove(downBox);
+            group.getChildren().add(upBox);
+        });
+
+        return group;
     }
 
-    public VBox getUitrusting(){
-        return box;
+    public Group getUitrusting(){
+        return group;
     }
 
     public void updateInventory(ArrayList<Equipment> inventory){
@@ -113,6 +147,8 @@ public class EquipmentView implements PlayerObserver {
         waterreserveLabel.setText(waterreserveTeller + "");
         zonneschildLabel.setText(zonneschildTeller + "");
     }
+
+
 
 
 

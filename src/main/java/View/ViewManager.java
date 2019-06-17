@@ -106,7 +106,7 @@ public class ViewManager extends Application{
         Button eindigBeurt = eindigBeurtKnop(eindigbeurtKnop);
         GridPane spelbord = speelbordView.loadSpelBord();
 
-        VBox uitrusting = uitrustingview.createEquipmentView();
+        Group uitrusting = uitrustingview.createEquipmentView();
 
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.drawImage(backgroundImage, 0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
@@ -160,7 +160,7 @@ public class ViewManager extends Application{
         GridPane spelbord = speelbordView.getSpelbord();
         GridPane stormTeken =  stormMeterView.getView();
 
-        VBox uitrusting = uitrustingview.getUitrusting();
+        Group uitrusting = uitrustingview.getUitrusting();
 
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.drawImage(backgroundImage, 0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
