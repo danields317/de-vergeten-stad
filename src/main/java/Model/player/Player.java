@@ -15,7 +15,7 @@ import java.util.List;
 public class Player implements PlayerObservable{
 
 	private String nickname; // Naam ingevoerd door de speler
-	private EquipmentController[] inventory;
+	private ArrayList<Equipment> inventory;
 	private int water;
 	private int actiesOver;
 	private Tile tile; // De tile waar de speler op staat
@@ -157,7 +157,7 @@ public class Player implements PlayerObservable{
 		return nickname;
 	}
 
-	public EquipmentController[] getInventory() {
+	public ArrayList<Equipment> getInventory() {
 		return inventory;
 	}
 

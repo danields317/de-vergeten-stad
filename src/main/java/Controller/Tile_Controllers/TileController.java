@@ -234,7 +234,7 @@ public class TileController {
             //ga ff checken of je hebt gewonnen
         }
         else{
-            System.out.println("zon kanker tile die geen kanker doet (Tilecontroller)");
+            System.out.println("Dit gaat fout (Tilecontroller)");
         }
     }
 
