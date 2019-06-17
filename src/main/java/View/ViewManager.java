@@ -35,6 +35,7 @@ public class ViewManager extends Application{
     WaterflesView waterflesView;      //maak waterfles stand
     StormMeterView stormMeterView = new StormMeterView(); //maak stormmetertekentje
     SpeelbordView speelbordView = SpeelbordView.getInstance();
+    Acties_View acties_view;//maak actie tekens
 
 
     private double windowWidth = 1600;
@@ -69,9 +70,9 @@ public class ViewManager extends Application{
             if(torf){
                 group = firstBordload();
                 torf = false;
-            }else{
-                group = makeGroup();
             }
+                group = makeGroup();
+
 
             Scene scene = new Scene(group, windowWidth, windowHeight);
             scene.getStylesheets().add("/styles.css");
@@ -88,30 +89,39 @@ public class ViewManager extends Application{
 
     public Group firstBordload(){
         waterflesView = new WaterflesView();
+
         GridPane waterfles;
 
         waterfles = waterflesView.createInitialGridPane();
         GridPane stormTeken = stormMeterView.createInitialGridPane();
+        acties_view = new Acties_View();
 
-
-        Image backgroundImage = new Image("gamescreenempty.png");
-        Canvas canvas = new Canvas(windowWidth, windowHeight);
         StackPane propellor = onderdeelview.loadPropeller("?", "?");
         StackPane beacon = onderdeelview.loadBeacon("?", "?");
         StackPane motor = onderdeelview.loadMotor("?", "?");
         StackPane zonnewijzer = onderdeelview.loadZonneWijzer("?", "?");
         GridPane knoppen = actieknoppenview.maakActieKnoppen();
-
         GridPane graafknoppen = graafknoppenview.maakGraafKnoppen();
+        GridPane spelbord = speelbordView.loadSpelBord();
+//        GridPane acties_view =
+        /*Image backgroundImage = new Image("gamescreenempty.png");
+        Canvas canvas = new Canvas(windowWidth, windowHeight);
+
+
         Button eindigbeurtKnop = eindigBeurtView.maakEindigbeurtKnop();
         Button eindigBeurt = eindigBeurtKnop(eindigbeurtKnop);
-        GridPane spelbord = speelbordView.loadSpelBord();
 
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.drawImage(backgroundImage, 0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
 
         Group group = new Group(canvas, stormTeken, knoppen, graafknoppen, eindigbeurtKnop, waterfles, propellor, beacon, motor, zonnewijzer, spelbord);
         return  group;
+
+         */
+        (Player_Controller.getInstance()).update();
+        (StormController.getInstance()).update();
+
+        return new Group( new GridPane());
     }
 
     public Button eindigBeurtKnop(Button eindigBeurt){
@@ -156,11 +166,13 @@ public class ViewManager extends Application{
         StackPane zonnewijzer = onderdeelview.getZonnewijzerView();
         GridPane spelbord = speelbordView.getSpelbord();
         GridPane stormTeken =  stormMeterView.getView();
+        System.out.println("Ik ben boven dat ding");
+        GridPane acties = acties_view.getView();
 
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.drawImage(backgroundImage, 0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
 
-        Group group = new Group(canvas, stormTeken, knoppen, graafKnoppen, eindigBeurt, waterfles, propellor,beacon,motor,zonnewijzer, spelbord);
+        Group group = new Group(canvas, stormTeken, knoppen, graafKnoppen, eindigBeurt, waterfles, propellor,beacon,motor,zonnewijzer, spelbord, acties);
         return group;
     }
 
