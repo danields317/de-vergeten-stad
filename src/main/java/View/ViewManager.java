@@ -4,6 +4,7 @@ import Controller.Player_Controllers.PlayerController;
 import Controller.Tile_Controllers.StormController;
 import Controller.Tile_Controllers.TileController;
 import Controller.firebase_controllers.UpdateFirebaseController;
+import Model.data.StaticData;
 import View.bord_views.*;
 import javafx.application.Application;
 import javafx.scene.Group;
@@ -16,6 +17,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import observers.*;
+
+import java.util.Map;
 
 public class ViewManager extends Application implements PlayerObserver, StormObserver {
 
@@ -37,6 +40,7 @@ public class ViewManager extends Application implements PlayerObserver, StormObs
     StormMeterView stormMeterView = new StormMeterView(); //maak stormmetertekentje
     SpeelbordView speelbordView = SpeelbordView.getInstance();
     Acties_View acties_view;//maak actie tekens
+    StaticData staticData = StaticData.getInstance();
 
 
     private double windowWidth = 1600;
@@ -134,7 +138,6 @@ public class ViewManager extends Application implements PlayerObserver, StormObs
             stormController.voerStormEventsUit();
             PlayerController playerController = PlayerController.getInstance();
             playerController.getPlayer().refillActions();
-            (PlayerController.getInstance()).getPlayer().subtractWater(1);
             (UpdateFirebaseController.getInstance()).updateFirebase();
             //update();
         });
@@ -164,8 +167,17 @@ public class ViewManager extends Application implements PlayerObserver, StormObs
         Canvas canvas = new Canvas(windowWidth, windowHeight);
         GridPane knoppen = actieknoppenview.getView();
         GridPane graafKnoppen = graafknoppenview.getView();
-        Button eindigbeurtKnop = eindigBeurtView.maakEindigbeurtKnop();
-        Button eindigBeurt = eindigBeurtKnop(eindigbeurtKnop);
+
+        Button eindigBeurt;
+        if(((String)((Map) staticData.getRoomInfo()).get("activePlayer")).equals(staticData.getClassName()) ) {
+            Button eindigbeurtKnop = eindigBeurtView.maakEindigbeurtKnop();
+            eindigBeurt = eindigBeurtKnop(eindigbeurtKnop);
+        }else{
+            eindigBeurt = new Button( (String)((Map) staticData.getRoomInfo()).get("activePlayer") + "/n beurt");
+            eindigBeurt.setPrefSize(152,57);
+            eindigBeurt.setLayoutX(1392);
+            eindigBeurt.setLayoutY(732);
+        }
         GridPane waterfles = waterflesView.getView();
 
 
