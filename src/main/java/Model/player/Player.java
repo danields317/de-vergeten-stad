@@ -1,6 +1,7 @@
 package Model.player;
 
 import Controller.Equipment_Controllers.EquipmentController;
+import Model.data.StaticData;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import Model.Tiles.Tile;
@@ -11,6 +12,7 @@ import observers.PlayerObserver;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Spliterator;
 
 public class Player implements PlayerObservable{
@@ -132,9 +134,15 @@ public class Player implements PlayerObservable{
 		return water;
 	}
 
+	@Override
+	public int getActiesOver() {
+		return actiesOver;
+	}
+
 	public void addWater(int water ) {
 
 		this.water = this.water + water;
+		notifyAllObservers();
 
 	}
 
@@ -149,9 +157,11 @@ public class Player implements PlayerObservable{
 	}
 
 	public void useAction(){
+		System.out.println(actiesOver);
         if (actiesOver > 0){
-            actiesOver -= 1;
+            actiesOver--;
         }
+        notifyAllObservers();
     }
 
     public boolean actiesOver(){
@@ -160,6 +170,7 @@ public class Player implements PlayerObservable{
 
     public void refillActions(){
         actiesOver = 4;
+		notifyAllObservers();
     }
 
 	public int getMaxWater() {
@@ -207,9 +218,29 @@ public class Player implements PlayerObservable{
 		return image;
 	}
 
-	public SpelerKlassen getKlasse(){
-	    return klasse;
+    public SpelerKlassen getKlasse(){
+        return klasse;
     }
+
+	public void updateData(){
+		System.out.println("ik luister");
+		StaticData staticData = StaticData.getInstance();
+		Object classes = ((Map) staticData.getRoomInfo()).get("Selectable_classes");
+
+
+		for(int i = 0; i < ((Map) classes).size(); i++) {
+			Object singeClass = ((Map) classes).get(Integer.toString(i));
+			if(((((Map) singeClass).get("name")).toString()).equals(staticData.getClassName())){
+				water = (((Long)(((Map) singeClass).get("water"))).intValue());
+
+			}
+
+
+		}
+
+
+
+	}
 
 	public void register(PlayerObserver observer){
 		observers.add(observer);

@@ -15,8 +15,6 @@ public class StormMeterView implements StormMeterObserver {
     public StormMeterView(){
         this.storm_meter_controller = Storm_Meter_Controller.getInstance();
         storm_meter_controller.registerObserver(this);
-
-
     }
 
     public GridPane createInitialGridPane(){

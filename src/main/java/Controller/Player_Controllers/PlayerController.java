@@ -215,6 +215,11 @@ public class PlayerController {
         return player;
     }
 
+    public void updateData(){
+        System.out.println("hala");
+        player.updateData();
+    }
+
     private static Player.SpelerKlassen getKlasse(String klasse){
         if (klasse.equals(Player.SpelerKlassen.ARCHEOLOOG.toString().toLowerCase())){
             return Player.SpelerKlassen.ARCHEOLOOG;
