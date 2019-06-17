@@ -1,10 +1,12 @@
 package Controller.Player_Controllers;
 
+import Controller.Bord_Controllers.SoundController;
 import Controller.Tile_Controllers.StormController;
 import Model.data.StaticData;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.jar.Attributes;
 
 public class FunctieController {
     private static FunctieController functieController;
@@ -47,6 +49,9 @@ public class FunctieController {
                 };
                 myObject.put(String.valueOf(i), obj);
             }else{
+                if((((Long) (((Map) singeClass).get("water"))).intValue() - 1) < 0){
+                    endLose();
+                }
                 Map<String, Object> obj = new HashMap<String, Object>() {
                     {
                         put("name", ((((Map) singeClass).get("name")).toString()));
@@ -62,5 +67,10 @@ public class FunctieController {
 
         staticData.setRoomInfo(data);
 
+    }
+
+    public void endLose(){
+        SoundController sound = new SoundController();
+        sound.play("Sound/n.wav");
     }
 }

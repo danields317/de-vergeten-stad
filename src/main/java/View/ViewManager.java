@@ -1,5 +1,6 @@
 package View;
 
+import Controller.Player_Controllers.FunctieController;
 import Controller.Player_Controllers.PlayerController;
 import Controller.Tile_Controllers.StormController;
 import Controller.Tile_Controllers.TileController;
@@ -93,6 +94,7 @@ public class ViewManager extends Application implements PlayerObserver, StormObs
     }
 
     public Group firstBordload(){
+        (FunctieController.getInstance()).endLose();
         waterflesView = new WaterflesView();
 
         GridPane waterfles;

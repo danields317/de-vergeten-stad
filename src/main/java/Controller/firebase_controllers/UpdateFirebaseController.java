@@ -64,8 +64,8 @@ public class UpdateFirebaseController {
             }
         }
         data.put("Selectable_classes", myObject);
-        data.put("activePlayer", activePlayer);
-        //data.put("activePlayer", "Archeoloog");
+        //data.put("activePlayer", activePlayer);
+        data.put("activePlayer", "Archeoloog");
         (FirebaseService.getInstance()).addSpel(staticData.getRoomName(), data);
 
     }
