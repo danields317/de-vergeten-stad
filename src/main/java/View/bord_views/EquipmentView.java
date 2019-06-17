@@ -107,6 +107,9 @@ public class EquipmentView implements PlayerObserver {
     }
 
     public Group getUitrusting(){
+        if (group == null){
+            createEquipmentView();
+        }
         return group;
     }
 

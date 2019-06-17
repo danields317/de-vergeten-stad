@@ -106,22 +106,22 @@ public class ViewManager extends Application implements PlayerObserver, StormObs
         GridPane graafknoppen = graafknoppenview.maakGraafKnoppen();
         GridPane spelbord = speelbordView.loadSpelBord();
 //        GridPane acties_view =
-        /*Image backgroundImage = new Image("gamescreenempty.png");
-        Canvas canvas = new Canvas(windowWidth, windowHeight);
+//        Image backgroundImage = new Image("gamescreenempty.png");
+//        Canvas canvas = new Canvas(windowWidth, windowHeight);
+//
+//
+//        Button eindigbeurtKnop = eindigBeurtView.maakEindigbeurtKnop();
+//        Button eindigBeurt = eindigBeurtKnop(eindigbeurtKnop);
+//
+//        Group uitrusting = uitrustingview.createEquipmentView();
+//
+//        GraphicsContext gc = canvas.getGraphicsContext2D();
+//        gc.drawImage(backgroundImage, 0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
+//
+//        Group group = new Group(canvas, stormTeken, knoppen, graafknoppen, eindigbeurtKnop, waterfles, propellor, beacon, motor, zonnewijzer, spelbord, uitrusting);
+//        return  group;
 
 
-        Button eindigbeurtKnop = eindigBeurtView.maakEindigbeurtKnop();
-        Button eindigBeurt = eindigBeurtKnop(eindigbeurtKnop);
-
-        Group uitrusting = uitrustingview.createEquipmentView();
-
-        GraphicsContext gc = canvas.getGraphicsContext2D();
-        gc.drawImage(backgroundImage, 0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
-
-        Group group = new Group(canvas, stormTeken, knoppen, graafknoppen, eindigbeurtKnop, waterfles, propellor, beacon, motor, zonnewijzer, spelbord, uitrusting);
-        return  group;
-
-         */
         (PlayerController.getInstance()).update();
         (StormController.getInstance()).update();
 
@@ -186,8 +186,7 @@ public class ViewManager extends Application implements PlayerObserver, StormObs
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.drawImage(backgroundImage, 0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
 
-        Group group = new Group(canvas, stormTeken, knoppen, graafKnoppen, eindigBeurt, waterfles, propellor,beacon,motor,zonnewijzer, spelbord, uitrusting);
-        Group group = new Group( canvas, stormTeken, knoppen, graafKnoppen, eindigBeurt, waterfles, propellor,beacon,motor,zonnewijzer, spelbord, acties);
+        Group group = new Group(canvas, stormTeken, knoppen, graafKnoppen, eindigBeurt, waterfles, propellor,beacon,motor,zonnewijzer, spelbord, uitrusting, acties);
         return group;
     }
 
