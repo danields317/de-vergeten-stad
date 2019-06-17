@@ -120,9 +120,11 @@ public class LoginView implements LoginObserver {
         if(!sb.getError().isEmpty()){
             gridPane.add(error, 0 ,0);
         }
-        gridPane.add(roomId, 0,1);
-        gridPane.add(startButton, 0,2);
-        gridPane.add(loadButton, 0 ,3);
+        gridPane.add(roomId, 140,70);
+        gridPane.add(startButton, 140,71);
+        gridPane.add(loadButton, 140 ,72);
+
+        //gridPane.setLayoutX();
 
         return gridPane;
     }

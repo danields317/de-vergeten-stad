@@ -13,6 +13,7 @@ import java.util.Random;
 /**
  * @author ryan
  */
+
 public class StormController {
 
     static StormController stormcontroller;
