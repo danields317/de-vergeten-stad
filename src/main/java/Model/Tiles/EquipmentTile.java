@@ -20,10 +20,6 @@ public class EquipmentTile extends Tile {
         return pad;
     }
 
-    public void geefEquipment(){
-        System.out.println("hoi ik ben een equipmentTile");
-    }
-
 
     /*public String vindJuistePNG(){
         String pad = null;

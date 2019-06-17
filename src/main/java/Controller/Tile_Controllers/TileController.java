@@ -158,23 +158,6 @@ public class TileController {
         }
     }
 
-    private void moveSpeler(int tileX, int tileY,int moveStormX, int moveStormY){
-        Player player = playerController.getPlayer();
-        int playerX = player.getX();
-        int playerY = player.getY();
-        if (playerX == tileX && playerY == tileY){
-            if (moveStormX == -1){
-                playerController.moveOost(false);
-            } else if (moveStormX == 1){
-                playerController.moveWest(false);
-            } else if (moveStormY == -1){
-                playerController.moveZuid(false);
-            } else if (moveStormY == 1){
-                playerController.moveNoord(false);
-            }
-        }
-    }
-
     private void beginZand(){
         randomTiles.get(2).addZandTegel();
         randomTiles.get(6).addZandTegel();
@@ -210,7 +193,6 @@ public class TileController {
         Tile tile = (getTileByLocation(y, x));
         if(tile.getClass().equals(EquipmentTile.class) || tile.getClass().equals(StartTile.class)){
             EquipmentTile eTile = (EquipmentTile) tile;
-            eTile.geefEquipment();
             //geef equipment
         }
         else if (tile.getClass().equals(Waterput.class)){

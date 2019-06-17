@@ -208,19 +208,15 @@ public class TileView implements BordObserver {
         for(PartTile.Soorten soort: onderdelen){
             if (soort.equals(PartTile.Soorten.OBELISK)){
                 beaconImageView.setOpacity(1);
-                System.out.println("het lukt");
             }
             else if (soort.equals(PartTile.Soorten.MOTOR)){
                 motorImageView.setOpacity(1);
-                System.out.println("het lukt");
             }
             else if(soort.equals(PartTile.Soorten.PROPELOR)){
                 propellerImageView.setOpacity(1);
-                System.out.println("het lukt");
             }
             else if(soort.equals(PartTile.Soorten.KOMPAS)){
                 wijzerImageView.setOpacity(1);
-                System.out.println("het lukt");
             }
         }
     }
