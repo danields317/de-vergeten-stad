@@ -9,7 +9,7 @@ public class Navigator_Controller extends PlayerController implements SpecialMov
 
     public Navigator_Controller(String nickname ) {
 
-        super( nickname, "Navigator", "PLACEHOLDER", 4, Color.YELLOW, "placeholder.png");
+        super( nickname, "Navigator", "PLACEHOLDER", 4, Color.YELLOW, "placeholder.png", Player.SpelerKlassen.NAVIGATOR);
 
     }
 }

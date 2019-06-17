@@ -11,7 +11,7 @@ public class Klimmer_Controller extends PlayerController implements SpecialMove 
 
     public Klimmer_Controller( String nickname ) {
 
-        super( nickname, "Klimmer", "PLACEHOLDER", 3, Color.BLACK, "placeholder.png");
+        super( nickname, "Klimmer", "PLACEHOLDER", 3, Color.BLACK, "placeholder.png", Player.SpelerKlassen.KLIMMER);
 
     }
 }

@@ -11,6 +11,7 @@ import observers.PlayerObserver;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Spliterator;
 
 public class Player implements PlayerObservable{
 
@@ -31,13 +32,43 @@ public class Player implements PlayerObservable{
 
 	public enum Richingen {NOORD, OOST, WEST, ZUID}
 
+	public enum SpelerKlassen {
+
+	    ARCHEOLOOG("Archeoloog"),
+        VERKENNER("Verkenner"),
+        WATERDRAGER("Waterdrager"),
+        KLIMMER("Klimmer"),
+	    NAVIGATOR("Navigator"),
+        METEOROLOOG("Meteoroloog");
+
+        private String klasse;
+
+        SpelerKlassen(String klasse) {
+            this.klasse = klasse;
+        }
+
+	    public SpelerKlassen getKlasse(String klasse){
+	        if (klasse.equals(SpelerKlassen.ARCHEOLOOG.toString())){
+	            return ARCHEOLOOG;
+            } else if (klasse.equals(SpelerKlassen.VERKENNER.toString())){
+                return VERKENNER;
+            } else if (klasse.equals(SpelerKlassen.WATERDRAGER.toString())){
+                return WATERDRAGER;
+            } else if (klasse.equals(SpelerKlassen.KLIMMER.toString())){
+                return KLIMMER;
+            }
+            return null;
+        }
+    }
+	SpelerKlassen klasse;
+
 	// List of all Observers of this Observable Objects
 	private List<PlayerObserver> observers = new ArrayList<PlayerObserver>();
 
 
 	/////////////////////////////////////// Constructor ///////////////////////////////////////
 	
-	public Player( String nickname, String className, String description, int maxWater, Color color, String imagePath ) {
+	public Player( String nickname, String className, String description, int maxWater, Color color, String imagePath, SpelerKlassen klasse ) {
 
 		this.nickname = nickname;
 		this.className = className;
@@ -50,8 +81,9 @@ public class Player implements PlayerObservable{
 
         actiesOver = 4;
 
+        this.klasse = klasse;
 	}
-	public Player( String nickname, String className, String description, int maxWater, int water, Color color, String imagePath ) {
+	public Player(String nickname, String className, String description, int maxWater, int water, Color color, String imagePath, SpelerKlassen klasse) {
 
 		this.nickname = nickname;
 		this.className = className;
@@ -64,6 +96,7 @@ public class Player implements PlayerObservable{
 
         actiesOver = 4;
 
+        this.klasse = klasse;
 	}
 	
 	/////////////////////////////////////// Methods ///////////////////////////////////////
@@ -193,6 +226,10 @@ public class Player implements PlayerObservable{
 	public Image getImage() {
 		return image;
 	}
+
+	public SpelerKlassen getKlasse(){
+	    return klasse;
+    }
 
 	public void register(PlayerObserver observer){
 		observers.add(observer);

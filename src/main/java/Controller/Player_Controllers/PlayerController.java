@@ -1,6 +1,8 @@
 package Controller.Player_Controllers;
 
 import Controller.Tile_Controllers.TileController;
+import Model.Bord.Onderdeel;
+import Model.Tiles.PartTile;
 import Model.Tiles.StartTile;
 import Model.Tiles.Storm;
 import Model.Tiles.Tile;
@@ -21,15 +23,16 @@ public class PlayerController {
 
     TileController tileController = TileController.getInstance();
 
-    public PlayerController(String className, int maxWater, int water, String imagePath){
-        player = new Player(staticData.getUsername(),className, "b", maxWater, water, Color.BLUE, imagePath);
+    public PlayerController(String className, int maxWater, int water, String imagePath, Player.SpelerKlassen klasse){
+        player = new Player(staticData.getUsername(),className, "b", maxWater, water, Color.BLUE, imagePath, klasse);
         spawnSpelers();
     }
 
 
-    public PlayerController(String n, String className, String b, int maxwater, Color color, String imagePath){
-        player = new Player(staticData.getUsername(),className, "b", 4, Color.BLUE, imagePath);
+    public PlayerController(String n, String className, String b, int maxwater, Color color, String imagePath, Player.SpelerKlassen klasse){
+        player = new Player(staticData.getUsername(),className, "b", 4, Color.BLUE, imagePath, klasse);
     }
+
     // Singleton Pattern.
     // now we can call: SpelbordController.getInstance()  from everywhere
     // AND it guarantees there is only 1 instance.
@@ -41,10 +44,11 @@ public class PlayerController {
                 Map classIn =((Map)(classInfo));
 //                System.out.println(((Long)(classIn.get("maxWater"))).intValue());
 //                System.out.println(((Map)(StaticData.getInstance()).getRoomInfo()).get("archeoloog"));
-                playercont = new PlayerController(((String)(classIn.get("name"))),
+                playercont = new PlayerController( ((String)(classIn.get("name"))),
                         ((Long)(classIn.get("maxWater"))).intValue(),
                         ((Long)(classIn.get("water"))).intValue(),
-                        ((String)(classIn.get("name"))) +".png");
+                        ((String)(classIn.get("name"))) +".png",
+                        Player.SpelerKlassen.WATERDRAGER);
             }
         }
         return playercont;
@@ -64,6 +68,7 @@ public class PlayerController {
             }
         }
         player.setLocatie(spawnTile.getX(), spawnTile.getY());
+        spawnTile.addSpeler(player);
     }
 
 
@@ -71,10 +76,7 @@ public class PlayerController {
         if(player.getY() > 0 && player.actiesOver()){
             Tile tileAbove = tileController.getTileByLocation((player.getY() - 1), player.getX());
             if(tileAbove.getZand() < 2 && !tileAbove.getClass().equals(Storm.class) && check) {
-                player.movePlayer(Player.Richingen.NOORD);
-                player.useAction();
-            } else if (!check && !tileAbove.getClass().equals(Storm.class)){
-                player.movePlayer(Player.Richingen.NOORD);
+                moveLogica(tileAbove, Player.Richingen.NOORD);
             }
             tileController.getTileByLocation((player.getY() + 1), player.getX()).notifyAllObservers();
             tileController.getTileByLocation(player.getY(), player.getX()).notifyAllObservers();
@@ -85,10 +87,7 @@ public class PlayerController {
         if(player.getY() < 4 && player.actiesOver()){
             Tile tileBeneath = tileController.getTileByLocation((player.getY() + 1), player.getX());
             if(tileBeneath.getZand() < 2 && !tileBeneath.getClass().equals(Storm.class) && check){
-                player.movePlayer(Player.Richingen.ZUID);
-                player.useAction();
-            } else if (!check && !tileBeneath.getClass().equals(Storm.class)){
-                player.movePlayer(Player.Richingen.ZUID);
+                moveLogica(tileBeneath, Player.Richingen.ZUID);
             }
             tileController.getTileByLocation((player.getY() - 1), player.getX()).notifyAllObservers();
             tileController.getTileByLocation(player.getY(), player.getX()).notifyAllObservers();
@@ -99,10 +98,7 @@ public class PlayerController {
         if(player.getX() < 4 && player.actiesOver()){
             Tile tileRight = tileController.getTileByLocation(player.getY(), (player.getX() + 1));
             if(tileRight.getZand() < 2 && !tileRight.getClass().equals(Storm.class) && check){
-                player.movePlayer(Player.Richingen.OOST);
-                player.useAction();
-            } else if (!check && !tileRight.getClass().equals(Storm.class)){
-                player.movePlayer(Player.Richingen.OOST);
+                moveLogica(tileRight, Player.Richingen.OOST);
             }
             tileController.getTileByLocation(player.getY(), (player.getX() - 1)).notifyAllObservers();
             tileController.getTileByLocation(player.getY(), player.getX()).notifyAllObservers();
@@ -113,14 +109,18 @@ public class PlayerController {
         if(player.getX() > 0 && player.actiesOver()){
             Tile tileLeft = tileController.getTileByLocation(player.getY(), (player.getX() -  1));
             if(tileLeft.getZand()  < 2 && !tileLeft.getClass().equals(Storm.class) && check){
-                player.movePlayer(Player.Richingen.WEST);
-                player.useAction();
-            } else if (!check && !tileLeft.getClass().equals(Storm.class)){
-                player.movePlayer(Player.Richingen.WEST);
+                moveLogica(tileLeft, Player.Richingen.WEST);
             }
             tileController.getTileByLocation(player.getY(), (player.getX() + 1)).notifyAllObservers();
             tileController.getTileByLocation(player.getY(), player.getX()).notifyAllObservers();
         }
+    }
+
+    public void moveLogica(Tile tile, Player.Richingen riching){
+        tileController.getTileByLocation(player.getY(), player.getX()).removeSpeler(player);
+        player.movePlayer(riching);
+        player.useAction();
+        tile.addSpeler(player);
     }
 
     public void tileActies(){
@@ -138,43 +138,44 @@ public class PlayerController {
     public void digHere(){
         if (player.actiesOver()){
             Tile locatie = tileController.getTileByLocation(player.getY(), player.getX());
-            locatie.removeZandTegel();
-            player.useAction();
+            digLogica(locatie);
         }
     }
 
     public void digNoord(){
         if(player.getY() > 0 && player.actiesOver()) {
             Tile locatie = tileController.getTileByLocation((player.getY() - 1), player.getX());
-            locatie.removeZandTegel();
-            player.useAction();
+            digLogica(locatie);
         }
     }
 
     public void digZuid(){
         if(player.getY() < 4 && player.actiesOver()) {
             Tile locatie = tileController.getTileByLocation((player.getY() + 1), player.getX());
-            locatie.removeZandTegel();
-            player.useAction();
+            digLogica(locatie);
         }
     }
 
     public void digOost(){
         if(player.getX() < 4 && player.actiesOver()) {
             Tile locatie = tileController.getTileByLocation(player.getY(), (player.getX() + 1));
-            locatie.removeZandTegel();
-            player.useAction();
+            digLogica(locatie);
         }
     }
 
     public void digWest(){
         if(player.getX() > 0 && player.actiesOver()) {
             Tile locatie = tileController.getTileByLocation(player.getY(), (player.getX() - 1));
+            digLogica(locatie);
+        }
+    }
+
+    private void digLogica(Tile locatie){
+        if (locatie.hasZand()){
             locatie.removeZandTegel();
             player.useAction();
         }
     }
-
 
 
     public void Uitgraven(){
