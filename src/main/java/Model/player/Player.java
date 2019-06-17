@@ -242,6 +242,10 @@ public class Player implements PlayerObservable{
 
 	}
 
+	public void getTweeActies(){
+		this.actiesOver = this.actiesOver + 2;
+	}
+
 	public void register(PlayerObserver observer){
 		observers.add(observer);
 	}

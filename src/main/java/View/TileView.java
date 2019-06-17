@@ -2,21 +2,16 @@ package View;
 
 import Controller.Player_Controllers.PlayerController;
 import Controller.Tile_Controllers.TileController;
-import Model.Bord.Onderdeel;
 import Model.Tiles.PartTile;
 import Model.Tiles.Tile;
 import Model.player.Player;
-import com.google.api.client.http.MultipartContent;
 import javafx.scene.control.Label;
-import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import observers.BordObservable;
 import observers.BordObserver;
-import observers.OnderdeelObservable;
-import observers.OnderdeelObserver;
 
 import java.util.ArrayList;
 
@@ -24,6 +19,7 @@ public class TileView implements BordObserver {
 
     TileController tileController;
     PlayerController playerController = PlayerController.getInstance();
+
     public final int tileSize = 105;
 
     StackPane stackPane;
@@ -48,7 +44,7 @@ public class TileView implements BordObserver {
 
     Image zandImage = new Image("/Tiles/Low_Sand.png");
     Image zandImageGeblokkeerd = new Image("/Tiles/High_Sand.png");
-    Image zonneschildImage = new Image("/placeholder.png");
+    Image zonneschildImage = new Image("/ingame_Sun_Shield.png");
 
     Image archeoloogImage = new Image("/Players/Archeoloog.png");
     Image klimmerImage = new Image("/Players/Klimmer.png");
@@ -144,10 +140,11 @@ public class TileView implements BordObserver {
         gridPane.add(waterdragerImageView, 2, 2);
 
         zonneschildImageView = new ImageView(zonneschildImage);
+        zonneschildImageView.setOpacity(0);
         zandImageView.setFitHeight(tileSize);
         zandImageView.setFitWidth(tileSize);
 
-        stackPane.getChildren().addAll(tileImageView, zandImageView, gridPane/*, zonneschildImageView*/);
+        stackPane.getChildren().addAll(tileImageView, zandImageView, gridPane, zonneschildImageView);
         stackPane.setMaxWidth(tileSize);
         stackPane.setMaxHeight(tileSize);
     }
@@ -221,6 +218,16 @@ public class TileView implements BordObserver {
         }
     }
 
+    public void checkZonneschild(boolean schild){
+        if(schild){
+            zonneschildImageView.setOpacity(0.4);
+        }
+        else{
+            zonneschildImageView.setOpacity(0);
+        }
+    }
+
+
     public void update(BordObservable bo){
         Tile tile = (Tile) bo;
         clearSpelers();
@@ -228,6 +235,7 @@ public class TileView implements BordObserver {
         checkZand(tile.getZand());
         checkSpelers(tile);
         checkOnderdelen(tile.getOnderdelen());
+        checkZonneschild(tile.hasZonneSchild());
     }
 
 }

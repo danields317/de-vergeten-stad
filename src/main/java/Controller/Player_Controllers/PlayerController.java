@@ -207,6 +207,7 @@ public class PlayerController {
 
 
     }
+
     public void registerObserver(PlayerObserver sbv) {
         player.register(sbv);
     }

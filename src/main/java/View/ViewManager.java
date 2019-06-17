@@ -181,7 +181,7 @@ public class ViewManager extends Application implements PlayerObserver, StormObs
         System.out.println("Ik ben boven dat ding");
         GridPane acties = acties_view.getView();
 
-        Group uitrusting = uitrustingview.getUitrusting();
+        StackPane uitrusting = uitrustingview.getUitrusting();
 
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.drawImage(backgroundImage, 0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());

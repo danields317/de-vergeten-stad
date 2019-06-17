@@ -19,6 +19,7 @@ public class Tile implements BordObservable{
     private Image discoveredImage;
 
     private int aantalZandTegels;
+    private boolean hasZonneSchild;
 
     private ArrayList<PartTile.Soorten> onderdelen;
     private ArrayList<Player> spelers;
@@ -50,7 +51,14 @@ public class Tile implements BordObservable{
     public void removeTweeZandTegels(){
         removeZandTegel();
         removeZandTegel();
+        notifyAllObservers();
     }
+
+    public void removeAllZand(){
+        this.aantalZandTegels = 0;
+        notifyAllObservers();
+    }
+
 
     public void discoverTile(){
         if (discovered || aantalZandTegels > 0) {return;}
@@ -116,10 +124,12 @@ public class Tile implements BordObservable{
 
     public void addSpeler(Player speler){
         spelers.add(speler);
+        notifyAllObservers();
     }
 
     public void removeSpeler(Player speler){
         spelers.remove(speler);
+        notifyAllObservers();
     }
 
     public boolean isDiscovered() { return discovered; }
@@ -130,5 +140,21 @@ public class Tile implements BordObservable{
 
     public int getY(){
         return y;
+    }
+
+    public void setZonneSchild(){
+        if(hasZonneSchild == false){
+            hasZonneSchild = true;
+            notifyAllObservers();
+        }
+    }
+
+    public void removeZonneSchild(){
+        hasZonneSchild = false;
+        notifyAllObservers();
+    }
+
+    public boolean hasZonneSchild(){
+        return hasZonneSchild;
     }
 }
