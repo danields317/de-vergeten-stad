@@ -50,7 +50,7 @@ public class FunctieController {
                 myObject.put(String.valueOf(i), obj);
             }else{
                 if((((Long) (((Map) singeClass).get("water"))).intValue() - 1) < 0){
-                    endLose();
+                    //endLose();
                 }
                 Map<String, Object> obj = new HashMap<String, Object>() {
                     {
