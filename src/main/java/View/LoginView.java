@@ -36,7 +36,7 @@ public class LoginView implements LoginObserver {
     Login_Controller loginController;
     TextField usernameField = new TextField();
     TextField passwordField = new TextField();
-    TextField roomId = new TextField("Kechs");
+    TextField roomId = new TextField("test");
 
     public LoginView(Stage s, ViewManager viewManager){
         this.viewManager = viewManager;
