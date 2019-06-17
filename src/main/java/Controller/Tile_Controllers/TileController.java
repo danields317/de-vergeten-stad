@@ -1,13 +1,14 @@
 package Controller.Tile_Controllers;
 
 import Controller.Player_Controllers.PlayerController;
+import Model.Bord.Onderdeel;
 import Model.Tiles.*;
 import Model.player.Player;
 import Model.storm.StormEventBeweging;
 import View.bord_views.SpeelbordView;
 import observers.BordObserver;
+import observers.OnderdeelObserver;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -20,6 +21,8 @@ public class TileController {
 
     ArrayList<Tile> tiles = new ArrayList<>();
     ArrayList<Tile> randomTiles = new ArrayList<>();
+    ArrayList<Onderdeel> onderdelen = new ArrayList<>();
+
 
     PlayerController playerController;
 
@@ -31,6 +34,7 @@ public class TileController {
         randomTiles.add(12, new Storm());
         beginZand();
         setTileLocations();
+        maakOnderdelen();
     }
 
     public static TileController getInstance(){
@@ -106,6 +110,14 @@ public class TileController {
             }
         }
     }
+
+    public void maakOnderdelen(){
+        onderdelen.add(new Onderdeel(PartTile.Soorten.OBELISK));
+        onderdelen.add(new Onderdeel(PartTile.Soorten.MOTOR));
+        onderdelen.add(new Onderdeel(PartTile.Soorten.KOMPAS));
+        onderdelen.add(new Onderdeel(PartTile.Soorten.PROPELOR));
+    }
+
 
     public void moveTileNoord(StormEventBeweging.Stappen stappen, int stormX, int stormY){
         moveTile(stappen, stormX, stormY,0,1);
@@ -189,8 +201,66 @@ public class TileController {
         this.counter++;
     }
 
-    public void notifyView(){
-        randomTiles.get(0).notifyAllObservers();
+    public void registerOnderdeelObserver(OnderdeelObserver ob){
+        for(int i = 0; i < 4; i++){
+        onderdelen.get(i).register(ob); }
+    }
+
+    public void useTileDiscoveredAction(int x, int y){
+        Tile tile = (getTileByLocation(y, x));
+        if(tile.getClass().equals(EquipmentTile.class) || tile.getClass().equals(StartTile.class)){
+            EquipmentTile Etile = (EquipmentTile) tile;
+            Etile.geefEquipment();
+            //geef equipment
+        }
+        else if (tile.getClass().equals(Waterput.class)){
+            Waterput Wtile = (Waterput) tile;
+            Wtile.geefWater();
+            //geef water
+        }
+        else if (tile.getClass().equals(Tunnel.class)){
+            Tunnel Ttile = (Tunnel) tile;
+            Ttile.geefSchaduw();
+            //geen zon brand
+        }
+        else if (tile.getClass().equals(PartTile.class)){
+            PartTile Ptile = (PartTile) tile;
+            geefHint(Ptile);
+            //ontdek hint
+        }
+        else if (tile.getClass().equals(Finish.class)){
+            Finish Ftile = (Finish) tile;
+            Ftile.isSpelKlaar();
+            //ga ff checken of je hebt gewonnen
+        }
+        else{
+            System.out.println("Dit gaat fout (Tilecontroller)");
+        }
+    }
+
+    public void geefHint(PartTile tile){
+        for(Onderdeel onderdeel:onderdelen){
+            if(tile.getSoort().equals(onderdeel.getSoort())){
+                if (tile.getRichting() == PartTile.Richtingen.OPZIJ){
+                    onderdeel.setY((tile.getY()));
+                    checkOnderdeelSpawned(onderdeel);
+                }
+                else if(tile.getRichting() == PartTile.Richtingen.OMHOOG){
+                    onderdeel.setX((tile.getX()));
+                    checkOnderdeelSpawned(onderdeel);
+                }
+                else{
+                    System.out.println("gaat fout lol (tilecontroller)");
+                }
+            }
+        }
+    }
+
+    public void checkOnderdeelSpawned(Onderdeel onderdeel){
+        if(!(onderdeel.getY() == -1) && !(onderdeel.getX() == -1)) {
+            Tile onderdeelSpawn = getTileByLocation(onderdeel.getY(), onderdeel.getX());
+            onderdeelSpawn.setOnderdeel(onderdeel.getSoort());
+        }
     }
 
     public ArrayList<Tile> getTiles(){
