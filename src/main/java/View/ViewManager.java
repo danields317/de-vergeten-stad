@@ -2,7 +2,6 @@ package View;
 
 import Controller.Player_Controllers.PlayerController;
 import Controller.Tile_Controllers.StormController;
-import Controller.Tile_Controllers.TileController;
 import View.bord_views.*;
 import javafx.application.Application;
 import javafx.scene.Group;
@@ -30,7 +29,7 @@ public class ViewManager extends Application{
     SpeelbordView speelbordview = new SpeelbordView();  //maak speelbord tiles
     //    SpelerView spelerview = new SpelerView();           //maak speler poppetjes en zijkant informatie
     //StormView stormview = new StormView();              //maak storm en stormmeter
-    UitrustingView uitrustingview = new UitrustingView();   //maak uitrusting plaatsen
+    EquipmentView uitrustingview = new EquipmentView();   //maak uitrusting plaatsen
     WaterflesView waterflesView;      //maak waterfles stand
     StormMeterView stormMeterView = new StormMeterView(); //maak stormmetertekentje
     SpeelbordView speelbordView = SpeelbordView.getInstance();
