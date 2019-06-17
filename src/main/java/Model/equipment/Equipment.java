@@ -9,14 +9,13 @@ public class Equipment {
 
 	private String naam;
 	private String description;
-	private Image image;
+
 	/////////////////////////////////////// Constructor ///////////////////////////////////////
 	
-	public Equipment(String naam, String description, String imagePath, EquipmentKaarten equipmentType) {
+	public Equipment(String naam, String description, EquipmentKaarten equipmentType) {
 
 		this.naam = naam;
 		this.description = description;
-		this.image = new Image(imagePath);
 		this.equipmentKaart = equipmentType;
 	}
 	
@@ -33,12 +32,7 @@ public class Equipment {
 	public String getDescription() {
 		return description;
 	}
-	
-	public Image getImage() {
-		return image;
-	}
-	
-	public void setImage() { }
+
 	public EquipmentKaarten getEquipmentType() {return equipmentKaart;}
 
 
