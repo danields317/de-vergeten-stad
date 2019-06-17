@@ -64,8 +64,6 @@ public class PlayerController {
             }
         }
         player.setLocatie(spawnTile.getX(), spawnTile.getY());
-        System.out.println(spawnTile.getX() + " " +  spawnTile.getY());
-        System.out.println("set spawn playercontroller");
     }
 
 
