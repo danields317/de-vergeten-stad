@@ -6,8 +6,8 @@ public class Duinkanon extends Equipment {
 
 	public Duinkanon() {
 	
-		super( "Duinkanon","Verwijder alle zandtegels van de tegel waarop je staat of van een aangrenzende tegel.", "placeholder.png");
-	
+		super( "Duinkanon","Verwijder alle zandtegels van de tegel waarop je staat of van een aangrenzende tegel.", "/placeholder.png");
+		this.equipmentKaart = EquipmentKaarten.DUINKANON;
 	}
 
 }

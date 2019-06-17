@@ -5,7 +5,6 @@ import javafx.scene.image.Image;
 import observers.BordObservable;
 import observers.BordObserver;
 
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 
 public class Tile implements BordObservable{
@@ -15,60 +14,54 @@ public class Tile implements BordObservable{
     public enum Varianten{EQUIPMENT, FATAMORGANA, PART, TUNNEL, WATERPUT, FINISH}
     private Varianten variant;
 
-    private boolean isDiscovered;
+    private boolean discovered;
     private Image undiscoveredImage;
     private Image discoveredImage;
-    private Image currentImage; //zet hier de discoverd of undiscoverd image en geef deze door naar de manager
 
     private int aantalZandTegels;
 
-    private ArrayList<PartTile> onderdelen;
+    private ArrayList<PartTile.Soorten> onderdelen;
     private ArrayList<Player> spelers;
 
     private int x;
     private int y;
 
-    public Tile(String undiscovered, String discovered, Varianten variant){
-        undiscoveredImage = new Image(undiscovered);
-        discoveredImage = new Image(discovered);
-        currentImage = discoveredImage;
+    public Tile(String undiscoveredImage, String discoveredImage, Varianten variant){
+        this.undiscoveredImage = new Image(undiscoveredImage);
+        this.discoveredImage = new Image(discoveredImage);
         onderdelen = new ArrayList<>();
         spelers = new ArrayList<>();
-        isDiscovered = false;
-        this.undiscoveredImage = new Image(undiscovered);
-        this.discoveredImage = new Image(discovered);
+        discovered = false;
         this.variant = variant;
     }
 
     public void addZandTegel(){
         aantalZandTegels += 1;
+        notifyAllObservers();
     }
 
     public void removeZandTegel(){
-        if (aantalZandTegels > 0){
-            aantalZandTegels -= 1;
-        }
+        if (aantalZandTegels == 0) {return;}
+
+        aantalZandTegels -= 1;
+        notifyAllObservers();
     }
 
     public void removeTweeZandTegels(){
-        if (aantalZandTegels == 1){
-            aantalZandTegels -= 1;
-        }
-        else if (aantalZandTegels > 1){
-            aantalZandTegels -= 2;
-        }
+        removeZandTegel();
+        removeZandTegel();
     }
 
     public void discoverTile(){
-        if (!isDiscovered){
-            isDiscovered = true;
-        }
+        if (discovered || aantalZandTegels > 0) {return;}
+
+        discovered = true;
+        notifyAllObservers();
     }
 
     public Varianten getVariant(){
         return variant;
     }
-
 	public void register(BordObserver bo){
 	    observers.add(bo);
     }
@@ -81,26 +74,42 @@ public class Tile implements BordObservable{
 
     public void setDiscoveredImage(String pad){
         this.discoveredImage = new Image(pad);
-        setCurrentImage(discoveredImage);
+//        setCurrentImage(discoveredImage);
+        notifyAllObservers();
     }
 
-    public void setCurrentImage(Image image){
-        this.currentImage = image;
+    public void setUndiscoveredImage(String pad){
+        this.undiscoveredImage = new Image(pad);
+//        setCurrentImage(discoveredImage);
+        notifyAllObservers();
     }
 
     public Image getImage(){
-        return currentImage;
+        if (discovered) {
+            return discoveredImage;
+        } else {
+            return undiscoveredImage;
+        }
+    }
+
+    public void setOnderdeel(PartTile.Soorten onderdeel){
+        onderdelen.add(onderdeel);
+        notifyAllObservers();
     }
 
     public int getZand() { return aantalZandTegels; }
-
-
-    public ArrayList getSpelers(){ return spelers;}
 
     public void setLocation(int x, int y){
         this.x = x;
         this.y = y;
     }
+
+    public ArrayList <PartTile.Soorten> getOnderdelen(){
+        return onderdelen;
+    }
+
+
+    public boolean isDiscovered() { return discovered; }
 
     public int getX(){
         return x;
@@ -109,5 +118,4 @@ public class Tile implements BordObservable{
     public int getY(){
         return y;
     }
-
 }

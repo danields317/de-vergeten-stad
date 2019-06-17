@@ -1,10 +1,6 @@
 package View.bord_views;
 
-import Controller.Bord_Controllers.LoadBord_Controller;
 import Controller.Bord_Controllers.Water_Controller;
-import Controller.Player_Controllers.Player_Controller;
-import Model.data.StaticData;
-import firebase.FirebaseService;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
@@ -15,22 +11,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import observers.LoadBordObservable;
 import observers.WaterObservable;
 import observers.WaterObserver;
 
-import java.util.Map;
-
 public class WaterflesView implements WaterObserver {
-
-    static WaterflesView waterflesView;
-
-    public static WaterflesView getInstance(){
-        if (waterflesView == null){
-            waterflesView = new WaterflesView();
-        }
-        return waterflesView;
-    }
 
 
     String kaart = "Homescreenempty.png";

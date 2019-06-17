@@ -91,14 +91,6 @@ public class Login implements LoginObservable {
         }
     }
 
-    public void increaseScore(){
-        System.out.println("Spelbord - score increased");
-        scorePlayer1++;
-
-        // SOMETHING Changed !!  - We need to notify the observers !
-        notifyAllObservers();
-    }
-
     // Add an observer to the list
     public void register(LoginObserver observer){
         observers.add(observer);

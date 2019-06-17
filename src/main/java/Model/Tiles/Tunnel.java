@@ -11,6 +11,10 @@ public class Tunnel extends Tile {
 		this.equipment = equipment;
 	}
 
+	public void geefSchaduw(){
+		System.out.println("Hoi ik been een tunnel");
+	}
+
     public Equipment getEquipment() {
         return equipment;
     }

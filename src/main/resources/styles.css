@@ -18,11 +18,11 @@
     -fx-padding: 0.3em 0 0 0.3em;
 }
 
-.label
+/*.label
 {
-    -fx-effect: dropshadow( gaussian, rgb(255,255,255) , 2,2,0,0 );
+    -fx-text-fill: #FFF;
     -fx-font-weight: bold;
-}
+}*/
 
 .tile
 {
@@ -43,5 +43,13 @@
 
 .tile .label
 {
+    -fx-text-fill: #000;
+    -fx-effect: dropshadow( gaussian, rgb(255,255,255) , 2,2,0,0 );
+    -fx-font-weight: bold;
     -fx-font-size: 2em;
+}
+
+.tile .speler
+{
+    -fx-effect: dropshadow( gaussian, rgb(255,255,255) , 2,2,0,0 );
 }

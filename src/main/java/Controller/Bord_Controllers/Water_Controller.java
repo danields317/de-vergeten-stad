@@ -1,6 +1,6 @@
 package Controller.Bord_Controllers;
 
-import Controller.Player_Controllers.Player_Controller;
+import Controller.Player_Controllers.PlayerController;
 import Model.player.Water;
 import observers.*;
 
@@ -8,7 +8,7 @@ public class Water_Controller implements PlayerObserver {
 
 
     static Water_Controller waterController;
-    Player_Controller playerController = Player_Controller.getInstance();
+    PlayerController playerController = PlayerController.getInstance();
     Water water;
 
     public Water_Controller(){

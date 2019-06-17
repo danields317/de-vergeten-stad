@@ -1,27 +1,24 @@
 package Model.player;
 
-import Controller.Equipment_Controllers.Equipment_Controller;
-import Model.storm.StormEventBeweging;
+import Controller.Equipment_Controllers.EquipmentController;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import Model.Tiles.Tile;
 import Model.equipment.Equipment;
+import observers.*;
 import observers.PlayerObservable;
 import observers.PlayerObserver;
-import observers.WaterObserver;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Player implements PlayerObservable {
+public class Player implements PlayerObservable{
 
 	private String nickname; // Naam ingevoerd door de speler
-	private Equipment_Controller[] inventory;
+	private EquipmentController[] inventory;
 	private int water;
 	private int actiesOver;
-	private int x;
-	private int y;
-	private Tile tile;
+	private Tile tile; // De tile waar de speler op staat
 	
 	// Informatie over de speler klasse
 	private String className;
@@ -29,6 +26,8 @@ public class Player implements PlayerObservable {
 	private int maxWater;
 	private Color color;
 	private Image image;
+	private int x;
+	private int y;
 
 	public enum Richingen {NOORD, OOST, WEST, ZUID}
 
@@ -49,6 +48,8 @@ public class Player implements PlayerObservable {
 		this.maxWater = maxWater;
 		water = maxWater;
 
+        actiesOver = 4;
+
 	}
 	public Player( String nickname, String className, String description, int maxWater, int water, Color color, String imagePath ) {
 
@@ -60,6 +61,8 @@ public class Player implements PlayerObservable {
 
 		this.maxWater = maxWater;
 		this.water = water;
+
+        actiesOver = 4;
 
 	}
 	
@@ -107,10 +110,8 @@ public class Player implements PlayerObservable {
     }
 
     private void move(int moveX, int moveY){
-	    if (x < 5 && x >= 0 && y < 5 && y >= 0){
-	        x = x + moveX;
-	        y = y + moveY;
-        }
+		x = x + moveX;
+		y = y + moveY;
     }
 	/////////////////////////////////////// Getters & Setters ///////////////////////////////////////
 	
@@ -127,7 +128,7 @@ public class Player implements PlayerObservable {
 	public void subtractWater(int water ) {
 		
 		this.water = this.water - water;
-		System.out.println("Ikzit inde water");
+
 		if (this.water <= 0) {
 			this.water++;
 		}
@@ -140,6 +141,13 @@ public class Player implements PlayerObservable {
         }
     }
 
+    public boolean actiesOver(){
+        return actiesOver > 0;
+    }
+
+    public void refillActions(){
+        actiesOver = 4;
+    }
 
 	public int getMaxWater() {
 		return maxWater;
@@ -149,12 +157,17 @@ public class Player implements PlayerObservable {
 		return nickname;
 	}
 
-	public Equipment_Controller[] getInventory() {
+	public EquipmentController[] getInventory() {
 		return inventory;
 	}
 
-	public int getActiesOver() {
+	public int getActies() {
 		return actiesOver;
+	}
+
+	public void setLocatie(int x, int y){
+		this.x = x;
+		this.y = y;
 	}
 
 	public int getX() {
@@ -188,11 +201,7 @@ public class Player implements PlayerObservable {
 	// Signal all observers that something has changed.
 	// Also send <<this>> object to the observers.
 	public void notifyAllObservers(){
-		System.out.println("Notify");
-
 		for (PlayerObserver s : observers) {
-			System.out.println(s + "Player Model");
-
 			s.update(this);
 		}
 	}

@@ -5,5 +5,9 @@ public class Finish extends Tile {
 	public Finish() {
 		super("/Tiles/Undiscovered.png", "/Tiles/Landing_Place.png", Varianten.FINISH);
 	}
+
+	public void isSpelKlaar(){
+		System.out.println("hoi ik ben een Finish tile");
+	}
 	
 }

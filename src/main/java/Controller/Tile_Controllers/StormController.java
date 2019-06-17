@@ -1,7 +1,7 @@
 package Controller.Tile_Controllers;
 
 import Controller.Controller;
-import Model.Tiles.Tile;
+import Controller.Player_Controllers.PlayerController;
 import Model.storm.Storm;
 import Model.storm.StormEvent;
 import Model.storm.StormEventBeweging;
@@ -99,19 +99,16 @@ public class StormController {
                 switch (stormEvent.naam){
                     case BEWEGING:
                         beweegStorm(((StormEventBeweging) stormEvent).richting, ((StormEventBeweging) stormEvent).stappen);
-                        System.out.println("Beweeg, StormController");
                         break;
                     case BRANDT:
                         Controller controller = Controller.getInstance();
                         controller.verwijderZand();
-                        System.out.println("NU DOE IK WATER, StormController");
                         break;
                     case STERKER:
                         storm.stormWordtSterker();
-                        System.out.println("NU DOE IK STERKERDER WORDEN, StormController");
                         break;
                     default:
-                        System.out.println("DIT HOORT NIET, StormController");
+                        System.out.println("DIT HOORT NIET");
                 }
                 stapelCounter++;
             }else{
@@ -121,25 +118,24 @@ public class StormController {
             }
         }
         storm.notifyAllObservers();
-        tileController.notifyObservers();
     }
 
     private void beweegStorm(StormEventBeweging.Richtingen richting, StormEventBeweging.Stappen stappen){
         switch (richting){
             case NOORD:
-                tileController.moveTiles(richting, stappen, storm.getX(), storm.getY());
+                tileController.moveTileZuid(stappen, storm.getX(), storm.getY());
                 storm.beweegNoord(stappen);
                 break;
             case OOST:
-                tileController.moveTiles(richting, stappen, storm.getX(), storm.getY());
+                tileController.moveTileWest(stappen, storm.getX(), storm.getY());
                 storm.beweegOost(stappen);
                 break;
             case ZUID:
-                tileController.moveTiles(richting, stappen, storm.getX(), storm.getY());
+                tileController.moveTileNoord(stappen, storm.getX(), storm.getY());
                 storm.beweegZuid(stappen);
                 break;
             case WEST:
-                tileController.moveTiles(richting, stappen, storm.getX(), storm.getY());
+                tileController.moveTileOost(stappen, storm.getX(), storm.getY());
                 storm.beweegWest(stappen);
                 break;
             default:

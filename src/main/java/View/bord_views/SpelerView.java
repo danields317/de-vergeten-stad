@@ -1,34 +1,11 @@
 package View.bord_views;
 
-import Controller.Equipment_Controllers.Equipment_Controller;
-import Controller.Player_Controllers.Archeoloog_Controller;
-import Controller.Player_Controllers.Klimmer_Controller;
-import Controller.Player_Controllers.Meteooroloog_Controller;
-import Controller.Player_Controllers.Navigator_Controller;
-import Controller.Player_Controllers.Verkenner_Controller;
-import Controller.Player_Controllers.Waterdrager_Controller;
-import Controller.Player_Controllers.Player_Controller;
-import Model.equipment.Equipment;
-import javafx.event.EventHandler;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-
-import java.util.ArrayList;
-
 public class SpelerView {
-
-    public GridPane maakSpelerGrid(ArrayList spelers){
-        GridPane spelerGrid = new GridPane();
-        return spelerGrid;
-    }
 
     /*public enum spelerKlasse {ARCHEOLOOG, KLIMMER, METEOOROLOOG, NAVIGATOR, VERKENNER, WATERDRAGER };
 
     static HBox inventoryView;
-    Player_Controller spelerController;
+    PlayerController spelerController;
 
     public SpelerView(spelerKlasse klasse, String nickname) {
 
@@ -69,7 +46,7 @@ public class SpelerView {
 
         inventoryView.getChildren().removeAll();
 
-        for (Equipment_Controller equipmentController: spelerController.getInventory()) {
+        for (EquipmentController equipmentController: spelerController.getInventory()) {
 
             ImageView imageView = new ImageView(equipmentController.getImage());
             inventoryView.getChildren().add(imageView);
