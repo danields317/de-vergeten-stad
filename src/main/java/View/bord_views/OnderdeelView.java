@@ -142,7 +142,6 @@ public class OnderdeelView implements OnderdeelObserver {
             zonnewijzerLabel.setText("X:" + x + " Y:" + y);
         }
         else if(onderdeel.getSoort().equals(PartTile.Soorten.MOTOR)){
-            System.out.println("motor");
             motorLabel.setText("X:" + x + " Y:" + y);
         }
         else if(onderdeel.getSoort().equals(PartTile.Soorten.PROPELOR)){
@@ -174,6 +173,5 @@ public class OnderdeelView implements OnderdeelObserver {
     public void update(OnderdeelObservable ob) {
         Onderdeel onderdeel = (Onderdeel) ob;
         checkHints(onderdeel);
-        System.out.println(onderdeel.getSoort());
     }
 }
