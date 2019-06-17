@@ -5,6 +5,7 @@ import Controller.Tile_Controllers.TileController;
 import Model.Bord.Onderdeel;
 import Model.Tiles.PartTile;
 import Model.Tiles.Tile;
+import Model.player.Player;
 import com.google.api.client.http.MultipartContent;
 import javafx.scene.control.Label;
 import javafx.scene.effect.ColorAdjust;
@@ -166,16 +167,22 @@ public class TileView implements BordObserver {
         waterdragerImageView.setOpacity(0);
     }
 
-    private void checkSpelers(int x, int y){
+//    private void checkSpelers(int x, int y){
+//
+//        int pX = playerController.getPlayer().getX();
+//        int pY = playerController.getPlayer().getY();
+//
+//        if(pX == x && pY == y){
+////            System.out.println("tileX:" + x + " tileY:" + y + "TileView");
+////            System.out.println("spelerX:" + pX + " spelerY" + pY);
+//            archeoloogImageView.setOpacity(1);
+//            klimmerImageView.setOpacity(1);
+//        }
+//    }
 
-        int pX = playerController.getPlayer().getX();
-        int pY = playerController.getPlayer().getY();
+    public void checkSpelers(Tile tile){
+        for (Player speler : tile.getSpelers()){
 
-        if(pX == x && pY == y){
-//            System.out.println("tileX:" + x + " tileY:" + y + "TileView");
-//            System.out.println("spelerX:" + pX + " spelerY" + pY);
-            archeoloogImageView.setOpacity(1);
-            klimmerImageView.setOpacity(1);
         }
     }
 
@@ -227,7 +234,7 @@ public class TileView implements BordObserver {
         clearSpelers();
         tileImageView.setImage(tile.getImage());
         checkZand(tile.getZand());
-        checkSpelers(tile.getX(), tile.getY());
+        checkSpelers(tile);
         checkOnderdelen(tile.getOnderdelen());
     }
 

@@ -11,6 +11,7 @@ import observers.PlayerObserver;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Spliterator;
 
 public class Player implements PlayerObservable{
 
@@ -31,13 +32,16 @@ public class Player implements PlayerObservable{
 
 	public enum Richingen {NOORD, OOST, WEST, ZUID}
 
+	public enum SpelerKlassen {ARCHEOLOOG, VERKENNER, WATERDRAGGER, KLIMMER}
+	SpelerKlassen klasse;
+
 	// List of all Observers of this Observable Objects
 	private List<PlayerObserver> observers = new ArrayList<PlayerObserver>();
 
 
 	/////////////////////////////////////// Constructor ///////////////////////////////////////
 	
-	public Player( String nickname, String className, String description, int maxWater, Color color, String imagePath ) {
+	public Player( String nickname, String className, String description, int maxWater, Color color, String imagePath, SpelerKlassen klasse ) {
 
 		this.nickname = nickname;
 		this.className = className;
@@ -50,8 +54,9 @@ public class Player implements PlayerObservable{
 
         actiesOver = 4;
 
+        this.klasse = klasse;
 	}
-	public Player( String nickname, String className, String description, int maxWater, int water, Color color, String imagePath ) {
+	public Player(String nickname, String className, String description, int maxWater, int water, Color color, String imagePath, SpelerKlassen klasse) {
 
 		this.nickname = nickname;
 		this.className = className;
@@ -64,6 +69,7 @@ public class Player implements PlayerObservable{
 
         actiesOver = 4;
 
+        this.klasse = klasse;
 	}
 	
 	/////////////////////////////////////// Methods ///////////////////////////////////////

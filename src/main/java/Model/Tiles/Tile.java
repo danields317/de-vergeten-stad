@@ -108,6 +108,15 @@ public class Tile implements BordObservable{
         return onderdelen;
     }
 
+    public ArrayList<Player> getSpelers(){ return  spelers; }
+
+    public void addSpeler(Player speler){
+        spelers.add(speler);
+    }
+
+    public void removeSpeler(Player speler){
+        spelers.remove(speler);
+    }
 
     public boolean isDiscovered() { return discovered; }
 

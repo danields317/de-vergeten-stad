@@ -9,7 +9,7 @@ public class Verkenner_Controller extends PlayerController implements SpecialMov
 
     public Verkenner_Controller( String nickname ) {
 
-        super( nickname, "Verkenner", "PLACEHOLDER", 4, Color.GREEN, "placeholder.png");
+        super( nickname, "Verkenner", "PLACEHOLDER", 4, Color.GREEN, "placeholder.png", Player.SpelerKlassen.VERKENNER);
 
     }
 }
