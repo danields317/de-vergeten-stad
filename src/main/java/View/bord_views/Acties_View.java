@@ -42,7 +42,6 @@ public class Acties_View implements Acties_Observer {
     }
 
     public static GridPane getView() {
-        System.out.println("lo");
         return view;
     }
 }

@@ -78,12 +78,11 @@ public class SpeelbordView{
         Player speler = playerController.getPlayer();
         Tile playerTile = tileController.getTileByLocation(speler.getY(), speler.getX());
         Tile clickedTile = tileController.getTileByLocation(y, x);
-        if (clickedTile.getVariant() == Tile.Varianten.TUNNEL && playerTile.getVariant() == Tile.Varianten.TUNNEL){
+        if (clickedTile.getVariant() == Tile.Varianten.TUNNEL && playerTile.getVariant() == Tile.Varianten.TUNNEL && clickedTile.isDiscovered() && playerTile.isDiscovered() && playerTile.getZand() < 2 && clickedTile.getZand() < 2){
             speler.setLocatie(x, y);
             playerTile.removeSpeler(speler);
             clickedTile.addSpeler(speler);
             speler.useAction();
-            playerController.update();
         }
         else if(aardekijkerSelected){
             equipmentController.gebruikAardekijker(x , y);
