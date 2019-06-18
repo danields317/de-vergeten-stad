@@ -4,6 +4,7 @@ package Controller.Bord_Controllers;
 import javax.sound.sampled.*;
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 
 public class SoundController implements Runnable {
@@ -26,7 +27,7 @@ public class SoundController implements Runnable {
 
     public void run()
     {
-        String[] songs = {"n.wav", "i.wav", "tati.wav", "m.wav", "C.wav", "k.wav", "dat_boi.wav",  "i_am.wav", "s.wav"};
+        String[] songs = {"nTest.wav", "iTest.wav", "tatiTest.wav", "mTest.wav", "CTest.wav", "kTest.wav", "dat_boiTest.wav",  "i_amTest.wav", "sTest.wav"};
         while(true) {
             System.out.println("start");
             int random = (int) (Math.random() * songs.length);
@@ -41,8 +42,14 @@ public class SoundController implements Runnable {
 
     private void playSound(String fileName)
     {
-        File soundFile = new File(ClassLoader.getSystemClassLoader().getResource("Sound/" + fileName).getFile());
+        File soundFile = null;
+        try {
+            soundFile = new File(getClass().getResource("/Sound/" + fileName).toURI().getPath());
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
         AudioInputStream audioInputStream = null;
+
         try
         {
             audioInputStream = AudioSystem.getAudioInputStream(soundFile);

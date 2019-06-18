@@ -6,7 +6,6 @@ import Model.data.StaticData;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.jar.Attributes;
 
 public class FunctieController {
     private static FunctieController functieController;
@@ -71,6 +70,6 @@ public class FunctieController {
 
     public void endLose(){
         SoundController sound = new SoundController();
-        sound.play("Sound/n.wav");
+        sound.play("Sound/nTest.wav");
     }
 }
