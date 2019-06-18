@@ -39,7 +39,6 @@ public class SpeelbordView{
         spelbord.setLayoutY(75);
         tileController = TileController.getInstance();
         ArrayList<Tile> tiles = tileController.getTiles();
-        System.out.println(tiles.size());
         for(int i = 0; i < tiles.size(); i ++){
 
             Tile tile = tiles.get(i);

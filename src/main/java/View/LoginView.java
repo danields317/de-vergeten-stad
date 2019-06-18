@@ -1,6 +1,7 @@
 package View;
 
 import Controller.Login_Controllers.Login_Controller;
+import Controller.firebase_controllers.UpdateFirebaseController;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -15,6 +16,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import observers.*;
@@ -34,7 +37,7 @@ public class LoginView implements LoginObserver {
     Login_Controller loginController;
     TextField usernameField = new TextField();
     TextField passwordField = new TextField();
-    TextField roomId = new TextField("t3PuQAWO6mrKfqaFISN0");
+    TextField roomId = new TextField("test");
 
     public LoginView(Stage s, ViewManager viewManager){
         this.viewManager = viewManager;
@@ -56,6 +59,7 @@ public class LoginView implements LoginObserver {
 
             Group group = new Group(canvas, root);
             Scene scene = new Scene(group);
+            scene.getStylesheets().add("/css/login.css");
             primaryStage.setScene(scene);
             primaryStage.setTitle("WELCOME TO THE GAME");
             primaryStage.setX(windowAnchorX);
@@ -70,7 +74,15 @@ public class LoginView implements LoginObserver {
     }
 
     private GridPane createInitialGridPane(){
-        Text scoreText = new Text("Player Score");
+
+        Text text1 = new Text("Username:");
+        Text text2 = new Text("Password:");
+
+        //Set style
+        text1.setFill(Color.WHITE);
+        text1.setFont(Font.font(null,FontWeight.BOLD, 18));
+        text2.setFill(Color.WHITE);
+        text2.setFont(Font.font(null,FontWeight.BOLD, 18));
 
         Button submitButton = new Button("Submit");
         submitButton.addEventFilter(MouseEvent.MOUSE_CLICKED, submitClicked);
@@ -84,10 +96,11 @@ public class LoginView implements LoginObserver {
 
         //gridPane.add(image, 0, 0);
         //gridPane.add(scoreText, 1, 0);
-
-        gridPane.add(usernameField, 140, 70);
-        gridPane.add(passwordField, 140,71);
-        gridPane.add(submitButton, 140,72);
+        gridPane.add(text1, 140, 70);
+        gridPane.add(usernameField, 140, 71);
+        gridPane.add(text2, 140,72);
+        gridPane.add(passwordField, 140,73);
+        gridPane.add(submitButton, 140,74);
 
         return gridPane;
     }
@@ -124,14 +137,21 @@ public class LoginView implements LoginObserver {
         gridPane.add(startButton, 140,71);
         gridPane.add(loadButton, 140 ,72);
 
-        //gridPane.setLayoutX();
-
         return gridPane;
     }
 
     public GridPane loginIncorrect(LoginObservable sb){
         Text error = new Text(sb.getError());
+        Text text1 = new Text("Username:");
+        Text text2 = new Text("Password:");
+
+        //Set style
+        text1.setFill(Color.WHITE);
+        text1.setFont(Font.font(null,FontWeight.BOLD, 18));
+        text2.setFill(Color.WHITE);
+        text2.setFont(Font.font(null,FontWeight.BOLD, 18));
         error.setFill(Color.RED);
+
         Button submitButton = new Button("Submit");
         submitButton.addEventFilter(MouseEvent.MOUSE_CLICKED, submitClicked);
         usernameField.setText(sb.getGivenUsername());
@@ -148,10 +168,12 @@ public class LoginView implements LoginObserver {
 //        gridPane.add(image, 0, 0);
 //        gridPane.add(scoreText, 1, 0);
 //        gridPane.add(usernameField, 1, 1);
-        gridPane.add(error, 0 ,0);
-        gridPane.add(usernameField, 0, 1);
-        gridPane.add(passwordField, 0,2);
-        gridPane.add(submitButton, 0,3);
+        gridPane.add(error, 140 ,69);
+        gridPane.add(text1, 140, 70);
+        gridPane.add(usernameField, 140, 71);
+        gridPane.add(text2, 140,72);
+        gridPane.add(passwordField, 140,73);
+        gridPane.add(submitButton, 140,74);
 
         return gridPane;
     }
@@ -173,7 +195,8 @@ public class LoginView implements LoginObserver {
     EventHandler<MouseEvent> startClicked = new EventHandler<MouseEvent>() {
         @Override
         public void handle(MouseEvent e) {
-            viewManager.loadGameView();
+            (UpdateFirebaseController.getInstance()).makeFirebase(roomId.getText());
+            //
 
         }
     };

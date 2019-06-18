@@ -34,6 +34,7 @@ public class Water_Controller implements PlayerObserver {
         playerController.registerObserver((PlayerObserver) this);
     }
     public void update(PlayerObservable sb){
-        water.updateWater(sb.getMaxWater(), sb.getWater());}
+        water.updateWater(sb.getMaxWater(), sb.getWater());
+    }
 
 }

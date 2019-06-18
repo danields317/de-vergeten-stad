@@ -1,6 +1,7 @@
 package Controller.Tile_Controllers;
 
 import Controller.Controller;
+import Controller.Player_Controllers.FunctieController;
 import Controller.Player_Controllers.PlayerController;
 import Model.storm.Storm;
 import Model.storm.StormEvent;
@@ -13,6 +14,7 @@ import java.util.Random;
 /**
  * @author ryan
  */
+
 public class StormController {
 
     static StormController stormcontroller;
@@ -98,11 +100,13 @@ public class StormController {
                 StormEvent stormEvent = randomStormEvents.get(stapelCounter);
                 switch (stormEvent.naam){
                     case BEWEGING:
+                        System.out.println(((StormEventBeweging) stormEvent).richting + " " + ((StormEventBeweging) stormEvent).stappen);
                         beweegStorm(((StormEventBeweging) stormEvent).richting, ((StormEventBeweging) stormEvent).stappen);
                         break;
                     case BRANDT:
                         Controller controller = Controller.getInstance();
                         controller.verwijderZand();
+                        (FunctieController.getInstance()).updateInfo();
                         break;
                     case STERKER:
                         storm.stormWordtSterker();
@@ -145,6 +149,8 @@ public class StormController {
     }
 
     public void registerObserver(StormObserver bo){ storm.register(bo); }
+
+    public void update(){storm.notifyAllObservers();};
 
 
 }

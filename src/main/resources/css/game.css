@@ -1,0 +1,92 @@
+.button
+{
+    -fx-background-color: none;
+    -fx-border-style: none;
+    -fx-font-size: 1.5em;
+    -fx-cursor: hand;
+    -fx-text-alignment: center;
+}
+
+/*.label
+{
+    -fx-text-fill: #FFF;
+    -fx-font-weight: bold;
+}*/
+
+.tile
+{
+    -fx-cursor: hand;
+}
+
+.tile:hover
+{
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
+}
+
+.tile:pressed
+{
+    -fx-scale-x: 1.0;
+    -fx-scale-y: 1.0;
+}
+
+.tile .label
+{
+    -fx-text-fill: #000;
+    -fx-effect: dropshadow( gaussian, rgb(255,255,255) , 2,2,0,0 );
+    -fx-font-weight: bold;
+    -fx-font-size: 2em;
+}
+
+.tile .speler
+{
+    -fx-effect: dropshadow( gaussian, rgb(255,255,255) , 2,2,0,0 );
+}
+
+.button
+{
+    -fx-background-color: none;
+    -fx-border-style: none;
+    -fx-font-size: 1.5em;
+    -fx-cursor: hand;
+    -fx-text-alignment: center;
+
+    -fx-background-size: 50px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+
+.button:hover
+{
+    -fx-background-size: 55px;
+}
+
+.button:pressed
+{
+    -fx-background-size: 40px;
+}
+
+.buttonGraaf
+{
+    -fx-background-image: url("/Buttons/graafButton.png");
+}
+.buttonActie
+{
+    -fx-background-image: url("/Buttons/actieButton.png");
+}
+.buttonMoveUp
+{
+    -fx-background-image: url("/Buttons/buttonUp.png");
+}
+.buttonMoveDown
+{
+    -fx-background-image: url("/Buttons/buttonDown.png");
+}
+.buttonMoveRight
+{
+    -fx-background-image: url("/Buttons/buttonRight.png");
+}
+.buttonMoveLeft
+{
+    -fx-background-image: url("/Buttons/buttonLeft.png");
+}

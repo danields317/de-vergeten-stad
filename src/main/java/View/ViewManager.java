@@ -1,7 +1,10 @@
 package View;
 
+import Controller.Player_Controllers.FunctieController;
 import Controller.Player_Controllers.PlayerController;
 import Controller.Tile_Controllers.StormController;
+import Controller.firebase_controllers.UpdateFirebaseController;
+import Model.data.StaticData;
 import View.bord_views.*;
 import javafx.application.Application;
 import javafx.scene.Group;
@@ -13,8 +16,11 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import observers.*;
 
-public class ViewManager extends Application{
+import java.util.Map;
+
+public class ViewManager extends Application implements PlayerObserver, StormObserver {
 
     private static ViewManager viewManager;
 
@@ -33,6 +39,8 @@ public class ViewManager extends Application{
     WaterflesView waterflesView;      //maak waterfles stand
     StormMeterView stormMeterView = new StormMeterView(); //maak stormmetertekentje
     SpeelbordView speelbordView = SpeelbordView.getInstance();
+    Acties_View acties_view;//maak actie tekens
+    StaticData staticData = StaticData.getInstance();
 
 
     private double windowWidth = 1600;
@@ -67,12 +75,12 @@ public class ViewManager extends Application{
             if(torf){
                 group = firstBordload();
                 torf = false;
-            }else{
-                group = makeGroup();
             }
+                group = makeGroup();
+
 
             Scene scene = new Scene(group, windowWidth, windowHeight);
-            scene.getStylesheets().add("/styles.css");
+            scene.getStylesheets().add("/css/game.css");
             primaryStage.setScene(scene);
             primaryStage.setTitle("De Vergeten Stad");
             primaryStage.setX(windowAnchorX);
@@ -85,31 +93,46 @@ public class ViewManager extends Application{
     }
 
     public Group firstBordload(){
+        (FunctieController.getInstance()).endLose();
         waterflesView = new WaterflesView();
+
         GridPane waterfles;
 
         waterfles = waterflesView.createInitialGridPane();
         GridPane stormTeken = stormMeterView.createInitialGridPane();
+        acties_view = new Acties_View();
 
-
-        Image backgroundImage = new Image("gamescreenempty.png");
-        Canvas canvas = new Canvas(windowWidth, windowHeight);
         StackPane propellor = onderdeelview.loadPropeller("?", "?");
         StackPane beacon = onderdeelview.loadBeacon("?", "?");
         StackPane motor = onderdeelview.loadMotor("?", "?");
         StackPane zonnewijzer = onderdeelview.loadZonneWijzer("?", "?");
         GridPane knoppen = actieknoppenview.maakActieKnoppen();
-
         GridPane graafknoppen = graafknoppenview.maakGraafKnoppen();
-        Button eindigbeurtKnop = eindigBeurtView.maakEindigbeurtKnop();
-        Button eindigBeurt = eindigBeurtKnop(eindigbeurtKnop);
         GridPane spelbord = speelbordView.loadSpelBord();
+//        GridPane acties_view =
+//        Image backgroundImage = new Image("gamescreenempty.png");
+//        Canvas canvas = new Canvas(windowWidth, windowHeight);
+//
+//
+//        Button eindigbeurtKnop = eindigBeurtView.maakEindigbeurtKnop();
+//        Button eindigBeurt = eindigBeurtKnop(eindigbeurtKnop);
+//
+//        Group uitrusting = uitrustingview.createEquipmentView();
+//
+//        GraphicsContext gc = canvas.getGraphicsContext2D();
+//        gc.drawImage(backgroundImage, 0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
+//
+//        Group group = new Group(canvas, stormTeken, knoppen, graafknoppen, eindigbeurtKnop, waterfles, propellor, beacon, motor, zonnewijzer, spelbord, uitrusting);
+//        return  group;
 
-        GraphicsContext gc = canvas.getGraphicsContext2D();
-        gc.drawImage(backgroundImage, 0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
 
-        Group group = new Group(canvas, stormTeken, knoppen, graafknoppen, eindigbeurtKnop, waterfles, propellor, beacon, motor, zonnewijzer, spelbord);
-        return  group;
+        (PlayerController.getInstance()).update();
+        (StormController.getInstance()).update();
+
+        (PlayerController.getInstance()).registerObserver(this);
+        (StormController.getInstance()).registerObserver(this);
+
+        return new Group( new GridPane());
     }
 
     public Button eindigBeurtKnop(Button eindigBeurt){
@@ -118,7 +141,8 @@ public class ViewManager extends Application{
             stormController.voerStormEventsUit();
             PlayerController playerController = PlayerController.getInstance();
             playerController.getPlayer().refillActions();
-            update();
+            (UpdateFirebaseController.getInstance()).updateFirebase();
+            //update();
         });
         return eindigBeurt;
     }
@@ -128,7 +152,7 @@ public class ViewManager extends Application{
 
             Image backgroundImage = new Image("background.png");
             Scene scene = new Scene(group, windowWidth, windowHeight);
-            scene.getStylesheets().add("/styles.css");
+            scene.getStylesheets().add("/css/game.css");
 
             primaryStage.setScene(scene);
             primaryStage.setTitle("De Vergeten Stad");
@@ -146,9 +170,19 @@ public class ViewManager extends Application{
         Canvas canvas = new Canvas(windowWidth, windowHeight);
         GridPane knoppen = actieknoppenview.getView();
         GridPane graafKnoppen = graafknoppenview.getView();
-        Button eindigbeurtKnop = eindigBeurtView.maakEindigbeurtKnop();
-        Button eindigBeurt = eindigBeurtKnop(eindigbeurtKnop);
+
+        Button eindigBeurt;
+        if(((String)((Map) staticData.getRoomInfo()).get("activePlayer")).equals(staticData.getClassName()) ) {
+            Button eindigbeurtKnop = eindigBeurtView.maakEindigbeurtKnop();
+            eindigBeurt = eindigBeurtKnop(eindigbeurtKnop);
+        }else{
+            eindigBeurt = new Button( (String)((Map) staticData.getRoomInfo()).get("activePlayer") + "/n beurt");
+            eindigBeurt.setPrefSize(152,57);
+            eindigBeurt.setLayoutX(1392);
+            eindigBeurt.setLayoutY(732);
+        }
         GridPane waterfles = waterflesView.getView();
+
 
         StackPane propellor = onderdeelview.getPropellerView();
         StackPane beacon = onderdeelview.getBeaconView();
@@ -156,13 +190,28 @@ public class ViewManager extends Application{
         StackPane zonnewijzer = onderdeelview.getZonnewijzerView();
         GridPane spelbord = speelbordView.getSpelbord();
         GridPane stormTeken =  stormMeterView.getView();
+        System.out.println("Ik ben boven dat ding");
+        GridPane acties = acties_view.getView();
+
+        Group uitrusting = uitrustingview.getUitrusting();
 
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.drawImage(backgroundImage, 0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
 
-        Group group = new Group(canvas, stormTeken, knoppen, graafKnoppen, eindigBeurt, waterfles, propellor,beacon,motor,zonnewijzer, spelbord);
+        Group group = new Group(canvas, stormTeken, knoppen, graafKnoppen, eindigBeurt, waterfles, propellor,beacon,motor,zonnewijzer, spelbord, uitrusting, acties);
         return group;
     }
 
     public void update(){loadGameView();}
+
+
+    @Override
+    public void update(PlayerObservable sb) {
+        loadGameView();
+    }
+
+    @Override
+    public void update(StormObservable sb) {
+        loadGameView();
+    }
 }

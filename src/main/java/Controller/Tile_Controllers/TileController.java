@@ -150,27 +150,12 @@ public class TileController {
 
                 SpeelbordView.getInstance().updateSpelBord(tmp, stormTile);
 
+                for (Player speler : tmp.getSpelers()){
+                    speler.setLocatie(stormX, stormY);
+                }
+
                 stormY = stormY + moveStormY;
                 stormX = stormX + moveStormX;
-
-                moveSpeler(stormX, stormY, moveStormX, moveStormY);
-            }
-        }
-    }
-
-    private void moveSpeler(int tileX, int tileY,int moveStormX, int moveStormY){
-        Player player = playerController.getPlayer();
-        int playerX = player.getX();
-        int playerY = player.getY();
-        if (playerX == tileX && playerY == tileY){
-            if (moveStormX == -1){
-                playerController.moveOost(false);
-            } else if (moveStormX == 1){
-                playerController.moveWest(false);
-            } else if (moveStormY == -1){
-                playerController.moveZuid(false);
-            } else if (moveStormY == 1){
-                playerController.moveNoord(false);
             }
         }
     }
@@ -209,28 +194,29 @@ public class TileController {
     public void useTileDiscoveredAction(int x, int y){
         Tile tile = (getTileByLocation(y, x));
         if(tile.getClass().equals(EquipmentTile.class) || tile.getClass().equals(StartTile.class)){
-            EquipmentTile Etile = (EquipmentTile) tile;
-            Etile.geefEquipment();
+            EquipmentTile eTile = (EquipmentTile) tile;
             //geef equipment
         }
         else if (tile.getClass().equals(Waterput.class)){
-            Waterput Wtile = (Waterput) tile;
-            Wtile.geefWater();
+            Waterput wTile = (Waterput) tile;
+            for (Player speler : wTile.getSpelers()){
+                speler.addWater(2);
+            }
             //geef water
         }
         else if (tile.getClass().equals(Tunnel.class)){
-            Tunnel Ttile = (Tunnel) tile;
-            Ttile.geefSchaduw();
+            Tunnel tTile = (Tunnel) tile;
+            tTile.geefSchaduw();
             //geen zon brand
         }
         else if (tile.getClass().equals(PartTile.class)){
-            PartTile Ptile = (PartTile) tile;
-            geefHint(Ptile);
+            PartTile pTile = (PartTile) tile;
+            geefHint(pTile);
             //ontdek hint
         }
         else if (tile.getClass().equals(Finish.class)){
-            Finish Ftile = (Finish) tile;
-            Ftile.isSpelKlaar();
+            Finish fTile = (Finish) tile;
+            fTile.isSpelKlaar();
             //ga ff checken of je hebt gewonnen
         }
         else{

@@ -9,17 +9,22 @@ public class GraafKnoppenView {
     static GridPane view = new GridPane();
 
     public GridPane maakGraafKnoppen(){
-        Button digUp = new Button("▲");
-        Button digDown = new Button("▼");
-        Button digLeft = new Button("◄");
-        Button digRight = new Button("►");
-        Button dig = new Button("Graaf");
+        Button digUp = new Button();
+        Button digDown = new Button();
+        Button digLeft = new Button();
+        Button digRight = new Button();
+        Button dig = new Button();
         digUp.setPrefSize(60, 60);
         digDown.setPrefSize(60, 60);
         digLeft.setPrefSize(60, 60);
         digRight.setPrefSize(60, 60);
         dig.setPrefSize(60, 60);
 
+        dig.getStyleClass().add("buttonGraaf");
+        digUp.getStyleClass().add("buttonMoveUp");
+        digDown.getStyleClass().add("buttonMoveDown");
+        digRight.getStyleClass().add("buttonMoveRight");
+        digLeft.getStyleClass().add("buttonMoveLeft");
 
         GridPane acties = new GridPane();
 
