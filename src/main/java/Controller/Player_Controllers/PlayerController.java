@@ -129,7 +129,7 @@ public class PlayerController {
 
     public void tileActies(){
         Tile locatie = tileController.getTileByLocation(player.getY(), player.getX());
-        if (!locatie.isDiscovered() && player.actiesOver()){
+        if (!locatie.isDiscovered() && player.actiesOver() && !locatie.hasZand()){
             locatie.discoverTile();
             tileController.useTileDiscoveredAction(player.getX(), player.getY());
             player.useAction();
@@ -207,6 +207,7 @@ public class PlayerController {
 
 
     }
+
     public void registerObserver(PlayerObserver sbv) {
         player.register(sbv);
     }

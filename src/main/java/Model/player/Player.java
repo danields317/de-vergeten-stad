@@ -142,7 +142,11 @@ public class Player implements PlayerObservable{
 
 	public void addWater(int water ) {
 
-		this.water = this.water + water;
+    	if (this.water + water < maxWater){
+            this.water = this.water + water;
+        } else {
+    	    this.water = maxWater;
+        }
 		notifyAllObservers();
 
 	}
@@ -242,6 +246,10 @@ public class Player implements PlayerObservable{
 
 
 
+	}
+
+	public void getTweeActies(){
+		this.actiesOver = this.actiesOver + 2;
 	}
 
 	public void register(PlayerObserver observer){

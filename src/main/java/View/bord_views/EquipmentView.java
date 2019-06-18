@@ -1,5 +1,6 @@
 package View.bord_views;
 
+import Controller.Equipment_Controllers.EquipmentController;
 import Model.equipment.Aardekijker;
 import Model.equipment.Duinkanon;
 import Model.equipment.Equipment;
@@ -10,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -20,8 +22,10 @@ import java.util.ArrayList;
 
 public class EquipmentView implements PlayerObserver {
 
+    EquipmentController equipmentController;
+
     private ArrayList<Equipment> inventory;
-    private Group group;
+    private StackPane group;
     private VBox upBox;
     private VBox downBox;
 
@@ -45,7 +49,8 @@ public class EquipmentView implements PlayerObserver {
 
 
 
-    public Group createEquipmentView(){
+    public StackPane createEquipmentView(){
+        equipmentController = EquipmentController.getInstance();
         ImageView aardekijker = new ImageView(new Image("/Equipment/Ground_Watcher.png"));
         aardekijker.setFitWidth(136);
         aardekijker.setFitHeight(192);
@@ -79,34 +84,52 @@ public class EquipmentView implements PlayerObserver {
         waterreserveStack = new StackPane(waterreserve, waterreserveLabel);
         zonneschildStack = new StackPane(zonneschild, zonneschildLabel);
 
+
+
         Button switchknopDown = new Button("1/2");
         Button switchknopUp = new Button("2/2");
 
-        hboxUp = new HBox(aardekijker, duinkanon, jetpack);
+        hboxUp = new HBox(aardekijkerStack, duinkanonStack, jetpackStack);
         hboxUp.setSpacing(7);
-        hboxDown = new HBox(tijdschakelaar, waterreserve, zonneschild);
+        hboxDown = new HBox(tijdschakelaarStack, waterreserveStack, zonneschildStack);
         hboxDown.setSpacing(7);
         upBox = new VBox(hboxUp, switchknopDown);
         downBox = new VBox(hboxDown, switchknopUp);
 
-        group = new Group(upBox);
+
+        group = new StackPane(downBox, upBox);
+        downBox.setOpacity(0);
+        downBox.setDisable(true);
+
         group.setLayoutX(721);
         group.setLayoutY(677);
 
+
         switchknopDown.setOnMouseClicked(e -> {
-            group.getChildren().remove(upBox);
-            group.getChildren().add(downBox);
+            upBox.setOpacity(0);
+            upBox.setDisable(true);
+            downBox.setOpacity(1);
+            downBox.setDisable(false);
         });
 
         switchknopUp.setOnMouseClicked(e -> {
-            group.getChildren().remove(downBox);
-            group.getChildren().add(upBox);
+            downBox.setOpacity(0);
+            downBox.setDisable(true);
+            upBox.setOpacity(1);
+            upBox.setDisable(false);
         });
+
+        aardekijkerStack.setOnMouseClicked(e -> equipmentController.setAardekijkerStatus());
+        duinkanonStack.setOnMouseClicked(e -> equipmentController.setDuinkanonStatus());
+        jetpackStack.setOnMouseClicked(e -> equipmentController.setJetpackStatus());
+        tijdschakelaarStack.setOnMouseClicked(e -> equipmentController.gebruikTijdschakelaar());
+        waterreserveStack.setOnMouseClicked(e -> equipmentController.gebruikWaterreserve());
+        zonneschildStack.setOnMouseClicked(e -> equipmentController.gebruikZonneschild());
 
         return group;
     }
 
-    public Group getUitrusting(){
+    public StackPane getUitrusting(){
         if (group == null){
             createEquipmentView();
         }

@@ -1,5 +1,7 @@
 package View.bord_views;
 
+import Controller.Equipment_Controllers.EquipmentController;
+import Controller.Player_Controllers.PlayerController;
 import Controller.Tile_Controllers.TileController;
 import Model.Tiles.EquipmentTile;
 import Model.Tiles.Tile;
@@ -19,7 +21,14 @@ public class SpeelbordView{
     //foto's hier opslaan en alleen de coordianten ophalen
     //bij update juiste coordinaat bij juiste image zetten.
     private TileController tileController;
+    private PlayerController playerController;
+    private EquipmentController equipmentController;
+
     public GridPane spelbord;
+
+    public boolean aardekijkerSelected = false;
+    public boolean duinkanonSelected = false;
+    public boolean jetpackSelected = false;
 
     private ArrayList<TileView> tileViews = new ArrayList<>();
 
@@ -38,6 +47,8 @@ public class SpeelbordView{
         spelbord.setLayoutX(410);
         spelbord.setLayoutY(75);
         tileController = TileController.getInstance();
+        playerController = PlayerController.getInstance();
+        equipmentController = EquipmentController.getInstance();
         ArrayList<Tile> tiles = tileController.getTiles();
         for(int i = 0; i < tiles.size(); i ++){
 
@@ -53,13 +64,28 @@ public class SpeelbordView{
             spelbord.setMargin(tilePane, new Insets(5,5,5,5));
 
             tilePane.setOnMouseClicked(e -> {
-                tileController.tileClicked( spelbord.getColumnIndex(tilePane), spelbord.getRowIndex(tilePane) );
+                handleTileClick(spelbord.getColumnIndex(tilePane), spelbord.getRowIndex(tilePane) );
             } );
 
             spelbord.add(tilePane, tile.getX() , tile.getY());
 
         }
         return spelbord;
+    }
+
+    public void handleTileClick(int x, int y){
+        if(aardekijkerSelected){
+            equipmentController.gebruikAardekijker(x , y);
+        }
+        else if(duinkanonSelected){
+            equipmentController.gebruikDuinkanon(x, y);
+        }
+        else if (jetpackSelected){
+            equipmentController.gebruikJetpack(x, y);
+        }
+        else{
+            tileController.tileClicked(x, y);
+        }
     }
 
     public void updateSpelBord(Tile tile, Tile tile2){
