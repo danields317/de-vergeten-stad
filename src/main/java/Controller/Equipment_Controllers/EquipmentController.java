@@ -70,12 +70,8 @@ public class EquipmentController {
     public void gebruikDuinkanon(int x, int y){
         int pX = playerController.getPlayer().getX();
         int pY = playerController.getPlayer().getY();
-        if (x == pX && y == pY || y == (pY + 1) || y == (pY -1)){
-            Tile tile = tileController.getTileByLocation(y, x);
-            tile.removeAllZand();
-        }
-        else if (x == pX || x == (pX + 1) || x == (pX - 1) && y == pY){
-            Tile tile = tileController.getTileByLocation(y, x);
+        Tile tile = tileController.getTileByLocation(y, x);
+        if ((x == pX && y >= pY-1 && y <= pY +1) || (y == pY && x >= pX-1 && x <= pX+1)) {
             tile.removeAllZand();
         }
     }
