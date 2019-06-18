@@ -119,7 +119,7 @@ public class PlayerController {
     }
 
     private void moveLogica(Tile tile, Player.Richingen riching){
-        if(tile.getZand() < 2 && !tile.getClass().equals(Storm.class)){
+        if(tile.getZand() < 2 && !tile.getClass().equals(Storm.class) && tileController.getTileByLocation(player.getY(), player.getX()).getZand() < 2){
             tileController.getTileByLocation(player.getY(), player.getX()).removeSpeler(player);
             player.movePlayer(riching);
             player.useAction();

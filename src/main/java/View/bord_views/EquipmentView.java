@@ -51,6 +51,7 @@ public class EquipmentView implements PlayerObserver {
 
     public StackPane createEquipmentView(){
         equipmentController = EquipmentController.getInstance();
+        equipmentController.registerObserver(this);
         ImageView aardekijker = new ImageView(new Image("/Equipment/Ground_Watcher.png"));
         aardekijker.setFitWidth(136);
         aardekijker.setFitHeight(192);
@@ -222,6 +223,7 @@ public class EquipmentView implements PlayerObserver {
 
     public void update(PlayerObservable ob) {
 
+        System.out.println("JAAA hetw erkt : EquipView");
         Player player = (Player) ob;
         inventory = player.getInventory();
         updateInventory(inventory);

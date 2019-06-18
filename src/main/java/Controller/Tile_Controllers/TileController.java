@@ -193,11 +193,12 @@ public class TileController {
 
     public void useTileDiscoveredAction(int x, int y){
         Tile tile = (getTileByLocation(y, x));
-//        Player player = playerController.getPlayer();
+        playerController = PlayerController.getInstance();
+        Player player = playerController.getPlayer();
         if(tile.getClass().equals(EquipmentTile.class) || tile.getClass().equals(StartTile.class)){
             EquipmentTile eTile = (EquipmentTile) tile;
             //geef equipment
-//            player.addEquipment(eTile.getEquipment());
+            player.addEquipment(eTile.getEquipment());
         }
         else if (tile.getClass().equals(Waterput.class)){
             Waterput wTile = (Waterput) tile;

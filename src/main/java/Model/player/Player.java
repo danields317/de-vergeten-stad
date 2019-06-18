@@ -19,7 +19,7 @@ import java.util.Spliterator;
 public class Player implements PlayerObservable{
 
 	private String nickname; // Naam ingevoerd door de speler
-	private ArrayList<Equipment> inventory;
+	private ArrayList<Equipment> inventory = new ArrayList<>();
 	private int water;
 	private int actiesOver;
 	private Tile tile; // De tile waar de speler op staat
@@ -252,10 +252,12 @@ public class Player implements PlayerObservable{
 
 	public void addEquipment(Equipment equipment){
 	    inventory.add(equipment);
+	    notifyAllObservers();
     }
 
     public void removeEquipment(Equipment equipment){
 	    inventory.remove(equipment);
+	    notifyAllObservers();
     }
 
 	public void register(PlayerObserver observer){

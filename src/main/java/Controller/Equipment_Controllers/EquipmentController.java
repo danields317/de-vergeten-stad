@@ -9,6 +9,7 @@ import Model.player.Player;
 import View.bord_views.Acties_View;
 import View.bord_views.SpeelbordView;
 import javafx.scene.image.Image;
+import observers.PlayerObserver;
 
 public class EquipmentController {
 
@@ -104,6 +105,10 @@ public class EquipmentController {
     public void gebruikZonneschild(){
         Tile tile = tileController.getTileByLocation(playerController.getPlayer().getY(), playerController.getPlayer().getX());
         tile.setZonneSchild();
+    }
+
+    public void registerObserver(PlayerObserver ob){
+        playerController.getPlayer().register(ob);
     }
 
 
