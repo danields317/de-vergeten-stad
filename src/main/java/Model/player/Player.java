@@ -1,6 +1,7 @@
 package Model.player;
 
 import Controller.Equipment_Controllers.EquipmentController;
+import Controller.Player_Controllers.FunctieController;
 import Model.data.StaticData;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
@@ -150,7 +151,8 @@ public class Player implements PlayerObservable{
 		
 		this.water = this.water - water;
 
-		if (this.water <= 0) {
+		if (this.water < 0) {
+			(FunctieController.getInstance()).endLose();
 			this.water++;
 		}
 		notifyAllObservers();

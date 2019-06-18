@@ -1,6 +1,7 @@
 package Controller.Tile_Controllers;
 
 import Controller.Controller;
+import Controller.Player_Controllers.FunctieController;
 import Controller.Player_Controllers.PlayerController;
 import Model.storm.Storm;
 import Model.storm.StormEvent;
@@ -105,6 +106,7 @@ public class StormController {
                     case BRANDT:
                         Controller controller = Controller.getInstance();
                         controller.verwijderZand();
+                        (FunctieController.getInstance()).updateInfo();
                         break;
                     case STERKER:
                         storm.stormWordtSterker();
