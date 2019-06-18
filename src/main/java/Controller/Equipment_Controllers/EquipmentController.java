@@ -6,6 +6,7 @@ import Model.Tiles.Tile;
 import Model.equipment.Equipment;
 import Model.equipment.Zonneschild;
 import Model.player.Player;
+import View.bord_views.Acties_View;
 import View.bord_views.SpeelbordView;
 import javafx.scene.image.Image;
 

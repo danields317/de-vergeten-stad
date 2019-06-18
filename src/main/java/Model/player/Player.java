@@ -163,7 +163,6 @@ public class Player implements PlayerObservable{
 	}
 
 	public void useAction(){
-		System.out.println(actiesOver);
         if (actiesOver > 0){
             actiesOver--;
         }
@@ -250,6 +249,14 @@ public class Player implements PlayerObservable{
 	public void getTweeActies(){
 		this.actiesOver = this.actiesOver + 2;
 	}
+
+	public void addEquipment(Equipment equipment){
+	    inventory.add(equipment);
+    }
+
+    public void removeEquipment(Equipment equipment){
+	    inventory.remove(equipment);
+    }
 
 	public void register(PlayerObserver observer){
 		observers.add(observer);
