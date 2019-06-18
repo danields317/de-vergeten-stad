@@ -20,6 +20,7 @@ public class GraafKnoppenView {
         digRight.setPrefSize(60, 60);
         dig.setPrefSize(60, 60);
 
+
         GridPane acties = new GridPane();
 
         acties.add(digUp, 1, 0);
