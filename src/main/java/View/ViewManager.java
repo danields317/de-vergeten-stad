@@ -3,7 +3,6 @@ package View;
 import Controller.Player_Controllers.FunctieController;
 import Controller.Player_Controllers.PlayerController;
 import Controller.Tile_Controllers.StormController;
-import Controller.Tile_Controllers.TileController;
 import Controller.firebase_controllers.UpdateFirebaseController;
 import Model.data.StaticData;
 import View.bord_views.*;
@@ -16,7 +15,6 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import observers.*;
 
@@ -82,7 +80,7 @@ public class ViewManager extends Application implements PlayerObserver, StormObs
 
 
             Scene scene = new Scene(group, windowWidth, windowHeight);
-            scene.getStylesheets().add("/styles.css");
+            scene.getStylesheets().add("/css/game.css");
             primaryStage.setScene(scene);
             primaryStage.setTitle("De Vergeten Stad");
             primaryStage.setX(windowAnchorX);
@@ -142,7 +140,7 @@ public class ViewManager extends Application implements PlayerObserver, StormObs
 
             Image backgroundImage = new Image("background.png");
             Scene scene = new Scene(group, windowWidth, windowHeight);
-            scene.getStylesheets().add("/styles.css");
+            scene.getStylesheets().add("/css/game.css");
 
             primaryStage.setScene(scene);
             primaryStage.setTitle("De Vergeten Stad");

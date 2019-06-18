@@ -1,7 +1,6 @@
 package View;
 
 import Controller.Login_Controllers.Login_Controller;
-import Controller.Player_Controllers.FunctieController;
 import Controller.firebase_controllers.UpdateFirebaseController;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -60,7 +59,7 @@ public class LoginView implements LoginObserver {
 
             Group group = new Group(canvas, root);
             Scene scene = new Scene(group);
-            scene.getStylesheets().add("/login.css");
+            scene.getStylesheets().add("/css/login.css");
             primaryStage.setScene(scene);
             primaryStage.setTitle("WELCOME TO THE GAME");
             primaryStage.setX(windowAnchorX);

@@ -62,6 +62,7 @@ public class LoadBordView implements LoadBordObserver {
 
             Group group = new Group(canvas, root);
             Scene scene = new Scene(group);
+            scene.getStylesheets().add("/css/spelerklasse.css");
             primaryStage.setScene(scene);
             primaryStage.setTitle("WELCOME TO THE GAME");
             primaryStage.setX(windowAnchorX);
@@ -118,7 +119,7 @@ public class LoadBordView implements LoadBordObserver {
             Text maxWater =  new Text(( ((Map) killMe).get("maxWater")).toString());
 
 
-            //Stylong
+            //Styling
             water.setFill(Color.BLACK);
             water.setFont(Font.font(null, FontWeight.BOLD, 30));
             splitter.setFill(Color.BLACK);
@@ -130,6 +131,7 @@ public class LoadBordView implements LoadBordObserver {
             className.setTextAlignment(TextAlignment.CENTER);
             gp.setStyle("-fx-background-color: #FFFFFF;");
             gp.setAlignment(Pos.CENTER);
+            gp.getStyleClass().add("spelerklasse");
             gp2.setAlignment(Pos.CENTER);
             gp2.setMinWidth(250.0);
             gp2.setPrefWidth(250.0);
