@@ -106,17 +106,11 @@ public class EquipmentView implements PlayerObserver {
 
 
         switchknopDown.setOnMouseClicked(e -> {
-            upBox.setOpacity(0);
-            upBox.setDisable(true);
-            downBox.setOpacity(1);
-            downBox.setDisable(false);
+            stelKnoppenIn(upBox, downBox);
         });
 
         switchknopUp.setOnMouseClicked(e -> {
-            downBox.setOpacity(0);
-            downBox.setDisable(true);
-            upBox.setOpacity(1);
-            upBox.setDisable(false);
+            stelKnoppenIn(downBox, upBox);
         });
 
         aardekijkerStack.setOnMouseClicked(e -> equipmentController.setAardekijkerStatus());
@@ -127,6 +121,13 @@ public class EquipmentView implements PlayerObserver {
         zonneschildStack.setOnMouseClicked(e -> equipmentController.gebruikZonneschild());
 
         return group;
+    }
+
+    public void stelKnoppenIn(VBox vBox1, VBox vBox2){
+        vBox1.setOpacity(0);
+        vBox1.setDisable(true);
+        vBox2.setOpacity(1);
+        vBox2.setDisable(false);
     }
 
     public StackPane getUitrusting(){

@@ -83,6 +83,7 @@ public class EquipmentController {
             currentTile.removeSpeler(playerController.getPlayer());
             landTile.addSpeler(playerController.getPlayer());
             playerController.getPlayer().setLocatie(landTile.getX(), landTile.getY());
+            setJetpackStatus();
         }
     }
 
