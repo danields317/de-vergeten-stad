@@ -26,6 +26,11 @@ public class OnderdeelView implements OnderdeelObserver {
     private Label motorLabel;
     private Label zonnewijzerLabel;
 
+    private Rectangle propellerRectangle;
+    private Rectangle beaconRectangle;
+    private Rectangle motorRectangle;
+    private Rectangle zonnewijzerRectangle;
+
     TileController tileController;
 
     public StackPane loadPropeller(String X, String Y){
@@ -33,9 +38,9 @@ public class OnderdeelView implements OnderdeelObserver {
         tileController = TileController.getInstance();
         tileController.registerOnderdeelObserver(this);
 
-        Rectangle rectangle = new Rectangle(150, 150);
-        rectangle.setFill(Color.BLACK);
-        rectangle.setOpacity(onderdeelOpactiy);
+        propellerRectangle = new Rectangle(150, 150);
+        propellerRectangle.setFill(Color.BLACK);
+        propellerRectangle.setOpacity(onderdeelOpactiy);
 
         propellerLabel = maakLabel(X, Y);
         Image propeller = new Image("/Onderdelen/PropBoven.png");
@@ -44,7 +49,7 @@ public class OnderdeelView implements OnderdeelObserver {
         imageview.setFitHeight(150);
 
         propellerView = new StackPane();
-        propellerView.getChildren().addAll(imageview, rectangle, propellerLabel);
+        propellerView.getChildren().addAll(imageview, propellerRectangle, propellerLabel);
         propellerView.setLayoutX(1393);
         propellerView.setLayoutY(60);
 
@@ -53,9 +58,9 @@ public class OnderdeelView implements OnderdeelObserver {
 
     public StackPane loadBeacon(String X, String Y){
 
-        Rectangle rectangle = new Rectangle(150, 150);
-        rectangle.setFill(Color.BLACK);
-        rectangle.setOpacity(onderdeelOpactiy);
+        beaconRectangle = new Rectangle(150, 150);
+        beaconRectangle.setFill(Color.BLACK);
+        beaconRectangle.setOpacity(onderdeelOpactiy);
 
         beaconLabel = maakLabel(X, Y);
         Image beacon = new Image("/Onderdelen/BeaconZijkant.png");
@@ -64,7 +69,7 @@ public class OnderdeelView implements OnderdeelObserver {
         imageview.setFitHeight(140);
 
         beaconView = new StackPane();
-        beaconView.getChildren().addAll(imageview, rectangle, beaconLabel);
+        beaconView.getChildren().addAll(imageview, beaconRectangle, beaconLabel);
         beaconView.setLayoutX(1393);
         beaconView.setLayoutY(213);
 
@@ -73,9 +78,9 @@ public class OnderdeelView implements OnderdeelObserver {
 
     public StackPane loadMotor(String X, String Y){
 
-        Rectangle rectangle = new Rectangle(150, 150);
-        rectangle.setFill(Color.BLACK);
-        rectangle.setOpacity(onderdeelOpactiy);
+        motorRectangle = new Rectangle(150, 150);
+        motorRectangle.setFill(Color.BLACK);
+        motorRectangle.setOpacity(onderdeelOpactiy);
 
         motorLabel = maakLabel(X, Y);
         Image motor = new Image("/Onderdelen/EngineZijkant.png");
@@ -84,7 +89,7 @@ public class OnderdeelView implements OnderdeelObserver {
         imageview.setFitHeight(140);
 
         motorView = new StackPane();
-        motorView.getChildren().addAll(imageview, rectangle, motorLabel);
+        motorView.getChildren().addAll(imageview, motorRectangle, motorLabel);
         motorView.setLayoutX(1393);
         motorView.setLayoutY(367);
 
@@ -93,9 +98,9 @@ public class OnderdeelView implements OnderdeelObserver {
 
     public StackPane loadZonneWijzer(String X, String Y){
 
-        Rectangle rectangle = new Rectangle(150, 150);
-        rectangle.setFill(Color.BLACK);
-        rectangle.setOpacity(onderdeelOpactiy);
+        zonnewijzerRectangle = new Rectangle(150, 150);
+        zonnewijzerRectangle.setFill(Color.BLACK);
+        zonnewijzerRectangle.setOpacity(onderdeelOpactiy);
 
         Image zonnewijzer = new Image("/Onderdelen/ZonnewijzerBoven.png");
         zonnewijzerLabel = maakLabel(X, Y);
@@ -104,14 +109,14 @@ public class OnderdeelView implements OnderdeelObserver {
         imageview.setFitHeight(140);
 
         zonnewijzerView = new StackPane();
-        zonnewijzerView.getChildren().addAll(imageview, rectangle, zonnewijzerLabel);
+        zonnewijzerView.getChildren().addAll(imageview, zonnewijzerRectangle, zonnewijzerLabel);
         zonnewijzerView.setLayoutX(1393);
         zonnewijzerView.setLayoutY(520);
 
         return zonnewijzerView;
     }
 
-    public Label maakLabel(String X, String Y){
+    private Label maakLabel(String X, String Y){
         Label coordinaten = new Label("X:" + X + " Y:" + Y);
         coordinaten.setFont(new Font(40));
         coordinaten.setTextFill(Color.WHITE);
@@ -119,7 +124,7 @@ public class OnderdeelView implements OnderdeelObserver {
         return coordinaten;
     }
 
-    public void checkHints(Onderdeel onderdeel){
+    private void checkHints(Onderdeel onderdeel){
         String x;
         String y;
         if (onderdeel.getX() == -1){
@@ -152,6 +157,26 @@ public class OnderdeelView implements OnderdeelObserver {
         }
     }
 
+    private void checkOpgepakt(Onderdeel onderdeel){
+        if (onderdeel.isOpgepakt()){
+            if(onderdeel.getSoort().equals(PartTile.Soorten.KOMPAS)){
+                zonnewijzerLabel.setOpacity(0);
+                zonnewijzerRectangle.setOpacity(0);
+            }
+            else if(onderdeel.getSoort().equals(PartTile.Soorten.MOTOR)){
+                motorLabel.setOpacity(0);
+                motorRectangle.setOpacity(0);
+            }
+            else if(onderdeel.getSoort().equals(PartTile.Soorten.PROPELOR)){
+                propellerLabel.setOpacity(0);
+                propellerRectangle.setOpacity(0);
+            }
+            else if (onderdeel.getSoort().equals(PartTile.Soorten.OBELISK)){
+                beaconLabel.setOpacity(0);
+                beaconRectangle.setOpacity(0);
+            }
+        }
+    }
 
     public StackPane getPropellerView() {
         return propellerView;
@@ -173,5 +198,6 @@ public class OnderdeelView implements OnderdeelObserver {
     public void update(OnderdeelObservable ob) {
         Onderdeel onderdeel = (Onderdeel) ob;
         checkHints(onderdeel);
+        checkOpgepakt(onderdeel);
     }
 }

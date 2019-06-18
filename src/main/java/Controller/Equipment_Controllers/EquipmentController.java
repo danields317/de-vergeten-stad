@@ -100,7 +100,6 @@ public class EquipmentController {
     }
 
     public void gebruikZonneschild(){
-        System.out.println("het werkt");
         Tile tile = tileController.getTileByLocation(playerController.getPlayer().getY(), playerController.getPlayer().getX());
         tile.setZonneSchild();
     }

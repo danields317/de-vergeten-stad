@@ -13,7 +13,6 @@ public class Water implements WaterObservable {
 
     public void updateWater(int maxWater, int water){
 
-        System.out.println(water + " " + maxWater);
         imgWater = "/veldfles/Fles" + water + "_" + maxWater + ".png" ;
 
         notifyAllObservers();

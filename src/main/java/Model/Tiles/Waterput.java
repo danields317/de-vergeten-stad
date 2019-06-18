@@ -10,7 +10,6 @@ public class Waterput extends Tile {
 	}
 
 	public void geefWater(){
-		System.out.println("Hoi ik ben een waterput");
 	}
 
 }

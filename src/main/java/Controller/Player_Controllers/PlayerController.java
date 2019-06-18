@@ -134,8 +134,10 @@ public class PlayerController {
             tileController.useTileDiscoveredAction(player.getX(), player.getY());
             player.useAction();
         }
-        else {
-            //pak een onderdeel op.
+        else if (player.actiesOver() && locatie.getZand() < 2 && locatie.hasOnderdeel()){
+            locatie.getOnderdelen().get(0).pakOp();
+            locatie.removeOnderdeel();
+            player.useAction();
         }
     }
 
@@ -217,7 +219,6 @@ public class PlayerController {
     }
 
     public void updateData(){
-        System.out.println("hala");
         player.updateData();
     }
 

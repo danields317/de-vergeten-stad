@@ -18,7 +18,6 @@ public class SoundController implements Runnable {
 
     public void play(String soundPath)
     {
-        System.out.println("play me");
         this.sound = soundPath;
         t = new Thread(this);
         t.start();
@@ -29,9 +28,8 @@ public class SoundController implements Runnable {
     {
         String[] songs = {"nTest.wav", "iTest.wav", "tatiTest.wav", "mTest.wav", "CTest.wav", "kTest.wav", "dat_boiTest.wav",  "i_amTest.wav", "sTest.wav"};
         while(true) {
-            System.out.println("start");
             int random = (int) (Math.random() * songs.length);
-            System.out.println(songs[random]);
+//            System.out.println(songs[random]);
             playSound(songs[random]);
             playing = true;
         }
@@ -95,9 +93,9 @@ public class SoundController implements Runnable {
                 if(nBytesRead < 0){
                     playing = false;
                 }
-                System.out.println(nBytesRead);
+//                System.out.println(nBytesRead);
             }
-            System.out.println(nBytesRead);
+//            System.out.println(nBytesRead);
         }
 
         line.drain();

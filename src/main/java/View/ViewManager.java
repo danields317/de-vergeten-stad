@@ -137,18 +137,6 @@ public class ViewManager extends Application implements PlayerObserver, StormObs
         return new Group( new GridPane());
     }
 
-    public Button eindigBeurtKnop(Button eindigBeurt){
-        eindigBeurt.setOnMouseClicked(e -> {
-            StormController stormController = StormController.getInstance();
-            stormController.voerStormEventsUit();
-            PlayerController playerController = PlayerController.getInstance();
-            playerController.getPlayer().refillActions();
-            (UpdateFirebaseController.getInstance()).updateFirebase();
-            //update();
-        });
-        return eindigBeurt;
-    }
-
     private void loadPrimaryStageWithGroup(Group group) {
         try {
 
@@ -175,8 +163,7 @@ public class ViewManager extends Application implements PlayerObserver, StormObs
 
         Button eindigBeurt;
         if(((String)((Map) staticData.getRoomInfo()).get("activePlayer")).equals(staticData.getClassName()) ) {
-            Button eindigbeurtKnop = eindigBeurtView.maakEindigbeurtKnop();
-            eindigBeurt = eindigBeurtKnop(eindigbeurtKnop);
+            eindigBeurt = eindigBeurtView.maakEindigbeurtKnop();
         }else{
             eindigBeurt = new Button( (String)((Map) staticData.getRoomInfo()).get("activePlayer") + "/n beurt");
             eindigBeurt.setPrefSize(152,57);
@@ -192,7 +179,6 @@ public class ViewManager extends Application implements PlayerObserver, StormObs
         StackPane zonnewijzer = onderdeelview.getZonnewijzerView();
         GridPane spelbord = speelbordView.getSpelbord();
         GridPane stormTeken =  stormMeterView.getView();
-        System.out.println("Ik ben boven dat ding");
         GridPane acties = acties_view.getView();
 
         StackPane uitrusting = uitrustingview.getUitrusting();

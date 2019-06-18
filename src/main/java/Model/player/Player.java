@@ -229,7 +229,6 @@ public class Player implements PlayerObservable{
     }
 
 	public void updateData(){
-		System.out.println("ik luister");
 		StaticData staticData = StaticData.getInstance();
 		Object classes = ((Map) staticData.getRoomInfo()).get("Selectable_classes");
 
