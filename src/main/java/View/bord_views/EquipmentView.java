@@ -85,7 +85,12 @@ public class EquipmentView implements PlayerObserver {
         waterreserveStack = new StackPane(waterreserve, waterreserveLabel);
         zonneschildStack = new StackPane(zonneschild, zonneschildLabel);
 
-
+        aardekijkerStack.getStyleClass().add("kaart");
+        duinkanonStack.getStyleClass().add("kaart");
+        jetpackStack.getStyleClass().add("kaart");
+        tijdschakelaarStack.getStyleClass().add("kaart");
+        waterreserveStack.getStyleClass().add("kaart");
+        zonneschildStack.getStyleClass().add("kaart");
 
         Button switchknopDown = new Button("1/2");
         Button switchknopUp = new Button("2/2");
@@ -114,14 +119,47 @@ public class EquipmentView implements PlayerObserver {
             stelKnoppenIn(downBox, upBox);
         });
 
-        aardekijkerStack.setOnMouseClicked(e -> equipmentController.setAardekijkerStatus());
-        duinkanonStack.setOnMouseClicked(e -> equipmentController.setDuinkanonStatus());
-        jetpackStack.setOnMouseClicked(e -> equipmentController.setJetpackStatus());
-        tijdschakelaarStack.setOnMouseClicked(e -> equipmentController.gebruikTijdschakelaar());
-        waterreserveStack.setOnMouseClicked(e -> equipmentController.gebruikWaterreserve());
-        zonneschildStack.setOnMouseClicked(e -> equipmentController.gebruikZonneschild());
+        aardekijkerStack.setOnMouseClicked(e -> {
+            equipmentController.setAardekijkerStatus();
+            deselectKaarten();
+            aardekijkerStack.getStyleClass().add("geselecteerdeKaart");
+        });
+        duinkanonStack.setOnMouseClicked(e -> {
+            equipmentController.setDuinkanonStatus();
+            deselectKaarten();
+            duinkanonStack.getStyleClass().add("geselecteerdeKaart");
+        });
+        jetpackStack.setOnMouseClicked(e -> {
+            equipmentController.setJetpackStatus();
+            deselectKaarten();
+            jetpackStack.getStyleClass().add("geselecteerdeKaart");
+        });
+        tijdschakelaarStack.setOnMouseClicked(e -> {
+            equipmentController.gebruikTijdschakelaar();
+            deselectKaarten();
+            tijdschakelaarStack.getStyleClass().add("geselecteerdeKaart");
+        });
+        waterreserveStack.setOnMouseClicked(e -> {
+            equipmentController.gebruikWaterreserve();
+            deselectKaarten();
+            waterreserveStack.getStyleClass().add("geselecteerdeKaart");
+        });
+        zonneschildStack.setOnMouseClicked(e -> {
+            equipmentController.gebruikZonneschild();
+            deselectKaarten();
+            zonneschildStack.getStyleClass().add("geselecteerdeKaart");
+        });
 
         return group;
+    }
+
+    private void deselectKaarten() {
+        aardekijkerStack.getStyleClass().remove("geselecteerdeKaart");
+        duinkanonStack.getStyleClass().remove("geselecteerdeKaart");
+        jetpackStack.getStyleClass().remove("geselecteerdeKaart");
+        tijdschakelaarStack.getStyleClass().remove("geselecteerdeKaart");
+        waterreserveStack.getStyleClass().remove("geselecteerdeKaart");
+        zonneschildStack.getStyleClass().remove("geselecteerdeKaart");
     }
 
     public void stelKnoppenIn(VBox vBox1, VBox vBox2){
@@ -223,7 +261,6 @@ public class EquipmentView implements PlayerObserver {
 
     public void update(PlayerObservable ob) {
 
-        System.out.println("JAAA hetw erkt : EquipView");
         Player player = (Player) ob;
         inventory = player.getInventory();
         updateInventory(inventory);
