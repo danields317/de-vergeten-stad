@@ -62,7 +62,7 @@ public class Player implements PlayerObservable{
 		this.maxWater = maxWater;
 		water = maxWater;
 
-        actiesOver = 6;
+        actiesOver = 4;
 
         this.klasse = klasse;
 	}
@@ -77,7 +77,7 @@ public class Player implements PlayerObservable{
 		this.maxWater = maxWater;
 		this.water = water;
 
-        actiesOver = 6;
+        actiesOver = 4;
 
         this.klasse = klasse;
 	}
