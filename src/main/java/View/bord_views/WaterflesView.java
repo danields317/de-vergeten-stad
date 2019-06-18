@@ -71,7 +71,8 @@ public class WaterflesView implements WaterObserver {
         gridPane.setHgap(5);
         gridPane.setAlignment(Pos.CENTER);
 
-        ImageView waterImage = new ImageView(new Image(sb.getImgWater()));
+        //ImageView waterImage = new ImageView(new Image(sb.getImgWater()));
+        ImageView waterImage = new ImageView(new Image("/placeholder.png"));
 
         waterImage.prefWidth(240.0);
         waterImage.prefHeight(220.0);

@@ -43,6 +43,17 @@
     -fx-effect: dropshadow( gaussian, rgb(255,255,255) , 2,2,0,0 );
 }
 
+.kaart
+{
+    -fx-cursor: hand;
+}
+
+.geselecteerdeKaart
+{
+    -fx-scale-x: 1.2;
+    -fx-scale-y: 1.2;
+}
+
 .button
 {
     -fx-background-color: none;
