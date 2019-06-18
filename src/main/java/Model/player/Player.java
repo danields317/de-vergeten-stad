@@ -142,7 +142,11 @@ public class Player implements PlayerObservable{
 
 	public void addWater(int water ) {
 
-		this.water = this.water + water;
+    	if (this.water + water < maxWater){
+            this.water = this.water + water;
+        } else {
+    	    this.water = maxWater;
+        }
 		notifyAllObservers();
 
 	}
