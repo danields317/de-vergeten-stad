@@ -20,6 +20,7 @@ public class EindigBeurtView {
         eindigBeurt.setOnMouseClicked(e -> {
             if (TileController.getInstance().checkFinish()){
                 //Hier komt victory chicken diners
+                ViewManager.getInstance().loadEndGame();
             } else {
                 StormController stormController = StormController.getInstance();
                 stormController.voerStormEventsUit();

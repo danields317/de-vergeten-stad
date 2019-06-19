@@ -13,6 +13,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -189,6 +190,14 @@ public class ViewManager extends Application implements PlayerObserver, StormObs
     }
 
     public void update(){loadGameView();}
+
+    public void loadEndGame(){
+        Group group = new Group();
+        ImageView pdb = new ImageView("/placeholder.png");
+        group.getChildren().add(pdb);
+        Scene endScene = new Scene(group);
+        primaryStage.setScene(endScene);
+    }
 
 
     @Override

@@ -104,7 +104,7 @@ public class StormController {
                         break;
                     case BRANDT:
                         Controller controller = Controller.getInstance();
-                        controller.verwijderZand();
+                        controller.zonBrand();
                         (FunctieController.getInstance()).updateInfo();
                         break;
                     case STERKER:

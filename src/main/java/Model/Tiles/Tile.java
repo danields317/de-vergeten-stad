@@ -166,6 +166,10 @@ public class Tile implements BordObservable{
         notifyAllObservers();
     }
 
+    public Image getDiscoveredImage(){
+        return discoveredImage;
+    }
+
     public boolean hasZonneSchild(){
         return hasZonneSchild;
     }
