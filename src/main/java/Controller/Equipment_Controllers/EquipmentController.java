@@ -78,8 +78,8 @@ public class EquipmentController {
         Tile tile = tileController.getTileByLocation(y, x);
         if ((x == pX && y >= pY-1 && y <= pY +1) || (y == pY && x >= pX-1 && x <= pX+1)) {
             tile.removeAllZand();
-            playerController.getPlayer().removeEquipment(Equipment.EquipmentKaarten.DUINKANON);
             setDuinkanonStatus();
+            playerController.getPlayer().removeEquipment(Equipment.EquipmentKaarten.DUINKANON);
         }
     }
 

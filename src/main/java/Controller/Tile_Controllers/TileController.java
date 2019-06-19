@@ -209,7 +209,7 @@ public class TileController {
         }
         else if (tile.getClass().equals(Tunnel.class)){
             Tunnel tTile = (Tunnel) tile;
-            tTile.geefSchaduw();
+            player.addEquipment(tTile.getEquipment());
             //geen zon brand
         }
         else if (tile.getClass().equals(PartTile.class)){
