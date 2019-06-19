@@ -34,7 +34,6 @@ public class Acties_Controller implements PlayerObserver {
 
     @Override
     public void update(PlayerObservable sb){
-
         acties.maakFotoArray(sb);
     }
 }

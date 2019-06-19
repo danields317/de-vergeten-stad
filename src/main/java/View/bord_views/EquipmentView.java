@@ -1,6 +1,8 @@
 package View.bord_views;
 
 import Controller.Equipment_Controllers.EquipmentController;
+import Controller.Player_Controllers.PlayerController;
+import Model.Tiles.Tile;
 import Model.equipment.Aardekijker;
 import Model.equipment.Duinkanon;
 import Model.equipment.Equipment;
@@ -78,10 +80,16 @@ public class EquipmentView implements PlayerObserver {
         waterreserveLabel = new Label();
         zonneschildLabel = new Label();
 
+        ImageView switchknopRight = new ImageView(new Image("Buttons/buttonEqRight.png"));
+        ImageView switchknopLeft = new ImageView(new Image("/Buttons/buttonEqLeft.png"));
+
+        switchknopRight.getStyleClass().add("eqButtonRight");
+        switchknopLeft.getStyleClass().add("eqButtonLeft");
+
         aardekijkerStack = new StackPane(aardekijker, aardekijkerLabel);
         duinkanonStack = new StackPane(duinkanon, duinkanonLabel);
-        jetpackStack = new StackPane(jetpack, jetpackLabel);
-        tijdschakelaarStack = new StackPane(tijdschakelaar, tijdschakelaarLabel);
+        jetpackStack = new StackPane(jetpack, jetpackLabel, switchknopRight);
+        tijdschakelaarStack = new StackPane(tijdschakelaar, tijdschakelaarLabel, switchknopLeft);
         waterreserveStack = new StackPane(waterreserve, waterreserveLabel);
         zonneschildStack = new StackPane(zonneschild, zonneschildLabel);
 
@@ -92,16 +100,12 @@ public class EquipmentView implements PlayerObserver {
         waterreserveStack.getStyleClass().add("kaart");
         zonneschildStack.getStyleClass().add("kaart");
 
-        Button switchknopDown = new Button("1/2");
-        Button switchknopUp = new Button("2/2");
-
         hboxUp = new HBox(aardekijkerStack, duinkanonStack, jetpackStack);
         hboxUp.setSpacing(7);
         hboxDown = new HBox(tijdschakelaarStack, waterreserveStack, zonneschildStack);
         hboxDown.setSpacing(7);
-        upBox = new VBox(hboxUp, switchknopDown);
-        downBox = new VBox(hboxDown, switchknopUp);
-
+        upBox = new VBox(hboxUp);
+        downBox = new VBox(hboxDown);
 
         group = new StackPane(downBox, upBox);
         downBox.setOpacity(0);
@@ -111,46 +115,68 @@ public class EquipmentView implements PlayerObserver {
         group.setLayoutY(677);
 
 
-        switchknopDown.setOnMouseClicked(e -> {
+        switchknopRight.setOnMouseClicked(e -> {
             stelKnoppenIn(upBox, downBox);
         });
 
-        switchknopUp.setOnMouseClicked(e -> {
+        switchknopLeft.setOnMouseClicked(e -> {
             stelKnoppenIn(downBox, upBox);
         });
 
         aardekijkerStack.setOnMouseClicked(e -> {
-            equipmentController.setAardekijkerStatus();
-            deselectKaarten();
-            aardekijkerStack.getStyleClass().add("geselecteerdeKaart");
+            if (checkInventory(Equipment.EquipmentKaarten.AARDEKIJKER)){
+                equipmentController.setAardekijkerStatus();
+                deselectKaarten();
+                aardekijkerStack.getStyleClass().add("geselecteerdeKaart");
+            }
         });
         duinkanonStack.setOnMouseClicked(e -> {
-            equipmentController.setDuinkanonStatus();
-            deselectKaarten();
-            duinkanonStack.getStyleClass().add("geselecteerdeKaart");
+            if (checkInventory(Equipment.EquipmentKaarten.DUINKANON)){
+                equipmentController.setDuinkanonStatus();
+                deselectKaarten();
+                duinkanonStack.getStyleClass().add("geselecteerdeKaart");
+            }
         });
         jetpackStack.setOnMouseClicked(e -> {
-            equipmentController.setJetpackStatus();
-            deselectKaarten();
-            jetpackStack.getStyleClass().add("geselecteerdeKaart");
+            if (checkInventory(Equipment.EquipmentKaarten.JETPACK)){
+                equipmentController.setJetpackStatus();
+                deselectKaarten();
+                jetpackStack.getStyleClass().add("geselecteerdeKaart");
+            }
         });
         tijdschakelaarStack.setOnMouseClicked(e -> {
-            equipmentController.gebruikTijdschakelaar();
-            deselectKaarten();
-            tijdschakelaarStack.getStyleClass().add("geselecteerdeKaart");
+            if (checkInventory(Equipment.EquipmentKaarten.TIJDSCHAKELAAR)){
+                equipmentController.gebruikTijdschakelaar();
+                deselectKaarten();
+                tijdschakelaarStack.getStyleClass().add("geselecteerdeKaart");
+            }
         });
         waterreserveStack.setOnMouseClicked(e -> {
-            equipmentController.gebruikWaterreserve();
-            deselectKaarten();
-            waterreserveStack.getStyleClass().add("geselecteerdeKaart");
+            if (checkInventory(Equipment.EquipmentKaarten.WATERRESERVE)){
+                equipmentController.gebruikWaterreserve();
+                deselectKaarten();
+                waterreserveStack.getStyleClass().add("geselecteerdeKaart");
+            }
         });
         zonneschildStack.setOnMouseClicked(e -> {
-            equipmentController.gebruikZonneschild();
-            deselectKaarten();
-            zonneschildStack.getStyleClass().add("geselecteerdeKaart");
+            if (checkInventory(Equipment.EquipmentKaarten.ZONNESCHILD)){
+                equipmentController.gebruikZonneschild();
+                deselectKaarten();
+                zonneschildStack.getStyleClass().add("geselecteerdeKaart");
+            }
         });
 
         return group;
+    }
+
+    private boolean checkInventory(Equipment.EquipmentKaarten kaart){
+        ArrayList<Equipment> inventory = PlayerController.getInstance().getPlayer().getInventory();
+        for (Equipment eq : inventory){
+            if (eq.getEquipmentType().equals(kaart)){
+                return true;
+            }
+        }
+        return false;
     }
 
     private void deselectKaarten() {
@@ -264,6 +290,7 @@ public class EquipmentView implements PlayerObserver {
         Player player = (Player) ob;
         inventory = player.getInventory();
         updateInventory(inventory);
+        deselectKaarten();
 
     }
 

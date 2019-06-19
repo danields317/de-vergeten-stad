@@ -67,6 +67,8 @@ public class EquipmentController {
     public void gebruikAardekijker(int x, int y){
         Tile tile = tileController.getTileByLocation(y , x);
         System.out.println(tile.getVariant());
+        playerController.getPlayer().removeEquipment(Equipment.EquipmentKaarten.AARDEKIJKER);
+        setAardekijkerStatus();
     }
 
     public void gebruikDuinkanon(int x, int y){
@@ -75,6 +77,8 @@ public class EquipmentController {
         Tile tile = tileController.getTileByLocation(y, x);
         if ((x == pX && y >= pY-1 && y <= pY +1) || (y == pY && x >= pX-1 && x <= pX+1)) {
             tile.removeAllZand();
+            playerController.getPlayer().removeEquipment(Equipment.EquipmentKaarten.DUINKANON);
+            setDuinkanonStatus();
         }
     }
 
@@ -86,11 +90,13 @@ public class EquipmentController {
             landTile.addSpeler(playerController.getPlayer());
             playerController.getPlayer().setLocatie(landTile.getX(), landTile.getY());
             setJetpackStatus();
+            playerController.getPlayer().removeEquipment(Equipment.EquipmentKaarten.JETPACK);
         }
     }
 
     public void gebruikTijdschakelaar(){
         playerController.getPlayer().getTweeActies();
+        playerController.getPlayer().removeEquipment(Equipment.EquipmentKaarten.TIJDSCHAKELAAR);
     }
 
     public void gebruikWaterreserve(){
@@ -100,11 +106,13 @@ public class EquipmentController {
         for(Player speler : tile.getSpelers()){
             speler.addWater(2);
         }
+        playerController.getPlayer().removeEquipment(Equipment.EquipmentKaarten.WATERRESERVE);
     }
 
     public void gebruikZonneschild(){
         Tile tile = tileController.getTileByLocation(playerController.getPlayer().getY(), playerController.getPlayer().getX());
         tile.setZonneSchild();
+        playerController.getPlayer().removeEquipment(Equipment.EquipmentKaarten.ZONNESCHILD);
     }
 
     public void registerObserver(PlayerObserver ob){

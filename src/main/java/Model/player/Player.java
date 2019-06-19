@@ -248,6 +248,7 @@ public class Player implements PlayerObservable{
 
 	public void getTweeActies(){
 		this.actiesOver = this.actiesOver + 2;
+		notifyAllObservers();
 	}
 
 	public void addEquipment(Equipment equipment){
@@ -255,8 +256,13 @@ public class Player implements PlayerObservable{
 	    notifyAllObservers();
     }
 
-    public void removeEquipment(Equipment equipment){
-	    inventory.remove(equipment);
+    public void removeEquipment(Equipment.EquipmentKaarten kaart){
+	    for (Equipment equipment : inventory){
+	        if (equipment.getEquipmentType().equals(kaart)){
+	            inventory.remove(equipment);
+	            break;
+            }
+        }
 	    notifyAllObservers();
     }
 
