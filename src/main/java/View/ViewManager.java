@@ -13,6 +13,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -40,6 +41,7 @@ public class ViewManager extends Application implements PlayerObserver, StormObs
     StormMeterView stormMeterView = new StormMeterView(); //maak stormmetertekentje
     SpeelbordView speelbordView = SpeelbordView.getInstance();
     Acties_View acties_view;//maak actie tekens
+    InstellingenView instellingenView = new InstellingenView();
     StaticData staticData = StaticData.getInstance();
 
 
@@ -109,6 +111,7 @@ public class ViewManager extends Application implements PlayerObserver, StormObs
         GridPane knoppen = actieknoppenview.maakActieKnoppen();
         GridPane graafknoppen = graafknoppenview.maakGraafKnoppen();
         GridPane spelbord = speelbordView.loadSpelBord();
+        ImageView instelligen = instellingenView.InstellingenView();
 //        GridPane acties_view =
 //        Image backgroundImage = new Image("gamescreenempty.png");
 //        Canvas canvas = new Canvas(windowWidth, windowHeight);
@@ -181,10 +184,12 @@ public class ViewManager extends Application implements PlayerObserver, StormObs
 
         StackPane uitrusting = uitrustingview.getUitrusting();
 
+        ImageView instelligen = instellingenView.InstellingenView();
+
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.drawImage(backgroundImage, 0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
 
-        Group group = new Group(canvas, stormTeken, knoppen, graafKnoppen, eindigBeurt, waterfles, propellor,beacon,motor,zonnewijzer, spelbord, uitrusting, acties);
+        Group group = new Group(canvas, stormTeken, knoppen, graafKnoppen, eindigBeurt, waterfles, propellor,beacon,motor,zonnewijzer, spelbord, uitrusting, acties, instelligen);
         return group;
     }
 

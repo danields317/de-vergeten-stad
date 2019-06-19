@@ -8,6 +8,7 @@ import Model.equipment.Duinkanon;
 import Model.equipment.Equipment;
 import Model.equipment.Jetpack;
 import Model.player.Player;
+import View.SpelregelView;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
