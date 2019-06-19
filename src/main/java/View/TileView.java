@@ -2,6 +2,7 @@ package View;
 
 import Controller.Player_Controllers.PlayerController;
 import Controller.Tile_Controllers.TileController;
+import Model.Bord.Onderdeel;
 import Model.Tiles.PartTile;
 import Model.Tiles.Tile;
 import Model.player.Player;
@@ -201,18 +202,25 @@ public class TileView implements BordObserver {
 
     }
 
-    public void checkOnderdelen(ArrayList<PartTile.Soorten> onderdelen){
-        for(PartTile.Soorten soort: onderdelen){
-            if (soort.equals(PartTile.Soorten.OBELISK)){
+    private void clearOnderdelen(){
+        beaconImageView.setOpacity(0);
+        motorImageView.setOpacity(0);
+        propellerImageView.setOpacity(0);
+        wijzerImageView.setOpacity(0);
+    }
+
+    private void checkOnderdelen(ArrayList<Onderdeel> onderdelen){
+        for(Onderdeel onderdeel: onderdelen){
+            if (onderdeel.getSoort().equals(PartTile.Soorten.OBELISK)){
                 beaconImageView.setOpacity(1);
             }
-            else if (soort.equals(PartTile.Soorten.MOTOR)){
+            else if (onderdeel.getSoort().equals(PartTile.Soorten.MOTOR)){
                 motorImageView.setOpacity(1);
             }
-            else if(soort.equals(PartTile.Soorten.PROPELOR)){
+            else if(onderdeel.getSoort().equals(PartTile.Soorten.PROPELOR)){
                 propellerImageView.setOpacity(1);
             }
-            else if(soort.equals(PartTile.Soorten.KOMPAS)){
+            else if(onderdeel.getSoort().equals(PartTile.Soorten.KOMPAS)){
                 wijzerImageView.setOpacity(1);
             }
         }
@@ -230,11 +238,15 @@ public class TileView implements BordObserver {
 
     public void update(BordObservable bo){
         Tile tile = (Tile) bo;
+
         clearSpelers();
         tileImageView.setImage(tile.getImage());
         checkZand(tile.getZand());
         checkSpelers(tile);
+
+        clearOnderdelen();
         checkOnderdelen(tile.getOnderdelen());
+
         checkZonneschild(tile.hasZonneSchild());
     }
 

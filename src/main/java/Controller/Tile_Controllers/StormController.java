@@ -100,7 +100,6 @@ public class StormController {
                 StormEvent stormEvent = randomStormEvents.get(stapelCounter);
                 switch (stormEvent.naam){
                     case BEWEGING:
-                        System.out.println(((StormEventBeweging) stormEvent).richting + " " + ((StormEventBeweging) stormEvent).stappen);
                         beweegStorm(((StormEventBeweging) stormEvent).richting, ((StormEventBeweging) stormEvent).stappen);
                         break;
                     case BRANDT:
@@ -112,7 +111,7 @@ public class StormController {
                         storm.stormWordtSterker();
                         break;
                     default:
-                        System.out.println("DIT HOORT NIET");
+                        System.out.println("DIT HOORT NIET: StormController");
                 }
                 stapelCounter++;
             }else{
@@ -143,7 +142,7 @@ public class StormController {
                 storm.beweegWest(stappen);
                 break;
             default:
-                System.out.println("DIT HOORT NIET");
+                System.out.println("DIT HOORT NIET: StormController");
         }
 
     }

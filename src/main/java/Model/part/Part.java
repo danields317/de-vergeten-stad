@@ -1,4 +1,5 @@
 package Model.part;
 
-public class part {
+public class Part {
+
 }

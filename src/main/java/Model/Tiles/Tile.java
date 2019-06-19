@@ -1,5 +1,6 @@
 package Model.Tiles;
 
+import Model.Bord.Onderdeel;
 import Model.player.Player;
 import javafx.scene.image.Image;
 import observers.BordObservable;
@@ -21,7 +22,7 @@ public class Tile implements BordObservable{
     private int aantalZandTegels;
     private boolean hasZonneSchild;
 
-    private ArrayList<PartTile.Soorten> onderdelen;
+    private ArrayList<Onderdeel> onderdelen;
     private ArrayList<Player> spelers;
 
     private int x;
@@ -100,7 +101,7 @@ public class Tile implements BordObservable{
         }
     }
 
-    public void setOnderdeel(PartTile.Soorten onderdeel){
+    public void setOnderdeel(Onderdeel onderdeel){
         onderdelen.add(onderdeel);
         notifyAllObservers();
     }
@@ -116,7 +117,7 @@ public class Tile implements BordObservable{
         this.y = y;
     }
 
-    public ArrayList <PartTile.Soorten> getOnderdelen(){
+    public ArrayList <Onderdeel> getOnderdelen(){
         return onderdelen;
     }
 
@@ -145,6 +146,17 @@ public class Tile implements BordObservable{
     public void setZonneSchild(){
         if(hasZonneSchild == false){
             hasZonneSchild = true;
+            notifyAllObservers();
+        }
+    }
+
+    public boolean hasOnderdeel(){
+        return !onderdelen.isEmpty();
+    }
+
+    public void removeOnderdeel(){
+        if (!onderdelen.isEmpty()){
+            onderdelen.remove(0);
             notifyAllObservers();
         }
     }

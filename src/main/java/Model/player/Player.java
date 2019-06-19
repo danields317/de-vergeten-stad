@@ -19,7 +19,7 @@ import java.util.Spliterator;
 public class Player implements PlayerObservable{
 
 	private String nickname; // Naam ingevoerd door de speler
-	private ArrayList<Equipment> inventory;
+	private ArrayList<Equipment> inventory = new ArrayList<>();
 	private int water;
 	private int actiesOver;
 	private Tile tile; // De tile waar de speler op staat
@@ -142,7 +142,11 @@ public class Player implements PlayerObservable{
 
 	public void addWater(int water ) {
 
-		this.water = this.water + water;
+    	if (this.water + water < maxWater){
+            this.water = this.water + water;
+        } else {
+    	    this.water = maxWater;
+        }
 		notifyAllObservers();
 
 	}
@@ -159,7 +163,6 @@ public class Player implements PlayerObservable{
 	}
 
 	public void useAction(){
-		System.out.println(actiesOver);
         if (actiesOver > 0){
             actiesOver--;
         }
@@ -225,7 +228,6 @@ public class Player implements PlayerObservable{
     }
 
 	public void updateData(){
-		System.out.println("ik luister");
 		StaticData staticData = StaticData.getInstance();
 		Object classes = ((Map) staticData.getRoomInfo()).get("Selectable_classes");
 
@@ -248,6 +250,21 @@ public class Player implements PlayerObservable{
 		this.actiesOver = this.actiesOver + 2;
 		notifyAllObservers();
 	}
+
+	public void addEquipment(Equipment equipment){
+	    inventory.add(equipment);
+	    notifyAllObservers();
+    }
+
+    public void removeEquipment(Equipment.EquipmentKaarten kaart){
+	    for (Equipment equipment : inventory){
+	        if (equipment.getEquipmentType().equals(kaart)){
+	            inventory.remove(equipment);
+	            break;
+            }
+        }
+	    notifyAllObservers();
+    }
 
 	public void register(PlayerObserver observer){
 		observers.add(observer);

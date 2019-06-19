@@ -6,6 +6,7 @@ import Controller.Tile_Controllers.TileController;
 import Model.Tiles.EquipmentTile;
 import Model.Tiles.Tile;
 import Model.Tiles.Tunnel;
+import Model.player.Player;
 import View.TileView;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
@@ -74,7 +75,16 @@ public class SpeelbordView{
     }
 
     public void handleTileClick(int x, int y){
-        if(aardekijkerSelected){
+        Player speler = playerController.getPlayer();
+        Tile playerTile = tileController.getTileByLocation(speler.getY(), speler.getX());
+        Tile clickedTile = tileController.getTileByLocation(y, x);
+        if (speler.actiesOver() && clickedTile.getVariant() == Tile.Varianten.TUNNEL && playerTile.getVariant() == Tile.Varianten.TUNNEL && clickedTile.isDiscovered() && playerTile.isDiscovered() && playerTile.getZand() < 2 && clickedTile.getZand() < 2){
+            speler.setLocatie(x, y);
+            playerTile.removeSpeler(speler);
+            clickedTile.addSpeler(speler);
+            speler.useAction();
+        }
+        else if(aardekijkerSelected){
             equipmentController.gebruikAardekijker(x , y);
         }
         else if(duinkanonSelected){

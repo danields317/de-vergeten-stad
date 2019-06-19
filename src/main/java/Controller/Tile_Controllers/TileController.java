@@ -193,9 +193,12 @@ public class TileController {
 
     public void useTileDiscoveredAction(int x, int y){
         Tile tile = (getTileByLocation(y, x));
+        playerController = PlayerController.getInstance();
+        Player player = playerController.getPlayer();
         if(tile.getClass().equals(EquipmentTile.class) || tile.getClass().equals(StartTile.class)){
             EquipmentTile eTile = (EquipmentTile) tile;
             //geef equipment
+            player.addEquipment(eTile.getEquipment());
         }
         else if (tile.getClass().equals(Waterput.class)){
             Waterput wTile = (Waterput) tile;
@@ -245,8 +248,31 @@ public class TileController {
     public void checkOnderdeelSpawned(Onderdeel onderdeel){
         if(!(onderdeel.getY() == -1) && !(onderdeel.getX() == -1)) {
             Tile onderdeelSpawn = getTileByLocation(onderdeel.getY(), onderdeel.getX());
-            onderdeelSpawn.setOnderdeel(onderdeel.getSoort());
+            onderdeelSpawn.setOnderdeel(onderdeel);
         }
+    }
+
+    private Tile getFinsihTile(){
+        for (Tile tile : randomTiles){
+            if (tile.getVariant() == Tile.Varianten.FINISH){
+                return tile;
+            }
+        }
+        return null;
+    }
+
+    private boolean checkAlleOnderdelen(){
+        int opgepaktCounter = 0;
+        for (Onderdeel onderdeel : onderdelen){
+            if (onderdeel.isOpgepakt()){
+                opgepaktCounter++;
+            }
+        }
+        return opgepaktCounter == 4;
+    }
+
+    public boolean checkFinish(){
+        return getFinsihTile().getSpelers().size() == 4 && checkAlleOnderdelen();
     }
 
     public ArrayList<Tile> getTiles(){

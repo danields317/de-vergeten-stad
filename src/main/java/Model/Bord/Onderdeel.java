@@ -12,6 +12,8 @@ public class Onderdeel implements OnderdeelObservable {
     private int  X = -1;
     private int  Y = -1;
 
+    private boolean opgepakt = false;
+
     private ArrayList<OnderdeelObserver> observers = new ArrayList<>();
 
     public Onderdeel(PartTile.Soorten soort){
@@ -41,6 +43,15 @@ public class Onderdeel implements OnderdeelObservable {
     public void setX(int x) {
         X = x;
         notifyAllObservers();
+    }
+
+    public void pakOp(){
+        opgepakt = true;
+        notifyAllObservers();
+    }
+
+    public boolean isOpgepakt(){
+        return opgepakt;
     }
 
     public int getY() {

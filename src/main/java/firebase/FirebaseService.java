@@ -69,7 +69,6 @@ public class FirebaseService{
 
                 if (snapshot != null && snapshot.exists()) {
 //                    controller.updateFromFirebase(snapshot);
-                    System.out.println("iets");
                     ListenUpdateController listenUpdateController = ListenUpdateController.getInstance();
                     listenUpdateController.setFirebaseData();
                     Platform.runLater(new Runnable() {
@@ -86,7 +85,6 @@ public class FirebaseService{
                 }
             }
         });
-        System.out.println("ik wil luistern");
     }
 
 

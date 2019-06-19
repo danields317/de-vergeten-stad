@@ -7,7 +7,6 @@ public class Finish extends Tile {
 	}
 
 	public void isSpelKlaar(){
-		System.out.println("hoi ik ben een Finish tile");
 	}
 	
 }

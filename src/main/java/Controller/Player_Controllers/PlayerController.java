@@ -119,7 +119,7 @@ public class PlayerController {
     }
 
     private void moveLogica(Tile tile, Player.Richingen riching){
-        if(tile.getZand() < 2 && !tile.getClass().equals(Storm.class)){
+        if(tile.getZand() < 2 && !tile.getClass().equals(Storm.class) && tileController.getTileByLocation(player.getY(), player.getX()).getZand() < 2){
             tileController.getTileByLocation(player.getY(), player.getX()).removeSpeler(player);
             player.movePlayer(riching);
             player.useAction();
@@ -129,13 +129,15 @@ public class PlayerController {
 
     public void tileActies(){
         Tile locatie = tileController.getTileByLocation(player.getY(), player.getX());
-        if (!locatie.isDiscovered() && player.actiesOver()){
+        if (!locatie.isDiscovered() && player.actiesOver() && !locatie.hasZand()){
             locatie.discoverTile();
             tileController.useTileDiscoveredAction(player.getX(), player.getY());
             player.useAction();
         }
-        else {
-            //pak een onderdeel op.
+        else if (player.actiesOver() && locatie.getZand() < 2 && locatie.hasOnderdeel()){
+            locatie.getOnderdelen().get(0).pakOp();
+            locatie.removeOnderdeel();
+            player.useAction();
         }
     }
 
@@ -217,7 +219,6 @@ public class PlayerController {
     }
 
     public void updateData(){
-        System.out.println("hala");
         player.updateData();
     }
 

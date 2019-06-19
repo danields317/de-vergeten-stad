@@ -3,7 +3,6 @@ package View;
 import Controller.Player_Controllers.FunctieController;
 import Controller.Player_Controllers.PlayerController;
 import Controller.Tile_Controllers.StormController;
-import Controller.Tile_Controllers.TileController;
 import Controller.firebase_controllers.UpdateFirebaseController;
 import Model.data.StaticData;
 import View.bord_views.*;
@@ -16,7 +15,6 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import observers.*;
 
@@ -82,7 +80,7 @@ public class ViewManager extends Application implements PlayerObserver, StormObs
 
 
             Scene scene = new Scene(group, windowWidth, windowHeight);
-            scene.getStylesheets().add("/styles.css");
+            scene.getStylesheets().add("/css/game.css");
             primaryStage.setScene(scene);
             primaryStage.setTitle("De Vergeten Stad");
             primaryStage.setX(windowAnchorX);
@@ -137,24 +135,12 @@ public class ViewManager extends Application implements PlayerObserver, StormObs
         return new Group( new GridPane());
     }
 
-    public Button eindigBeurtKnop(Button eindigBeurt){
-        eindigBeurt.setOnMouseClicked(e -> {
-            StormController stormController = StormController.getInstance();
-            stormController.voerStormEventsUit();
-            PlayerController playerController = PlayerController.getInstance();
-            playerController.getPlayer().refillActions();
-            (UpdateFirebaseController.getInstance()).updateFirebase();
-            //update();
-        });
-        return eindigBeurt;
-    }
-
     private void loadPrimaryStageWithGroup(Group group) {
         try {
 
             Image backgroundImage = new Image("background.png");
             Scene scene = new Scene(group, windowWidth, windowHeight);
-            scene.getStylesheets().add("/styles.css");
+            scene.getStylesheets().add("/css/game.css");
 
             primaryStage.setScene(scene);
             primaryStage.setTitle("De Vergeten Stad");
@@ -175,8 +161,7 @@ public class ViewManager extends Application implements PlayerObserver, StormObs
 
         Button eindigBeurt;
         if(((String)((Map) staticData.getRoomInfo()).get("activePlayer")).equals(staticData.getClassName()) ) {
-            Button eindigbeurtKnop = eindigBeurtView.maakEindigbeurtKnop();
-            eindigBeurt = eindigBeurtKnop(eindigbeurtKnop);
+            eindigBeurt = eindigBeurtView.maakEindigbeurtKnop();
         }else{
             eindigBeurt = new Button( (String)((Map) staticData.getRoomInfo()).get("activePlayer") + "/n beurt");
             eindigBeurt.setPrefSize(152,57);
@@ -192,7 +177,6 @@ public class ViewManager extends Application implements PlayerObserver, StormObs
         StackPane zonnewijzer = onderdeelview.getZonnewijzerView();
         GridPane spelbord = speelbordView.getSpelbord();
         GridPane stormTeken =  stormMeterView.getView();
-        System.out.println("Ik ben boven dat ding");
         GridPane acties = acties_view.getView();
 
         StackPane uitrusting = uitrustingview.getUitrusting();
