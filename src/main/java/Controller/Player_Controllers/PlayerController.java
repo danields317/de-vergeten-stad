@@ -80,8 +80,8 @@ public class PlayerController {
 
             moveLogica(tileAbove, Player.Richingen.NOORD, isKlimmer);
 
-            tileController.getTileByLocation((player.getY() + 1), player.getX()).notifyAllObservers();
-            tileController.getTileByLocation(player.getY(), player.getX()).notifyAllObservers();
+            //tileController.getTileByLocation((player.getY() + 1), player.getX()).notifyAllObservers();
+            //tileController.getTileByLocation(player.getY(), player.getX()).notifyAllObservers();
         }
     }
 
@@ -91,8 +91,8 @@ public class PlayerController {
 
             moveLogica(tileBeneath, Player.Richingen.ZUID, isKlimmer);
 
-            tileController.getTileByLocation((player.getY() - 1), player.getX()).notifyAllObservers();
-            tileController.getTileByLocation(player.getY(), player.getX()).notifyAllObservers();
+            //tileController.getTileByLocation((player.getY() - 1), player.getX()).notifyAllObservers();
+            //tileController.getTileByLocation(player.getY(), player.getX()).notifyAllObservers();
         }
     }
 
@@ -102,8 +102,8 @@ public class PlayerController {
 
             moveLogica(tileRight, Player.Richingen.OOST, isKlimmer);
 
-            tileController.getTileByLocation(player.getY(), (player.getX() - 1)).notifyAllObservers();
-            tileController.getTileByLocation(player.getY(), player.getX()).notifyAllObservers();
+            //tileController.getTileByLocation(player.getY(), (player.getX() - 1)).notifyAllObservers();
+            //tileController.getTileByLocation(player.getY(), player.getX()).notifyAllObservers();
         }
     }
 
@@ -113,8 +113,45 @@ public class PlayerController {
 
             moveLogica(tileLeft, Player.Richingen.WEST, isKlimmer);
 
-            tileController.getTileByLocation(player.getY(), (player.getX() + 1)).notifyAllObservers();
-            tileController.getTileByLocation(player.getY(), player.getX()).notifyAllObservers();
+            //tileController.getTileByLocation(player.getY(), (player.getX() + 1)).notifyAllObservers();
+            //tileController.getTileByLocation(player.getY(), player.getX()).notifyAllObservers();
+        }
+    }
+
+    public void moveNoordOost(){
+        if(player.getX() < 4 && player.getY() > 0 && player.actiesOver()) {
+            Tile destTile = tileController.getTileByLocation((player.getY() - 1), (player.getX() + 1));
+            moveSchuinLogica(destTile, Player.RichtingenSchuin.NOORDOOST);
+        }
+    }
+
+    public void moveZuidOost(){
+        if(player.getX() < 4 && player.getY() < 4 && player.actiesOver()) {
+            Tile destTile = tileController.getTileByLocation((player.getY() + 1), (player.getX() + 1));
+            moveSchuinLogica(destTile, Player.RichtingenSchuin.ZUIDOOST);
+        }
+    }
+
+    public void moveZuidWest(){
+        if(player.getX() > 0 && player.getY() < 4 && player.actiesOver()) {
+            Tile destTile = tileController.getTileByLocation((player.getY() + 1), (player.getX() - 1));
+            moveSchuinLogica(destTile, Player.RichtingenSchuin.ZUIDWEST);
+        }
+    }
+
+    public void moveNoordWest(){
+        if(player.getX() > 0 && player.getY() > 0 && player.actiesOver()) {
+            Tile destTile = tileController.getTileByLocation((player.getY() - 1), (player.getX() - 1));
+            moveSchuinLogica(destTile, Player.RichtingenSchuin.NOORDWEST);
+        }
+    }
+
+    private void moveSchuinLogica(Tile tile, Player.RichtingenSchuin richting){
+        if(tile.getZand() < 2 && !tile.getClass().equals(Storm.class) && tileController.getTileByLocation(player.getY(), player.getX()).getZand() < 2){
+            tileController.getTileByLocation(player.getY(), player.getX()).removeSpeler(player);
+            player.movePlayerSchuin(richting);
+            player.useAction();
+            tile.addSpeler(player);
         }
     }
 
@@ -185,6 +222,15 @@ public class PlayerController {
             locatie.removeZandTegel();
         }
     }
+
+    public void schepWater(){
+        Tile tile = tileController.getTileByLocation(player.getY(), player.getX());
+        if(tile.getVariant() == Tile.Varianten.WATERPUT){
+            player.addWater(2);
+            player.useAction();
+        }
+    }
+
 
 
     public void Uitgraven(){

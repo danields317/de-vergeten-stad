@@ -13,6 +13,7 @@ public class ActieKnoppenView {
 
     static GridPane view = new GridPane();
     GridPane acties;
+    PlayerController playerController;
 
     public GridPane maakActieKnoppen(){
         Button up = new Button();
@@ -44,7 +45,7 @@ public class ActieKnoppenView {
         acties.setLayoutX(319);
         acties.setLayoutY(685);
 
-        PlayerController playerController = PlayerController.getInstance();
+        playerController = PlayerController.getInstance();
         boolean isKlimmer = false;
 
         switch (playerController.getPlayer().getKlasse()){
@@ -88,6 +89,9 @@ public class ActieKnoppenView {
     public void setWaterdragerKnoppen(){
         Button wS = new Button("wS");
         acties.add(wS, 2, 2);
+        wS.setOnMouseClicked(e -> {
+            playerController.schepWater();
+        });
     }
 
     public void setVerkennerKnoppen(){
@@ -95,9 +99,15 @@ public class ActieKnoppenView {
         Button rO = new Button("rO");
         Button lB = new Button("lB");
         Button lO = new Button("lO");
+
+        rB.setOnMouseClicked(e -> playerController.moveNoordOost());
+        rO.setOnMouseClicked(e -> playerController.moveZuidOost());
+        lB.setOnMouseClicked(e -> playerController.moveNoordWest());
+        lO.setOnMouseClicked(e -> playerController.moveZuidWest());
+
         acties.add(lB, 0, 0);
-        acties.add(lO, 2, 0);
-        acties.add(rB, 0, 2);
+        acties.add(lO, 0, 2);
+        acties.add(rB, 2, 0);
         acties.add(rO, 2, 2);
     }
 
