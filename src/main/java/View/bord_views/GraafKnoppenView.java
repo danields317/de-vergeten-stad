@@ -37,29 +37,35 @@ public class GraafKnoppenView {
         acties.setLayoutX(525);
         acties.setLayoutY(685);
 
+        PlayerController playerController = PlayerController.getInstance();
+        boolean isArcheoloog = false;
+
+        switch (playerController.getPlayer().getKlasse()){
+            case ARCHEOLOOG:
+                isArcheoloog = true;
+                break;
+        }
+
+        final boolean finalArcheoloog = isArcheoloog;
+
         digUp.setOnMouseClicked(e -> {
-            PlayerController playerController = PlayerController.getInstance();
-            playerController.digNoord();
+            playerController.digNoord(finalArcheoloog);
         });
 
         digDown.setOnMouseClicked(e -> {
-            PlayerController playerController = PlayerController.getInstance();
-            playerController.digZuid();
+            playerController.digZuid(finalArcheoloog);
         });
 
         digRight.setOnMouseClicked(e -> {
-            PlayerController playerController = PlayerController.getInstance();
-            playerController.digOost();
+            playerController.digOost(finalArcheoloog);
         });
 
         digLeft.setOnMouseClicked(e -> {
-            PlayerController playerController = PlayerController.getInstance();
-            playerController.digWest();
+            playerController.digWest(finalArcheoloog);
         });
 
         dig.setOnMouseClicked(e -> {
-            PlayerController playerController = PlayerController.getInstance();
-            playerController.digHere();
+            playerController.digHere(finalArcheoloog);
         });
 
         view = acties;

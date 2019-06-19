@@ -2,6 +2,7 @@ package View.bord_views;
 
 import Controller.Player_Controllers.PlayerController;
 import Model.Tiles.Tile;
+import Model.player.Player;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
@@ -11,6 +12,7 @@ import java.awt.*;
 public class ActieKnoppenView {
 
     static GridPane view = new GridPane();
+    GridPane acties;
 
     public GridPane maakActieKnoppen(){
         Button up = new Button();
@@ -31,7 +33,7 @@ public class ActieKnoppenView {
         right.getStyleClass().add("buttonMoveRight");
         left.getStyleClass().add("buttonMoveLeft");
 
-        GridPane acties = new GridPane();
+        acties = new GridPane();
 
         acties.add(up, 1, 0);
         acties.add(down, 1, 2);
@@ -42,28 +44,40 @@ public class ActieKnoppenView {
         acties.setLayoutX(319);
         acties.setLayoutY(685);
 
+        PlayerController playerController = PlayerController.getInstance();
+        boolean isKlimmer = false;
+
+        switch (playerController.getPlayer().getKlasse()){
+            case WATERDRAGER:
+                setWaterdragerKnoppen();
+                break;
+            case VERKENNER:
+                setVerkennerKnoppen();
+                break;
+            case KLIMMER:
+                isKlimmer = true;
+                break;
+        }
+
+        final boolean finalKlimmer = isKlimmer;
+
         up.setOnMouseClicked(e -> {
-            PlayerController playerController = PlayerController.getInstance();
-            playerController.moveNoord();
+            playerController.moveNoord(finalKlimmer);
         });
 
         down.setOnMouseClicked(e -> {
-            PlayerController playerController = PlayerController.getInstance();
-            playerController.moveZuid();
+            playerController.moveZuid(finalKlimmer);
         });
 
         right.setOnMouseClicked(e -> {
-            PlayerController playerController = PlayerController.getInstance();
-            playerController.moveOost();
+            playerController.moveOost(finalKlimmer);
         });
 
         left.setOnMouseClicked(e -> {
-            PlayerController playerController = PlayerController.getInstance();
-            playerController.moveWest();
+            playerController.moveWest(finalKlimmer);
         });
 
         tileActions.setOnMouseClicked(e -> {
-            PlayerController playerController = PlayerController.getInstance();
             playerController.tileActies();
         });
 
@@ -71,7 +85,21 @@ public class ActieKnoppenView {
         return acties;
     }
 
+    public void setWaterdragerKnoppen(){
+        Button wS = new Button("wS");
+        acties.add(wS, 2, 2);
+    }
 
+    public void setVerkennerKnoppen(){
+        Button rB = new Button("rB");
+        Button rO = new Button("rO");
+        Button lB = new Button("lB");
+        Button lO = new Button("lO");
+        acties.add(lB, 0, 0);
+        acties.add(lO, 2, 0);
+        acties.add(rB, 0, 2);
+        acties.add(rO, 2, 2);
+    }
 
     public static GridPane getView() {
         return view;

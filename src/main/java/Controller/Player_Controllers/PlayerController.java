@@ -74,52 +74,52 @@ public class PlayerController {
     }
 
 
-    public void moveNoord(){
+    public void moveNoord(boolean isKlimmer){
         if(player.getY() > 0 && player.actiesOver()){
             Tile tileAbove = tileController.getTileByLocation((player.getY() - 1), player.getX());
 
-            moveLogica(tileAbove, Player.Richingen.NOORD);
+            moveLogica(tileAbove, Player.Richingen.NOORD, isKlimmer);
 
             tileController.getTileByLocation((player.getY() + 1), player.getX()).notifyAllObservers();
             tileController.getTileByLocation(player.getY(), player.getX()).notifyAllObservers();
         }
     }
 
-    public void moveZuid(){
+    public void moveZuid(boolean isKlimmer){
         if(player.getY() < 4 && player.actiesOver()){
             Tile tileBeneath = tileController.getTileByLocation((player.getY() + 1), player.getX());
 
-            moveLogica(tileBeneath, Player.Richingen.ZUID);
+            moveLogica(tileBeneath, Player.Richingen.ZUID, isKlimmer);
 
             tileController.getTileByLocation((player.getY() - 1), player.getX()).notifyAllObservers();
             tileController.getTileByLocation(player.getY(), player.getX()).notifyAllObservers();
         }
     }
 
-    public void moveOost(){
+    public void moveOost(boolean isKlimmer){
         if(player.getX() < 4 && player.actiesOver()){
             Tile tileRight = tileController.getTileByLocation(player.getY(), (player.getX() + 1));
 
-            moveLogica(tileRight, Player.Richingen.OOST);
+            moveLogica(tileRight, Player.Richingen.OOST, isKlimmer);
 
             tileController.getTileByLocation(player.getY(), (player.getX() - 1)).notifyAllObservers();
             tileController.getTileByLocation(player.getY(), player.getX()).notifyAllObservers();
         }
     }
 
-    public void moveWest(){
+    public void moveWest(boolean isKlimmer){
         if(player.getX() > 0 && player.actiesOver()){
             Tile tileLeft = tileController.getTileByLocation(player.getY(), (player.getX() -  1));
 
-            moveLogica(tileLeft, Player.Richingen.WEST);
+            moveLogica(tileLeft, Player.Richingen.WEST, isKlimmer);
 
             tileController.getTileByLocation(player.getY(), (player.getX() + 1)).notifyAllObservers();
             tileController.getTileByLocation(player.getY(), player.getX()).notifyAllObservers();
         }
     }
 
-    private void moveLogica(Tile tile, Player.Richingen riching){
-        if(tile.getZand() < 2 && !tile.getClass().equals(Storm.class) && tileController.getTileByLocation(player.getY(), player.getX()).getZand() < 2){
+    private void moveLogica(Tile tile, Player.Richingen riching, boolean isKlimmer){
+        if((tile.getZand() < 2 || isKlimmer) && !tile.getClass().equals(Storm.class) && (tileController.getTileByLocation(player.getY(), player.getX()).getZand() < 2 || isKlimmer)){
             tileController.getTileByLocation(player.getY(), player.getX()).removeSpeler(player);
             player.movePlayer(riching);
             player.useAction();
@@ -141,45 +141,48 @@ public class PlayerController {
         }
     }
 
-    public void digHere(){
+    public void digHere(boolean isArcheoloog){
         if (player.actiesOver()){
             Tile locatie = tileController.getTileByLocation(player.getY(), player.getX());
-            digLogica(locatie);
+            digLogica(locatie, isArcheoloog);
         }
     }
 
-    public void digNoord(){
+    public void digNoord(boolean isArcheoloog){
         if(player.getY() > 0 && player.actiesOver()) {
             Tile locatie = tileController.getTileByLocation((player.getY() - 1), player.getX());
-            digLogica(locatie);
+            digLogica(locatie, isArcheoloog);
         }
     }
 
-    public void digZuid(){
+    public void digZuid(boolean isArcheoloog){
         if(player.getY() < 4 && player.actiesOver()) {
             Tile locatie = tileController.getTileByLocation((player.getY() + 1), player.getX());
-            digLogica(locatie);
+            digLogica(locatie, isArcheoloog);
         }
     }
 
-    public void digOost(){
+    public void digOost(boolean isArcheoloog){
         if(player.getX() < 4 && player.actiesOver()) {
             Tile locatie = tileController.getTileByLocation(player.getY(), (player.getX() + 1));
-            digLogica(locatie);
+            digLogica(locatie, isArcheoloog);
         }
     }
 
-    public void digWest(){
+    public void digWest(boolean isArcheoloog){
         if(player.getX() > 0 && player.actiesOver()) {
             Tile locatie = tileController.getTileByLocation(player.getY(), (player.getX() - 1));
-            digLogica(locatie);
+            digLogica(locatie, isArcheoloog);
         }
     }
 
-    private void digLogica(Tile locatie){
+    private void digLogica(Tile locatie, boolean isArcheoloog){
         if (locatie.hasZand()){
             locatie.removeZandTegel();
             player.useAction();
+        }
+        if(locatie.hasZand() && isArcheoloog){
+            locatie.removeZandTegel();
         }
     }
 
@@ -194,7 +197,7 @@ public class PlayerController {
 
     public void removeWater(){
         Tile tile = tileController.getTileByLocation(player.getY(), player.getX());
-        if(!tile.hasZonneSchild() || tile.getVariant() != Tile.Varianten.TUNNEL) {
+        if(!tile.hasZonneSchild() && tile.getVariant() != Tile.Varianten.TUNNEL ) {
             player.subtractWater(1);
         }
     }
