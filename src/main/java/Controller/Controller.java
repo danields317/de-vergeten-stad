@@ -14,7 +14,8 @@ public class Controller/* extends Application  */{
         return controller;
     }
 
-    public void verwijderZand(){playcont.removeWater();
+    public void zonBrand(){
+        playcont.removeWater();
     }
 
     /*

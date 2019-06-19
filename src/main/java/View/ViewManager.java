@@ -195,6 +195,14 @@ public class ViewManager extends Application implements PlayerObserver, StormObs
 
     public void update(){loadGameView();}
 
+    public void loadEndGame(){
+        Group group = new Group();
+        ImageView pdb = new ImageView("/placeholder.png");
+        group.getChildren().add(pdb);
+        Scene endScene = new Scene(group);
+        primaryStage.setScene(endScene);
+    }
+
 
     @Override
     public void update(PlayerObservable sb) {
