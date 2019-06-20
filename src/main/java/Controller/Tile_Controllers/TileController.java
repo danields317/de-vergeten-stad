@@ -3,13 +3,18 @@ package Controller.Tile_Controllers;
 import Controller.Player_Controllers.PlayerController;
 import Model.Bord.Onderdeel;
 import Model.Tiles.*;
+import Model.data.StaticData;
+import Model.equipment.*;
+import Model.part.Part;
 import Model.player.Player;
 import Model.storm.StormEventBeweging;
 import View.bord_views.SpeelbordView;
+import com.sun.org.apache.regexp.internal.RE;
 import observers.BordObserver;
 import observers.OnderdeelObserver;
 
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.Random;
 
 public class TileController {
@@ -277,5 +282,88 @@ public class TileController {
 
     public ArrayList<Tile> getTiles(){
         return this.randomTiles;
+    }
+
+    public void updateData(){
+        StaticData staticData = StaticData.getInstance();
+        Object roominfo = staticData.getRoomInfo();
+        Map<String, Object> tilesMap = (Map)((Map) roominfo).get("tiles");
+        makeTilesFormFB(tilesMap);
+    }
+
+    public void makeTilesFormFB(Map<String, Object> tilesMap){
+        ArrayList<Tile> tilesFB = new ArrayList<>();
+        for (int i = 0; i < 24; i++){
+            Map<String, Object> tileFB = (Map)tilesMap.get(Integer.toString(i));
+            String variant = (tileFB.get("naam").toString());
+            Tile tile = new Tile(null, null, null);
+
+            int x = Integer.valueOf(tileFB.get("x").toString());
+            int y = Integer.valueOf(tileFB.get("y").toString());
+            boolean discovered = Boolean.getBoolean(tileFB.get("discovered").toString());
+            boolean hasZonneSchild = Boolean.getBoolean(tileFB.get("hasZonneSchild").toString());
+            int aantalZand = Integer.valueOf(tileFB.get("aantalZandTegels").toString());
+
+            switch (variant){
+                case "PART":
+                    tile = new PartTile(stringToRichting(tileFB.get("richting").toString()), stringToSoort(tileFB.get("soort").toString()));
+                    break;
+                case "EQUIPMENT":
+                    tile = new EquipmentTile(stringToEquipment(tileFB.get("equipment").toString()));
+                    break;
+                case "TUNNEL":
+                    tile = new Tunnel(stringToEquipment(tileFB.get("equipment").toString()));
+                    break;
+                case "WATERPUT":
+                    tile = new Waterput();
+                    break;
+                case "FATAMORGANA":
+                    tile = new FataMorgana();
+                    break;
+                case "FINISH":
+                    tile = new Finish();
+                    break;
+            }
+            tile.setLocation(x, y);
+            tile.setDiscovered(discovered);
+            tile.setHasZonneSchild(hasZonneSchild);
+            tile.setAantalZandTegels(aantalZand);
+            tilesFB.add(tile);
+        }
+    }
+
+    private PartTile.Richtingen stringToRichting(String richting){
+        if(richting.equals("OPZIJ")){
+            return PartTile.Richtingen.OPZIJ;
+        }
+        return PartTile.Richtingen.OMHOOG;
+    }
+
+    private PartTile.Soorten stringToSoort(String soort){
+        switch (soort) {
+            case "OBELISK":
+                return PartTile.Soorten.OBELISK;
+            case "KOMPAS":
+                return PartTile.Soorten.KOMPAS;
+            case "MOTOR":
+                return PartTile.Soorten.MOTOR;
+        }
+        return PartTile.Soorten.PROPELOR;
+    }
+
+    private Equipment stringToEquipment(String equipment){
+        switch (equipment){
+            case "JETPACK":
+                return new Jetpack();
+            case "AARDEKIJKER":
+                return new Aardekijker();
+            case "DUINKANON":
+                return new Duinkanon();
+            case "TIJDSCHAKELAAR":
+                return new Tijdschakelaar();
+            case "WATERRESERVE":
+                return new Waterreserve();
+        }
+        return new Zonneschild();
     }
 }

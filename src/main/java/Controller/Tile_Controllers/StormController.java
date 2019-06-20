@@ -125,6 +125,7 @@ public class StormController {
                 stapelCounter = 0;
                 makeEvents();
                 randomizeEvents(stormEvents);
+                hasMadeEvents = false;
             }
         }
         storm.notifyAllObservers();

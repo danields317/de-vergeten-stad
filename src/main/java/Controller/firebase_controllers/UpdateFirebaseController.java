@@ -4,7 +4,10 @@ import Controller.Player_Controllers.PlayerController;
 import Controller.Tile_Controllers.StormController;
 import Controller.Tile_Controllers.TileController;
 import Model.Bord.Onderdeel;
+import Model.Tiles.EquipmentTile;
+import Model.Tiles.PartTile;
 import Model.Tiles.Tile;
+import Model.Tiles.Tunnel;
 import Model.data.StaticData;
 import Model.player.Player;
 import Model.storm.Storm;
@@ -122,12 +125,28 @@ public class UpdateFirebaseController {
         Map<String, Object> tilesMap = new HashMap<>();
         int tileCounter = 0;
         for (Tile tile : randomTiles){
+
             Map<String, Object> tile0 = new HashMap<>();
+
+            Tile.Varianten variant = tile.getVariant();
+            switch (variant){
+                case TUNNEL:
+                    tile0.put("equipment", ((Tunnel)tile).getEquipment().getEquipmentType().toString());
+                    break;
+                case PART:
+                    tile0.put("soort", ((PartTile)tile).getSoort().toString());
+                    tile0.put("richting", ((PartTile)tile).getRichting().toString());
+                    break;
+                case EQUIPMENT:
+                    tile0.put("equipment", ((EquipmentTile)tile).getEquipment().getEquipmentType().toString());
+                    break;
+            }
             tile0.put("discovered", tile.isDiscovered());
             tile0.put("aantalZandTegels", tile.getZand());
             tile0.put("hasZonneSchild", tile.hasZonneSchild());
             tile0.put("x", tile.getX());
             tile0.put("y", tile.getY());
+            tile0.put("naam", tile.getVariant().toString());
 
             Map<String, Object> spelersMap = new HashMap<>();
             ArrayList<Player> players = tile.getSpelers();

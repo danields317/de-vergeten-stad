@@ -173,4 +173,16 @@ public class Tile implements BordObservable{
     public boolean hasZonneSchild(){
         return hasZonneSchild;
     }
+
+    public void setDiscovered(boolean discovered) {
+        this.discovered = discovered;
+    }
+
+    public void setAantalZandTegels(int aantalZandTegels) {
+        this.aantalZandTegels = aantalZandTegels;
+    }
+
+    public void setHasZonneSchild(boolean hasZonneSchild) {
+        this.hasZonneSchild = hasZonneSchild;
+    }
 }
