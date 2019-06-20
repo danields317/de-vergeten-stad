@@ -308,9 +308,12 @@ public class TileController {
     }
 
     private void makeTilesFormFB(Map<String, Object> tilesMap){
+        ArrayList<Tile> fbTiles = new ArrayList<>();
         for (int i = 0; i < 25; i++){
             Map<String, Object> tileFB = (Map)tilesMap.get(Integer.toString(i));
-            Tile tile = randomTiles.get(i);
+            Tile tile = null;
+
+            String variant = tileFB.get("naam").toString();
 
             int x = Integer.valueOf(tileFB.get("x").toString());
             int y = Integer.valueOf(tileFB.get("y").toString());
@@ -321,18 +324,72 @@ public class TileController {
             boolean hasZonneSchild = Boolean.getBoolean(tileFB.get("hasZonneSchild").toString());
             int aantalZand = Integer.valueOf(tileFB.get("aantalZandTegels").toString());
 
+            switch (variant){
+                case "PART":
+                    tile = new PartTile(stringToRichting(tileFB.get("richting").toString()), stringToSoort(tileFB.get("soort").toString()));
+                    break;
+                case "FATAMORGANA":
+                    tile = new FataMorgana();
+                    break;
+                case "EQUIPMENT":
+                    tile = new EquipmentTile(stringToEquipment(tileFB.get("equipment").toString()));
+                    break;
+                case "TUNNEL":
+                    tile = new Tunnel(stringToEquipment(tileFB.get("equipment").toString()));
+                    break;
+                case "WATERPUT":
+                    tile = new Waterput();
+                    break;
+                case "FINISH":
+                    tile = new Finish();
+                    break;
+                case "STORM":
+                    tile = new Storm();
+                    break;
+            }
+
             tile.setLocation(x, y);
             tile.setDiscovered(discovered);
             tile.setHasZonneSchild(hasZonneSchild);
             tile.setAantalZandTegels(aantalZand);
+            fbTiles.add(tile);
         }
+        randomTiles = fbTiles;
     }
 
-    public Tile getStartTile(){
-        for (Tile tile : randomTiles){
-            if (tile.getClass().equals(StartTile.class)){
-                return tile;
-            }
+    public Equipment stringToEquipment(String eq){
+        switch (eq){
+            case "JETPACK":
+                return new Jetpack();
+            case "AARDEKIJKER":
+                return new Aardekijker();
+            case "DUINKANON":
+                return new Duinkanon();
+            case "TIJDSCHAKELAAR":
+                return new Tijdschakelaar();
+            case "ZONNESCHILD":
+                return new Zonneschild();
+            case "WATERRESERVE":
+                return new Waterreserve();
+        }
+        return null;
+    }
+    public PartTile.Richtingen stringToRichting(String richting){
+        if (richting.equals("OPZIJ")){
+            return PartTile.Richtingen.OPZIJ;
+        }
+        return PartTile.Richtingen.OMHOOG;
+    }
+    public PartTile.Soorten stringToSoort(String soort){
+        switch (soort){
+            case "OBELISK":
+                return PartTile.Soorten.OBELISK;
+            case "MOTOR":
+                return PartTile.Soorten.MOTOR;
+            case "KOMPAS":
+                return PartTile.Soorten.KOMPAS;
+            case "PROPELOR":
+                return PartTile.Soorten.PROPELOR;
         }
         return null;
     }

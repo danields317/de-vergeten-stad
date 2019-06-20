@@ -131,7 +131,21 @@ public class UpdateFirebaseController {
             tile0.put("hasZonneSchild", tile.hasZonneSchild());
             tile0.put("x", tile.getX());
             tile0.put("y", tile.getY());
-            tile0.put("naam", tile.getVariant().toString());
+            String variant = tile.getVariant().toString();
+            tile0.put("naam", variant);
+
+            switch (variant){
+                case "PART":
+                    tile0.put("richting", ((PartTile)tile).getRichting().toString());
+                    tile0.put("soort", ((PartTile)tile).getSoort().toString());
+                    break;
+                case "EQUIPMENT":
+                    tile0.put("equipment", ((EquipmentTile)tile).getEquipment().getEquipmentType().toString());
+                    break;
+                case "TUNNEL":
+                    tile0.put("equipment", ((Tunnel)tile).getEquipment().getEquipmentType().toString());
+                    break;
+            }
 
             Map<String, Object> spelersMap = new HashMap<>();
             ArrayList<Player> players = tile.getSpelers();
