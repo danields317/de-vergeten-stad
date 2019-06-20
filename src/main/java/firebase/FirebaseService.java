@@ -69,15 +69,16 @@ public class FirebaseService{
                 }
 
                 if (snapshot != null && snapshot.exists()) {
-//                    controller.updateFromFirebase(snapshot);
+                    System.out.println("update from fb");
                     ListenUpdateController listenUpdateController = ListenUpdateController.getInstance();
                     listenUpdateController.setFirebaseData();
-                    Platform.runLater(new Runnable() {
-                        @Override
-                        public void run() {
-                            (PlayerController.getInstance()).update();
-                            StormController.getInstance().update();
-                        }
+
+
+                    Platform.runLater(() -> {
+                        System.out.println("notifiy player model");
+                        (PlayerController.getInstance()).update();
+                        System.out.println("notifiy storm model");
+                        (StormController.getInstance()).update();
                     });
 
 

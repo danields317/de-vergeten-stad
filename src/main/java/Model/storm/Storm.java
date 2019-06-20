@@ -3,6 +3,7 @@ package Model.storm;
 import javafx.scene.image.Image;
 import observers.StormObservable;
 import observers.StormObserver;
+import org.omg.CORBA.PUBLIC_MEMBER;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -87,7 +88,9 @@ public class Storm implements StormObservable{
     }
 
     public void setSterkte(int sterkte){
+        System.out.println(sterkte);
         this.sterkte = sterkte;
+        System.out.println(sterkte);
     }
 
     public void setSubSterkte(int sterkte){

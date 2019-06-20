@@ -30,10 +30,17 @@ public class ListenUpdateController {
         playerController = PlayerController.getInstance();
         stormController = StormController.getInstance();
         FirebaseService firebaseService = FirebaseService.getInstance();
+
+        System.out.println("roominfo");
         Object roomInfo = firebaseService.getSpel(staticData.getRoomName()).getData();
         (StaticData.getInstance()).setRoomInfo(roomInfo);
+
+        System.out.println("playerController update");
         playerController.updateData();
 
+        System.out.println("stormController update");
         stormController.updateData();
+
+        System.out.println("DIT IS GOED");
     }
 }

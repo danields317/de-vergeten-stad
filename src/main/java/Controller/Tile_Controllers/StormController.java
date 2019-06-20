@@ -105,7 +105,9 @@ public class StormController {
                 StormEvent stormEvent = randomStormEvents.get(stapelCounter);
                 switch (stormEvent.naam){
                     case BEWEGING:
+                        System.out.println("is het kikker of kinker?");
                         beweegStorm(((StormEventBeweging) stormEvent).richting, ((StormEventBeweging) stormEvent).stappen);
+                        System.out.println("ik hoop dat de leraren dit niet zien");
                         break;
                     case BRANDT:
                         Controller controller = Controller.getInstance();
@@ -168,12 +170,14 @@ public class StormController {
         StaticData staticData = StaticData.getInstance();
         Object roominfo = staticData.getRoomInfo();
         Map<String, Object> stormMap = (Map)((Map) roominfo).get("storm");
-        makeRandomStormEventsFB((Map)stormMap.get("events"));
-//        hasMadeEvents = true;
-
-        storm.setSterkte((int)stormMap.get("sterkte"));
-        storm.setSubSterkte((int)stormMap.get("subSterkte"));
-        storm.setLocatie((int)stormMap.get("x"), (int)stormMap.get("y"));
+        if (!hasMadeEvents){
+            makeRandomStormEventsFB((Map)stormMap.get("events"));
+            hasMadeEvents = true;
+        }
+        storm.setSterkte(Integer.valueOf(stormMap.get("sterkte").toString()));
+        storm.setSubSterkte(Integer.valueOf(stormMap.get("subSterkte").toString()));
+        storm.setLocatie(Integer.valueOf(stormMap.get("x").toString()), Integer.valueOf(stormMap.get("y").toString()));
+        setStapelCounter(Integer.valueOf(stormMap.get("stapelCounter").toString()));
     }
 
     private void makeRandomStormEventsFB(Map<String, Object> stormEvents){
@@ -183,33 +187,41 @@ public class StormController {
                 events.add(new StormEvent(StormEvent.Namen.BRANDT));
             } else if (stormEvents.get(Integer.toString(i)).equals("STERKER")){
                 events.add(new StormEvent(StormEvent.Namen.STERKER));
-            } else if (stormEvents.get(Integer.toString(i)).equals("BEWEGENNOORDONE")){
+            } else if (stormEvents.get(Integer.toString(i)).equals("BEWEGINGNOORDONE")){
                 events.add(new StormEventBeweging(StormEvent.Namen.BEWEGING, StormEventBeweging.Richtingen.NOORD,StormEventBeweging.Stappen.ONE));
-            } else if (stormEvents.get(Integer.toString(i)).equals("BEWEGENNOORDTWO")){
+            } else if (stormEvents.get(Integer.toString(i)).equals("BEWEGINGNOORDTWO")){
                 events.add(new StormEventBeweging(StormEvent.Namen.BEWEGING, StormEventBeweging.Richtingen.NOORD,StormEventBeweging.Stappen.TWO));
-            } else if (stormEvents.get(Integer.toString(i)).equals("BEWEGENNOORDTHREE")){
+            } else if (stormEvents.get(Integer.toString(i)).equals("BEWEGINGNOORDTHREE")){
                 events.add(new StormEventBeweging(StormEvent.Namen.BEWEGING, StormEventBeweging.Richtingen.NOORD,StormEventBeweging.Stappen.THREE));
-            } else if (stormEvents.get(Integer.toString(i)).equals("BEWEGENOOSTONE")){
+            } else if (stormEvents.get(Integer.toString(i)).equals("BEWEGINGOOSTONE")){
                 events.add(new StormEventBeweging(StormEvent.Namen.BEWEGING, StormEventBeweging.Richtingen.OOST,StormEventBeweging.Stappen.ONE));
-            } else if (stormEvents.get(Integer.toString(i)).equals("BEWEGENOOSTTWO")){
+            } else if (stormEvents.get(Integer.toString(i)).equals("BEWEGINGOOSTTWO")){
                 events.add(new StormEventBeweging(StormEvent.Namen.BEWEGING, StormEventBeweging.Richtingen.OOST,StormEventBeweging.Stappen.TWO));
-            } else if (stormEvents.get(Integer.toString(i)).equals("BEWEGENOOSTTHREE")){
+            } else if (stormEvents.get(Integer.toString(i)).equals("BEWEGINGOOSTTHREE")){
                 events.add(new StormEventBeweging(StormEvent.Namen.BEWEGING, StormEventBeweging.Richtingen.OOST,StormEventBeweging.Stappen.THREE));
-            } else if (stormEvents.get(Integer.toString(i)).equals("BEWEGENZUIDONE")){
+            } else if (stormEvents.get(Integer.toString(i)).equals("BEWEGINGZUIDONE")){
                 events.add(new StormEventBeweging(StormEvent.Namen.BEWEGING, StormEventBeweging.Richtingen.ZUID,StormEventBeweging.Stappen.ONE));
-            } else if (stormEvents.get(Integer.toString(i)).equals("BEWEGENZUIDTWO")){
+            } else if (stormEvents.get(Integer.toString(i)).equals("BEWEGINGZUIDTWO")){
                 events.add(new StormEventBeweging(StormEvent.Namen.BEWEGING, StormEventBeweging.Richtingen.ZUID,StormEventBeweging.Stappen.TWO));
-            } else if (stormEvents.get(Integer.toString(i)).equals("BEWEGENZUIDTHREE")){
+            } else if (stormEvents.get(Integer.toString(i)).equals("BEWEGINGZUIDTHREE")){
                 events.add(new StormEventBeweging(StormEvent.Namen.BEWEGING, StormEventBeweging.Richtingen.ZUID,StormEventBeweging.Stappen.THREE));
-            } else if (stormEvents.get(Integer.toString(i)).equals("BEWEGENWESTONE")){
+            } else if (stormEvents.get(Integer.toString(i)).equals("BEWEGINGWESTONE")){
                 events.add(new StormEventBeweging(StormEvent.Namen.BEWEGING, StormEventBeweging.Richtingen.WEST,StormEventBeweging.Stappen.ONE));
-            } else if (stormEvents.get(Integer.toString(i)).equals("BEWEGENWESTTWO")){
+            } else if (stormEvents.get(Integer.toString(i)).equals("BEWEGINGWESTTWO")){
                 events.add(new StormEventBeweging(StormEvent.Namen.BEWEGING, StormEventBeweging.Richtingen.WEST,StormEventBeweging.Stappen.TWO));
-            } else if (stormEvents.get(Integer.toString(i)).equals("BEWEGENWESTTHREE")){
+            } else if (stormEvents.get(Integer.toString(i)).equals("BEWEGINGWESTTHREE")){
                 events.add(new StormEventBeweging(StormEvent.Namen.BEWEGING, StormEventBeweging.Richtingen.WEST,StormEventBeweging.Stappen.THREE));
             }
         }
-        randomStormEvents= events;
+        randomStormEvents = events;
+    }
+
+    public int getStapelCounter(){
+        return stapelCounter;
+    }
+
+    public void setStapelCounter(int counter){
+        this.stapelCounter = counter;
     }
 
 }

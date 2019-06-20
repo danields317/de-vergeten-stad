@@ -48,14 +48,14 @@ public class FunctieController {
                 };
                 myObject.put(String.valueOf(i), obj);
             }else{
-                if((((Long) (((Map) singeClass).get("water"))).intValue() - 1) < 0){
-                    //endLose();
-                }
+//                if((((Long) (((Map) singeClass).get("water"))).intValue() - 1) < 0){
+//                    //endLose();
+//                }
                 Map<String, Object> obj = new HashMap<String, Object>() {
                     {
                         put("name", ((((Map) singeClass).get("name")).toString()));
                         put("maxWater", (((Map) singeClass).get("maxWater")) );
-                        put("water", (((Long) (((Map) singeClass).get("water"))).intValue() - 1));
+                        put("water", (Integer.valueOf(((Map)singeClass).get("water").toString()))-1);
                     }
                 };
                 myObject.put(String.valueOf(i), obj);
