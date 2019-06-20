@@ -358,6 +358,7 @@ public class TileController {
             fbTiles.add(tile);
         }
         randomTiles = fbTiles;
+        maakOnderdelen();
     }
 
     public Equipment stringToEquipment(String eq){
