@@ -2,9 +2,17 @@ package Controller.firebase_controllers;
 
 import Controller.Player_Controllers.PlayerController;
 import Controller.Tile_Controllers.StormController;
+import Controller.Tile_Controllers.TileController;
+import Model.Bord.Onderdeel;
+import Model.Tiles.Tile;
 import Model.data.StaticData;
+import Model.player.Player;
+import Model.storm.Storm;
+import Model.storm.StormEvent;
+import Model.storm.StormEventBeweging;
 import firebase.FirebaseService;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,6 +21,7 @@ public class UpdateFirebaseController {
     private StaticData staticData;
     private PlayerController playerController;
     private StormController stormController;
+    private TileController tc = TileController.getInstance();
 
     public UpdateFirebaseController(){
         staticData = StaticData.getInstance();
@@ -63,11 +72,82 @@ public class UpdateFirebaseController {
                 myObject.put(String.valueOf(i), obj);
             }
         }
+
+        data.put("tiles", makeTileMap());
+        data.put("storm", makeStormMap());
+
         data.put("Selectable_classes", myObject);
 //        data.put("activePlayer", activePlayer);
         data.put("activePlayer", "Archeoloog");
         (FirebaseService.getInstance()).addSpel(staticData.getRoomName(), data);
 
+    }
+
+    private Map<String, Object> makeStormMap(){
+        Map<String, Object> stormMap = new HashMap<>();
+
+        ArrayList<StormEvent> events = stormController.getStormEvents();
+        Storm storm = stormController.getStorm();
+
+        Map<String, Object> stormEventsMap = new HashMap<>();
+        int stormEventCounter = 0;
+        for (StormEvent event : events){
+            switch (event.naam){
+                case STERKER:
+                    stormEventsMap.put(Integer.toString(stormEventCounter), event.naam.toString());
+                    break;
+                case BRANDT:
+                    stormEventsMap.put(Integer.toString(stormEventCounter), event.naam.toString());
+                    break;
+                case BEWEGING:
+                    stormEventsMap.put(Integer.toString(stormEventCounter), event.naam.toString()+((StormEventBeweging) event).richting.toString()+((StormEventBeweging) event).stappen.toString());
+                    break;
+            }
+            stormEventCounter++;
+        }
+
+        stormMap.put("events", stormEventsMap);
+        stormMap.put("sterkte", storm.getSterkte());
+        stormMap.put("subSterkte", storm.getSubSterkte());
+        stormMap.put("x", storm.getX());
+        stormMap.put("y", storm.getY());
+
+        return stormMap;
+    }
+
+    private Map<String, Object> makeTileMap(){
+        ArrayList<Tile> randomTiles = tc.getTiles();
+        Map<String, Object> tilesMap = new HashMap<>();
+        int tileCounter = 0;
+        for (Tile tile : randomTiles){
+            Map<String, Object> tile0 = new HashMap<>();
+            tile0.put("discovered", tile.isDiscovered());
+            tile0.put("aantalZandTegels", tile.getZand());
+            tile0.put("hasZonneSchild", tile.hasZonneSchild());
+            tile0.put("x", tile.getX());
+            tile0.put("y", tile.getY());
+
+            Map<String, Object> spelersMap = new HashMap<>();
+            ArrayList<Player> players = tile.getSpelers();
+            int playerCounter = 0;
+            for (Player player : players){
+                spelersMap.put(Integer.toString(playerCounter), player.getClassName());
+            }
+
+            Map<String, Object> onderdelenMap = new HashMap<>();
+            ArrayList<Onderdeel> onderdelen = tile.getOnderdelen();
+            int onderdelenCounter = 0;
+            for (Onderdeel onderdeel : onderdelen){
+                onderdelenMap.put(Integer.toString(playerCounter), onderdeel.getSoort().toString());
+            }
+
+            tile0.put("spelers", spelersMap);
+            tile0.put("onderdelen", onderdelenMap);
+
+            tilesMap.put(Integer.toString(tileCounter), tile0);
+            tileCounter++;
+        }
+        return tilesMap;
     }
 
     public void makeFirebase(String roomName){

@@ -28,11 +28,12 @@ public class ListenUpdateController {
 
     public void setFirebaseData(){
         playerController = PlayerController.getInstance();
+        stormController = StormController.getInstance();
         FirebaseService firebaseService = FirebaseService.getInstance();
         Object roomInfo = firebaseService.getSpel(staticData.getRoomName()).getData();
         (StaticData.getInstance()).setRoomInfo(roomInfo);
         playerController.updateData();
 
-
+        stormController.updateData();
     }
 }

@@ -229,8 +229,10 @@ public class FirebaseService{
         ApiFuture<WriteResult> writeResult = this.colRef.document(documentId).delete();
     }
 
-//    public static void main(String[] args){
-//        System.out.println(getInstance().getGebruiker("ryanr").get("wachtwoord"));
-//    }
+    public static void main(String[] args){
+        FirebaseService fb = FirebaseService.getInstance();
+        DocumentSnapshot spel = fb.getSpel("test");
+        System.out.println();
+    }
 
 }
