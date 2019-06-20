@@ -145,6 +145,9 @@ public class UpdateFirebaseController {
                 case "TUNNEL":
                     tile0.put("equipment", ((Tunnel)tile).getEquipment().getEquipmentType().toString());
                     break;
+                case "START":
+                    tile0.put("equipment", ((StartTile)tile).getEquipment().getEquipmentType().toString());
+                    break;
             }
 
             Map<String, Object> spelersMap = new HashMap<>();
