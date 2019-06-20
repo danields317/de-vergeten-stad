@@ -1,5 +1,6 @@
 package View;
 
+import Controller.Bord_Controllers.Player_Menu_Controller;
 import Controller.Player_Controllers.FunctieController;
 import Controller.Player_Controllers.PlayerController;
 import Controller.Tile_Controllers.StormController;
@@ -41,6 +42,7 @@ public class ViewManager extends Application implements PlayerObserver, StormObs
     SpeelbordView speelbordView = SpeelbordView.getInstance();
     Acties_View acties_view;//maak actie tekens
     StaticData staticData = StaticData.getInstance();
+    Player_Menu_View player_menu_view;
 
 
     private double windowWidth = 1600;
@@ -101,6 +103,8 @@ public class ViewManager extends Application implements PlayerObserver, StormObs
         waterfles = waterflesView.createInitialGridPane();
         GridPane stormTeken = stormMeterView.createInitialGridPane();
         acties_view = new Acties_View();
+        player_menu_view = new Player_Menu_View();
+        (Player_Menu_Controller.getInstance()).begin();
 
         StackPane propellor = onderdeelview.loadPropeller("?", "?");
         StackPane beacon = onderdeelview.loadBeacon("?", "?");
@@ -109,6 +113,7 @@ public class ViewManager extends Application implements PlayerObserver, StormObs
         GridPane knoppen = actieknoppenview.maakActieKnoppen();
         GridPane graafknoppen = graafknoppenview.maakGraafKnoppen();
         GridPane spelbord = speelbordView.loadSpelBord();
+
 //        GridPane acties_view =
 //        Image backgroundImage = new Image("gamescreenempty.png");
 //        Canvas canvas = new Canvas(windowWidth, windowHeight);
@@ -178,13 +183,14 @@ public class ViewManager extends Application implements PlayerObserver, StormObs
         GridPane spelbord = speelbordView.getSpelbord();
         GridPane stormTeken =  stormMeterView.getView();
         GridPane acties = acties_view.getView();
+        GridPane playermenu = player_menu_view.getView();
 
         StackPane uitrusting = uitrustingview.getUitrusting();
 
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.drawImage(backgroundImage, 0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
 
-        Group group = new Group(canvas, stormTeken, knoppen, graafKnoppen, eindigBeurt, waterfles, propellor,beacon,motor,zonnewijzer, spelbord, uitrusting, acties);
+        Group group = new Group(canvas, stormTeken, knoppen, graafKnoppen, eindigBeurt, waterfles, propellor,beacon,motor,zonnewijzer, spelbord, uitrusting, acties,  playermenu);
         return group;
     }
 
