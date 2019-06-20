@@ -12,7 +12,7 @@ public class Tile implements BordObservable{
 
     private ArrayList<BordObserver> observers = new ArrayList<>();
 
-    public enum Varianten{EQUIPMENT, FATAMORGANA, PART, TUNNEL, WATERPUT, FINISH, STORM}
+    public enum Varianten{EQUIPMENT, FATAMORGANA, PART, TUNNEL, WATERPUT, FINISH, STORM, START}
     private Varianten variant;
 
     private boolean discovered;
@@ -184,5 +184,9 @@ public class Tile implements BordObservable{
 
     public void setHasZonneSchild(boolean hasZonneSchild) {
         this.hasZonneSchild = hasZonneSchild;
+    }
+
+    public void setVariant(Varianten variant){
+        this.variant = variant;
     }
 }

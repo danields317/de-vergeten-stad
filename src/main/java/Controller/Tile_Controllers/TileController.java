@@ -346,6 +346,9 @@ public class TileController {
                 case "STORM":
                     tile = new Storm();
                     break;
+                case "START":
+                    tile = new StartTile(stringToEquipment(tileFB.get("equipment").toString()));
+                    break;
             }
 
             tile.setLocation(x, y);
