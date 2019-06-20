@@ -4,10 +4,7 @@ import Controller.Player_Controllers.PlayerController;
 import Controller.Tile_Controllers.StormController;
 import Controller.Tile_Controllers.TileController;
 import Model.Bord.Onderdeel;
-import Model.Tiles.EquipmentTile;
-import Model.Tiles.PartTile;
-import Model.Tiles.Tile;
-import Model.Tiles.Tunnel;
+import Model.Tiles.*;
 import Model.data.StaticData;
 import Model.player.Player;
 import Model.storm.Storm;
@@ -25,6 +22,8 @@ public class UpdateFirebaseController {
     private PlayerController playerController;
     private StormController stormController;
     private TileController tc;
+
+    private boolean startGame = false;
 
     public UpdateFirebaseController(){
         staticData = StaticData.getInstance();
@@ -145,6 +144,14 @@ public class UpdateFirebaseController {
             ArrayList<Onderdeel> onderdelen = tile.getOnderdelen();
             for (Onderdeel onderdeel : onderdelen){
                 onderdelenMap.put(Integer.toString(playerCounter), onderdeel.getSoort().toString());
+            }
+
+            if (!startGame && tile.getClass().equals(StartTile.class)){
+                spelersMap.put("0", "Archeoloog");
+                spelersMap.put("1", "Klimmer");
+                spelersMap.put("2", "Verkenner");
+                spelersMap.put("3", "Waterdrager");
+                startGame = true;
             }
 
             tile0.put("spelers", spelersMap);
