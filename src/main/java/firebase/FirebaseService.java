@@ -9,6 +9,7 @@ import java.util.concurrent.ExecutionException;
 
 import Controller.Player_Controllers.PlayerController;
 import Controller.Tile_Controllers.StormController;
+import Controller.Tile_Controllers.TileController;
 import Controller.firebase_controllers.ListenUpdateController;
 import Model.player.Player;
 import com.google.api.core.ApiFuture;
@@ -79,6 +80,7 @@ public class FirebaseService{
                         (PlayerController.getInstance()).update();
                         System.out.println("notifiy storm model");
                         (StormController.getInstance()).update();
+                        (TileController.getInstance()).update();
                     });
 
 

@@ -366,4 +366,10 @@ public class TileController {
         }
         return new Zonneschild();
     }
+
+    public void update(){
+        for (Tile tile : randomTiles){
+            tile.notifyAllObservers();
+        }
+    }
 }
