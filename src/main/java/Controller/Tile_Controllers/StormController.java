@@ -32,12 +32,12 @@ public class StormController {
 
     private boolean hasMadeEvents = false;
 
-    private StormController(){
+    public StormController(){
         storm = new Storm();
         makeEvents();
         randomizeEvents(stormEvents);
         stapelCounter = 0;
-        tileController = TileController.getInstance();
+        tileController = TileController.getCheatInstance();
     }
 
     public static StormController getInstance(){

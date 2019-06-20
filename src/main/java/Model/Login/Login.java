@@ -36,7 +36,6 @@ public class Login implements LoginObservable {
 
     public void laadKamer(String roomId, Stage s){
         new LoadBordView(s , roomId);
-        TileController.getInstance();
     }
     public String getScore(){
         return Integer.toString(scorePlayer1);

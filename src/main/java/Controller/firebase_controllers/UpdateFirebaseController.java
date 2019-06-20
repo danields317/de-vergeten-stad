@@ -24,13 +24,10 @@ public class UpdateFirebaseController {
     private StaticData staticData;
     private PlayerController playerController;
     private StormController stormController;
-    private TileController tc = TileController.getInstance();
+    private TileController tc;
 
     public UpdateFirebaseController(){
         staticData = StaticData.getInstance();
-        stormController = StormController.getInstance();
-        playerController = PlayerController.getInstance();
-
     }
 
     public static UpdateFirebaseController getInstance(){
@@ -42,6 +39,9 @@ public class UpdateFirebaseController {
     }
 
     public void updateFirebase(){
+        stormController = StormController.getInstance();
+        playerController = PlayerController.getInstance();
+        tc = TileController.getInstance();
         StaticData staticData = StaticData.getInstance();
         Map<String, Object> data = new HashMap<String, Object>();
         Object classes = ((Map) staticData.getRoomInfo()).get("Selectable_classes");
@@ -88,7 +88,7 @@ public class UpdateFirebaseController {
 
     private Map<String, Object> makeStormMap(){
         Map<String, Object> stormMap = new HashMap<>();
-
+        StormController stormController = new StormController();
         ArrayList<StormEvent> events = stormController.getStormEvents();
         Storm storm = stormController.getStorm();
 
@@ -143,7 +143,6 @@ public class UpdateFirebaseController {
 
             Map<String, Object> onderdelenMap = new HashMap<>();
             ArrayList<Onderdeel> onderdelen = tile.getOnderdelen();
-            int onderdelenCounter = 0;
             for (Onderdeel onderdeel : onderdelen){
                 onderdelenMap.put(Integer.toString(playerCounter), onderdeel.getSoort().toString());
             }
@@ -159,6 +158,9 @@ public class UpdateFirebaseController {
 
     public void makeFirebase(String roomName){
         Map<String, Object> myObject = new HashMap<String, Object>();
+
+        tc = new TileController();
+
         Map<String, Object> obj = new HashMap<String, Object>() {
             {
                 put("name", "Archeoloog");
@@ -192,9 +194,11 @@ public class UpdateFirebaseController {
         };
         myObject.put("3", obj);
         Map<String, Object> data = new HashMap<String, Object>();
-        data.put("Selectable_classes", data);
+        data.put("Selectable_classes", myObject);
+        data.put("tiles", makeTileMap());
+        data.put("storm", makeStormMap());
 
         (FirebaseService.getInstance()).addSpel(roomName, data);
-
+        StaticData.getInstance().setRoomInfo(data);
     }
 }

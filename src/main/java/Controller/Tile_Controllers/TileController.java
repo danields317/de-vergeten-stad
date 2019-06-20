@@ -22,6 +22,7 @@ public class TileController {
     Random random = new Random();
 
     public static TileController tileController;
+    public static TileController cheatController;
     private static EquipmentController equipmentController = EquipmentController.getInstance();
 
     ArrayList<Tile> tiles = new ArrayList<>();
@@ -47,11 +48,18 @@ public class TileController {
         makeTilesFormFB(tilesMap);
     }
 
+    public static TileController getCheatInstance(){
+        if (cheatController == null){
+            cheatController = new TileController();
+        }
+        return cheatController;
+    }
+
     public static TileController getInstance(){
         if (tileController == null){
             StaticData staticData = StaticData.getInstance();
             Object roominfo = staticData.getRoomInfo();
-            tileController = new TileController();
+            tileController = new TileController(roominfo);
         }
         return tileController;
     }
