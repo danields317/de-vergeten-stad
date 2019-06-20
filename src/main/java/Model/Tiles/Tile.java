@@ -12,7 +12,7 @@ public class Tile implements BordObservable{
 
     private ArrayList<BordObserver> observers = new ArrayList<>();
 
-    public enum Varianten{EQUIPMENT, FATAMORGANA, PART, TUNNEL, WATERPUT, FINISH}
+    public enum Varianten{EQUIPMENT, FATAMORGANA, PART, TUNNEL, WATERPUT, FINISH, STORM}
     private Varianten variant;
 
     private boolean discovered;
@@ -35,6 +35,7 @@ public class Tile implements BordObservable{
         spelers = new ArrayList<>();
         discovered = false;
         this.variant = variant;
+        System.out.println("REEEEEEEEEEEEEE");
     }
 
     public void addZandTegel(){
@@ -82,7 +83,9 @@ public class Tile implements BordObservable{
     }
 
     public void setDiscoveredImage(String pad){
+        System.out.println("image jaa");
         this.discoveredImage = new Image(pad);
+        System.out.println("image neee");
 //        setCurrentImage(discoveredImage);
         notifyAllObservers();
     }

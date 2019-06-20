@@ -72,7 +72,9 @@ public class FirebaseService{
                 if (snapshot != null && snapshot.exists()) {
                     System.out.println("update from fb");
                     ListenUpdateController listenUpdateController = ListenUpdateController.getInstance();
+                    System.out.println("flikker");
                     listenUpdateController.setFirebaseData();
+                    System.out.println("kenker");
 
 
                     Platform.runLater(() -> {
@@ -80,7 +82,9 @@ public class FirebaseService{
                         (PlayerController.getInstance()).update();
                         System.out.println("notifiy storm model");
                         (StormController.getInstance()).update();
+                        System.out.println("notify tile model");
                         (TileController.getInstance()).update();
+                        System.out.println("notify tile model-----------------------------------------------");
                     });
 
 

@@ -90,6 +90,7 @@ public class TileController {
                 tiles.add(new EquipmentTile(equipmentController.getEquipment()));
             }
         }
+        EquipmentTile.resetTeller();
     }
 
 
@@ -285,31 +286,47 @@ public class TileController {
     }
 
     public void updateData(){
+        System.out.println("1-------------------1");
         StaticData staticData = StaticData.getInstance();
+        System.out.println("-2-----------------2-");
         Object roominfo = staticData.getRoomInfo();
+        System.out.println("--3---------------3--");
         Map<String, Object> tilesMap = (Map)((Map) roominfo).get("tiles");
+        System.out.println("---4-------------4---");
         makeTilesFormFB(tilesMap);
+        System.out.println("----5-----------5----");
     }
 
     public void makeTilesFormFB(Map<String, Object> tilesMap){
         ArrayList<Tile> tilesFB = new ArrayList<>();
         for (int i = 0; i < 24; i++){
+            System.out.println("0");
             Map<String, Object> tileFB = (Map)tilesMap.get(Integer.toString(i));
+            System.out.println("1");
             String variant = (tileFB.get("naam").toString());
-            Tile tile = new Tile(null, null, null);
+            System.out.println("2");
+            Tile tile = null;
+            System.out.println("3");
 
             int x = Integer.valueOf(tileFB.get("x").toString());
+            System.out.println("4");
             int y = Integer.valueOf(tileFB.get("y").toString());
+            System.out.println("5");
             boolean discovered = Boolean.getBoolean(tileFB.get("discovered").toString());
+            System.out.println("6");
             boolean hasZonneSchild = Boolean.getBoolean(tileFB.get("hasZonneSchild").toString());
+            System.out.println("7");
             int aantalZand = Integer.valueOf(tileFB.get("aantalZandTegels").toString());
+            System.out.println("8");
 
+            System.out.println(variant);
             switch (variant){
                 case "PART":
                     tile = new PartTile(stringToRichting(tileFB.get("richting").toString()), stringToSoort(tileFB.get("soort").toString()));
                     break;
                 case "EQUIPMENT":
                     tile = new EquipmentTile(stringToEquipment(tileFB.get("equipment").toString()));
+                    System.out.println("EQUIPMENT GEMAAKT");
                     break;
                 case "TUNNEL":
                     tile = new Tunnel(stringToEquipment(tileFB.get("equipment").toString()));
@@ -323,13 +340,28 @@ public class TileController {
                 case "FINISH":
                     tile = new Finish();
                     break;
+                case "STORM":
+                    tile = new Storm();
+                    break;
+                default:
+                    System.out.println("DEFAULT");
             }
+            System.out.println("9");
             tile.setLocation(x, y);
+            System.out.println("10");
             tile.setDiscovered(discovered);
+            System.out.println("11");
             tile.setHasZonneSchild(hasZonneSchild);
+            System.out.println("12");
             tile.setAantalZandTegels(aantalZand);
+            System.out.println("13");
             tilesFB.add(tile);
+            System.out.println("14");
         }
+        EquipmentTile.resetTeller();
+        System.out.println("15");
+        randomTiles = tilesFB;
+        System.out.println("16");
     }
 
     private PartTile.Richtingen stringToRichting(String richting){
@@ -352,18 +384,25 @@ public class TileController {
     }
 
     private Equipment stringToEquipment(String equipment){
+        System.out.println("stringToEquipment");
         switch (equipment){
             case "JETPACK":
+                System.out.println("Jetpack");
                 return new Jetpack();
             case "AARDEKIJKER":
+                System.out.println("aardekijker");
                 return new Aardekijker();
             case "DUINKANON":
+                System.out.println("duinkanon");
                 return new Duinkanon();
             case "TIJDSCHAKELAAR":
+                System.out.println("tijd");
                 return new Tijdschakelaar();
             case "WATERRESERVE":
+                System.out.println("water");
                 return new Waterreserve();
         }
+        System.out.println("zonne");
         return new Zonneschild();
     }
 

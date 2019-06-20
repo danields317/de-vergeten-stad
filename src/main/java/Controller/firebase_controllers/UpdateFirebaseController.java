@@ -103,7 +103,6 @@ public class UpdateFirebaseController {
                     stormEventsMap.put(Integer.toString(stormEventCounter), event.naam.toString());
                     break;
                 case BEWEGING:
-                    System.out.println("---------------------------KANKER------------------------------");
                     stormEventsMap.put(Integer.toString(stormEventCounter), event.naam.toString()+((StormEventBeweging) event).richting.toString()+((StormEventBeweging) event).stappen.toString());
                     break;
             }
