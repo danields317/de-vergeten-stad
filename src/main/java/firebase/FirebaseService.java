@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 import Controller.Player_Controllers.PlayerController;
+import Controller.Tile_Controllers.StormController;
 import Controller.firebase_controllers.ListenUpdateController;
 import Model.player.Player;
 import com.google.api.core.ApiFuture;
@@ -75,6 +76,7 @@ public class FirebaseService{
                         @Override
                         public void run() {
                             (PlayerController.getInstance()).update();
+                            StormController.getInstance().update();
                         }
                     });
 

@@ -168,10 +168,9 @@ public class StormController {
         StaticData staticData = StaticData.getInstance();
         Object roominfo = staticData.getRoomInfo();
         Map<String, Object> stormMap = (Map)((Map) roominfo).get("storm");
-        if(!hasMadeEvents){
-            makeRandomStormEventsFB((Map)stormMap.get("events"));
-            hasMadeEvents = true;
-        }
+        makeRandomStormEventsFB((Map)stormMap.get("events"));
+//        hasMadeEvents = true;
+
         storm.setSterkte((int)stormMap.get("sterkte"));
         storm.setSubSterkte((int)stormMap.get("subSterkte"));
         storm.setLocatie((int)stormMap.get("x"), (int)stormMap.get("y"));
