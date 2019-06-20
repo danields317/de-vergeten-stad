@@ -227,8 +227,14 @@ public class ViewManager extends Application implements PlayerObserver, StormObs
         });
 
         Group group = new Group(pdb);
-        Scene endScene = new Scene(group);
-        primaryStage.setScene(endScene);
+        //Scene endScene = new Scene(group, windowWidth, windowHeight);
+        //primaryStage.setScene(endScene);
+        //primaryStage.getScene().setRoot(group);
+        primaryStage.setScene(new Scene(group));
+        //primaryStage.setTitle("De Vergeten Stad");
+        //primaryStage.setX(windowAnchorX);
+        //primaryStage.setY(windowAnchorY);
+        //primaryStage.show();
     }
 
 

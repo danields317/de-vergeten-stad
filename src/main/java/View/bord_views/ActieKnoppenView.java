@@ -87,7 +87,9 @@ public class ActieKnoppenView {
     }
 
     public void setWaterdragerKnoppen(){
-        Button wS = new Button("wS");
+        Button wS = new Button();
+        wS.getStyleClass().add("buttonWater");
+        wS.setPrefSize(60, 60);
         acties.add(wS, 2, 2);
         wS.setOnMouseClicked(e -> {
             playerController.schepWater();
@@ -95,15 +97,30 @@ public class ActieKnoppenView {
     }
 
     public void setVerkennerKnoppen(){
-        Button rB = new Button("rB");
-        Button rO = new Button("rO");
-        Button lB = new Button("lB");
-        Button lO = new Button("lO");
+        Button rB = new Button();
+        Button rO = new Button();
+        Button lB = new Button();
+        Button lO = new Button();
+
+        rB.setPrefSize(60, 60);
+        rO.setPrefSize(60, 60);
+        lB.setPrefSize(60, 60);
+        lO.setPrefSize(60, 60);
 
         rB.setOnMouseClicked(e -> playerController.moveNoordOost());
         rO.setOnMouseClicked(e -> playerController.moveZuidOost());
         lB.setOnMouseClicked(e -> playerController.moveNoordWest());
         lO.setOnMouseClicked(e -> playerController.moveZuidWest());
+
+        rB.getStyleClass().add("buttonMoveUp");
+        rO.getStyleClass().add("buttonMoveRight");
+        lB.getStyleClass().add("buttonMoveLeft");
+        lO.getStyleClass().add("buttonMoveDown");
+
+        rB.setRotate(45);
+        rO.setRotate(45);
+        lB.setRotate(45);
+        lO.setRotate(45);
 
         acties.add(lB, 0, 0);
         acties.add(lO, 0, 2);

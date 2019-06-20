@@ -5,6 +5,7 @@ import Model.Bord.Onderdeel;
 import Model.Tiles.*;
 import Model.player.Player;
 import Model.storm.StormEventBeweging;
+import View.ViewManager;
 import View.bord_views.SpeelbordView;
 import observers.BordObserver;
 import observers.OnderdeelObserver;
@@ -273,6 +274,21 @@ public class TileController {
 
     public boolean checkFinish(){
         return getFinsihTile().getSpelers().size() == 4 && checkAlleOnderdelen();
+    }
+
+    public void checkZandCounter() {
+        int zandCounter = 0;
+        //int zandMax = 48;
+        int zandMax = 9;
+
+        for (Tile tile : randomTiles) {
+            zandCounter += tile.getZand();
+        }
+
+        if (zandCounter > zandMax) {
+            ViewManager.getInstance().loadEndGame(ViewManager.endConditions.SUFFOCATION);
+        }
+
     }
 
     public ArrayList<Tile> getTiles(){

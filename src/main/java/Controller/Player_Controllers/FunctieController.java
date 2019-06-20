@@ -3,6 +3,7 @@ package Controller.Player_Controllers;
 import Controller.Bord_Controllers.SoundController;
 import Controller.Tile_Controllers.StormController;
 import Model.data.StaticData;
+import View.ViewManager;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -71,5 +72,6 @@ public class FunctieController {
     public void endLose(){
         SoundController sound = new SoundController();
         sound.play("Sound/nTest.wav");
+        ViewManager.getInstance().loadEndGame(ViewManager.endConditions.DEHYDRATION);
     }
 }

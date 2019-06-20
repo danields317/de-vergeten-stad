@@ -89,49 +89,6 @@
     -fx-background-size: 40px;
 }
 
-.buttonGraaf
-{
-    -fx-background-image: url("/Buttons/graafButton.png");
-}
-.buttonActie
-{
-    -fx-background-image: url("/Buttons/actieButton.png");
-}
-.buttonMoveUp
-{
-    -fx-background-image: url("/Buttons/buttonUp.png");
-}
-.buttonMoveDown
-{
-    -fx-background-image: url("/Buttons/buttonDown.png");
-}
-.buttonMoveRight
-{
-    -fx-background-image: url("/Buttons/buttonRight.png");
-}
-.buttonMoveLeft
-{
-    -fx-background-image: url("/Buttons/buttonLeft.png");
-    -fx-alignment: baseline-left;
-}
-
-
-
-.eqButtonRight:hover{
-    -fx-effect: dropshadow( gaussian, rgb(243,255,28) , 2,2,2,2 );
-}
-.eqButtonLeft:hover{
-    -fx-effect: dropshadow( gaussian, rgb(243,255,28) , 2,2,2,2 );
-}
-.eqButtonRight{
-    -fx-background-image: url("/Buttons/buttonEqRight.png");
-    -fx-alignment: baseline-right;
-}
-.eqButtonLeft
-{
-    -fx-background-image: url("/Buttons/buttonEqLeft.png");
-}
-
 .pagina
 {
     -fx-text-fill: #000;
@@ -154,4 +111,50 @@
 .playermenu
 {
     -fx-cursor: hand;
+}
+
+/******************************************************************************/
+
+.buttonGraaf
+{
+    -fx-background-image: url("/Buttons/graafButton.png");
+}
+.buttonActie
+{
+    -fx-background-image: url("/Buttons/actieButton.png");
+}
+.buttonMoveUp
+{
+    -fx-background-image: url("/Buttons/buttonUp.png");
+}
+.buttonMoveDown
+{
+    -fx-background-image: url("/Buttons/buttonDown.png");
+}
+.buttonMoveRight
+{
+    -fx-background-image: url("/Buttons/buttonRight.png");
+}
+.buttonWater
+{
+    -fx-background-image: url("/Buttons/waterButton.png");
+}
+.buttonMoveLeft
+{
+    -fx-background-image: url("/Buttons/buttonLeft.png");
+    -fx-alignment: baseline-left;
+}
+.eqButtonRight:hover{
+    -fx-effect: dropshadow( gaussian, rgb(243,255,28) , 2,2,2,2 );
+}
+.eqButtonLeft:hover{
+    -fx-effect: dropshadow( gaussian, rgb(243,255,28) , 2,2,2,2 );
+}
+.eqButtonRight{
+    -fx-background-image: url("/Buttons/buttonEqRight.png");
+    -fx-alignment: baseline-right;
+}
+.eqButtonLeft
+{
+    -fx-background-image: url("/Buttons/buttonEqLeft.png");
 }

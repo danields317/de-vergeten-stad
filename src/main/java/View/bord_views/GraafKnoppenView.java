@@ -79,15 +79,30 @@ public class GraafKnoppenView {
     }
 
     public void setVerkennerGraafKnoppen(){
-        Button rB = new Button("rB");
-        Button rO = new Button("rO");
-        Button lB = new Button("lB");
-        Button lO = new Button("lO");
+        Button rB = new Button();
+        Button rO = new Button();
+        Button lB = new Button();
+        Button lO = new Button();
+
+        rB.setPrefSize(60, 60);
+        rO.setPrefSize(60, 60);
+        lB.setPrefSize(60, 60);
+        lO.setPrefSize(60, 60);
 
         rB.setOnMouseClicked(e -> playerController.digNoordOost());
         rO.setOnMouseClicked(e -> playerController.digZuidOost());
         lB.setOnMouseClicked(e -> playerController.digNoordWest());
         lO.setOnMouseClicked(e -> playerController.digZuidWest());
+
+        rB.getStyleClass().add("buttonMoveUp");
+        rO.getStyleClass().add("buttonMoveRight");
+        lB.getStyleClass().add("buttonMoveLeft");
+        lO.getStyleClass().add("buttonMoveDown");
+
+        rB.setRotate(45);
+        rO.setRotate(45);
+        lB.setRotate(45);
+        lO.setRotate(45);
 
         acties.add(lB, 0, 0);
         acties.add(lO, 0, 2);
