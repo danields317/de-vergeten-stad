@@ -221,6 +221,7 @@ public class UpdateFirebaseController {
         data.put("Selectable_classes", myObject);
         data.put("tiles", makeTileMap());
         data.put("storm", makeStormMap());
+        data.put("activePlayer", "Archeoloog");
 
         (FirebaseService.getInstance()).addSpel(roomName, data);
         StaticData.getInstance().setRoomInfo(data);
