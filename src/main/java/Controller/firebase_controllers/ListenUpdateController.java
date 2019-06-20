@@ -41,8 +41,6 @@ public class ListenUpdateController {
 
         stormController.updateData();
 
-        System.out.println("TILEEEEEEEEEEEEEE");
         tileController.updateData();
-        System.out.println("OK NICE");
     }
 }

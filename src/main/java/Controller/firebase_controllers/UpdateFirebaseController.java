@@ -127,19 +127,6 @@ public class UpdateFirebaseController {
 
             Map<String, Object> tile0 = new HashMap<>();
 
-            Tile.Varianten variant = tile.getVariant();
-            switch (variant){
-                case TUNNEL:
-                    tile0.put("equipment", ((Tunnel)tile).getEquipment().getEquipmentType().toString());
-                    break;
-                case PART:
-                    tile0.put("soort", ((PartTile)tile).getSoort().toString());
-                    tile0.put("richting", ((PartTile)tile).getRichting().toString());
-                    break;
-                case EQUIPMENT:
-                    tile0.put("equipment", ((EquipmentTile)tile).getEquipment().getEquipmentType().toString());
-                    break;
-            }
             tile0.put("discovered", tile.isDiscovered());
             tile0.put("aantalZandTegels", tile.getZand());
             tile0.put("hasZonneSchild", tile.hasZonneSchild());

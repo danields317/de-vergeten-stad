@@ -105,9 +105,7 @@ public class StormController {
                 StormEvent stormEvent = randomStormEvents.get(stapelCounter);
                 switch (stormEvent.naam){
                     case BEWEGING:
-                        System.out.println("is het kikker of kinker?");
                         beweegStorm(((StormEventBeweging) stormEvent).richting, ((StormEventBeweging) stormEvent).stappen);
-                        System.out.println("ik hoop dat de leraren dit niet zien");
                         break;
                     case BRANDT:
                         Controller controller = Controller.getInstance();
