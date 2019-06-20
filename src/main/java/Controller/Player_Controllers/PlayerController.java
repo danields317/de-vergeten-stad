@@ -23,6 +23,11 @@ public class PlayerController {
     StaticData staticData = StaticData.getInstance();
     Player player;
 
+     Player archeoloog;
+     Player klimmer;
+     Player verkenner;
+     Player waterdrager;
+
     TileController tileController = TileController.getInstance();
 
     public PlayerController(String className, int maxWater, int water, String imagePath, Player.SpelerKlassen klasse){
@@ -277,14 +282,32 @@ public class PlayerController {
     }
 
 
-    public void giveWater(Player receiver, int amount){
+    public void giveWater(Player.SpelerKlassen receiver, int amount){
+
+        Player receiverPlayer = player;
+
+        switch (receiver){
+            case ARCHEOLOOG:
+                receiverPlayer = archeoloog;
+                break;
+            case KLIMMER:
+                receiverPlayer = klimmer;
+                break;
+            case VERKENNER:
+                receiverPlayer = verkenner;
+                break;
+            case WATERDRAGER:
+                receiverPlayer = waterdrager;
+                break;
+        }
+
         if(this.getPlayer().getWater() == 0){
             System.out.println("You dont have any water to give");
-        } else if( receiver.getWater() >= receiver.getMaxWater()){
-            System.out.println(receiver.getClassName() + " has already full water");
+        } else if( receiverPlayer.getWater() >= receiverPlayer.getMaxWater()){
+            System.out.println(receiverPlayer.getClassName() + " has already full water");
         }else{
             this.player.subtractWater(amount);
-            receiver.addWater(amount);
+            receiverPlayer.addWater(amount);
         }
 
 
