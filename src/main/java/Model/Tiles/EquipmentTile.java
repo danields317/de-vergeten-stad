@@ -20,6 +20,9 @@ public class EquipmentTile extends Tile {
     }
 
     public String vindJuistePNG(){
+        if (aangemaaktTeller == 10){
+            aangemaaktTeller = 1;
+        }
         String pad = "/Tiles/Equipment_" + aangemaaktTeller + ".png";
         return pad;
     }

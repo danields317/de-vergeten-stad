@@ -36,6 +36,8 @@ public class ListenUpdateController {
 
         Object roomInfo = firebaseService.getSpel(staticData.getRoomName()).getData();
         (StaticData.getInstance()).setRoomInfo(roomInfo);
+        System.out.println(roomInfo);
+
 
         playerController.updateData();
 
