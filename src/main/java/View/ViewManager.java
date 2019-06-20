@@ -24,6 +24,7 @@ import java.util.Map;
 public class ViewManager extends Application implements PlayerObserver, StormObserver {
 
     private static ViewManager viewManager;
+    public enum endConditions {VICTORYROYALE, STERFDOORSTORM, DEHYDRATION, SUFFOCATION};
 
     static Stage primaryStage;
     String kaart = "/gamescreenempty.png";
@@ -195,10 +196,31 @@ public class ViewManager extends Application implements PlayerObserver, StormObs
 
     public void update(){loadGameView();}
 
-    public void loadEndGame(){
-        Group group = new Group();
-        ImageView pdb = new ImageView("/placeholder.png");
-        group.getChildren().add(pdb);
+    public void loadEndGame(endConditions endConiditon){
+        Image image = new Image("/placeholder.png");
+
+        switch(endConiditon){
+            case VICTORYROYALE:
+                image = new Image("/Endscreen/victoryroyale.png");
+                break;
+            case STERFDOORSTORM:
+                image = new Image("/Endscreen/sterfdoorstorm.png");
+                break;
+            case DEHYDRATION:
+                image = new Image("/Endscreen/dehydration.png");
+                break;
+            case SUFFOCATION:
+                image = new Image("/Endscreen/suffocation.png");
+                break;
+        }
+
+        ImageView pdb = new ImageView(image);
+
+        pdb.setOnMouseClicked(e -> {
+            loadLoginView();
+        });
+
+        Group group = new Group(pdb);
         Scene endScene = new Scene(group);
         primaryStage.setScene(endScene);
     }
