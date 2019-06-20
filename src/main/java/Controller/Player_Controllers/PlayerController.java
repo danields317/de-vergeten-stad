@@ -213,6 +213,34 @@ public class PlayerController {
         }
     }
 
+    public void digNoordOost(){
+        if(player.getX() < 4 && player.getY() > 0 && player.actiesOver()){
+            Tile locatie = tileController.getTileByLocation((player.getY() - 1), (player.getX() +1));
+            digLogica(locatie, false);
+        }
+    }
+
+    public void digZuidOost(){
+        if(player.getX() < 4 && player.getY() < 4 && player.actiesOver()) {
+            Tile locatie = tileController.getTileByLocation((player.getY() + 1), (player.getX() + 1));
+            digLogica(locatie, false);
+        }
+    }
+
+    public void digZuidWest(){
+        if(player.getX() > 0 && player.getY() < 4 && player.actiesOver()) {
+            Tile locatie = tileController.getTileByLocation((player.getY() + 1), (player.getX() - 1));
+            digLogica(locatie, false);
+        }
+    }
+
+    public void digNoordWest(){
+        if(player.getX() > 0 && player.getY() > 0 && player.actiesOver()) {
+            Tile locatie = tileController.getTileByLocation((player.getY() - 1), (player.getX() - 1));
+            digLogica(locatie, false);
+        }
+    }
+
     private void digLogica(Tile locatie, boolean isArcheoloog){
         if (locatie.hasZand()){
             locatie.removeZandTegel();

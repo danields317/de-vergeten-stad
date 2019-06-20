@@ -7,8 +7,11 @@ import javafx.scene.layout.GridPane;
 public class GraafKnoppenView {
 
     static GridPane view = new GridPane();
+    GridPane acties;
+    PlayerController playerController;
 
     public GridPane maakGraafKnoppen(){
+        playerController = PlayerController.getInstance();
         Button digUp = new Button();
         Button digDown = new Button();
         Button digLeft = new Button();
@@ -26,7 +29,7 @@ public class GraafKnoppenView {
         digRight.getStyleClass().add("buttonMoveRight");
         digLeft.getStyleClass().add("buttonMoveLeft");
 
-        GridPane acties = new GridPane();
+        acties = new GridPane();
 
         acties.add(digUp, 1, 0);
         acties.add(digDown, 1, 2);
@@ -43,6 +46,9 @@ public class GraafKnoppenView {
         switch (playerController.getPlayer().getKlasse()){
             case ARCHEOLOOG:
                 isArcheoloog = true;
+                break;
+            case VERKENNER:
+                setVerkennerGraafKnoppen();
                 break;
         }
 
@@ -70,6 +76,23 @@ public class GraafKnoppenView {
 
         view = acties;
         return acties;
+    }
+
+    public void setVerkennerGraafKnoppen(){
+        Button rB = new Button("rB");
+        Button rO = new Button("rO");
+        Button lB = new Button("lB");
+        Button lO = new Button("lO");
+
+        rB.setOnMouseClicked(e -> playerController.digNoordOost());
+        rO.setOnMouseClicked(e -> playerController.digZuidOost());
+        lB.setOnMouseClicked(e -> playerController.digNoordWest());
+        lO.setOnMouseClicked(e -> playerController.digZuidWest());
+
+        acties.add(lB, 0, 0);
+        acties.add(lO, 0, 2);
+        acties.add(rB, 2, 0);
+        acties.add(rO, 2, 2);
     }
 
     public static GridPane getView() {
