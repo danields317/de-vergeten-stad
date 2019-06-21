@@ -8,8 +8,10 @@ import Model.equipment.*;
 import Model.part.Part;
 import Model.player.Player;
 import Model.storm.StormEventBeweging;
+import View.ViewManager;
 import View.bord_views.SpeelbordView;
 import com.sun.org.apache.regexp.internal.RE;
+import javafx.application.Platform;
 import observers.BordObserver;
 import observers.OnderdeelObserver;
 
@@ -304,7 +306,28 @@ public class TileController {
         StaticData staticData = StaticData.getInstance();
         Object roominfo = staticData.getRoomInfo();
         Map<String, Object> tilesMap = (Map)((Map) roominfo).get("tiles");
-        makeTilesFormFB(tilesMap);
+        updateTilesFromFB(tilesMap);
+    }
+
+    private void updateTilesFromFB(Map<String, Object> tilesMap){
+        for (int i = 0; i < 25; i++){
+            Map<String, Object> tileFB = (Map)tilesMap.get(Integer.toString(i));
+            Tile tile = randomTiles.get(i);
+
+            int x = Integer.valueOf(tileFB.get("x").toString());
+            int y = Integer.valueOf(tileFB.get("y").toString());
+            boolean discovered = false;
+            if((tileFB.get("discovered").toString()).equals("true")){
+                discovered = true;
+            }
+            boolean hasZonneSchild = Boolean.getBoolean(tileFB.get("hasZonneSchild").toString());
+            int aantalZand = Integer.valueOf(tileFB.get("aantalZandTegels").toString());
+
+            tile.setLocation(x, y);
+            tile.setDiscovered(discovered);
+            tile.setHasZonneSchild(hasZonneSchild);
+            tile.setAantalZandTegels(aantalZand);
+        }
     }
 
     private void makeTilesFormFB(Map<String, Object> tilesMap){

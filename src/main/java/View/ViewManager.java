@@ -72,6 +72,7 @@ public class ViewManager extends Application implements PlayerObserver, StormObs
     }
 
     public void loadGameView() {
+
         try {
             Group group;
             if(torf){
@@ -80,6 +81,23 @@ public class ViewManager extends Application implements PlayerObserver, StormObs
             }
                 group = makeGroup();
 
+
+            Scene scene = new Scene(group, windowWidth, windowHeight);
+            scene.getStylesheets().add("/css/game.css");
+            primaryStage.setScene(scene);
+            primaryStage.setTitle("De Vergeten Stad");
+            primaryStage.setX(windowAnchorX);
+            primaryStage.setY(windowAnchorY);
+            primaryStage.show();
+
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateGameView() {
+        try {
+            Group group = makeGroup();
 
             Scene scene = new Scene(group, windowWidth, windowHeight);
             scene.getStylesheets().add("/css/game.css");
@@ -193,7 +211,9 @@ public class ViewManager extends Application implements PlayerObserver, StormObs
         return group;
     }
 
-    public void update(){loadGameView();}
+    public void update(){
+        loadGameView();
+    }
 
     public void loadEndGame(){
         Group group = new Group();

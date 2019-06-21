@@ -79,15 +79,15 @@ public class UpdateFirebaseController {
         data.put("storm", makeStormMap());
 
         data.put("Selectable_classes", myObject);
-//        data.put("activePlayer", activePlayer);
-        data.put("activePlayer", "Archeoloog");
+        data.put("activePlayer", activePlayer);
+//        data.put("activePlayer", "Archeoloog");
         (FirebaseService.getInstance()).addSpel(staticData.getRoomName(), data);
 
     }
 
     private Map<String, Object> makeStormMap(){
         Map<String, Object> stormMap = new HashMap<>();
-        StormController stormController = new StormController();
+        StormController stormController = StormController.getInstance();
         ArrayList<StormEvent> events = stormController.getStormEvents();
         Storm storm = stormController.getStorm();
 
@@ -220,6 +220,7 @@ public class UpdateFirebaseController {
         Map<String, Object> data = new HashMap<String, Object>();
         data.put("Selectable_classes", myObject);
         data.put("tiles", makeTileMap());
+        StaticData.getInstance().setRoomInfo(data);
         data.put("storm", makeStormMap());
         data.put("activePlayer", "Archeoloog");
 

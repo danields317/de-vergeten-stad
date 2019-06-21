@@ -1,5 +1,6 @@
 package Controller.Tile_Controllers;
 
+import Controller.Bord_Controllers.SoundController;
 import Controller.Controller;
 import Controller.Player_Controllers.FunctieController;
 import Controller.Player_Controllers.PlayerController;
@@ -7,6 +8,8 @@ import Model.data.StaticData;
 import Model.storm.Storm;
 import Model.storm.StormEvent;
 import Model.storm.StormEventBeweging;
+import View.bord_views.SpeelbordView;
+import javafx.application.Platform;
 import observers.StormObserver;
 
 import java.lang.invoke.SwitchPoint;
@@ -37,7 +40,7 @@ public class StormController {
         makeEvents();
         randomizeEvents(stormEvents);
         stapelCounter = 0;
-        tileController = TileController.getCheatInstance();
+        tileController = TileController.getInstance();
     }
 
     public static StormController getInstance(){
@@ -123,7 +126,6 @@ public class StormController {
                 stapelCounter = 0;
                 makeEvents();
                 randomizeEvents(stormEvents);
-                hasMadeEvents = false;
             }
         }
         storm.notifyAllObservers();
@@ -163,7 +165,7 @@ public class StormController {
 
     public void registerObserver(StormObserver bo){ storm.register(bo); }
 
-    public void update(){storm.notifyAllObservers();};
+    public void update(){storm.notifyAllObservers();}
 
     public void updateData(){
         StaticData staticData = StaticData.getInstance();
