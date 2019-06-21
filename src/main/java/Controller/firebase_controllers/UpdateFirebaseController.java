@@ -25,6 +25,9 @@ public class UpdateFirebaseController {
 
     private boolean startGame = false;
 
+    private int counter = 0;
+    private String[] testSpelers = {"Archeoloog", "Klimmer"};
+
     public UpdateFirebaseController(){
         staticData = StaticData.getInstance();
     }
@@ -79,7 +82,11 @@ public class UpdateFirebaseController {
         data.put("storm", makeStormMap());
 
         data.put("Selectable_classes", myObject);
-        data.put("activePlayer", activePlayer);
+        if (counter == 2){
+            counter = 0;
+        }
+        data.put("activePlayer", testSpelers[counter]);
+        counter++;
 //        data.put("activePlayer", "Archeoloog");
         (FirebaseService.getInstance()).addSpel(staticData.getRoomName(), data);
 
