@@ -196,6 +196,7 @@ public class LoginView implements LoginObserver {
         @Override
         public void handle(MouseEvent e) {
             (UpdateFirebaseController.getInstance()).makeFirebase(roomId.getText());
+            loginController.loadGame(roomId.getText(), primaryStage);
             //
         }
     };
