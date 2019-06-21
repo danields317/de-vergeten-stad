@@ -57,10 +57,6 @@ public class SpeelbordView{
             TileView tileView = new TileView(tile.getImage());
             tileViews.add(tileView);
             tileView.update(tile);
-
-            //ImageView tile = new ImageView(tiles[i][j].getImage());
-            //tile.setFitHeight(115);
-            //tile.setFitWidth(115)
             StackPane tilePane = tileView.maakTile();
             spelbord.setMargin(tilePane, new Insets(5,5,5,5));
 

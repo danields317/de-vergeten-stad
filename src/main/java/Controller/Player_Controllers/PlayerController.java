@@ -46,11 +46,7 @@ public class PlayerController {
     public static PlayerController getInstance(boolean loadGame, Object classInfo) {
         if (playercont == null) {
             if(loadGame){
-//                System.out.println(((Map)(StaticData.getInstance()).getRoomInfo()).get("Selectable_classes"));
-//                System.out.println(classInfo);
                 Map classIn =((Map)(classInfo));
-//                System.out.println(((Long)(classIn.get("maxWater"))).intValue());
-//                System.out.println(((Map)(StaticData.getInstance()).getRoomInfo()).get("archeoloog"));
                 playercont = new PlayerController( ((String)(classIn.get("name"))),
                         ((Long)(classIn.get("maxWater"))).intValue(),
                         ((Long)(classIn.get("water"))).intValue(),
@@ -84,9 +80,6 @@ public class PlayerController {
             Tile tileAbove = tileController.getTileByLocation((player.getY() - 1), player.getX());
 
             moveLogica(tileAbove, Player.Richingen.NOORD, isKlimmer);
-
-            //tileController.getTileByLocation((player.getY() + 1), player.getX()).notifyAllObservers();
-            //tileController.getTileByLocation(player.getY(), player.getX()).notifyAllObservers();
         }
     }
 
@@ -95,9 +88,6 @@ public class PlayerController {
             Tile tileBeneath = tileController.getTileByLocation((player.getY() + 1), player.getX());
 
             moveLogica(tileBeneath, Player.Richingen.ZUID, isKlimmer);
-
-            //tileController.getTileByLocation((player.getY() - 1), player.getX()).notifyAllObservers();
-            //tileController.getTileByLocation(player.getY(), player.getX()).notifyAllObservers();
         }
     }
 
@@ -106,9 +96,6 @@ public class PlayerController {
             Tile tileRight = tileController.getTileByLocation(player.getY(), (player.getX() + 1));
 
             moveLogica(tileRight, Player.Richingen.OOST, isKlimmer);
-
-            //tileController.getTileByLocation(player.getY(), (player.getX() - 1)).notifyAllObservers();
-            //tileController.getTileByLocation(player.getY(), player.getX()).notifyAllObservers();
         }
     }
 
@@ -117,9 +104,6 @@ public class PlayerController {
             Tile tileLeft = tileController.getTileByLocation(player.getY(), (player.getX() -  1));
 
             moveLogica(tileLeft, Player.Richingen.WEST, isKlimmer);
-
-            //tileController.getTileByLocation(player.getY(), (player.getX() + 1)).notifyAllObservers();
-            //tileController.getTileByLocation(player.getY(), player.getX()).notifyAllObservers();
         }
     }
 
@@ -264,16 +248,6 @@ public class PlayerController {
         }
     }
 
-
-
-    public void Uitgraven(){
-
-    }
-
-    public void eenOnderdeelOppakken(){
-
-    }
-
     public void removeWater(){
         Tile tile = tileController.getTileByLocation(player.getY(), player.getX());
         if(!tile.hasZonneSchild() && tile.getVariant() != Tile.Varianten.TUNNEL ) {
@@ -314,7 +288,7 @@ public class PlayerController {
     }
 
     public void registerObserver(PlayerObserver sbv) {
-        player.register(sbv);
+        System.out.println(sbv);player.register(sbv);
     }
 
     public Player getPlayer() {

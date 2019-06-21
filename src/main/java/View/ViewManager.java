@@ -30,15 +30,11 @@ public class ViewManager extends Application implements PlayerObserver, StormObs
 
     static Stage primaryStage;
     String kaart = "/gamescreenempty.png";
-    //BordView bordView = new BordView();  //maak achtergrond
     ActieKnoppenView actieknoppenview = new ActieKnoppenView();  //maak beweeg knoppen
     GraafKnoppenView graafknoppenview = new GraafKnoppenView();  //maak graaf knoppen
     EindigBeurtView eindigBeurtView = new EindigBeurtView();  //maak eindig beurt knop
-    //LoadBordView loadbordview = new LoadBordView();  //geen idee wat deze doet
     OnderdeelView onderdeelview = new OnderdeelView();  //maak onderdelen
     SpeelbordView speelbordview = new SpeelbordView();  //maak speelbord tiles
-    //    SpelerView spelerview = new SpelerView();           //maak speler poppetjes en zijkant informatie
-    //StormView stormview = new StormView();              //maak storm en stormmeter
     EquipmentView uitrustingview = new EquipmentView();   //maak uitrusting plaatsen
     WaterflesView waterflesView;      //maak waterfles stand
     StormMeterView stormMeterView = new StormMeterView(); //maak stormmetertekentje
@@ -108,7 +104,8 @@ public class ViewManager extends Application implements PlayerObserver, StormObs
         GridPane stormTeken = stormMeterView.createInitialGridPane();
         acties_view = new Acties_View();
         player_menu_view = new Player_Menu_View();
-        (Player_Menu_Controller.getInstance()).begin();
+        player_menu_view.maakView();
+
 
         StackPane propellor = onderdeelview.loadPropeller("?", "?");
         StackPane beacon = onderdeelview.loadBeacon("?", "?");
@@ -118,21 +115,6 @@ public class ViewManager extends Application implements PlayerObserver, StormObs
         GridPane graafknoppen = graafknoppenview.maakGraafKnoppen();
         GridPane spelbord = speelbordView.loadSpelBord();
         ImageView instelligen = instellingenView.InstellingenView();
-//        GridPane acties_view =
-//        Image backgroundImage = new Image("gamescreenempty.png");
-//        Canvas canvas = new Canvas(windowWidth, windowHeight);
-//
-//
-//        Button eindigbeurtKnop = eindigBeurtView.maakEindigbeurtKnop();
-//        Button eindigBeurt = eindigBeurtKnop(eindigbeurtKnop);
-//
-//        Group uitrusting = uitrustingview.createEquipmentView();
-//
-//        GraphicsContext gc = canvas.getGraphicsContext2D();
-//        gc.drawImage(backgroundImage, 0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
-//
-//        Group group = new Group(canvas, stormTeken, knoppen, graafknoppen, eindigbeurtKnop, waterfles, propellor, beacon, motor, zonnewijzer, spelbord, uitrusting);
-//        return  group;
 
 
         (PlayerController.getInstance()).update();
@@ -187,7 +169,8 @@ public class ViewManager extends Application implements PlayerObserver, StormObs
         GridPane spelbord = speelbordView.getSpelbord();
         GridPane stormTeken =  stormMeterView.getView();
         GridPane acties = acties_view.getView();
-        VBox playermenu = player_menu_view.getView();
+        GridPane playermenu = player_menu_view.getView();
+        GridPane playermenuclasses = player_menu_view.getView2();
 
         StackPane uitrusting = uitrustingview.getUitrusting();
 
@@ -196,7 +179,7 @@ public class ViewManager extends Application implements PlayerObserver, StormObs
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.drawImage(backgroundImage, 0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
 
-        Group group = new Group(canvas, stormTeken, knoppen, graafKnoppen, eindigBeurt, waterfles, propellor,beacon,motor,zonnewijzer, spelbord, uitrusting, acties, instelligen, playermenu);
+        Group group = new Group(canvas, stormTeken, knoppen, graafKnoppen, eindigBeurt, waterfles, propellor,beacon,motor,zonnewijzer, spelbord, uitrusting, acties, instelligen, playermenu, playermenuclasses);
         return group;
     }
 
