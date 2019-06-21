@@ -1,20 +1,17 @@
 package Model.player;
 
-import Controller.Equipment_Controllers.EquipmentController;
 import Controller.Player_Controllers.FunctieController;
 import Model.data.StaticData;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import Model.Tiles.Tile;
 import Model.equipment.Equipment;
-import observers.*;
 import observers.PlayerObservable;
 import observers.PlayerObserver;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Spliterator;
 
 public class Player implements PlayerObservable{
 
@@ -41,8 +38,6 @@ public class Player implements PlayerObservable{
         VERKENNER,
         WATERDRAGER,
         KLIMMER,
-	    NAVIGATOR,
-        METEOROLOOG;
     }
 	SpelerKlassen klasse;
 

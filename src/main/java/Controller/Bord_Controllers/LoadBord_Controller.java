@@ -2,7 +2,6 @@ package Controller.Bord_Controllers;
 
 import Model.Bord.LoadBord;
 import observers.LoadBordObserver;
-import observers.LoginObserver;
 
 public class LoadBord_Controller {
 

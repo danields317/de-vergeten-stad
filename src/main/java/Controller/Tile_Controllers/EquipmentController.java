@@ -3,8 +3,6 @@ package Controller.Tile_Controllers;
 
 import Model.equipment.*;
 
-import java.util.List;
-
 public class EquipmentController {
 
     private static EquipmentController equipmentController;

@@ -2,7 +2,6 @@ package Controller.Tile_Controllers;
 
 import Controller.Controller;
 import Controller.Player_Controllers.FunctieController;
-import Controller.Player_Controllers.PlayerController;
 import Model.storm.Storm;
 import Model.storm.StormEvent;
 import Model.storm.StormEventBeweging;

@@ -1,13 +1,8 @@
 package View.bord_views;
 
 import Controller.Player_Controllers.PlayerController;
-import Model.Tiles.Tile;
-import Model.player.Player;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
 import javafx.scene.layout.*;
-
-import java.awt.*;
 
 public class ActieKnoppenView {
 

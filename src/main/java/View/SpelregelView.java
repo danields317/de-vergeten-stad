@@ -1,6 +1,5 @@
 package View;
 
-import Model.player.Player;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;

@@ -2,14 +2,13 @@ package firebase;
 
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
+import Controller.Bord_Controllers.Player_Menu_Controller;
 import Controller.Player_Controllers.PlayerController;
 import Controller.firebase_controllers.ListenUpdateController;
-import Model.player.Player;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.*;
 import com.google.firebase.database.annotations.Nullable;
@@ -30,7 +29,6 @@ public class FirebaseService{
     private Firestore firestore;
     private static final String GEBRUIKERS_PATH = "games";
     private CollectionReference colRef;
-   //private Controller controller;
 
 
     public FirebaseService() {
@@ -68,13 +66,12 @@ public class FirebaseService{
                 }
 
                 if (snapshot != null && snapshot.exists()) {
-//                    controller.updateFromFirebase(snapshot);
                     ListenUpdateController listenUpdateController = ListenUpdateController.getInstance();
                     listenUpdateController.setFirebaseData();
                     Platform.runLater(new Runnable() {
                         @Override
                         public void run() {
-                            (PlayerController.getInstance()).update();
+                            (Player_Menu_Controller.getInstance()).update();(PlayerController.getInstance()).update();
                         }
                     });
 
@@ -228,9 +225,5 @@ public class FirebaseService{
     public void delete(String documentId) {
         ApiFuture<WriteResult> writeResult = this.colRef.document(documentId).delete();
     }
-
-//    public static void main(String[] args){
-//        System.out.println(getInstance().getGebruiker("ryanr").get("wachtwoord"));
-//    }
 
 }
