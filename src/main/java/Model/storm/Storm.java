@@ -1,6 +1,7 @@
 package Model.storm;
 
 import View.ViewManager;
+import View.bord_views.EndgameView;
 import javafx.scene.image.Image;
 import observers.StormObservable;
 import observers.StormObserver;
@@ -67,8 +68,7 @@ public class Storm implements StormObservable{
         }else if (subSterkte < 16){
             sterkte = 6;
         }else {
-            System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa");
-            ViewManager.getInstance().loadEndGame(ViewManager.endConditions.STERFDOORSTORM);
+            EndgameView endgameView = new EndgameView(ViewManager.endConditions.STERFDOORSTORM);
         }
         notifyAllObservers();
     }

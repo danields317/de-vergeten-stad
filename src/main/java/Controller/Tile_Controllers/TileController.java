@@ -6,6 +6,7 @@ import Model.Tiles.*;
 import Model.player.Player;
 import Model.storm.StormEventBeweging;
 import View.ViewManager;
+import View.bord_views.EndgameView;
 import View.bord_views.SpeelbordView;
 import observers.BordObserver;
 import observers.OnderdeelObserver;
@@ -286,7 +287,7 @@ public class TileController {
         }
 
         if (zandCounter > zandMax) {
-            ViewManager.getInstance().loadEndGame(ViewManager.endConditions.SUFFOCATION);
+            EndgameView endgameView = new EndgameView(ViewManager.endConditions.SUFFOCATION);
         }
 
     }

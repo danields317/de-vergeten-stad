@@ -2,6 +2,8 @@ package Model.player;
 
 import Controller.Player_Controllers.FunctieController;
 import Model.data.StaticData;
+import View.ViewManager;
+import View.bord_views.EndgameView;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import Model.Tiles.Tile;
@@ -170,6 +172,7 @@ public class Player implements PlayerObservable{
 		this.water = this.water - water;
 
 		if (this.water < 0) {
+			EndgameView endgameView = new EndgameView(ViewManager.endConditions.DEHYDRATION);
 			(FunctieController.getInstance()).endLose();
 			this.water++;
 		}

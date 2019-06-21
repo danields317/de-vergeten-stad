@@ -185,42 +185,6 @@ public class ViewManager extends Application implements PlayerObserver, StormObs
 
     public void update(){loadGameView();}
 
-    public void loadEndGame(endConditions endConiditon){
-        Image image = new Image("/placeholder.png");
-
-        switch(endConiditon){
-            case VICTORYROYALE:
-                image = new Image("/Endscreen/victoryroyale.png");
-                break;
-            case STERFDOORSTORM:
-                image = new Image("/Endscreen/sterfdoorstorm.png");
-                break;
-            case DEHYDRATION:
-                image = new Image("/Endscreen/dehydration.png");
-                break;
-            case SUFFOCATION:
-                image = new Image("/Endscreen/suffocation.png");
-                break;
-        }
-
-        ImageView pdb = new ImageView(image);
-
-        pdb.setOnMouseClicked(e -> {
-            loadLoginView();
-        });
-
-        Group group = new Group(pdb);
-        //Scene endScene = new Scene(group, windowWidth, windowHeight);
-        //primaryStage.setScene(endScene);
-        //primaryStage.getScene().setRoot(group);
-        primaryStage.setScene(new Scene(group));
-        //primaryStage.setTitle("De Vergeten Stad");
-        //primaryStage.setX(windowAnchorX);
-        //primaryStage.setY(windowAnchorY);
-        //primaryStage.show();
-    }
-
-
     @Override
     public void update(PlayerObservable sb) {
         loadGameView();

@@ -72,6 +72,5 @@ public class FunctieController {
     public void endLose(){
         SoundController sound = new SoundController();
         sound.play("Sound/nTest.wav");
-        ViewManager.getInstance().loadEndGame(ViewManager.endConditions.DEHYDRATION);
     }
 }

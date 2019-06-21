@@ -19,7 +19,7 @@ public class EindigBeurtView {
 
         eindigBeurt.setOnMouseClicked(e -> {
             if (TileController.getInstance().checkFinish()){
-                ViewManager.getInstance().loadEndGame(ViewManager.endConditions.VICTORYROYALE);
+                EndgameView endgameView = new EndgameView(ViewManager.endConditions.VICTORYROYALE);
             } else {
                 StormController stormController = StormController.getInstance();
                 stormController.voerStormEventsUit();
