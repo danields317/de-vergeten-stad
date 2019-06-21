@@ -38,7 +38,6 @@ public class ListenUpdateController {
         (StaticData.getInstance()).setRoomInfo(roomInfo);
         System.out.println(roomInfo);
 
-
         playerController.updateData();
 
         stormController.updateData();

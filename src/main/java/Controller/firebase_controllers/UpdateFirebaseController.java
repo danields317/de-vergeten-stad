@@ -171,6 +171,11 @@ public class UpdateFirebaseController {
             }
 
             if (!startGame && tile.getClass().equals(StartTile.class)){
+//                String className, int maxWater, int water, String imagePath, Player.SpelerKlassen klasse
+//                tile.addSpeler((new PlayerController("Archeoloog", 3, 3, "/Players/Archeoloog.png", Player.SpelerKlassen.ARCHEOLOOG)).getPlayer());
+//                tile.addSpeler((new PlayerController("Klimmer", 3, 3, "/Players/Klimmer.png", Player.SpelerKlassen.KLIMMER)).getPlayer());
+//                tile.addSpeler((new PlayerController("Verkenner", 4, 4, "/Players/Verkenner.png", Player.SpelerKlassen.VERKENNER)).getPlayer());
+//                tile.addSpeler((new PlayerController("Waterdrager", 5, 5, "/Players/Waterdrager.png", Player.SpelerKlassen.WATERDRAGER)).getPlayer());
                 spelersMap.put("0", "Archeoloog");
                 spelersMap.put("1", "Klimmer");
                 spelersMap.put("2", "Verkenner");

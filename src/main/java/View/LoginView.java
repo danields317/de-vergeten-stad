@@ -197,14 +197,12 @@ public class LoginView implements LoginObserver {
         public void handle(MouseEvent e) {
             (UpdateFirebaseController.getInstance()).makeFirebase(roomId.getText());
             //
-
         }
     };
     EventHandler<MouseEvent> loadClicked = new EventHandler<MouseEvent>() {
         @Override
         public void handle(MouseEvent e ) {
             loginController.loadGame(roomId.getText(), primaryStage);
-
         }
     };
     EventHandler<MouseEvent> submitClicked = new EventHandler<MouseEvent>() {
