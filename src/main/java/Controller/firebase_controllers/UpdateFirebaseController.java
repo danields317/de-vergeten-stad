@@ -80,6 +80,7 @@ public class UpdateFirebaseController {
 
         data.put("tiles", makeTileMap());
         data.put("storm", makeStormMap());
+        data.put("onderdelen", makeOnderdelenMap());
 
         data.put("Selectable_classes", myObject);
         if (counter == 2){
@@ -90,6 +91,25 @@ public class UpdateFirebaseController {
 //        data.put("activePlayer", "Archeoloog");
         (FirebaseService.getInstance()).addSpel(staticData.getRoomName(), data);
 
+    }
+
+    private Map<String, Object> makeOnderdelenMap(){
+        Map<String, Object> onderdelenMap = new HashMap<>();
+        TileController tileController = TileController.getInstance();
+        ArrayList<Onderdeel> onderdelen = tileController.getOnderdelen();
+
+        int counter = 0;
+        for (Onderdeel onderdeel : onderdelen){
+            Map<String, Object> onderdeelMap = new HashMap<>();
+            onderdeelMap.put("x", onderdeel.getX());
+            onderdeelMap.put("y", onderdeel.getY());
+            onderdeelMap.put("soort", onderdeel.getSoort().toString());
+            onderdeelMap.put("opgepakt", onderdeel.isOpgepakt());
+            onderdelenMap.put(Integer.toString(counter), onderdeelMap);
+            counter++;
+        }
+
+        return onderdelenMap;
     }
 
     private Map<String, Object> makeStormMap(){

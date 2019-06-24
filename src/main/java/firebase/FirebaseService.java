@@ -76,6 +76,7 @@ public class FirebaseService{
                         (PlayerController.getInstance()).update();
                         (TileController.getInstance()).update();
                         (StormController.getInstance()).update();
+
                         SpeelbordView.getInstance().loadSpelBord();
                         ViewManager.getInstance().update();
                     });

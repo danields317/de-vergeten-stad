@@ -307,6 +307,24 @@ public class TileController {
         Object roominfo = staticData.getRoomInfo();
         Map<String, Object> tilesMap = (Map)((Map) roominfo).get("tiles");
         updateTilesFromFB(tilesMap);
+
+        Map<String, Object> onderdelenMap = (Map)((Map) roominfo).get("onderdelen");
+        updateOnderdelenFromFB(onderdelenMap);
+    }
+
+    private void updateOnderdelenFromFB(Map<String, Object> onderdelenMap){
+        for (int i = 0; i <onderdelen.size(); i++){
+            Map<String, Object> onderdeelFB = (Map)onderdelenMap.get(Integer.toString(i));
+            Onderdeel onderdeel = onderdelen.get(i);
+
+            int x = Integer.valueOf(onderdeelFB.get("x").toString());
+            int y = Integer.valueOf(onderdeelFB.get("y").toString());
+            if((onderdeelFB.get("opgepakt").toString()).equals("true")){
+                onderdeel.pakOp();
+            }
+            onderdeel.setX(x);
+            onderdeel.setY(y);
+        }
     }
 
     private void updateTilesFromFB(Map<String, Object> tilesMap){
@@ -419,6 +437,10 @@ public class TileController {
                 return PartTile.Soorten.PROPELOR;
         }
         return null;
+    }
+
+    public ArrayList<Onderdeel> getOnderdelen() {
+        return onderdelen;
     }
 
     public void update(){
