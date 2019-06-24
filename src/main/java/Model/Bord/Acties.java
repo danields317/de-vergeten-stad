@@ -1,6 +1,5 @@
 package Model.Bord;
 
-import com.sun.xml.internal.fastinfoset.util.StringArray;
 import observers.Acties_Observable;
 import observers.Acties_Observer;
 import observers.PlayerObservable;
