@@ -32,6 +32,7 @@ public class EindigBeurtView {
                 stormController.voerStormEventsUit();
                 PlayerController playerController = PlayerController.getInstance();
                 playerController.getPlayer().refillActions();
+
                 (UpdateFirebaseController.getInstance()).updateFirebase();
                 //update();
             }

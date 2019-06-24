@@ -223,7 +223,6 @@ public class ViewManager extends Application implements PlayerObserver, StormObs
         primaryStage.setScene(endScene);
     }
 
-
     @Override
     public void update(PlayerObservable sb) {
         loadGameView();
