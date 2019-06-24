@@ -34,6 +34,8 @@ public class EindigBeurtView {
 
                 (UpdateFirebaseController.getInstance()).updateFirebase();
                 //update();
+
+                ViewManager.getInstance().disableButtons();
             }
         });
 

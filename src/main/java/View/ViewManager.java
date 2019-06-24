@@ -9,6 +9,7 @@ import Model.data.StaticData;
 import View.bord_views.*;
 import javafx.application.Application;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -255,6 +256,12 @@ public class ViewManager extends Application implements PlayerObserver, StormObs
         //primaryStage.setX(windowAnchorX);
         //primaryStage.setY(windowAnchorY);
         //primaryStage.show();
+    }
+
+    public void disableButtons(){
+        for (Node node : primaryStage.getScene().getRoot().getChildrenUnmodifiable()){
+            node.setDisable(true);
+        }
     }
 
     @Override
