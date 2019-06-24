@@ -214,7 +214,6 @@ public class UpdateFirebaseController {
 
     public void makeFirebase(String roomName){
         Map<String, Object> players = new HashMap<String, Object>();
-
         tc = new TileController();
 
         Map<String, Object> obj = new HashMap<String, Object>() {
@@ -258,6 +257,6 @@ public class UpdateFirebaseController {
         data.put("activePlayer", "Archeoloog");
 
         (FirebaseService.getInstance()).addSpel(roomName, data);
-        StaticData.getInstance().setRoomInfo(data);
+
     }
 }

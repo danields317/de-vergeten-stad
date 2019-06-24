@@ -33,6 +33,8 @@ public class EindigBeurtView {
                 playerController.getPlayer().refillActions();
 
                 (UpdateFirebaseController.getInstance()).updateFirebase();
+
+                ViewManager.getInstance().disableButtons();
                 //update();
             }
         });

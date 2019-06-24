@@ -61,7 +61,6 @@ public class Player_Menu_View implements Player_Menu_Observer {
         for (int i = 0; i < 4; i++) {
             Object me = ((Map) classes).get(Integer.toString(i));
             String text = ((Map) me).get("name").toString();
-            System.out.println("/Players/"+((Map) me).get("name").toString()+".png");
             ImageView player_Menu_Image = new ImageView(new Image("/Players/"+text+".png"));
             classespic.add(player_Menu_Image,0,i);
             classespic.setLayoutY(80);
@@ -70,7 +69,6 @@ public class Player_Menu_View implements Player_Menu_Observer {
             player_Menu_Image.setFitHeight(100);
             player_Menu_Image.setFitWidth(100);
 
-            System.out.println("Gezet");
         }
         view = gp;
         view2 = classespic;
@@ -78,7 +76,7 @@ public class Player_Menu_View implements Player_Menu_Observer {
 
     @Override
     public void update(Player_Menu_Observable sb){
-        System.out.println("CHECKCHECK UPDATE");maakView();
+        maakView();
     }
 
     public static GridPane getView() {
