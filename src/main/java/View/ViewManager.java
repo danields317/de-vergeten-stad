@@ -1,5 +1,6 @@
 package View;
 
+import Controller.Bord_Controllers.Player_Menu_Controller;
 import Controller.Player_Controllers.FunctieController;
 import Controller.Player_Controllers.PlayerController;
 import Controller.Tile_Controllers.StormController;
@@ -16,6 +17,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import observers.*;
 
@@ -24,18 +26,15 @@ import java.util.Map;
 public class ViewManager extends Application implements PlayerObserver, StormObserver {
 
     private static ViewManager viewManager;
+    public enum endConditions {VICTORYROYALE, STERFDOORSTORM, DEHYDRATION, SUFFOCATION};
 
     static Stage primaryStage;
     String kaart = "/gamescreenempty.png";
-    //BordView bordView = new BordView();  //maak achtergrond
     ActieKnoppenView actieknoppenview = new ActieKnoppenView();  //maak beweeg knoppen
     GraafKnoppenView graafknoppenview = new GraafKnoppenView();  //maak graaf knoppen
     EindigBeurtView eindigBeurtView = new EindigBeurtView();  //maak eindig beurt knop
-    //LoadBordView loadbordview = new LoadBordView();  //geen idee wat deze doet
     OnderdeelView onderdeelview = new OnderdeelView();  //maak onderdelen
     SpeelbordView speelbordview = new SpeelbordView();  //maak speelbord tiles
-    //    SpelerView spelerview = new SpelerView();           //maak speler poppetjes en zijkant informatie
-    //StormView stormview = new StormView();              //maak storm en stormmeter
     EquipmentView uitrustingview = new EquipmentView();   //maak uitrusting plaatsen
     WaterflesView waterflesView;      //maak waterfles stand
     StormMeterView stormMeterView = new StormMeterView(); //maak stormmetertekentje
@@ -43,6 +42,7 @@ public class ViewManager extends Application implements PlayerObserver, StormObs
     Acties_View acties_view;//maak actie tekens
     InstellingenView instellingenView = new InstellingenView();
     StaticData staticData = StaticData.getInstance();
+    Player_Menu_View player_menu_view;
 
 
     private double windowWidth = 1600;
@@ -121,6 +121,9 @@ public class ViewManager extends Application implements PlayerObserver, StormObs
         waterfles = waterflesView.createInitialGridPane();
         GridPane stormTeken = stormMeterView.createInitialGridPane();
         acties_view = new Acties_View();
+        player_menu_view = new Player_Menu_View();
+        player_menu_view.maakView();
+
 
         StackPane propellor = onderdeelview.loadPropeller("?", "?");
         StackPane beacon = onderdeelview.loadBeacon("?", "?");
@@ -130,21 +133,6 @@ public class ViewManager extends Application implements PlayerObserver, StormObs
         GridPane graafknoppen = graafknoppenview.maakGraafKnoppen();
         GridPane spelbord = speelbordView.loadSpelBord();
         ImageView instelligen = instellingenView.InstellingenView();
-//        GridPane acties_view =
-//        Image backgroundImage = new Image("gamescreenempty.png");
-//        Canvas canvas = new Canvas(windowWidth, windowHeight);
-//
-//
-//        Button eindigbeurtKnop = eindigBeurtView.maakEindigbeurtKnop();
-//        Button eindigBeurt = eindigBeurtKnop(eindigbeurtKnop);
-//
-//        Group uitrusting = uitrustingview.createEquipmentView();
-//
-//        GraphicsContext gc = canvas.getGraphicsContext2D();
-//        gc.drawImage(backgroundImage, 0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
-//
-//        Group group = new Group(canvas, stormTeken, knoppen, graafknoppen, eindigbeurtKnop, waterfles, propellor, beacon, motor, zonnewijzer, spelbord, uitrusting);
-//        return  group;
 
 
         (PlayerController.getInstance()).update();
@@ -199,6 +187,8 @@ public class ViewManager extends Application implements PlayerObserver, StormObs
         GridPane spelbord = speelbordView.getSpelbord();
         GridPane stormTeken =  stormMeterView.getView();
         GridPane acties = acties_view.getView();
+        GridPane playermenu = player_menu_view.getView();
+        GridPane playermenuclasses = player_menu_view.getView2();
 
         StackPane uitrusting = uitrustingview.getUitrusting();
 
@@ -207,7 +197,7 @@ public class ViewManager extends Application implements PlayerObserver, StormObs
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.drawImage(backgroundImage, 0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
 
-        Group group = new Group(canvas, stormTeken, knoppen, graafKnoppen, eindigBeurt, waterfles, propellor,beacon,motor,zonnewijzer, spelbord, uitrusting, acties, instelligen);
+        Group group = new Group(canvas, stormTeken, knoppen, graafKnoppen, eindigBeurt, waterfles, propellor,beacon,motor,zonnewijzer, spelbord, uitrusting, acties, instelligen, playermenu, playermenuclasses);
         return group;
     }
 
@@ -215,12 +205,45 @@ public class ViewManager extends Application implements PlayerObserver, StormObs
         loadGameView();
     }
 
-    public void loadEndGame(){
-        Group group = new Group();
-        ImageView pdb = new ImageView("/placeholder.png");
-        group.getChildren().add(pdb);
-        Scene endScene = new Scene(group);
-        primaryStage.setScene(endScene);
+    public void loadEndGame(endConditions endConiditon){
+        Image image = new Image("/placeholder.png");
+
+        switch(endConiditon){
+            case VICTORYROYALE:
+                image = new Image("/Endscreen/victoryroyale.png");
+                break;
+            case STERFDOORSTORM:
+                image = new Image("/Endscreen/sterfdoorstorm.png");
+                break;
+            case DEHYDRATION:
+                image = new Image("/Endscreen/dehydration.png");
+                break;
+            case SUFFOCATION:
+                image = new Image("/Endscreen/suffocation.png");
+                break;
+        }
+
+        ImageView pdb = new ImageView(image);
+
+        pdb.setOnMouseClicked(e -> {
+            loadLoginView();
+        });
+
+//        try {
+//            ViewManager.getInstance().stop();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+
+        Group group = new Group(pdb);
+        //Scene endScene = new Scene(group, windowWidth, windowHeight);
+        //primaryStage.setScene(endScene);
+        //primaryStage.getScene().setRoot(group);
+        primaryStage.setScene(new Scene(group));
+        //primaryStage.setTitle("De Vergeten Stad");
+        //primaryStage.setX(windowAnchorX);
+        //primaryStage.setY(windowAnchorY);
+        //primaryStage.show();
     }
 
     @Override

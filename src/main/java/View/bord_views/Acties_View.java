@@ -32,10 +32,6 @@ public class Acties_View implements Acties_Observer {
         view = gp;
     }
 
-    public void setup(){
-
-    }
-
     @Override
     public void update(Acties_Observable sb){
         maakView(sb);

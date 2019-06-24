@@ -7,8 +7,11 @@ import javafx.scene.layout.GridPane;
 public class GraafKnoppenView {
 
     static GridPane view = new GridPane();
+    GridPane acties;
+    PlayerController playerController;
 
     public GridPane maakGraafKnoppen(){
+        playerController = PlayerController.getInstance();
         Button digUp = new Button();
         Button digDown = new Button();
         Button digLeft = new Button();
@@ -26,7 +29,7 @@ public class GraafKnoppenView {
         digRight.getStyleClass().add("buttonMoveRight");
         digLeft.getStyleClass().add("buttonMoveLeft");
 
-        GridPane acties = new GridPane();
+        acties = new GridPane();
 
         acties.add(digUp, 1, 0);
         acties.add(digDown, 1, 2);
@@ -37,33 +40,74 @@ public class GraafKnoppenView {
         acties.setLayoutX(525);
         acties.setLayoutY(685);
 
+        PlayerController playerController = PlayerController.getInstance();
+        boolean isArcheoloog = false;
+
+        switch (playerController.getPlayer().getKlasse()){
+            case ARCHEOLOOG:
+                isArcheoloog = true;
+                break;
+            case VERKENNER:
+                setVerkennerGraafKnoppen();
+                break;
+        }
+
+        final boolean finalArcheoloog = isArcheoloog;
+
         digUp.setOnMouseClicked(e -> {
-            PlayerController playerController = PlayerController.getInstance();
-            playerController.digNoord();
+            playerController.digNoord(finalArcheoloog);
         });
 
         digDown.setOnMouseClicked(e -> {
-            PlayerController playerController = PlayerController.getInstance();
-            playerController.digZuid();
+            playerController.digZuid(finalArcheoloog);
         });
 
         digRight.setOnMouseClicked(e -> {
-            PlayerController playerController = PlayerController.getInstance();
-            playerController.digOost();
+            playerController.digOost(finalArcheoloog);
         });
 
         digLeft.setOnMouseClicked(e -> {
-            PlayerController playerController = PlayerController.getInstance();
-            playerController.digWest();
+            playerController.digWest(finalArcheoloog);
         });
 
         dig.setOnMouseClicked(e -> {
-            PlayerController playerController = PlayerController.getInstance();
-            playerController.digHere();
+            playerController.digHere(finalArcheoloog);
         });
 
         view = acties;
         return acties;
+    }
+
+    public void setVerkennerGraafKnoppen(){
+        Button rB = new Button();
+        Button rO = new Button();
+        Button lB = new Button();
+        Button lO = new Button();
+
+        rB.setPrefSize(60, 60);
+        rO.setPrefSize(60, 60);
+        lB.setPrefSize(60, 60);
+        lO.setPrefSize(60, 60);
+
+        rB.setOnMouseClicked(e -> playerController.digNoordOost());
+        rO.setOnMouseClicked(e -> playerController.digZuidOost());
+        lB.setOnMouseClicked(e -> playerController.digNoordWest());
+        lO.setOnMouseClicked(e -> playerController.digZuidWest());
+
+        rB.getStyleClass().add("buttonMoveUp");
+        rO.getStyleClass().add("buttonMoveRight");
+        lB.getStyleClass().add("buttonMoveLeft");
+        lO.getStyleClass().add("buttonMoveDown");
+
+        rB.setRotate(45);
+        rO.setRotate(45);
+        lB.setRotate(45);
+        lO.setRotate(45);
+
+        acties.add(lB, 0, 0);
+        acties.add(lO, 0, 2);
+        acties.add(rB, 2, 0);
+        acties.add(rO, 2, 2);
     }
 
     public static GridPane getView() {

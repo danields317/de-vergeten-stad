@@ -89,6 +89,32 @@
     -fx-background-size: 40px;
 }
 
+.pagina
+{
+    -fx-text-fill: #000;
+    -fx-effect: dropshadow( gaussian, rgb(255,255,255) , 2,2,0,0 );
+    -fx-font-weight: bold;
+    -fx-font-size: 2em;
+}
+.spelregelButton:hover
+{
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
+}
+
+.spelregelButton:pressed
+{
+    -fx-scale-x: 1.0;
+    -fx-scale-y: 1.0;
+}
+
+.playermenu
+{
+    -fx-cursor: hand;
+}
+
+/******************************************************************************/
+
 .buttonGraaf
 {
     -fx-background-image: url("/Buttons/graafButton.png");
@@ -109,14 +135,15 @@
 {
     -fx-background-image: url("/Buttons/buttonRight.png");
 }
+.buttonWater
+{
+    -fx-background-image: url("/Buttons/waterButton.png");
+}
 .buttonMoveLeft
 {
     -fx-background-image: url("/Buttons/buttonLeft.png");
     -fx-alignment: baseline-left;
 }
-
-
-
 .eqButtonRight:hover{
     -fx-effect: dropshadow( gaussian, rgb(243,255,28) , 2,2,2,2 );
 }
@@ -130,23 +157,4 @@
 .eqButtonLeft
 {
     -fx-background-image: url("/Buttons/buttonEqLeft.png");
-}
-
-.pagina
-{
-    -fx-text-fill: #000;
-    -fx-effect: dropshadow( gaussian, rgb(255,255,255) , 2,2,0,0 );
-    -fx-font-weight: bold;
-    -fx-font-size: 2em;
-}
-.spelregelButton:hover
-{
-    -fx-scale-x: 1.1;
-    -fx-scale-y: 1.1;
-}
-
-.spelregelButton:pressed
-{
-    -fx-scale-x: 1.0;
-    -fx-scale-y: 1.0;
 }

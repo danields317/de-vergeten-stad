@@ -67,7 +67,6 @@ public class LoginView implements LoginObserver {
             primaryStage.show();
             GraphicsContext gc = canvas.getGraphicsContext2D();
             gc.drawImage(backgroundImage, 0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
-            /*Bord_Controller b = new Bord_Controller(root);*/
         } catch(Exception e) {
             e.printStackTrace();
         }
@@ -93,9 +92,6 @@ public class LoginView implements LoginObserver {
         gridPane.setVgap(5);
         gridPane.setHgap(5);
         gridPane.setAlignment(Pos.CENTER);
-
-        //gridPane.add(image, 0, 0);
-        //gridPane.add(scoreText, 1, 0);
         gridPane.add(text1, 140, 70);
         gridPane.add(usernameField, 140, 71);
         gridPane.add(text2, 140,72);
@@ -164,10 +160,6 @@ public class LoginView implements LoginObserver {
         gridPane.setVgap(5);
         gridPane.setHgap(5);
         gridPane.setAlignment(Pos.CENTER);
-
-//        gridPane.add(image, 0, 0);
-//        gridPane.add(scoreText, 1, 0);
-//        gridPane.add(usernameField, 1, 1);
         gridPane.add(error, 140 ,69);
         gridPane.add(text1, 140, 70);
         gridPane.add(usernameField, 140, 71);
@@ -182,7 +174,6 @@ public class LoginView implements LoginObserver {
         ImageView imageView = null;
         try {
             Image image = new Image(getClass().getResource(kaart).toURI().toString());
-            //Image image = new Image(new FileInputStream(file));
             imageView = new ImageView(image);
             return imageView;
         } catch (Exception e) {

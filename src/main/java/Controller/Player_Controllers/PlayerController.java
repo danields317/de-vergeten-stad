@@ -23,6 +23,11 @@ public class PlayerController {
     StaticData staticData = StaticData.getInstance();
     Player player;
 
+     Player archeoloog;
+     Player klimmer;
+     Player verkenner;
+     Player waterdrager;
+
     TileController tileController = TileController.getInstance();
 
     public PlayerController(String className, int maxWater, int water, String imagePath, Player.SpelerKlassen klasse){
@@ -41,11 +46,7 @@ public class PlayerController {
     public static PlayerController getInstance(boolean loadGame, Object classInfo) {
         if (playercont == null) {
             if(loadGame){
-//                System.out.println(((Map)(StaticData.getInstance()).getRoomInfo()).get("Selectable_classes"));
-//                System.out.println(classInfo);
                 Map classIn =((Map)(classInfo));
-//                System.out.println(((Long)(classIn.get("maxWater"))).intValue());
-//                System.out.println(((Map)(StaticData.getInstance()).getRoomInfo()).get("archeoloog"));
                 playercont = new PlayerController( ((String)(classIn.get("name"))),
                         ((Long)(classIn.get("maxWater"))).intValue(),
                         ((Long)(classIn.get("water"))).intValue(),
@@ -74,52 +75,77 @@ public class PlayerController {
     }
 
 
-    public void moveNoord(){
+    public void moveNoord(boolean isKlimmer){
         if(player.getY() > 0 && player.actiesOver()){
             Tile tileAbove = tileController.getTileByLocation((player.getY() - 1), player.getX());
 
-            moveLogica(tileAbove, Player.Richingen.NOORD);
-
-            tileController.getTileByLocation((player.getY() + 1), player.getX()).notifyAllObservers();
-            tileController.getTileByLocation(player.getY(), player.getX()).notifyAllObservers();
+            moveLogica(tileAbove, Player.Richingen.NOORD, isKlimmer);
         }
     }
 
-    public void moveZuid(){
+    public void moveZuid(boolean isKlimmer){
         if(player.getY() < 4 && player.actiesOver()){
             Tile tileBeneath = tileController.getTileByLocation((player.getY() + 1), player.getX());
 
-            moveLogica(tileBeneath, Player.Richingen.ZUID);
-
-            tileController.getTileByLocation((player.getY() - 1), player.getX()).notifyAllObservers();
-            tileController.getTileByLocation(player.getY(), player.getX()).notifyAllObservers();
+            moveLogica(tileBeneath, Player.Richingen.ZUID, isKlimmer);
         }
     }
 
-    public void moveOost(){
+    public void moveOost(boolean isKlimmer){
         if(player.getX() < 4 && player.actiesOver()){
             Tile tileRight = tileController.getTileByLocation(player.getY(), (player.getX() + 1));
 
-            moveLogica(tileRight, Player.Richingen.OOST);
-
-            tileController.getTileByLocation(player.getY(), (player.getX() - 1)).notifyAllObservers();
-            tileController.getTileByLocation(player.getY(), player.getX()).notifyAllObservers();
+            moveLogica(tileRight, Player.Richingen.OOST, isKlimmer);
         }
     }
 
-    public void moveWest(){
+    public void moveWest(boolean isKlimmer){
         if(player.getX() > 0 && player.actiesOver()){
             Tile tileLeft = tileController.getTileByLocation(player.getY(), (player.getX() -  1));
 
-            moveLogica(tileLeft, Player.Richingen.WEST);
-
-            tileController.getTileByLocation(player.getY(), (player.getX() + 1)).notifyAllObservers();
-            tileController.getTileByLocation(player.getY(), player.getX()).notifyAllObservers();
+            moveLogica(tileLeft, Player.Richingen.WEST, isKlimmer);
         }
     }
 
-    private void moveLogica(Tile tile, Player.Richingen riching){
+    public void moveNoordOost(){
+        if(player.getX() < 4 && player.getY() > 0 && player.actiesOver()) {
+            Tile destTile = tileController.getTileByLocation((player.getY() - 1), (player.getX() + 1));
+            moveSchuinLogica(destTile, Player.RichtingenSchuin.NOORDOOST);
+        }
+    }
+
+    public void moveZuidOost(){
+        if(player.getX() < 4 && player.getY() < 4 && player.actiesOver()) {
+            Tile destTile = tileController.getTileByLocation((player.getY() + 1), (player.getX() + 1));
+            moveSchuinLogica(destTile, Player.RichtingenSchuin.ZUIDOOST);
+        }
+    }
+
+    public void moveZuidWest(){
+        if(player.getX() > 0 && player.getY() < 4 && player.actiesOver()) {
+            Tile destTile = tileController.getTileByLocation((player.getY() + 1), (player.getX() - 1));
+            moveSchuinLogica(destTile, Player.RichtingenSchuin.ZUIDWEST);
+        }
+    }
+
+    public void moveNoordWest(){
+        if(player.getX() > 0 && player.getY() > 0 && player.actiesOver()) {
+            Tile destTile = tileController.getTileByLocation((player.getY() - 1), (player.getX() - 1));
+            moveSchuinLogica(destTile, Player.RichtingenSchuin.NOORDWEST);
+        }
+    }
+
+    private void moveSchuinLogica(Tile tile, Player.RichtingenSchuin richting){
         if(tile.getZand() < 2 && !tile.getClass().equals(Storm.class) && tileController.getTileByLocation(player.getY(), player.getX()).getZand() < 2){
+            tileController.getTileByLocation(player.getY(), player.getX()).removeSpeler(player);
+            player.movePlayerSchuin(richting);
+            player.useAction();
+            tile.addSpeler(player);
+        }
+    }
+
+    private void moveLogica(Tile tile, Player.Richingen riching, boolean isKlimmer){
+        if((tile.getZand() < 2 || isKlimmer) && !tile.getClass().equals(Storm.class) && (tileController.getTileByLocation(player.getY(), player.getX()).getZand() < 2 || isKlimmer)){
             tileController.getTileByLocation(player.getY(), player.getX()).removeSpeler(player);
             player.movePlayer(riching);
             player.useAction();
@@ -141,73 +167,121 @@ public class PlayerController {
         }
     }
 
-    public void digHere(){
+    public void digHere(boolean isArcheoloog){
         if (player.actiesOver()){
             Tile locatie = tileController.getTileByLocation(player.getY(), player.getX());
-            digLogica(locatie);
+            digLogica(locatie, isArcheoloog);
         }
     }
 
-    public void digNoord(){
+    public void digNoord(boolean isArcheoloog){
         if(player.getY() > 0 && player.actiesOver()) {
             Tile locatie = tileController.getTileByLocation((player.getY() - 1), player.getX());
-            digLogica(locatie);
+            digLogica(locatie, isArcheoloog);
         }
     }
 
-    public void digZuid(){
+    public void digZuid(boolean isArcheoloog){
         if(player.getY() < 4 && player.actiesOver()) {
             Tile locatie = tileController.getTileByLocation((player.getY() + 1), player.getX());
-            digLogica(locatie);
+            digLogica(locatie, isArcheoloog);
         }
     }
 
-    public void digOost(){
+    public void digOost(boolean isArcheoloog){
         if(player.getX() < 4 && player.actiesOver()) {
             Tile locatie = tileController.getTileByLocation(player.getY(), (player.getX() + 1));
-            digLogica(locatie);
+            digLogica(locatie, isArcheoloog);
         }
     }
 
-    public void digWest(){
+    public void digWest(boolean isArcheoloog){
         if(player.getX() > 0 && player.actiesOver()) {
             Tile locatie = tileController.getTileByLocation(player.getY(), (player.getX() - 1));
-            digLogica(locatie);
+            digLogica(locatie, isArcheoloog);
         }
     }
 
-    private void digLogica(Tile locatie){
+    public void digNoordOost(){
+        if(player.getX() < 4 && player.getY() > 0 && player.actiesOver()){
+            Tile locatie = tileController.getTileByLocation((player.getY() - 1), (player.getX() +1));
+            digLogica(locatie, false);
+        }
+    }
+
+    public void digZuidOost(){
+        if(player.getX() < 4 && player.getY() < 4 && player.actiesOver()) {
+            Tile locatie = tileController.getTileByLocation((player.getY() + 1), (player.getX() + 1));
+            digLogica(locatie, false);
+        }
+    }
+
+    public void digZuidWest(){
+        if(player.getX() > 0 && player.getY() < 4 && player.actiesOver()) {
+            Tile locatie = tileController.getTileByLocation((player.getY() + 1), (player.getX() - 1));
+            digLogica(locatie, false);
+        }
+    }
+
+    public void digNoordWest(){
+        if(player.getX() > 0 && player.getY() > 0 && player.actiesOver()) {
+            Tile locatie = tileController.getTileByLocation((player.getY() - 1), (player.getX() - 1));
+            digLogica(locatie, false);
+        }
+    }
+
+    private void digLogica(Tile locatie, boolean isArcheoloog){
         if (locatie.hasZand()){
             locatie.removeZandTegel();
             player.useAction();
         }
+        if(locatie.hasZand() && isArcheoloog){
+            locatie.removeZandTegel();
+        }
     }
 
-
-    public void Uitgraven(){
-
-    }
-
-    public void eenOnderdeelOppakken(){
-
+    public void schepWater(){
+        Tile tile = tileController.getTileByLocation(player.getY(), player.getX());
+        if(tile.getVariant() == Tile.Varianten.WATERPUT){
+            player.addWater(2);
+            player.useAction();
+        }
     }
 
     public void removeWater(){
         Tile tile = tileController.getTileByLocation(player.getY(), player.getX());
-        if(!tile.hasZonneSchild() || tile.getVariant() != Tile.Varianten.TUNNEL) {
+        if(!tile.hasZonneSchild() && tile.getVariant() != Tile.Varianten.TUNNEL ) {
             player.subtractWater(1);
         }
     }
 
 
-    public void giveWater(Player receiver, int amount){
+    public void giveWater(Player.SpelerKlassen receiver, int amount){
+
+        Player receiverPlayer = player;
+
+        switch (receiver){
+            case ARCHEOLOOG:
+                receiverPlayer = archeoloog;
+                break;
+            case KLIMMER:
+                receiverPlayer = klimmer;
+                break;
+            case VERKENNER:
+                receiverPlayer = verkenner;
+                break;
+            case WATERDRAGER:
+                receiverPlayer = waterdrager;
+                break;
+        }
+
         if(this.getPlayer().getWater() == 0){
             System.out.println("You dont have any water to give");
-        } else if( receiver.getWater() >= receiver.getMaxWater()){
-            System.out.println(receiver.getClassName() + " has already full water");
+        } else if( receiverPlayer.getWater() >= receiverPlayer.getMaxWater()){
+            System.out.println(receiverPlayer.getClassName() + " has already full water");
         }else{
             this.player.subtractWater(amount);
-            receiver.addWater(amount);
+            receiverPlayer.addWater(amount);
         }
 
 
