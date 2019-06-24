@@ -229,6 +229,12 @@ public class ViewManager extends Application implements PlayerObserver, StormObs
             loadLoginView();
         });
 
+//        try {
+//            ViewManager.getInstance().stop();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+
         Group group = new Group(pdb);
         //Scene endScene = new Scene(group, windowWidth, windowHeight);
         //primaryStage.setScene(endScene);

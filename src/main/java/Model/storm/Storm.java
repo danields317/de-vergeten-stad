@@ -68,8 +68,7 @@ public class Storm implements StormObservable{
         }else if (subSterkte < 16){
             sterkte = 6;
         }else {
-            System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa");
-            ViewManager.getInstance().loadEndGame(ViewManager.endConditions.STERFDOORSTORM);
+           ViewManager.getInstance().loadEndGame(ViewManager.endConditions.STERFDOORSTORM);
         }
         notifyAllObservers();
     }

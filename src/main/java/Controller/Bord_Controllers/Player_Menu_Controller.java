@@ -38,7 +38,7 @@ public class Player_Menu_Controller implements PlayerObserver {
     }
 
     public void update(){
-        System.out.println("CHECKCHECK UPDATECONTROLLER");player_menu.notifyAllObservers();
+        player_menu.notifyAllObservers();
     }
 
 }

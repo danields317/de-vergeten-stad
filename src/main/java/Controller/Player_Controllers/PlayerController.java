@@ -288,7 +288,7 @@ public class PlayerController {
     }
 
     public void registerObserver(PlayerObserver sbv) {
-        System.out.println(sbv);player.register(sbv);
+        player.register(sbv);
     }
 
     public Player getPlayer() {
