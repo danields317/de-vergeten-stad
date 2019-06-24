@@ -275,6 +275,25 @@ public class TileController {
         }
     }
 
+    private void checkOnderdelenSpawned(){
+        for (Onderdeel onderdeel : onderdelen){
+            if(!(onderdeel.getY() == -1) && !(onderdeel.getX() == -1)) {
+                Tile onderdeelSpawn = getTileByLocation(onderdeel.getY(), onderdeel.getX());
+                onderdeelSpawn.removeOnderdeelSoort(onderdeel);
+                onderdeelSpawn.setOnderdeel(onderdeel);
+            }
+        }
+    }
+
+    private void despawnOnderdelen(){
+        for (Onderdeel onderdeel : onderdelen){
+            if (onderdeel.isOpgepakt()){
+                Tile onderdeelTile = getTileByLocation(onderdeel.getY(), onderdeel.getX());
+                onderdeelTile.removeOnderdeelSoort(onderdeel);
+            }
+        }
+    }
+
     private Tile getFinsihTile(){
         for (Tile tile : randomTiles){
             if (tile.getVariant() == Tile.Varianten.FINISH){
@@ -308,8 +327,12 @@ public class TileController {
         Map<String, Object> tilesMap = (Map)((Map) roominfo).get("tiles");
         updateTilesFromFB(tilesMap);
 
-        Map<String, Object> onderdelenMap = (Map)((Map) roominfo).get("onderdelen");
-        updateOnderdelenFromFB(onderdelenMap);
+        Platform.runLater(() -> {
+            Map<String, Object> onderdelenMap = (Map)((Map) roominfo).get("onderdelen");
+            updateOnderdelenFromFB(onderdelenMap);
+            checkOnderdelenSpawned();
+            despawnOnderdelen();
+        });
     }
 
     private void updateOnderdelenFromFB(Map<String, Object> onderdelenMap){

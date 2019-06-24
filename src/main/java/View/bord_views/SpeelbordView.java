@@ -119,7 +119,6 @@ public class SpeelbordView{
 
     public void registerViews(){
         int counter = 0;
-        System.out.println(tileViews.size() + "-------------------------------");
         for (TileView view : tileViews){
             if (counter == 25){
                 counter = 0;

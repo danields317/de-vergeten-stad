@@ -154,6 +154,15 @@ public class Tile implements BordObservable{
         return !onderdelen.isEmpty();
     }
 
+    public void removeOnderdeelSoort(Onderdeel onderdeel){
+        for (Onderdeel ond : onderdelen){
+            if (ond.getSoort().equals(onderdeel.getSoort())) {
+                onderdelen.remove(onderdeel);
+                notifyAllObservers();
+            }
+        }
+    }
+
     public void removeOnderdeel(){
         if (!onderdelen.isEmpty()){
             onderdelen.remove(0);

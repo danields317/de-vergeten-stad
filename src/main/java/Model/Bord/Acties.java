@@ -14,7 +14,6 @@ public class Acties implements Acties_Observable {
 
 
     public void maakFotoArray(PlayerObservable sb){
-        System.out.println(sb.getActiesOver());
         if (sb.getActiesOver() > 4) {
             for (int i = (6 - sb.getActiesOver()); i < 4; i++) {
                 System.out.println("BLAUW");

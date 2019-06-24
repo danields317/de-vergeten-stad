@@ -88,9 +88,7 @@ public class Storm implements StormObservable{
     }
 
     public void setSterkte(int sterkte){
-        System.out.println(sterkte);
         this.sterkte = sterkte;
-        System.out.println(sterkte);
     }
 
     public void setSubSterkte(int sterkte){
