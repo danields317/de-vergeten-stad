@@ -6,6 +6,7 @@ import Model.Tiles.Tile;
 import Model.equipment.Equipment;
 import Model.equipment.Zonneschild;
 import Model.player.Player;
+import View.AardekijkerPopup;
 import View.bord_views.Acties_View;
 import View.bord_views.SpeelbordView;
 import javafx.scene.image.Image;
@@ -66,7 +67,7 @@ public class EquipmentController {
 
     public void gebruikAardekijker(int x, int y){
         Tile tile = tileController.getTileByLocation(y , x);
-        System.out.println(tile.getVariant());
+        AardekijkerPopup aardekijkerPopup = new AardekijkerPopup(tile.getDiscoveredImage());
         playerController.getPlayer().removeEquipment(Equipment.EquipmentKaarten.AARDEKIJKER);
         setAardekijkerStatus();
     }
@@ -77,8 +78,8 @@ public class EquipmentController {
         Tile tile = tileController.getTileByLocation(y, x);
         if ((x == pX && y >= pY-1 && y <= pY +1) || (y == pY && x >= pX-1 && x <= pX+1)) {
             tile.removeAllZand();
-            playerController.getPlayer().removeEquipment(Equipment.EquipmentKaarten.DUINKANON);
             setDuinkanonStatus();
+            playerController.getPlayer().removeEquipment(Equipment.EquipmentKaarten.DUINKANON);
         }
     }
 

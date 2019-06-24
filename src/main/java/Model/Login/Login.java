@@ -1,5 +1,6 @@
 package Model.Login;
 
+import Controller.Tile_Controllers.TileController;
 import Model.data.StaticData;
 import View.LoadBordView;
 import com.google.cloud.firestore.QueryDocumentSnapshot;
@@ -35,7 +36,6 @@ public class Login implements LoginObservable {
 
     public void laadKamer(String roomId, Stage s){
         new LoadBordView(s , roomId);
-
     }
     public String getScore(){
         return Integer.toString(scorePlayer1);

@@ -1,17 +1,20 @@
 package firebase;
 
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.time.LocalTime;
+import java.util.*;
 import java.util.concurrent.ExecutionException;
 
 import Controller.Player_Controllers.PlayerController;
+import Controller.Tile_Controllers.StormController;
+import Controller.Tile_Controllers.TileController;
 import Controller.firebase_controllers.ListenUpdateController;
 import Model.player.Player;
+import View.ViewManager;
+import View.bord_views.SpeelbordView;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.*;
+import com.google.cloud.firestore.EventListener;
 import com.google.firebase.database.annotations.Nullable;
 import javafx.application.Platform;
 
@@ -30,8 +33,6 @@ public class FirebaseService{
     private Firestore firestore;
     private static final String GEBRUIKERS_PATH = "games";
     private CollectionReference colRef;
-   //private Controller controller;
-
 
     public FirebaseService() {
         Database db = new Database();
@@ -68,16 +69,17 @@ public class FirebaseService{
                 }
 
                 if (snapshot != null && snapshot.exists()) {
-//                    controller.updateFromFirebase(snapshot);
                     ListenUpdateController listenUpdateController = ListenUpdateController.getInstance();
                     listenUpdateController.setFirebaseData();
-                    Platform.runLater(new Runnable() {
-                        @Override
-                        public void run() {
-                            (PlayerController.getInstance()).update();
-                        }
-                    });
 
+                    Platform.runLater(() -> {
+                        (PlayerController.getInstance()).update();
+                        (TileController.getInstance()).update();
+                        (StormController.getInstance()).update();
+
+                        SpeelbordView.getInstance().loadSpelBord();
+                        ViewManager.getInstance().update();
+                    });
 
                     System.out.println("Current data: " + snapshot.getData());
                 } else {
@@ -229,8 +231,10 @@ public class FirebaseService{
         ApiFuture<WriteResult> writeResult = this.colRef.document(documentId).delete();
     }
 
-//    public static void main(String[] args){
-//        System.out.println(getInstance().getGebruiker("ryanr").get("wachtwoord"));
-//    }
+    public static void main(String[] args){
+        FirebaseService fb = FirebaseService.getInstance();
+        DocumentSnapshot spel = fb.getSpel("test");
+        System.out.println();
+    }
 
 }

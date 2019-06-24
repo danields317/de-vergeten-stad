@@ -42,6 +42,9 @@ public class EquipmentController {
         if (equipmentList == null) {
             generateEquipment();
         }
+        if (equipmentCounter == 12){
+            equipmentCounter = 0;
+        }
         Equipment equipment = equipmentList[equipmentCounter];
         equipmentCounter++;
         return equipment;

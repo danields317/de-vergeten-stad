@@ -51,6 +51,10 @@ public class SpeelbordView{
         playerController = PlayerController.getInstance();
         equipmentController = EquipmentController.getInstance();
         ArrayList<Tile> tiles = tileController.getTiles();
+
+        tileViews.clear();
+
+        tileController.counter = 0;
         for(int i = 0; i < tiles.size(); i ++){
 
             Tile tile = tiles.get(i);
@@ -111,5 +115,16 @@ public class SpeelbordView{
 
     public GridPane getSpelbord() {
         return spelbord;
+    }
+
+    public void registerViews(){
+        int counter = 0;
+        for (TileView view : tileViews){
+            if (counter == 25){
+                counter = 0;
+            }
+            tileController.registerObserver(view, counter);
+            counter++;
+        }
     }
 }

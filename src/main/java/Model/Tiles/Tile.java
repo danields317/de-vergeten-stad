@@ -12,7 +12,7 @@ public class Tile implements BordObservable{
 
     private ArrayList<BordObserver> observers = new ArrayList<>();
 
-    public enum Varianten{EQUIPMENT, FATAMORGANA, PART, TUNNEL, WATERPUT, FINISH}
+    public enum Varianten{EQUIPMENT, FATAMORGANA, PART, TUNNEL, WATERPUT, FINISH, STORM, START}
     private Varianten variant;
 
     private boolean discovered;
@@ -154,6 +154,15 @@ public class Tile implements BordObservable{
         return !onderdelen.isEmpty();
     }
 
+    public void removeOnderdeelSoort(Onderdeel onderdeel){
+        for (Onderdeel ond : onderdelen){
+            if (ond.getSoort().equals(onderdeel.getSoort())) {
+                onderdelen.remove(onderdeel);
+                notifyAllObservers();
+            }
+        }
+    }
+
     public void removeOnderdeel(){
         if (!onderdelen.isEmpty()){
             onderdelen.remove(0);
@@ -166,7 +175,27 @@ public class Tile implements BordObservable{
         notifyAllObservers();
     }
 
+    public Image getDiscoveredImage(){
+        return discoveredImage;
+    }
+
     public boolean hasZonneSchild(){
         return hasZonneSchild;
+    }
+
+    public void setDiscovered(boolean discovered) {
+        this.discovered = discovered;
+    }
+
+    public void setAantalZandTegels(int aantalZandTegels) {
+        this.aantalZandTegels = aantalZandTegels;
+    }
+
+    public void setHasZonneSchild(boolean hasZonneSchild) {
+        this.hasZonneSchild = hasZonneSchild;
+    }
+
+    public void setVariant(Varianten variant){
+        this.variant = variant;
     }
 }

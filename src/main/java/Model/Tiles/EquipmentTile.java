@@ -9,13 +9,20 @@ public class EquipmentTile extends Tile {
 
     public EquipmentTile(Equipment equipment){
         super("/Tiles/Undiscovered.png", "/placeholder.png", Varianten.EQUIPMENT);
+
         String juistePNG = vindJuistePNG();
+
         super.setDiscoveredImage(juistePNG);
+
         aangemaaktTeller ++;
+
         this.equipment = equipment;
     }
 
     public String vindJuistePNG(){
+        if (aangemaaktTeller == 10){
+            aangemaaktTeller = 1;
+        }
         String pad = "/Tiles/Equipment_" + aangemaaktTeller + ".png";
         return pad;
     }
@@ -53,5 +60,8 @@ public class EquipmentTile extends Tile {
         return equipment;
     }
 
+    public static void resetTeller(){
+        aangemaaktTeller = 1;
+    }
 
 }

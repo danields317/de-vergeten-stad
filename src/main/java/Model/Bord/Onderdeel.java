@@ -9,8 +9,8 @@ import java.util.ArrayList;
 public class Onderdeel implements OnderdeelObservable {
 
     private PartTile.Soorten soort;
-    private int  X = -1;
-    private int  Y = -1;
+    private int X = -1;
+    private int Y = -1;
 
     private boolean opgepakt = false;
 

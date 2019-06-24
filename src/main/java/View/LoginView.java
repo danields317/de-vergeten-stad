@@ -35,9 +35,9 @@ public class LoginView implements LoginObserver {
 
     Stage primaryStage;
     Login_Controller loginController;
-    TextField usernameField = new TextField();
-    TextField passwordField = new TextField();
-    TextField roomId = new TextField("test");
+    TextField usernameField = new TextField("q");
+    TextField passwordField = new TextField("q");
+    TextField roomId = new TextField("Neee");
 
     public LoginView(Stage s, ViewManager viewManager){
         this.viewManager = viewManager;
@@ -196,15 +196,14 @@ public class LoginView implements LoginObserver {
         @Override
         public void handle(MouseEvent e) {
             (UpdateFirebaseController.getInstance()).makeFirebase(roomId.getText());
+            loginController.loadGame(roomId.getText(), primaryStage);
             //
-
         }
     };
     EventHandler<MouseEvent> loadClicked = new EventHandler<MouseEvent>() {
         @Override
         public void handle(MouseEvent e ) {
             loginController.loadGame(roomId.getText(), primaryStage);
-
         }
     };
     EventHandler<MouseEvent> submitClicked = new EventHandler<MouseEvent>() {

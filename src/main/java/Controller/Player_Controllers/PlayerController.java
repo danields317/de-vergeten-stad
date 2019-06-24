@@ -193,7 +193,10 @@ public class PlayerController {
     }
 
     public void removeWater(){
-        player.subtractWater(1);
+        Tile tile = tileController.getTileByLocation(player.getY(), player.getX());
+        if(!tile.hasZonneSchild() || tile.getVariant() != Tile.Varianten.TUNNEL) {
+            player.subtractWater(1);
+        }
     }
 
 
