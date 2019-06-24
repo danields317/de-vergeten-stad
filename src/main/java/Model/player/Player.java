@@ -33,7 +33,8 @@ public class Player implements PlayerObservable{
 	private int x;
 	private int y;
 
-	public enum Richingen {NOORD, OOST, WEST, ZUID}
+	public enum Richingen {NOORD, OOST, WEST, ZUID};
+	public enum RichtingenSchuin{NOORDOOST, ZUIDOOST, ZUIDWEST, NOORDWEST};
 
 	public enum SpelerKlassen {
 	    ARCHEOLOOG,
@@ -125,10 +126,28 @@ public class Player implements PlayerObservable{
         }
     }
 
+    public void movePlayerSchuin(RichtingenSchuin richting){
+		switch (richting){
+			case NOORDOOST:
+				move(1, -1);
+				break;
+			case ZUIDOOST:
+				move(1, 1);
+				break;
+			case ZUIDWEST:
+				move(-1, 1);
+				break;
+			case NOORDWEST:
+				move(-1, -1);
+				break;
+		}
+	}
+
     private void move(int moveX, int moveY){
 		x = x + moveX;
 		y = y + moveY;
     }
+
 	/////////////////////////////////////// Getters & Setters ///////////////////////////////////////
 	
 	public int getWater() {
