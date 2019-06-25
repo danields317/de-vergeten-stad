@@ -5,6 +5,7 @@ import java.time.LocalTime;
 import java.util.*;
 import java.util.concurrent.ExecutionException;
 
+import Controller.Player_Controllers.FunctieController;
 import Controller.Player_Controllers.PlayerController;
 import Controller.Tile_Controllers.StormController;
 import Controller.Tile_Controllers.TileController;
@@ -74,6 +75,9 @@ public class FirebaseService{
                     listenUpdateController.setFirebaseData();
 
                     Platform.runLater(() -> {
+                        if (PlayerController.getInstance().checkPlayerWater()){
+                            (FunctieController.getInstance()).endLose();
+                        }
                         (PlayerController.getInstance()).update();
                         (TileController.getInstance()).update();
                         (StormController.getInstance()).update();

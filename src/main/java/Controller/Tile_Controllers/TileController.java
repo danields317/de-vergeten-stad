@@ -319,7 +319,7 @@ public class TileController {
         return getFinsihTile().getSpelers().size() == 4 && checkAlleOnderdelen();
     }
 
-    private void checkZandCounter() {
+    public void checkZandCounter() {
         int zandCounter = 0;
         //int zandMax = 48;
         int zandMax = 9;

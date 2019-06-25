@@ -506,6 +506,17 @@ public class PlayerController {
         return null;
     }
 
+    public boolean checkPlayerWater(){
+        StaticData staticData = StaticData.getInstance();
+        Map<String, Object> gebruikers = (Map)((Map)staticData.getRoomInfo()).get("Selectable_classes");
+        for (int i = 0; i < 4; i++){
+            if (Integer.valueOf(((Map)(gebruikers.get(Integer.toString(i)))).get("water").toString()) < 0 ){
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void update(){
         player.notifyAllObservers();
     }

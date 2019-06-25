@@ -20,7 +20,7 @@ public class Tile implements BordObservable{
     private Image discoveredImage;
 
     private int aantalZandTegels;
-    private boolean hasZonneSchild;
+    private boolean hasZonneSchild = false;
 
     private ArrayList<Onderdeel> onderdelen;
     private ArrayList<Player> spelers;

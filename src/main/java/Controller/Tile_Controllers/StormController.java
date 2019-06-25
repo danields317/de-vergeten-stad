@@ -5,6 +5,7 @@ import Controller.Controller;
 import Controller.Player_Controllers.FunctieController;
 import Controller.Player_Controllers.PlayerController;
 import Model.data.StaticData;
+import Model.player.Player;
 import Model.storm.Storm;
 import Model.storm.StormEvent;
 import Model.storm.StormEventBeweging;
@@ -131,7 +132,7 @@ public class StormController {
                         beweegStorm(((StormEventBeweging) stormEvent).richting, ((StormEventBeweging) stormEvent).stappen);
                         break;
                     case BRANDT:
-                        if (checkPlayerWater()){
+                        if (PlayerController.getInstance().checkPlayerWater()){
                             (FunctieController.getInstance()).endLose();
                         } else {
                             Controller controller = Controller.getInstance();
@@ -154,17 +155,6 @@ public class StormController {
         }
         storm.notifyAllObservers();
         tileController.checkZandCounter();
-    }
-
-    private boolean checkPlayerWater(){
-        StaticData staticData = StaticData.getInstance();
-        Map<String, Object> gebruikers = (Map)((Map)staticData.getRoomInfo()).get("Selectable_classes");
-        for (int i = 0; i < 4; i++){
-            if (((Map)(gebruikers.get(Integer.toString(i)))).get("water").equals("0")){
-                return true;
-            }
-        }
-        return false;
     }
 
     /**
