@@ -23,6 +23,11 @@ import observers.*;
 
 import java.util.Map;
 
+/**
+ * De ViewManager regelt het de bovenste JavaFX nodes.
+ * Hiermee wordt de verschillende scenes gestart en gevuld.
+ */
+
 public class ViewManager extends Application implements PlayerObserver, StormObserver {
 
     private static ViewManager viewManager;
@@ -69,11 +74,19 @@ public class ViewManager extends Application implements PlayerObserver, StormObs
         loadLoginView();
     }
 
+    /**
+     * Laadt het login scherm.
+     */
+
     public void loadLoginView() {
 
         new LoginView(primaryStage, this);
 
     }
+
+    /**
+     * Laadt het login scherm.
+     */
 
     public void loadGameView() {
         try {
@@ -98,6 +111,7 @@ public class ViewManager extends Application implements PlayerObserver, StormObs
         }
     }
 
+
     public Group firstBordload(){
         (FunctieController.getInstance()).endLose();
         waterflesView = new WaterflesView();
@@ -118,21 +132,6 @@ public class ViewManager extends Application implements PlayerObserver, StormObs
         GridPane graafknoppen = graafknoppenview.maakGraafKnoppen();
         GridPane spelbord = speelbordView.loadSpelBord();
         ImageView instelligen = instellingenView.InstellingenView();
-//        GridPane acties_view =
-//        Image backgroundImage = new Image("gamescreenempty.png");
-//        Canvas canvas = new Canvas(windowWidth, windowHeight);
-//
-//
-//        Button eindigbeurtKnop = eindigBeurtView.maakEindigbeurtKnop();
-//        Button eindigBeurt = eindigBeurtKnop(eindigbeurtKnop);
-//
-//        Group uitrusting = uitrustingview.createEquipmentView();
-//
-//        GraphicsContext gc = canvas.getGraphicsContext2D();
-//        gc.drawImage(backgroundImage, 0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
-//
-//        Group group = new Group(canvas, stormTeken, knoppen, graafknoppen, eindigbeurtKnop, waterfles, propellor, beacon, motor, zonnewijzer, spelbord, uitrusting);
-//        return  group;
 
 
         (PlayerController.getInstance()).update();
@@ -142,23 +141,6 @@ public class ViewManager extends Application implements PlayerObserver, StormObs
         (StormController.getInstance()).registerObserver(this);
 
         return new Group( new GridPane());
-    }
-
-    private void loadPrimaryStageWithGroup(Group group) {
-        try {
-
-            Image backgroundImage = new Image("background.png");
-            Scene scene = new Scene(group, windowWidth, windowHeight);
-            scene.getStylesheets().add("/css/game.css");
-
-            primaryStage.setScene(scene);
-            primaryStage.setTitle("De Vergeten Stad");
-            primaryStage.setX(windowAnchorX);
-            primaryStage.setY(windowAnchorY);
-            primaryStage.show();
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
     }
 
     private Group makeGroup(){
@@ -202,6 +184,12 @@ public class ViewManager extends Application implements PlayerObserver, StormObs
 
     public void update(){loadGameView();}
 
+    /**
+     * Stopt het spel en laat een eindscherm zien.
+     * @param endConiditon Hoe het spel is geëindigt.
+     * @author Tim
+     */
+
     public void loadEndGame(endConditions endConiditon){
         Image image = new Image("/placeholder.png");
 
@@ -230,10 +218,14 @@ public class ViewManager extends Application implements PlayerObserver, StormObs
         //Scene endScene = new Scene(group, windowWidth, windowHeight);
         //primaryStage.setScene(endScene);
         //primaryStage.getScene().setRoot(group);
-        primaryStage.setScene(new Scene(group));
+        //primaryStage.setScene(new Scene(group));
         //primaryStage.setTitle("De Vergeten Stad");
         //primaryStage.setX(windowAnchorX);
         //primaryStage.setY(windowAnchorY);
+        //primaryStage.show();
+
+        //primaryStage.close();
+        //primaryStage.setScene(new Scene(group));
         //primaryStage.show();
     }
 

@@ -14,6 +14,8 @@ import javafx.stage.Stage;
 import observers.WaterObservable;
 import observers.WaterObserver;
 
+import java.io.File;
+
 public class WaterflesView implements WaterObserver {
 
 
@@ -71,8 +73,16 @@ public class WaterflesView implements WaterObserver {
         gridPane.setHgap(5);
         gridPane.setAlignment(Pos.CENTER);
 
-        ImageView waterImage = new ImageView(new Image(sb.getImgWater()));
-//        ImageView waterImage = new ImageView(new Image("/placeholder.png"));
+        String waterflesImagePath = sb.getImgWater();
+        File idea=new File(waterflesImagePath);
+
+        if (!idea.exists()){
+            waterflesImagePath = "/placeholder.png";
+        }
+
+        ImageView waterImage = new ImageView(new Image(waterflesImagePath));
+
+
 
         waterImage.prefWidth(240.0);
         waterImage.prefHeight(220.0);

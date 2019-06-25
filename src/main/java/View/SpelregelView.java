@@ -9,6 +9,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
+/**
+ * Start een nieuwe stage waarop de spelregels worden weergegeven.
+ */
 
 public class SpelregelView {
 
