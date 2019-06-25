@@ -264,6 +264,12 @@ public class ViewManager extends Application implements PlayerObserver, StormObs
         }
     }
 
+    public void enableButtons(){
+        for (Node node : primaryStage.getScene().getRoot().getChildrenUnmodifiable()){
+            node.setDisable(false);
+        }
+    }
+
     @Override
     public void update(PlayerObservable sb) {
         loadGameView();

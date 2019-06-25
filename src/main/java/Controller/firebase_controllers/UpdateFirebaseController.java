@@ -25,7 +25,7 @@ public class UpdateFirebaseController {
 
     private boolean startGame = false;
 
-    private int counter = 0;
+    private int counter = 1;
     private String[] testSpelers = {"Archeoloog", "Klimmer"};
 
     public UpdateFirebaseController(){
@@ -82,10 +82,10 @@ public class UpdateFirebaseController {
         data.put("storm", makeStormMap());
         data.put("onderdelen", makeOnderdelenMap());
 
-        data.put("Selectable_classes", myObject);
-        if (counter == 2){
-            counter = 0;
-        }
+//        data.put("Selectable_classes", myObject);
+//        if (counter == 2){
+//            counter = 0;
+//        }
         data.put("activePlayer", testSpelers[counter]);
         counter++;
 //        data.put("activePlayer", "Archeoloog");
