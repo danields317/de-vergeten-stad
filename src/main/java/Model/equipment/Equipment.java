@@ -2,6 +2,10 @@ package Model.equipment;
 
 import javafx.scene.image.Image;
 
+/**
+ * De Equipment klasse houdt bij welk soort equipment een speler heeft.
+ */
+
 public class Equipment {
 
 	public enum EquipmentKaarten {AARDEKIJKER, DUINKANON, JETPACK, TIJDSCHAKELAAR, WATERRESERVE, ZONNESCHILD};

@@ -16,6 +16,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Spliterator;
 
+/**
+ * De Player klasse is een model voor elke speler.
+ * Deze klasse houdt de status van alle attributen van de speler bij en
+ * voert functies uit de alleen Player variabelen aanpassen.
+ */
+
 public class Player implements PlayerObservable{
 
 	private String nickname; // Naam ingevoerd door de speler
@@ -99,6 +105,11 @@ public class Player implements PlayerObservable{
 	}
 	*/
 
+	/**
+	 * Deze functie verdeelt water tussen speler wanneer een speler ervoor kiest om water te geven aan een andere speler.
+	 * @param reciever, ontvanger van het water
+	 */
+
 	public void giveWater(Player reciever){
 		if((this.water > 0 && reciever.water < reciever.maxWater) && (this.tile == reciever.tile)){
 			this.subtractWater(1);
@@ -107,6 +118,11 @@ public class Player implements PlayerObservable{
 
 		}
 	}
+
+	/**
+	 * Geeft de opdracht aan een andere funcites om de X en Y van de speler aan te passen.
+	 * @param riching, de kant waar de speler op gaat.
+	 */
 
 	public void movePlayer(Richingen riching){
 	    switch (riching){
@@ -125,7 +141,13 @@ public class Player implements PlayerObservable{
         }
     }
 
-    private void move(int moveX, int moveY){
+	/**
+	 * Zet de nieuwe X en Y locatie van een speler wanneer deze verplaatst is.
+	 * @param moveX, verschuiving op de X as.
+	 * @param moveY, verschuiving op de Y as.
+	 */
+
+	private void move(int moveX, int moveY){
 		x = x + moveX;
 		y = y + moveY;
     }
@@ -140,6 +162,11 @@ public class Player implements PlayerObservable{
 		return actiesOver;
 	}
 
+
+	/**
+	 * Voegt water toe aan de speler.
+	 * @param water, aantal water dat wordt toegevoegt.
+	 */
 	public void addWater(int water ) {
 
     	if (this.water + water < maxWater){
@@ -150,6 +177,11 @@ public class Player implements PlayerObservable{
 		notifyAllObservers();
 
 	}
+
+	/**
+	 * Verwijdert water van de speler.
+	 * @param water, aantal water dat verwijdert wordt.
+	 */
 
 	public void subtractWater(int water ) {
 		
@@ -162,6 +194,10 @@ public class Player implements PlayerObservable{
 		notifyAllObservers();
 	}
 
+	/**
+	 * Haalt een actie van een speler af.
+	 */
+
 	public void useAction(){
         if (actiesOver > 0){
             actiesOver--;
@@ -173,7 +209,11 @@ public class Player implements PlayerObservable{
         return actiesOver > 0;
     }
 
-    public void refillActions(){
+	/**
+	 * Geeft de speler weer 4 acties.
+	 */
+
+	public void refillActions(){
         actiesOver = 4;
 		notifyAllObservers();
     }
@@ -245,6 +285,10 @@ public class Player implements PlayerObservable{
 
 
 	}
+
+	/**
+	 * Krijg twee extra acties.
+	 */
 
 	public void getTweeActies(){
 		this.actiesOver = this.actiesOver + 2;

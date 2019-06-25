@@ -12,6 +12,12 @@ import View.bord_views.SpeelbordView;
 import javafx.scene.image.Image;
 import observers.PlayerObserver;
 
+/**
+ * Deze klasse handelt het gebruik van equipment door een speler af
+ *
+ * @author Daniel
+ */
+
 public class EquipmentController {
 
     private static EquipmentController equipmentController;
@@ -32,6 +38,11 @@ public class EquipmentController {
         return equipmentController;
     }
 
+    /**
+     * Zet de aardekijker equipment kaart op actief om deze te gaan gebruiken.
+     * Een andere kaart die actief stond wordt gedeactiveerd.
+     */
+
     public void setAardekijkerStatus(){
         speelbordView.duinkanonSelected = false;
         speelbordView.jetpackSelected = false;
@@ -42,6 +53,11 @@ public class EquipmentController {
             speelbordView.aardekijkerSelected = false;
         }
     }
+
+    /**
+     * Zet de duinkanon equipment kaart op actief om deze te gaan gebruiken.
+     * Een andere kaart die actief stond wordt gedeactiveerd.
+     */
 
     public void setDuinkanonStatus(){
         speelbordView.aardekijkerSelected = false;
@@ -54,6 +70,11 @@ public class EquipmentController {
         }
     }
 
+    /**
+     * Zet de jetpack equipment kaart op actief om deze te gaan gebruiken.
+     * Een andere kaart die actief stond wordt gedeactiveerd.
+     */
+
     public void setJetpackStatus(){
         speelbordView.aardekijkerSelected = false;
         speelbordView.duinkanonSelected = false;
@@ -65,12 +86,26 @@ public class EquipmentController {
         }
     }
 
+    /**
+     * Gebruikt de aardekijker om de ontdekte kant van een onontdekte tile te bekijken.
+     * Verwijdert hierna de aardekijker uit de inventory en zet de kaart weer inactief.
+     * @param x-as van de tile waar de speler op klikte
+     * @param y-as van de tile waar de speler op klikte
+     */
+
     public void gebruikAardekijker(int x, int y){
         Tile tile = tileController.getTileByLocation(y , x);
         AardekijkerPopup aardekijkerPopup = new AardekijkerPopup(tile.getDiscoveredImage());
         playerController.getPlayer().removeEquipment(Equipment.EquipmentKaarten.AARDEKIJKER);
         setAardekijkerStatus();
     }
+
+    /**
+     * Gebuikt de aardekijker op een tile om al het zand te verwijderen.
+     * Verwijdert hierna de aardekijker uit de inventory en zet de kaart weer inactief.
+     * @param x-as van de tile waar de speler op klikte
+     * @param y-as van de tile waar de speler op klikte
+     */
 
     public void gebruikDuinkanon(int x, int y){
         int pX = playerController.getPlayer().getX();
@@ -82,6 +117,13 @@ public class EquipmentController {
             playerController.getPlayer().removeEquipment(Equipment.EquipmentKaarten.DUINKANON);
         }
     }
+
+    /**
+     * Gebuikt de Jetpack om de speler naar een andere tile te verplaatsen.
+     * Verwijdert hierna de aardekijker uit de inventory en zet de kaart weer inactief.
+     * @param x-as van de tile waar de speler op klikte
+     * @param y-as van de tile waar de speler op klikte
+     */
 
     public void gebruikJetpack(int x, int y){
         Tile currentTile = tileController.getTileByLocation(playerController.getPlayer().getY(), playerController.getPlayer().getX());
@@ -95,10 +137,20 @@ public class EquipmentController {
         }
     }
 
+    /**
+     * Geeft de speler twee extra acties.
+     * Verwijdert hierna de aardekijker uit de inventory en zet de kaart weer inactief.
+     */
+
     public void gebruikTijdschakelaar(){
         playerController.getPlayer().getTweeActies();
         playerController.getPlayer().removeEquipment(Equipment.EquipmentKaarten.TIJDSCHAKELAAR);
     }
+
+    /**
+     * Geeft alle speler op een tile 2 extra water.
+     * Verwijdert hierna de aardekijker uit de inventory en zet de kaart weer inactief.
+     */
 
     public void gebruikWaterreserve(){
         int pX = playerController.getPlayer().getX();
@@ -109,6 +161,10 @@ public class EquipmentController {
         }
         playerController.getPlayer().removeEquipment(Equipment.EquipmentKaarten.WATERRESERVE);
     }
+
+    /**
+     * Zet een zonneschild op een tile om niet verbrand te worden.
+     */
 
     public void gebruikZonneschild(){
         Tile tile = tileController.getTileByLocation(playerController.getPlayer().getY(), playerController.getPlayer().getX());
