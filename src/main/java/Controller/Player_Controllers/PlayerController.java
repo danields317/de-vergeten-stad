@@ -23,12 +23,12 @@ public class PlayerController {
     StaticData staticData = StaticData.getInstance();
     Player player;
 
-     Player archeoloog;
-     Player klimmer;
-     Player verkenner;
-     Player waterdrager;
+    Player archeoloog;
+    Player klimmer;
+    Player verkenner;
+    Player waterdrager;
 
-    TileController tileController = TileController.getInstance();
+     TileController tileController = TileController.getInstance();
 
     public PlayerController(String className, int maxWater, int water, String imagePath, Player.SpelerKlassen klasse){
         player = new Player(staticData.getUsername(),className, "b", maxWater, water, Color.BLUE, imagePath, klasse);
@@ -43,7 +43,7 @@ public class PlayerController {
     // Singleton Pattern.
     // now we can call: SpelbordController.getInstance()  from everywhere
     // AND it guarantees there is only 1 instance.
-    public static PlayerController getInstance(boolean loadGame, Object classInfo) {
+    public static PlayerController getInstance  (boolean loadGame, Object classInfo) {
         if (playercont == null) {
             if(loadGame){
 //                System.out.println(((Map)(StaticData.getInstance()).getRoomInfo()).get("Selectable_classes"));
@@ -81,23 +81,61 @@ public class PlayerController {
 
     public void moveNoord(boolean isKlimmer){
         if(player.getY() > 0 && player.actiesOver()){
+            int x = 0;
+            int y = 0;
             Tile tileAbove = tileController.getTileByLocation((player.getY() - 1), player.getX());
+            for(Tile tile : tileController.getTiles()){
+
+                ArrayList<String>players = tile.getPlayers();
+                for(int i = 0; i < players.size(); i++){
+                    if(this.player.getClassName().equals(players.get(i))){
+                        x = tile.getX();
+                        y = tile.getY();
+                        tile.removePlayer(players.get(i));
+                    }
+                }
+
+            }
+            for(Tile tile : tileController.getTiles()){
+                if(tile.getY() == (y - 1) && tile.getX() == x ){
+                    tile.addPlayer(player.getClassName());
+                }
+            }
 
             moveLogica(tileAbove, Player.Richingen.NOORD, isKlimmer);
 
-            //tileController.getTileByLocation((player.getY() + 1), player.getX()).notifyAllObservers();
-            //tileController.getTileByLocation(player.getY(), player.getX()).notifyAllObservers();
+            tileController.getTileByLocation((player.getY() + 1), player.getX()).notifyAllObservers();
+            tileController.getTileByLocation(player.getY(), player.getX()).notifyAllObservers();
         }
     }
 
     public void moveZuid(boolean isKlimmer){
         if(player.getY() < 4 && player.actiesOver()){
             Tile tileBeneath = tileController.getTileByLocation((player.getY() + 1), player.getX());
+            int x = 0;
+            int y = 0;
+            for(Tile tile : tileController.getTiles()){
+
+                ArrayList<String>players = tile.getPlayers();
+                for(int i = 0; i < players.size(); i++){
+                    if(this.player.getClassName().equals(players.get(i))){
+                        x = tile.getX();
+                        y = tile.getY();
+                        tile.removePlayer(players.get(i));
+                    }
+                }
+
+            }
+            for(Tile tile : tileController.getTiles()){
+                if(tile.getY() == (y + 1) && tile.getX() == x ){
+                    tile.addPlayer(player.getClassName());
+                }
+            }
 
             moveLogica(tileBeneath, Player.Richingen.ZUID, isKlimmer);
 
-            //tileController.getTileByLocation((player.getY() - 1), player.getX()).notifyAllObservers();
-            //tileController.getTileByLocation(player.getY(), player.getX()).notifyAllObservers();
+            tileController.getTileByLocation((player.getY() - 1), player.getX()).notifyAllObservers();
+            tileController.getTileByLocation(player.getY(), player.getX()).notifyAllObservers();
         }
     }
 
@@ -105,10 +143,29 @@ public class PlayerController {
         if(player.getX() < 4 && player.actiesOver()){
             Tile tileRight = tileController.getTileByLocation(player.getY(), (player.getX() + 1));
 
+            int x = 0;
+            int y = 0;
+            for(Tile tile : tileController.getTiles()){
+
+                ArrayList<String>players = tile.getPlayers();
+                for(int i = 0; i < players.size(); i++){
+                    if(this.player.getClassName().equals(players.get(i))){
+                        x = tile.getX();
+                        y = tile.getY();
+                        tile.removePlayer(players.get(i));
+                    }
+                }
+
+            }
+            for(Tile tile : tileController.getTiles()){
+                if(tile.getY() == y  && tile.getX() == (x + 1)){
+                    tile.addPlayer(player.getClassName());
+                }
+            }
             moveLogica(tileRight, Player.Richingen.OOST, isKlimmer);
 
-            //tileController.getTileByLocation(player.getY(), (player.getX() - 1)).notifyAllObservers();
-            //tileController.getTileByLocation(player.getY(), player.getX()).notifyAllObservers();
+            tileController.getTileByLocation(player.getY(), (player.getX() - 1)).notifyAllObservers();
+            tileController.getTileByLocation(player.getY(), player.getX()).notifyAllObservers();
         }
     }
 
@@ -116,10 +173,29 @@ public class PlayerController {
         if(player.getX() > 0 && player.actiesOver()){
             Tile tileLeft = tileController.getTileByLocation(player.getY(), (player.getX() -  1));
 
+            int x = 0;
+            int y = 0;
+            for(Tile tile : tileController.getTiles()){
+
+                ArrayList<String>players = tile.getPlayers();
+                for(int i = 0; i < players.size(); i++){
+                    if(this.player.getClassName().equals(players.get(i))){
+                        x = tile.getX();
+                        y = tile.getY();
+                        tile.removePlayer(players.get(i));
+                    }
+                }
+
+            }
+            for(Tile tile : tileController.getTiles()){
+                if(tile.getY() == y && tile.getX() == (x - 1) ){
+                    tile.addPlayer(player.getClassName());
+                }
+            }
             moveLogica(tileLeft, Player.Richingen.WEST, isKlimmer);
 
-            //tileController.getTileByLocation(player.getY(), (player.getX() + 1)).notifyAllObservers();
-            //tileController.getTileByLocation(player.getY(), player.getX()).notifyAllObservers();
+            tileController.getTileByLocation(player.getY(), (player.getX() + 1)).notifyAllObservers();
+            tileController.getTileByLocation(player.getY(), player.getX()).notifyAllObservers();
         }
     }
 

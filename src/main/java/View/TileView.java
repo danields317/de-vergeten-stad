@@ -167,6 +167,7 @@ public class TileView implements BordObserver {
 
 
     private void checkSpelers(Tile tile){
+        /*
         for (Player speler : tile.getSpelers()){
             if (speler.getKlasse().equals(Player.SpelerKlassen.KLIMMER)){
                 klimmerImageView.setOpacity(1);
@@ -175,6 +176,18 @@ public class TileView implements BordObserver {
             } else if (speler.getKlasse().equals(Player.SpelerKlassen.VERKENNER)){
                 verkennerImageView.setOpacity(1);
             } else if (speler.getKlasse().equals(Player.SpelerKlassen.WATERDRAGER)){
+                waterdragerImageView.setOpacity(1);
+            }
+        }*/
+
+        for(String player : tile.getPlayers()){
+            if (player.equals("Klimmer")){
+                klimmerImageView.setOpacity(1);
+            } else if (player.equals("Archeoloog")){
+                archeoloogImageView.setOpacity(1);
+            } else if (player.equals("Verkenner")){
+                verkennerImageView.setOpacity(1);
+            } else if (player.equals("Waterdrager")){
                 waterdragerImageView.setOpacity(1);
             }
         }
