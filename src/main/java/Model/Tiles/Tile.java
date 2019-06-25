@@ -24,6 +24,7 @@ public class Tile implements BordObservable{
 
     private ArrayList<Onderdeel> onderdelen;
     private ArrayList<Player> spelers;
+    private ArrayList<String> players = new ArrayList<>();
 
     private int x;
     private int y;
@@ -126,6 +127,27 @@ public class Tile implements BordObservable{
     public void addSpeler(Player speler){
         spelers.add(speler);
         notifyAllObservers();
+    }
+
+    public void addPlayer(String player){
+        players.add(player);
+        notifyAllObservers();
+    }
+
+    public void removePlayer(String player){
+        for(int i = 0; i < players.size(); i++){
+            if(players.get(i).equals(player)) {
+                players.remove(i);
+            }
+        }
+    }
+
+    public void emptyPlayers() {
+        players.clear();
+    }
+
+    public ArrayList<String> getPlayers() {
+        return players;
     }
 
     public void removeSpeler(Player speler){

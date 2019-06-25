@@ -16,6 +16,7 @@ import observers.BordObserver;
 import observers.OnderdeelObserver;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.util.Random;
 
@@ -30,6 +31,7 @@ public class TileController {
     ArrayList<Tile> tiles = new ArrayList<>();
     ArrayList<Tile> randomTiles = new ArrayList<>();
     ArrayList<Onderdeel> onderdelen = new ArrayList<>();
+
 
 
     PlayerController playerController;
@@ -352,6 +354,7 @@ public class TileController {
 
     private void updateTilesFromFB(Map<String, Object> tilesMap){
         for (int i = 0; i < 25; i++){
+            System.out.println("leleofgjdkslgndsjkdjlgbsdj");
             Map<String, Object> tileFB = (Map)tilesMap.get(Integer.toString(i));
             Tile tile = randomTiles.get(i);
 
@@ -363,7 +366,21 @@ public class TileController {
             }
             boolean hasZonneSchild = Boolean.getBoolean(tileFB.get("hasZonneSchild").toString());
             int aantalZand = Integer.valueOf(tileFB.get("aantalZandTegels").toString());
+            tile.emptyPlayers();
+            String s = tileFB.get("Players").toString();
 
+            if(s.contains("Archeoloog")){
+                tile.addPlayer("Archeoloog");
+            }
+            if(s.contains("Klimmer")){
+                tile.addPlayer("Klimmer");
+            }
+            if(s.contains("Verkenner")){
+                tile.addPlayer("Verkenner");
+            }
+            if(s.contains("Waterdrager")){
+                tile.addPlayer("Waterdrager");
+            }
             tile.setLocation(x, y);
             tile.setDiscovered(discovered);
             tile.setHasZonneSchild(hasZonneSchild);
@@ -387,6 +404,7 @@ public class TileController {
             }
             boolean hasZonneSchild = Boolean.getBoolean(tileFB.get("hasZonneSchild").toString());
             int aantalZand = Integer.valueOf(tileFB.get("aantalZandTegels").toString());
+
 
             switch (variant){
                 case "PART":
@@ -413,6 +431,21 @@ public class TileController {
                 case "START":
                     tile = new StartTile(stringToEquipment(tileFB.get("equipment").toString()));
                     break;
+            }
+
+            String s = tileFB.get("Players").toString();
+
+            if(s.contains("Archeoloog")){
+                tile.addPlayer("Archeoloog");
+            }
+            if(s.contains("Klimmer")){
+                tile.addPlayer("Klimmer");
+            }
+            if(s.contains("Verkenner")){
+                tile.addPlayer("Verkenner");
+            }
+            if(s.contains("Waterdrager")){
+                tile.addPlayer("Waterdrager");
             }
 
             tile.setLocation(x, y);

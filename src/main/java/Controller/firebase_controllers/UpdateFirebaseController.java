@@ -16,12 +16,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * @author Jason
+ *
+ */
+
 public class UpdateFirebaseController {
     private static UpdateFirebaseController updateFirebaseController;
     private StaticData staticData;
     private PlayerController playerController;
     private StormController stormController;
     private TileController tc;
+    private boolean start = false;
 
     private boolean startGame = false;
 
@@ -41,6 +47,7 @@ public class UpdateFirebaseController {
     }
 
     public void updateFirebase(){
+        start = false;
         stormController = StormController.getInstance();
         playerController = PlayerController.getInstance();
         tc = TileController.getInstance();
@@ -83,12 +90,13 @@ public class UpdateFirebaseController {
         data.put("onderdelen", makeOnderdelenMap());
 
         data.put("Selectable_classes", myObject);
-        if (counter == 2){
+       /* if (counter == 2){
             counter = 0;
-        }
-        data.put("activePlayer", testSpelers[counter]);
-        counter++;
-//        data.put("activePlayer", "Archeoloog");
+        }*/
+        data.put("activePlayer", activePlayer);
+
+        //counter++;
+//         data.put("activePlayer", "Archeoloog");
         (FirebaseService.getInstance()).addSpel(staticData.getRoomName(), data);
 
     }
@@ -149,13 +157,15 @@ public class UpdateFirebaseController {
         ArrayList<Tile> randomTiles = tc.getTiles();
         Map<String, Object> tilesMap = new HashMap<>();
         int tileCounter = 0;
-        for (Tile tile : randomTiles){
 
+        for (Tile tile : randomTiles){
+            boolean start = false;
             Map<String, Object> tile0 = new HashMap<>();
 
             tile0.put("discovered", tile.isDiscovered());
             tile0.put("aantalZandTegels", tile.getZand());
             tile0.put("hasZonneSchild", tile.hasZonneSchild());
+
             tile0.put("x", tile.getX());
             tile0.put("y", tile.getY());
             String variant = tile.getVariant().toString();
@@ -174,7 +184,23 @@ public class UpdateFirebaseController {
                     break;
                 case "START":
                     tile0.put("equipment", ((StartTile)tile).getEquipment().getEquipmentType().toString());
+
+
+                    start = true;
                     break;
+            }
+
+            if(!start || !this.start){
+                System.out.println("lllllloooooo");
+                tile0.put("Players", tile.getPlayers());
+            }else{
+                System.out.print("kkkkkkkkkkkkkkkgggggggggggg");
+                ArrayList<String> a = new ArrayList<>();
+                a.add("Archeoloog");
+                a.add("Klimmer");
+                a.add("Verkenner");
+                a.add("Waterdrager");
+                tile0.put("Players", a);
             }
 
             Map<String, Object> spelersMap = new HashMap<>();
@@ -213,6 +239,7 @@ public class UpdateFirebaseController {
     }
 
     public void makeFirebase(String roomName){
+        start = true;
         Map<String, Object> players = new HashMap<String, Object>();
 
         tc = new TileController();
