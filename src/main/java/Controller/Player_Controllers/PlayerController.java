@@ -200,30 +200,122 @@ public class PlayerController {
     }
 
     public void moveNoordOost(){
-        if(player.getX() < 4 && player.getY() > 0 && player.actiesOver()) {
+        if(player.getX() < 4 && player.getY() > 0 && player.actiesOver()){
             Tile destTile = tileController.getTileByLocation((player.getY() - 1), (player.getX() + 1));
+
+            int x = 0;
+            int y = 0;
+            for(Tile tile : tileController.getTiles()){
+
+                ArrayList<String>players = tile.getPlayers();
+                for(int i = 0; i < players.size(); i++){
+                    if(this.player.getClassName().equals(players.get(i))){
+                        x = tile.getX();
+                        y = tile.getY();
+                        tile.removePlayer(players.get(i));
+                    }
+                }
+
+            }
+            for(Tile tile : tileController.getTiles()){
+                if(tile.getY() == (y - 1) && tile.getX() == (x + 1) ){
+                    tile.addPlayer(player.getClassName());
+                }
+            }
             moveSchuinLogica(destTile, Player.RichtingenSchuin.NOORDOOST);
+
+            tileController.getTileByLocation((player.getY() + 1), (player.getX() - 1)).notifyAllObservers();
+            tileController.getTileByLocation(player.getY(), player.getX()).notifyAllObservers();
         }
     }
 
     public void moveZuidOost(){
-        if(player.getX() < 4 && player.getY() < 4 && player.actiesOver()) {
+        if(player.getX() < 4 && player.getY() < 4 && player.actiesOver()){
             Tile destTile = tileController.getTileByLocation((player.getY() + 1), (player.getX() + 1));
+
+            int x = 0;
+            int y = 0;
+            for(Tile tile : tileController.getTiles()){
+
+                ArrayList<String>players = tile.getPlayers();
+                for(int i = 0; i < players.size(); i++){
+                    if(this.player.getClassName().equals(players.get(i))){
+                        x = tile.getX();
+                        y = tile.getY();
+                        tile.removePlayer(players.get(i));
+                    }
+                }
+
+            }
+            for(Tile tile : tileController.getTiles()){
+                if(tile.getY() == (y + 1) && tile.getX() == (x + 1) ){
+                    tile.addPlayer(player.getClassName());
+                }
+            }
             moveSchuinLogica(destTile, Player.RichtingenSchuin.ZUIDOOST);
+
+            tileController.getTileByLocation((player.getY() - 1), (player.getX() - 1)).notifyAllObservers();
+            tileController.getTileByLocation(player.getY(), player.getX()).notifyAllObservers();
         }
     }
 
     public void moveZuidWest(){
-        if(player.getX() > 0 && player.getY() < 4 && player.actiesOver()) {
+        if(player.getX() > 0 && player.getY() < 4 && player.actiesOver()){
             Tile destTile = tileController.getTileByLocation((player.getY() + 1), (player.getX() - 1));
+
+            int x = 0;
+            int y = 0;
+            for(Tile tile : tileController.getTiles()){
+
+                ArrayList<String>players = tile.getPlayers();
+                for(int i = 0; i < players.size(); i++){
+                    if(this.player.getClassName().equals(players.get(i))){
+                        x = tile.getX();
+                        y = tile.getY();
+                        tile.removePlayer(players.get(i));
+                    }
+                }
+
+            }
+            for(Tile tile : tileController.getTiles()){
+                if(tile.getY() == (y + 1) && tile.getX() == (x - 1) ){
+                    tile.addPlayer(player.getClassName());
+                }
+            }
             moveSchuinLogica(destTile, Player.RichtingenSchuin.ZUIDWEST);
+
+            tileController.getTileByLocation((player.getY() - 1), (player.getX() + 1)).notifyAllObservers();
+            tileController.getTileByLocation(player.getY(), player.getX()).notifyAllObservers();
         }
     }
 
     public void moveNoordWest(){
         if(player.getX() > 0 && player.getY() > 0 && player.actiesOver()) {
             Tile destTile = tileController.getTileByLocation((player.getY() - 1), (player.getX() - 1));
+
+            int x = 0;
+            int y = 0;
+            for(Tile tile : tileController.getTiles()){
+
+                ArrayList<String>players = tile.getPlayers();
+                for(int i = 0; i < players.size(); i++){
+                    if(this.player.getClassName().equals(players.get(i))){
+                        x = tile.getX();
+                        y = tile.getY();
+                        tile.removePlayer(players.get(i));
+                    }
+                }
+
+            }
+            for(Tile tile : tileController.getTiles()){
+                if(tile.getY() == (y - 1) && tile.getX() == (x - 1) ){
+                    tile.addPlayer(player.getClassName());
+                }
+            }
             moveSchuinLogica(destTile, Player.RichtingenSchuin.NOORDWEST);
+
+            tileController.getTileByLocation((player.getY() + 1), (player.getX() + 1)).notifyAllObservers();
+            tileController.getTileByLocation(player.getY(), player.getX()).notifyAllObservers();
         }
     }
 

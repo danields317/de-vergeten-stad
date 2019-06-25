@@ -90,13 +90,10 @@ public class UpdateFirebaseController {
         data.put("onderdelen", makeOnderdelenMap());
 
         data.put("Selectable_classes", myObject);
-       /* if (counter == 2){
-            counter = 0;
-        }*/
+
         data.put("activePlayer", activePlayer);
 
-        //counter++;
-//         data.put("activePlayer", "Archeoloog");
+//         data.put("activePlayer", "Verkenner");
         (FirebaseService.getInstance()).addSpel(staticData.getRoomName(), data);
 
     }

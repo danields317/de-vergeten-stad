@@ -250,19 +250,12 @@ public class Player implements PlayerObservable{
 		StaticData staticData = StaticData.getInstance();
 		Object classes = ((Map) staticData.getRoomInfo()).get("Selectable_classes");
 
-
 		for(int i = 0; i < ((Map) classes).size(); i++) {
 			Object singeClass = ((Map) classes).get(Integer.toString(i));
 			if(((((Map) singeClass).get("name")).toString()).equals(staticData.getClassName())){
 				water = (((Long)(((Map) singeClass).get("water"))).intValue());
-
 			}
-
-
 		}
-
-
-
 	}
 
 	public void getTweeActies(){
