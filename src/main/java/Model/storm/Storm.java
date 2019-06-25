@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * De Storm
+ * De Storm model
  *
  * @author ryanr
  * @author daniel
