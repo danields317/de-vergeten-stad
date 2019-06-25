@@ -344,12 +344,10 @@ public class TileController {
         Map<String, Object> tilesMap = (Map)((Map) roominfo).get("tiles");
         updateTilesFromFB(tilesMap);
 
-        Platform.runLater(() -> {
-            Map<String, Object> onderdelenMap = (Map)((Map) roominfo).get("onderdelen");
-            updateOnderdelenFromFB(onderdelenMap);
-            checkOnderdelenSpawned();
-            despawnOnderdelen();
-        });
+        Map<String, Object> onderdelenMap = (Map)((Map) roominfo).get("onderdelen");
+        updateOnderdelenFromFB(onderdelenMap);
+        checkOnderdelenSpawned();
+        despawnOnderdelen();
     }
 
     private void updateOnderdelenFromFB(Map<String, Object> onderdelenMap){

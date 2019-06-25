@@ -84,14 +84,16 @@ public class EquipmentController {
     }
 
     public void gebruikJetpack(int x, int y){
-        Tile currentTile = tileController.getTileByLocation(playerController.getPlayer().getY(), playerController.getPlayer().getX());
+        Tile currentTile = playerController.getTilelocation();
         Tile landTile = tileController.getTileByLocation(y, x);
         if(currentTile.getZand() < 2 && landTile.getZand() < 2){
-            currentTile.removeSpeler(playerController.getPlayer());
-            landTile.addSpeler(playerController.getPlayer());
+            currentTile.removePlayer(playerController.getPlayer().getClassName());
+            landTile.addPlayer(playerController.getPlayer().getClassName());
             playerController.getPlayer().setLocatie(landTile.getX(), landTile.getY());
             setJetpackStatus();
             playerController.getPlayer().removeEquipment(Equipment.EquipmentKaarten.JETPACK);
+
+            currentTile.notifyAllObservers();
         }
     }
 
