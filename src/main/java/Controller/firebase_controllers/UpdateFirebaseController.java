@@ -95,7 +95,7 @@ public class UpdateFirebaseController {
         }*/
         data.put("activePlayer", activePlayer);
 
-        //counter++;
+        //  counter++;
 //         data.put("activePlayer", "Archeoloog");
         (FirebaseService.getInstance()).addSpel(staticData.getRoomName(), data);
 
