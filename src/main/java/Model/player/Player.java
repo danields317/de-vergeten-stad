@@ -3,6 +3,7 @@ package Model.player;
 import Controller.Equipment_Controllers.EquipmentController;
 import Controller.Player_Controllers.FunctieController;
 import Model.data.StaticData;
+import firebase.FirebaseService;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import Model.Tiles.Tile;
@@ -170,13 +171,12 @@ public class Player implements PlayerObservable{
 
 	}
 
-	public void subtractWater(int water ) {
+	public void subtractWater(int water) {
 		
 		this.water = this.water - water;
 
 		if (this.water < 0) {
 			(FunctieController.getInstance()).endLose();
-			this.water++;
 		}
 		notifyAllObservers();
 	}

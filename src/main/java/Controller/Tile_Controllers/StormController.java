@@ -131,9 +131,13 @@ public class StormController {
                         beweegStorm(((StormEventBeweging) stormEvent).richting, ((StormEventBeweging) stormEvent).stappen);
                         break;
                     case BRANDT:
-                        Controller controller = Controller.getInstance();
-                        controller.zonBrand();
-                        (FunctieController.getInstance()).updateInfo();
+                        if (checkPlayerWater()){
+                            (FunctieController.getInstance()).endLose();
+                        } else {
+                            Controller controller = Controller.getInstance();
+                            controller.zonBrand();
+                            (FunctieController.getInstance()).updateInfo();
+                        }
                         break;
                     case STERKER:
                         storm.stormWordtSterker();
@@ -150,6 +154,17 @@ public class StormController {
         }
         storm.notifyAllObservers();
         tileController.checkZandCounter();
+    }
+
+    private boolean checkPlayerWater(){
+        StaticData staticData = StaticData.getInstance();
+        Map<String, Object> gebruikers = (Map)((Map)staticData.getRoomInfo()).get("Selectable_classes");
+        for (int i = 0; i < 4; i++){
+            if (((Map)(gebruikers.get(Integer.toString(i)))).get("water").equals("0")){
+                return true;
+            }
+        }
+        return false;
     }
 
     /**

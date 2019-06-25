@@ -79,11 +79,16 @@ public class FirebaseService{
                         (StormController.getInstance()).update();
 
                         SpeelbordView.getInstance().loadSpelBord();
-                        ViewManager.getInstance().update();
+
+                        ViewManager viewManager = ViewManager.getInstance();
+
+                        viewManager.update();
 
                         StaticData staticData = StaticData.getInstance();
                         if (((String)((Map) staticData.getRoomInfo()).get("activePlayer")).equals(staticData.getClassName()) ){
-                            ViewManager.getInstance().enableButtons();
+                            viewManager.enableButtons();
+                        } else {
+                            viewManager.disableButtons();
                         }
                     });
 
