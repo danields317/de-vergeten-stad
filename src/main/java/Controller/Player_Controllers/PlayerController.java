@@ -16,6 +16,15 @@ import observers.WaterObserver;
 import java.util.ArrayList;
 import java.util.Map;
 
+/**
+ *
+ * @author Jason
+ * @author ryan
+ * @author daniël
+ * @version 1.0.0
+ * @since 25-06-2019
+ */
+
 public class PlayerController {
 
 
@@ -81,23 +90,12 @@ public class PlayerController {
 
     public void moveNoord(boolean isKlimmer){
         if(player.getY() > 0 && player.actiesOver()){
-            int x = 0;
-            int y = 0;
             Tile tileAbove = tileController.getTileByLocation((player.getY() - 1), player.getX());
-            for(Tile tile : tileController.getTiles()){
+            Tile tile = getTilelocation();
+            tile.removePlayer(this.player.getClassName());
 
-                ArrayList<String>players = tile.getPlayers();
-                for(int i = 0; i < players.size(); i++){
-                    if(this.player.getClassName().equals(players.get(i))){
-                        x = tile.getX();
-                        y = tile.getY();
-                        tile.removePlayer(players.get(i));
-                    }
-                }
-
-            }
-            for(Tile tile : tileController.getTiles()){
-                if(tile.getY() == (y - 1) && tile.getX() == x ){
+            for(Tile atile : tileController.getTiles()){
+                if(atile.getY() == (tile.getY() - 1) && atile.getX() == tile.getX() ){
                     tile.addPlayer(player.getClassName());
                 }
             }
@@ -112,22 +110,11 @@ public class PlayerController {
     public void moveZuid(boolean isKlimmer){
         if(player.getY() < 4 && player.actiesOver()){
             Tile tileBeneath = tileController.getTileByLocation((player.getY() + 1), player.getX());
-            int x = 0;
-            int y = 0;
-            for(Tile tile : tileController.getTiles()){
+            Tile tile = getTilelocation();
+            tile.removePlayer(this.player.getClassName());
 
-                ArrayList<String>players = tile.getPlayers();
-                for(int i = 0; i < players.size(); i++){
-                    if(this.player.getClassName().equals(players.get(i))){
-                        x = tile.getX();
-                        y = tile.getY();
-                        tile.removePlayer(players.get(i));
-                    }
-                }
-
-            }
-            for(Tile tile : tileController.getTiles()){
-                if(tile.getY() == (y + 1) && tile.getX() == x ){
+            for(Tile atile : tileController.getTiles()){
+                if(atile.getY() == (tile.getY() + 1) && atile.getX() == tile.getX() ){
                     tile.addPlayer(player.getClassName());
                 }
             }
@@ -142,23 +129,11 @@ public class PlayerController {
     public void moveOost(boolean isKlimmer){
         if(player.getX() < 4 && player.actiesOver()){
             Tile tileRight = tileController.getTileByLocation(player.getY(), (player.getX() + 1));
+            Tile tile = getTilelocation();
+            tile.removePlayer(this.player.getClassName());
 
-            int x = 0;
-            int y = 0;
-            for(Tile tile : tileController.getTiles()){
-
-                ArrayList<String>players = tile.getPlayers();
-                for(int i = 0; i < players.size(); i++){
-                    if(this.player.getClassName().equals(players.get(i))){
-                        x = tile.getX();
-                        y = tile.getY();
-                        tile.removePlayer(players.get(i));
-                    }
-                }
-
-            }
-            for(Tile tile : tileController.getTiles()){
-                if(tile.getY() == y  && tile.getX() == (x + 1)){
+            for(Tile atile : tileController.getTiles()){
+                if(atile.getY() == tile.getY() && atile.getX() == (tile.getX() + 1) ){
                     tile.addPlayer(player.getClassName());
                 }
             }
@@ -172,23 +147,11 @@ public class PlayerController {
     public void moveWest(boolean isKlimmer){
         if(player.getX() > 0 && player.actiesOver()){
             Tile tileLeft = tileController.getTileByLocation(player.getY(), (player.getX() -  1));
+            Tile tile = getTilelocation();
+            tile.removePlayer(this.player.getClassName());
 
-            int x = 0;
-            int y = 0;
-            for(Tile tile : tileController.getTiles()){
-
-                ArrayList<String>players = tile.getPlayers();
-                for(int i = 0; i < players.size(); i++){
-                    if(this.player.getClassName().equals(players.get(i))){
-                        x = tile.getX();
-                        y = tile.getY();
-                        tile.removePlayer(players.get(i));
-                    }
-                }
-
-            }
-            for(Tile tile : tileController.getTiles()){
-                if(tile.getY() == y && tile.getX() == (x - 1) ){
+            for(Tile atile : tileController.getTiles()){
+                if(atile.getY() == tile.getY() && atile.getX() == (tile.getX() - 1) ){
                     tile.addPlayer(player.getClassName());
                 }
             }
@@ -203,22 +166,11 @@ public class PlayerController {
         if(player.getX() < 4 && player.getY() > 0 && player.actiesOver()){
             Tile destTile = tileController.getTileByLocation((player.getY() - 1), (player.getX() + 1));
 
-            int x = 0;
-            int y = 0;
-            for(Tile tile : tileController.getTiles()){
+            Tile tile = getTilelocation();
+            tile.removePlayer(this.player.getClassName());
 
-                ArrayList<String>players = tile.getPlayers();
-                for(int i = 0; i < players.size(); i++){
-                    if(this.player.getClassName().equals(players.get(i))){
-                        x = tile.getX();
-                        y = tile.getY();
-                        tile.removePlayer(players.get(i));
-                    }
-                }
-
-            }
-            for(Tile tile : tileController.getTiles()){
-                if(tile.getY() == (y - 1) && tile.getX() == (x + 1) ){
+            for(Tile atile : tileController.getTiles()){
+                if(atile.getY() == (tile.getY() - 1) && atile.getX() == (tile.getX() + 1) ){
                     tile.addPlayer(player.getClassName());
                 }
             }
@@ -233,22 +185,11 @@ public class PlayerController {
         if(player.getX() < 4 && player.getY() < 4 && player.actiesOver()){
             Tile destTile = tileController.getTileByLocation((player.getY() + 1), (player.getX() + 1));
 
-            int x = 0;
-            int y = 0;
-            for(Tile tile : tileController.getTiles()){
+            Tile tile = getTilelocation();
+            tile.removePlayer(this.player.getClassName());
 
-                ArrayList<String>players = tile.getPlayers();
-                for(int i = 0; i < players.size(); i++){
-                    if(this.player.getClassName().equals(players.get(i))){
-                        x = tile.getX();
-                        y = tile.getY();
-                        tile.removePlayer(players.get(i));
-                    }
-                }
-
-            }
-            for(Tile tile : tileController.getTiles()){
-                if(tile.getY() == (y + 1) && tile.getX() == (x + 1) ){
+            for(Tile atile : tileController.getTiles()){
+                if(atile.getY() == (tile.getY() + 1) && atile.getX() == (tile.getX() + 1) ){
                     tile.addPlayer(player.getClassName());
                 }
             }
@@ -263,22 +204,11 @@ public class PlayerController {
         if(player.getX() > 0 && player.getY() < 4 && player.actiesOver()){
             Tile destTile = tileController.getTileByLocation((player.getY() + 1), (player.getX() - 1));
 
-            int x = 0;
-            int y = 0;
-            for(Tile tile : tileController.getTiles()){
+            Tile tile = getTilelocation();
+            tile.removePlayer(this.player.getClassName());
 
-                ArrayList<String>players = tile.getPlayers();
-                for(int i = 0; i < players.size(); i++){
-                    if(this.player.getClassName().equals(players.get(i))){
-                        x = tile.getX();
-                        y = tile.getY();
-                        tile.removePlayer(players.get(i));
-                    }
-                }
-
-            }
-            for(Tile tile : tileController.getTiles()){
-                if(tile.getY() == (y + 1) && tile.getX() == (x - 1) ){
+            for(Tile atile : tileController.getTiles()){
+                if(atile.getY() == (tile.getY() + 1) && atile.getX() == (tile.getX() - 1) ){
                     tile.addPlayer(player.getClassName());
                 }
             }
@@ -292,23 +222,11 @@ public class PlayerController {
     public void moveNoordWest(){
         if(player.getX() > 0 && player.getY() > 0 && player.actiesOver()) {
             Tile destTile = tileController.getTileByLocation((player.getY() - 1), (player.getX() - 1));
+            Tile tile = getTilelocation();
+            tile.removePlayer(this.player.getClassName());
 
-            int x = 0;
-            int y = 0;
-            for(Tile tile : tileController.getTiles()){
-
-                ArrayList<String>players = tile.getPlayers();
-                for(int i = 0; i < players.size(); i++){
-                    if(this.player.getClassName().equals(players.get(i))){
-                        x = tile.getX();
-                        y = tile.getY();
-                        tile.removePlayer(players.get(i));
-                    }
-                }
-
-            }
-            for(Tile tile : tileController.getTiles()){
-                if(tile.getY() == (y - 1) && tile.getX() == (x - 1) ){
+            for(Tile atile : tileController.getTiles()){
+                if(atile.getY() == (tile.getY() - 1) && atile.getX() == (tile.getX() - 1) ){
                     tile.addPlayer(player.getClassName());
                 }
             }
@@ -353,64 +271,97 @@ public class PlayerController {
 
     public void digHere(boolean isArcheoloog){
         if (player.actiesOver()){
-            Tile locatie = tileController.getTileByLocation(player.getY(), player.getX());
-            digLogica(locatie, isArcheoloog);
+            Tile tile = getTilelocation();
+            digLogica(tile, isArcheoloog);
         }
     }
 
     public void digNoord(boolean isArcheoloog){
         if(player.getY() > 0 && player.actiesOver()) {
-            Tile locatie = tileController.getTileByLocation((player.getY() - 1), player.getX());
-            digLogica(locatie, isArcheoloog);
+            Tile tile = getTilelocation();
+            for(Tile atile : tileController.getTiles()){
+                if(atile.getY() == (tile.getY()-1) && atile.getX() == tile.getX() ){
+                    digLogica(atile, isArcheoloog);
+                }
+            }
         }
     }
 
     public void digZuid(boolean isArcheoloog){
         if(player.getY() < 4 && player.actiesOver()) {
-            Tile locatie = tileController.getTileByLocation((player.getY() + 1), player.getX());
-            digLogica(locatie, isArcheoloog);
+            Tile tile = getTilelocation();
+            for(Tile atile : tileController.getTiles()){
+                if(atile.getY() == (tile.getY() + 1) && atile.getX() == tile.getX() ){
+                    digLogica(atile, isArcheoloog);
+                }
+            }
         }
     }
 
     public void digOost(boolean isArcheoloog){
         if(player.getX() < 4 && player.actiesOver()) {
-            Tile locatie = tileController.getTileByLocation(player.getY(), (player.getX() + 1));
-            digLogica(locatie, isArcheoloog);
+            Tile tile = getTilelocation();
+            for(Tile atile : tileController.getTiles()){
+                if(atile.getY() == tile.getY() && atile.getX() == (tile.getX()+ 1) ){
+                    digLogica(atile, isArcheoloog);
+                }
+            }
         }
     }
 
     public void digWest(boolean isArcheoloog){
         if(player.getX() > 0 && player.actiesOver()) {
-            Tile locatie = tileController.getTileByLocation(player.getY(), (player.getX() - 1));
-            digLogica(locatie, isArcheoloog);
+            Tile tile = getTilelocation();
+            for(Tile atile : tileController.getTiles()){
+                if(atile.getY() == tile.getY() && atile.getX() == (tile.getX() - 1) ){
+                    digLogica(atile, isArcheoloog);
+                }
+            }
         }
     }
 
     public void digNoordOost(){
         if(player.getX() < 4 && player.getY() > 0 && player.actiesOver()){
-            Tile locatie = tileController.getTileByLocation((player.getY() - 1), (player.getX() +1));
-            digLogica(locatie, false);
+            Tile tile = getTilelocation();
+            for(Tile atile : tileController.getTiles()){
+                if(atile.getY() == (tile.getY()-1) && atile.getX() == (tile.getX() + 1 )){
+                    digLogica(atile, false);
+                }
+            }
         }
     }
 
     public void digZuidOost(){
         if(player.getX() < 4 && player.getY() < 4 && player.actiesOver()) {
-            Tile locatie = tileController.getTileByLocation((player.getY() + 1), (player.getX() + 1));
-            digLogica(locatie, false);
+            Tile tile = getTilelocation();
+            for(Tile atile : tileController.getTiles()){
+                if(atile.getY() == (tile.getY()+1) && atile.getX() == (tile.getX() + 1 )){
+                    digLogica(atile, false);
+                }
+            }
         }
     }
 
     public void digZuidWest(){
         if(player.getX() > 0 && player.getY() < 4 && player.actiesOver()) {
-            Tile locatie = tileController.getTileByLocation((player.getY() + 1), (player.getX() - 1));
-            digLogica(locatie, false);
+            Tile tile = getTilelocation();
+            for(Tile atile : tileController.getTiles()){
+                if(atile.getY() == (tile.getY()+1) && atile.getX() == (tile.getX() - 1 )){
+                    digLogica(atile, false);
+                }
+            }
+
         }
     }
 
     public void digNoordWest(){
         if(player.getX() > 0 && player.getY() > 0 && player.actiesOver()) {
-            Tile locatie = tileController.getTileByLocation((player.getY() - 1), (player.getX() - 1));
-            digLogica(locatie, false);
+            Tile tile = getTilelocation();
+            for(Tile atile : tileController.getTiles()){
+                if(atile.getY() == (tile.getY()-1) && atile.getX() == (tile.getX() - 1 )){
+                    digLogica(atile, false);
+                }
+            }
         }
     }
 
@@ -504,6 +455,21 @@ public class PlayerController {
             return Player.SpelerKlassen.KLIMMER;
         }
         return null;
+    }
+
+    public Tile getTilelocation(){
+        Tile selectedTile = new Tile();
+        for(Tile tile : tileController.getTiles()){
+
+            ArrayList<String>players = tile.getPlayers();
+            for(int i = 0; i < players.size(); i++){
+                if(this.player.getClassName().equals(players.get(i))){
+                    selectedTile = tile;
+                }
+            }
+
+        }
+        return selectedTile;
     }
 
     public boolean checkPlayerWater(){

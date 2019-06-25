@@ -181,6 +181,8 @@ public class UpdateFirebaseController {
                     break;
                 case "START":
                     tile0.put("equipment", ((StartTile)tile).getEquipment().getEquipmentType().toString());
+
+
                     start = true;
                     break;
             }

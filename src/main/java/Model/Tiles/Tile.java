@@ -29,6 +29,9 @@ public class Tile implements BordObservable{
     private int x;
     private int y;
 
+    public Tile(){
+
+    }
     public Tile(String undiscoveredImage, String discoveredImage, Varianten variant){
         this.undiscoveredImage = new Image(undiscoveredImage);
         this.discoveredImage = new Image(discoveredImage);
