@@ -9,6 +9,7 @@ import Controller.Player_Controllers.PlayerController;
 import Controller.Tile_Controllers.StormController;
 import Controller.Tile_Controllers.TileController;
 import Controller.firebase_controllers.ListenUpdateController;
+import Model.data.StaticData;
 import Model.player.Player;
 import View.ViewManager;
 import View.bord_views.SpeelbordView;
@@ -78,7 +79,17 @@ public class FirebaseService{
                         (StormController.getInstance()).update();
 
                         SpeelbordView.getInstance().loadSpelBord();
-                        ViewManager.getInstance().update();
+
+                        ViewManager viewManager = ViewManager.getInstance();
+
+                        viewManager.update();
+
+                        StaticData staticData = StaticData.getInstance();
+                        if (((String)((Map) staticData.getRoomInfo()).get("activePlayer")).equals(staticData.getClassName()) ){
+                            viewManager.enableButtons();
+                        } else {
+                            viewManager.disableButtons();
+                        }
                     });
 
                     System.out.println("Current data: " + snapshot.getData());

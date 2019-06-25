@@ -18,9 +18,11 @@ import java.util.Map;
 import java.util.Random;
 
 /**
+ * De StormController klasse zorgt ervoor dat de storm functies uitvoert aan de hand van StormEvents.
+ * Ook update deze klasse de storm als er een update is in FireBase.
+ *
  * @author ryan
  */
-
 public class StormController {
 
     static StormController stormcontroller;
@@ -34,6 +36,8 @@ public class StormController {
     TileController tileController;
 
     private boolean hasMadeEvents = false;
+
+    private int aantalStormEvents = 30;
 
     public StormController(){
         storm = new Storm();
@@ -52,10 +56,10 @@ public class StormController {
 
     /**
      * Deze functie maakt alle stormevents aan die kunnen gebeuren.
-     * Volgens de spel regels zijn er 31 stormevents in totaal dus daarom loopt de for loop tot 31.
+     * De for loop loopt tot en met 30 omdat er 30 StormEvents zijn.
      */
     private void makeEvents(){
-        for (int i = 0; i < 31; i++){
+        for (int i = 0; i <= aantalStormEvents; i++){
             if (i < 4) {
                 stormEvents.add(new StormEvent(StormEvent.Namen.BRANDT));
             }else if (i < 7){
@@ -88,6 +92,13 @@ public class StormController {
         }
     }
 
+    /**
+     * Deze functie randomized een ArrayList die hij mee krijgt.
+     * De functie is recusrsive.
+     *
+     * @param stormEvents De ArrayList die wordt gerandomized, bestaande uit StormEvents.
+     * @auhtor ryan
+     */
     private void randomizeEvents(ArrayList<StormEvent> stormEvents){
 
         if (stormEvents.isEmpty()){
@@ -101,6 +112,15 @@ public class StormController {
         randomizeEvents(stormEvents);
     }
 
+    /**
+     * Deze functie loopt door alle StormEvents en voert aan de ahnd van het type event een actie uit.
+     *
+     * Er zijn 3 cases die andere functionaliteiten van de storm uitvoeren.
+     *
+     * De else statement reset de stapelCounter en randomized de stormEvents opnieuw.
+     *
+     * @author ryan
+     */
     public void voerStormEventsUit(){
         int tmpSterkte = storm.getSterkte();
         for (int i = 0; i < tmpSterkte; i++){
@@ -111,9 +131,13 @@ public class StormController {
                         beweegStorm(((StormEventBeweging) stormEvent).richting, ((StormEventBeweging) stormEvent).stappen);
                         break;
                     case BRANDT:
-                        Controller controller = Controller.getInstance();
-                        controller.zonBrand();
-                        (FunctieController.getInstance()).updateInfo();
+                        if (checkPlayerWater()){
+                            (FunctieController.getInstance()).endLose();
+                        } else {
+                            Controller controller = Controller.getInstance();
+                            controller.zonBrand();
+                            (FunctieController.getInstance()).updateInfo();
+                        }
                         break;
                     case STERKER:
                         storm.stormWordtSterker();
@@ -129,8 +153,26 @@ public class StormController {
             }
         }
         storm.notifyAllObservers();
+        tileController.checkZandCounter();
     }
 
+    private boolean checkPlayerWater(){
+        StaticData staticData = StaticData.getInstance();
+        Map<String, Object> gebruikers = (Map)((Map)staticData.getRoomInfo()).get("Selectable_classes");
+        for (int i = 0; i < 4; i++){
+            if (((Map)(gebruikers.get(Integer.toString(i)))).get("water").equals("0")){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Deze functie is een door geef luik om de storm een bepaalde richting op te laten bewegen.
+     *
+     * @param richting De richting die de storm op beweegt.
+     * @param stappen Het aantal stappen dat de storm beweegt.
+     */
     private void beweegStorm(StormEventBeweging.Richtingen richting, StormEventBeweging.Stappen stappen){
         switch (richting){
             case NOORD:
@@ -167,6 +209,11 @@ public class StormController {
 
     public void update(){storm.notifyAllObservers();}
 
+    /**
+     * Deze functie update de storm, de stormevents en de stapelCounter met informatie uit FireBase.
+     *
+     * @author ryan
+     */
     public void updateData(){
         StaticData staticData = StaticData.getInstance();
         Object roominfo = staticData.getRoomInfo();
@@ -181,9 +228,16 @@ public class StormController {
         setStapelCounter(Integer.valueOf(stormMap.get("stapelCounter").toString()));
     }
 
+    /**
+     * Deze functie intialiseerd stormEvents die hij binnen krijgt vanuit FireBase.
+     * De for loop gaat tot en met 30 omdat er in totaal 30 stormEvents zijn.
+     *
+     * @param stormEvents Een Map<String, Object> waarin alle stormEvents zitten.
+     * @author ryan
+     */
     private void makeRandomStormEventsFB(Map<String, Object> stormEvents){
         ArrayList<StormEvent> events = new ArrayList<>();
-        for (int i = 0; i < 31; i++){
+        for (int i = 0; i <= aantalStormEvents; i++){
             if (stormEvents.get(Integer.toString(i)).equals("BRANDT")){
                 events.add(new StormEvent(StormEvent.Namen.BRANDT));
             } else if (stormEvents.get(Integer.toString(i)).equals("STERKER")){
@@ -224,5 +278,6 @@ public class StormController {
     public void setStapelCounter(int counter){
         this.stapelCounter = counter;
     }
+
 
 }

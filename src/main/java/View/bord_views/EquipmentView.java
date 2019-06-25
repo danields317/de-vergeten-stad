@@ -74,12 +74,12 @@ public class EquipmentView implements PlayerObserver {
         zonneschild.setFitWidth(136);
         zonneschild.setFitHeight(192);
 
-        aardekijkerLabel = new Label();
-        duinkanonLabel = new Label();
-        jetpackLabel = new Label();
-        tijdschakelaarLabel = new Label();
-        waterreserveLabel = new Label();
-        zonneschildLabel = new Label();
+        aardekijkerLabel = new Label("0");
+        duinkanonLabel = new Label("0");
+        jetpackLabel = new Label("0");
+        tijdschakelaarLabel = new Label("0");
+        waterreserveLabel = new Label("0");
+        zonneschildLabel = new Label("0");
 
         ImageView switchknopRight = new ImageView(new Image("Buttons/buttonEqRight.png"));
         ImageView switchknopLeft = new ImageView(new Image("/Buttons/buttonEqLeft.png"));

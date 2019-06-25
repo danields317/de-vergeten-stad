@@ -10,9 +10,16 @@ import java.util.List;
 public class Player_Menu implements Player_Menu_Observable {
     private List<Player_Menu_Observer> observers = new ArrayList<Player_Menu_Observer>();
     private StaticData staticData = StaticData.getInstance();
+    String[] players = new String[4];
 
     public void spelerBlokOpbouwen(){
-
+        System.out.println("SpelerBlokOpbouwen : Player_Menu");
+        for (int i = 0; i < 4; i++) {
+//            System.out.println("/Player_Menu/"+i+".png");
+//            players[i] = "/Player_Menu/"+i+".png";
+//            System.out.println("/Player_Menu/"+i+".png");
+        }
+        notifyAllObservers();
     }
 
 //    private GridPane createUpdatedGridPane(LoadBordObservable sb){

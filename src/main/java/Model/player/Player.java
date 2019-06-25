@@ -3,6 +3,7 @@ package Model.player;
 import Controller.Equipment_Controllers.EquipmentController;
 import Controller.Player_Controllers.FunctieController;
 import Model.data.StaticData;
+import firebase.FirebaseService;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import Model.Tiles.Tile;
@@ -33,7 +34,8 @@ public class Player implements PlayerObservable{
 	private int x;
 	private int y;
 
-	public enum Richingen {NOORD, OOST, WEST, ZUID}
+	public enum Richingen {NOORD, OOST, WEST, ZUID};
+	public enum RichtingenSchuin{NOORDOOST, ZUIDOOST, ZUIDWEST, NOORDWEST};
 
 	public enum SpelerKlassen {
 	    ARCHEOLOOG,
@@ -125,10 +127,28 @@ public class Player implements PlayerObservable{
         }
     }
 
+    public void movePlayerSchuin(RichtingenSchuin richting){
+		switch (richting){
+			case NOORDOOST:
+				move(1, -1);
+				break;
+			case ZUIDOOST:
+				move(1, 1);
+				break;
+			case ZUIDWEST:
+				move(-1, 1);
+				break;
+			case NOORDWEST:
+				move(-1, -1);
+				break;
+		}
+	}
+
     private void move(int moveX, int moveY){
 		x = x + moveX;
 		y = y + moveY;
     }
+
 	/////////////////////////////////////// Getters & Setters ///////////////////////////////////////
 	
 	public int getWater() {
@@ -151,13 +171,12 @@ public class Player implements PlayerObservable{
 
 	}
 
-	public void subtractWater(int water ) {
+	public void subtractWater(int water) {
 		
 		this.water = this.water - water;
 
 		if (this.water < 0) {
 			(FunctieController.getInstance()).endLose();
-			this.water++;
 		}
 		notifyAllObservers();
 	}
@@ -231,19 +250,12 @@ public class Player implements PlayerObservable{
 		StaticData staticData = StaticData.getInstance();
 		Object classes = ((Map) staticData.getRoomInfo()).get("Selectable_classes");
 
-
 		for(int i = 0; i < ((Map) classes).size(); i++) {
 			Object singeClass = ((Map) classes).get(Integer.toString(i));
 			if(((((Map) singeClass).get("name")).toString()).equals(staticData.getClassName())){
 				water = (((Long)(((Map) singeClass).get("water"))).intValue());
-
 			}
-
-
 		}
-
-
-
 	}
 
 	public void getTweeActies(){

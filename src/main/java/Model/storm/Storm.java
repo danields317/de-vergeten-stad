@@ -1,5 +1,6 @@
 package Model.storm;
 
+import View.ViewManager;
 import javafx.scene.image.Image;
 import observers.StormObservable;
 import observers.StormObserver;
@@ -9,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * De Storm model regelt het bewegen van de storm en het sterker worden van de storm.
+ * De storm heeft een locatie (x en y) een sterkte en een substerkte.
  *
  * @author ryanr
  * @author daniel
@@ -56,6 +59,10 @@ public class Storm implements StormObservable{
         notifyAllObservers();
     }
 
+    /**
+     * Aan de hand van de subSterkte van de storm wordt bepaald wat de sterkte is.
+     * Dit is aan de hand van het spelregel boekje.
+     */
     public void stormWordtSterker(){
         subSterkte++;
         if (subSterkte < 7){
@@ -66,7 +73,9 @@ public class Storm implements StormObservable{
             sterkte = 5;
         }else if (subSterkte < 16){
             sterkte = 6;
-        }else return;                        //dood()
+        }else {
+            ViewManager.getInstance().loadEndGame(ViewManager.endConditions.STERFDOORSTORM);
+        }
         notifyAllObservers();
     }
 
