@@ -21,7 +21,7 @@ import java.util.Map;
  * @author Jason
  * @author ryan
  * @author daniël
- * @version 1.0.0
+ * @version 1.0.01
  * @since 25-06-2019
  */
 
@@ -92,11 +92,12 @@ public class PlayerController {
         if(player.getY() > 0 && player.actiesOver()){
             Tile tileAbove = tileController.getTileByLocation((player.getY() - 1), player.getX());
             Tile tile = getTilelocation();
+            System.out.println(tile);
             tile.removePlayer(this.player.getClassName());
 
             for(Tile atile : tileController.getTiles()){
                 if(atile.getY() == (tile.getY() - 1) && atile.getX() == tile.getX() ){
-                    tile.addPlayer(player.getClassName());
+                    atile.addPlayer(player.getClassName());
                 }
             }
 
@@ -115,7 +116,7 @@ public class PlayerController {
 
             for(Tile atile : tileController.getTiles()){
                 if(atile.getY() == (tile.getY() + 1) && atile.getX() == tile.getX() ){
-                    tile.addPlayer(player.getClassName());
+                    atile.addPlayer(player.getClassName());
                 }
             }
 
@@ -134,7 +135,7 @@ public class PlayerController {
 
             for(Tile atile : tileController.getTiles()){
                 if(atile.getY() == tile.getY() && atile.getX() == (tile.getX() + 1) ){
-                    tile.addPlayer(player.getClassName());
+                    atile.addPlayer(player.getClassName());
                 }
             }
             moveLogica(tileRight, Player.Richingen.OOST, isKlimmer);
@@ -152,7 +153,7 @@ public class PlayerController {
 
             for(Tile atile : tileController.getTiles()){
                 if(atile.getY() == tile.getY() && atile.getX() == (tile.getX() - 1) ){
-                    tile.addPlayer(player.getClassName());
+                    atile.addPlayer(player.getClassName());
                 }
             }
             moveLogica(tileLeft, Player.Richingen.WEST, isKlimmer);
@@ -171,7 +172,7 @@ public class PlayerController {
 
             for(Tile atile : tileController.getTiles()){
                 if(atile.getY() == (tile.getY() - 1) && atile.getX() == (tile.getX() + 1) ){
-                    tile.addPlayer(player.getClassName());
+                    atile.addPlayer(player.getClassName());
                 }
             }
             moveSchuinLogica(destTile, Player.RichtingenSchuin.NOORDOOST);
@@ -190,7 +191,7 @@ public class PlayerController {
 
             for(Tile atile : tileController.getTiles()){
                 if(atile.getY() == (tile.getY() + 1) && atile.getX() == (tile.getX() + 1) ){
-                    tile.addPlayer(player.getClassName());
+                    atile.addPlayer(player.getClassName());
                 }
             }
             moveSchuinLogica(destTile, Player.RichtingenSchuin.ZUIDOOST);
@@ -209,7 +210,7 @@ public class PlayerController {
 
             for(Tile atile : tileController.getTiles()){
                 if(atile.getY() == (tile.getY() + 1) && atile.getX() == (tile.getX() - 1) ){
-                    tile.addPlayer(player.getClassName());
+                    atile.addPlayer(player.getClassName());
                 }
             }
             moveSchuinLogica(destTile, Player.RichtingenSchuin.ZUIDWEST);
@@ -227,7 +228,7 @@ public class PlayerController {
 
             for(Tile atile : tileController.getTiles()){
                 if(atile.getY() == (tile.getY() - 1) && atile.getX() == (tile.getX() - 1) ){
-                    tile.addPlayer(player.getClassName());
+                    atile.addPlayer(player.getClassName());
                 }
             }
             moveSchuinLogica(destTile, Player.RichtingenSchuin.NOORDWEST);
@@ -256,7 +257,7 @@ public class PlayerController {
     }
 
     public void tileActies(){
-        Tile locatie = tileController.getTileByLocation(player.getY(), player.getX());
+        Tile locatie = getTilelocation();
         if (!locatie.isDiscovered() && player.actiesOver() && !locatie.hasZand()){
             locatie.discoverTile();
             tileController.useTileDiscoveredAction(player.getX(), player.getY());
