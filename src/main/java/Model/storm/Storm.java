@@ -10,7 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * De Storm model
+ * De Storm model regelt het bewegen van de storm en het sterker worden van de storm.
+ * De storm heeft een locatie (x en y) een sterkte en een substerkte.
  *
  * @author ryanr
  * @author daniel
@@ -58,6 +59,10 @@ public class Storm implements StormObservable{
         notifyAllObservers();
     }
 
+    /**
+     * Aan de hand van de subSterkte van de storm wordt bepaald wat de sterkte is.
+     * Dit is aan de hand van het spelregel boekje.
+     */
     public void stormWordtSterker(){
         subSterkte++;
         if (subSterkte < 7){
@@ -69,7 +74,6 @@ public class Storm implements StormObservable{
         }else if (subSterkte < 16){
             sterkte = 6;
         }else {
-            System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa");
             ViewManager.getInstance().loadEndGame(ViewManager.endConditions.STERFDOORSTORM);
         }
         notifyAllObservers();
