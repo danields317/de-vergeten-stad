@@ -319,7 +319,7 @@ public class TileController {
         return getFinsihTile().getSpelers().size() == 4 && checkAlleOnderdelen();
     }
 
-    public void checkZandCounter() {
+    private void checkZandCounter() {
         int zandCounter = 0;
         //int zandMax = 48;
         int zandMax = 9;
@@ -398,7 +398,9 @@ public class TileController {
             }
             tile.setLocation(x, y);
             tile.setDiscovered(discovered);
-            tile.setHasZonneSchild(hasZonneSchild);
+            if (hasZonneSchild){
+                tile.setZonneSchild();
+            }
             tile.setAantalZandTegels(aantalZand);
         }
     }
