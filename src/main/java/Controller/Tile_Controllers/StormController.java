@@ -222,7 +222,7 @@ public class StormController {
      * Deze functie intialiseerd stormEvents die hij binnen krijgt vanuit FireBase.
      * De for loop gaat tot en met 30 omdat er in totaal 30 stormEvents zijn.
      *
-     * @param stormEvents Een Map<String, Object> waarin alle stormEvents zitten.
+     * @param stormEvents Een Map waarin alle stormEvents zitten.
      * @author ryan
      */
     private void makeRandomStormEventsFB(Map<String, Object> stormEvents){

@@ -249,7 +249,6 @@ public class FirebaseService{
     public static void main(String[] args){
         FirebaseService fb = FirebaseService.getInstance();
         DocumentSnapshot spel = fb.getSpel("test");
-        System.out.println();
     }
 
 }
