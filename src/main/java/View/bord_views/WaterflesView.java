@@ -18,6 +18,7 @@ public class WaterflesView implements WaterObserver {
 
 
     String kaart = "Homescreenempty.png";
+    //String file = "C:\\Users\\mjboere\\workspace\\Hello FX World\\src\\wereldkaart.jpg";
     private double width = 1600;
     private double height = 900;
     private double windowAnchorX = 50;
@@ -29,6 +30,9 @@ public class WaterflesView implements WaterObserver {
 
 
     public WaterflesView(){
+        /*primaryStage = s;
+        //loadPrimaryStageWithGridPane(createInitialGridPane());
+        loadPrimaryStageWithGridPane(createInitialGridPane());*/
         waterController = waterController.getInstance();
         waterController.registerObserver();
         waterController.registerObserver((WaterObserver) this);
@@ -68,6 +72,7 @@ public class WaterflesView implements WaterObserver {
         gridPane.setAlignment(Pos.CENTER);
 
         ImageView waterImage = new ImageView(new Image(sb.getImgWater()));
+//        ImageView waterImage = new ImageView(new Image("/placeholder.png"));
 
         waterImage.prefWidth(240.0);
         waterImage.prefHeight(220.0);
@@ -111,6 +116,11 @@ public class WaterflesView implements WaterObserver {
         gridPane.add(waterImage, 0, 0);
         gridPane.setLayoutX(-62);
         gridPane.setLayoutY(649);
+
+
+
+        //gridPane.add(image, 0, 0);
+        //gridPane.add(scoreText, 1, 0);
         view = gridPane;
 
         return gridPane;

@@ -3,6 +3,7 @@ package Model.Login;
 import Controller.Tile_Controllers.TileController;
 import Model.data.StaticData;
 import View.LoadBordView;
+import com.google.cloud.firestore.QueryDocumentSnapshot;
 import javafx.stage.Stage;
 import observers.*;
 
@@ -11,6 +12,7 @@ import java.util.List;
 
 public class Login implements LoginObservable {
 
+    private int scorePlayer1 = 0; 		// Should be in player model - but out of time;
     private String uName = "me";
     private String pass = "notme";
     private String givenUsername;
@@ -25,6 +27,8 @@ public class Login implements LoginObservable {
         setError("");
         if(kamers.contains(kamerId)){
             return true;
+//        if(kamerId.equals("huilen")){
+//            return true;
         }else{
             return false;
         }
@@ -32,6 +36,9 @@ public class Login implements LoginObservable {
 
     public void laadKamer(String roomId, Stage s){
         new LoadBordView(s , roomId);
+    }
+    public String getScore(){
+        return Integer.toString(scorePlayer1);
     }
 
     public void setError(String error){
@@ -76,6 +83,9 @@ public class Login implements LoginObservable {
             staticData.setUsername(uName);
             LoginCorrect();
             setError("");
+//        if(((this.uName.equals(uName)) && (this.pass.equals(pass))) || true){
+//            LoginCorrect();
+//            setError("");
         }else{
             setError("Password of username klopt niet");
         }

@@ -83,11 +83,13 @@ public class Tile implements BordObservable{
 
     public void setDiscoveredImage(String pad){
         this.discoveredImage = new Image(pad);
+//        setCurrentImage(discoveredImage);
         notifyAllObservers();
     }
 
     public void setUndiscoveredImage(String pad){
         this.undiscoveredImage = new Image(pad);
+//        setCurrentImage(discoveredImage);
         notifyAllObservers();
     }
 

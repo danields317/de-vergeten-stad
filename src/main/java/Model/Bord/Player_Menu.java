@@ -1,7 +1,6 @@
 package Model.Bord;
 
 import Model.data.StaticData;
-import View.bord_views.Player_Menu_View;
 import observers.Player_Menu_Observable;
 import observers.Player_Menu_Observer;
 
@@ -11,6 +10,10 @@ import java.util.List;
 public class Player_Menu implements Player_Menu_Observable {
     private List<Player_Menu_Observer> observers = new ArrayList<Player_Menu_Observer>();
     private StaticData staticData = StaticData.getInstance();
+
+    public void spelerBlokOpbouwen(){
+
+    }
 
     @Override
     public void register(Player_Menu_Observer observer) {

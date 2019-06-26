@@ -1,5 +1,6 @@
 package View;
 
+import Model.player.Player;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -12,14 +13,14 @@ import javafx.stage.Stage;
 public class SpelregelView {
 
     Stage stage;
-    private int aantalSpelregels = 8;
+    private int aantalSpelregels = 4;
     private int huidigePaginaIndex = 0;
     Image[] images;
 
     public SpelregelView(){
         stage = new Stage();
         images = new Image[aantalSpelregels];
-        for (int i = 1; i <= aantalSpelregels; i++){
+        for (int i = 1; i <= 4; i++){
             Image image = new Image("/Spelregels/spelregels" + i + ".png");
             images[i-1] = image;
         }
@@ -37,7 +38,7 @@ public class SpelregelView {
 
         buttonLeft.setOnMouseClicked(e -> {
             if (huidigePaginaIndex == 0){
-                huidigePaginaIndex = aantalSpelregels-1;
+                huidigePaginaIndex = 3;
             } else {
                 huidigePaginaIndex--;
             }
@@ -45,7 +46,7 @@ public class SpelregelView {
             imageView.setImage(images[huidigePaginaIndex]);
         });
         buttonRight.setOnMouseClicked(e -> {
-            if (huidigePaginaIndex == aantalSpelregels-1){
+            if (huidigePaginaIndex == 3){
                 huidigePaginaIndex = 0;
             } else {
                 huidigePaginaIndex++;

@@ -129,7 +129,6 @@ public class StormController {
             }
         }
         storm.notifyAllObservers();
-        tileController.checkZandCounter();
     }
 
     private void beweegStorm(StormEventBeweging.Richtingen richting, StormEventBeweging.Stappen stappen){
@@ -225,6 +224,5 @@ public class StormController {
     public void setStapelCounter(int counter){
         this.stapelCounter = counter;
     }
-
 
 }

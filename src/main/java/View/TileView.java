@@ -49,8 +49,8 @@ public class TileView implements BordObserver {
 
     Image archeoloogImage = new Image("/Players/Archeoloog.png");
     Image klimmerImage = new Image("/Players/Klimmer.png");
-    //Image meteooroloogImage = new Image("/Players/Meteoroloog.png");
-    //Image navigatorImage = new Image("/Players/Navigator.png");
+    Image meteooroloogImage = new Image("/Players/Meteoroloog.png");
+    Image navigatorImage = new Image("/Players/Navigator.png");
     Image verkennerImage = new Image("/Players/Verkenner.png");
     Image waterdragerImage = new Image("/Players/Waterdrager.png");
 
@@ -85,16 +85,16 @@ public class TileView implements BordObserver {
         klimmerImageView.setFitHeight(tileSize/3);
         klimmerImageView.setOpacity(0);
         klimmerImageView.getStyleClass().add("speler");
-//        //meteooroloogImageView = new ImageView(meteooroloogImage);
-////        meteooroloogImageView.setFitWidth(tileSize/3);
-//  //      meteooroloogImageView.setFitHeight(tileSize/3);
-//    //    meteooroloogImageView.setOpacity(0);
-//        meteooroloogImageView.getStyleClass().add("speler");
-//        //navigatorImageView = new ImageView(navigatorImage);
-//        navigatorImageView.setFitWidth(tileSize/3);
-//        navigatorImageView.setFitHeight(tileSize/3);
-//        navigatorImageView.setOpacity(0);
-//        navigatorImageView.getStyleClass().add("speler");
+        meteooroloogImageView = new ImageView(meteooroloogImage);
+        meteooroloogImageView.setFitWidth(tileSize/3);
+        meteooroloogImageView.setFitHeight(tileSize/3);
+        meteooroloogImageView.setOpacity(0);
+        meteooroloogImageView.getStyleClass().add("speler");
+        navigatorImageView = new ImageView(navigatorImage);
+        navigatorImageView.setFitWidth(tileSize/3);
+        navigatorImageView.setFitHeight(tileSize/3);
+        navigatorImageView.setOpacity(0);
+        navigatorImageView.getStyleClass().add("speler");
         verkennerImageView = new ImageView(verkennerImage);
         verkennerImageView.setFitWidth(tileSize/3);
         verkennerImageView.setFitHeight(tileSize/3);
@@ -135,8 +135,8 @@ public class TileView implements BordObserver {
         gridPane.add(onderdeelStackPane, 1, 1);
         gridPane.add(archeoloogImageView, 0, 0);
         gridPane.add(klimmerImageView, 2, 0);
-//        gridPane.add(meteooroloogImageView, 0, 1);
-//        gridPane.add(navigatorImageView, 2, 1);
+        gridPane.add(meteooroloogImageView, 0, 1);
+        gridPane.add(navigatorImageView, 2, 1);
         gridPane.add(verkennerImageView, 0, 2);
         gridPane.add(waterdragerImageView, 2, 2);
 
@@ -159,8 +159,8 @@ public class TileView implements BordObserver {
     private void clearSpelers(){
         archeoloogImageView.setOpacity(0);
         klimmerImageView.setOpacity(0);
-//        meteooroloogImageView.setOpacity(0);
-//        navigatorImageView.setOpacity(0);
+        meteooroloogImageView.setOpacity(0);
+        navigatorImageView.setOpacity(0);
         verkennerImageView.setOpacity(0);
         waterdragerImageView.setOpacity(0);
     }

@@ -37,6 +37,10 @@ public class StormMeterView implements StormMeterObserver {
         gridPane.setLayoutX(-10);
         gridPane.setLayoutY(515);
 
+
+
+        //gridPane.add(image, 0, 0);
+        //gridPane.add(scoreText, 1, 0);
         view = gridPane;
 
         return gridPane;
@@ -60,9 +64,18 @@ public class StormMeterView implements StormMeterObserver {
         view = gridPane;
     }
 
+
     public GridPane getView(){
         return view;
     }
+
+
+
+
+
+
+
+
 
     @Override
     public void update(StormMeterObservable sb) {

@@ -4,7 +4,7 @@ import javafx.scene.paint.Color;
 import Model.player.*;
 
 
-public class Klimmer_Controller extends PlayerController {
+public class Klimmer_Controller extends PlayerController implements SpecialMove {
 
 
     /////////////////////////////////////// Constructor ///////////////////////////////////////

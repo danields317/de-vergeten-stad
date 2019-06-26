@@ -1,5 +1,6 @@
 package Controller.Login_Controllers;
 
+import Controller.Controller;
 import Model.Login.Login;
 import firebase.FirebaseService;
 import javafx.stage.Stage;

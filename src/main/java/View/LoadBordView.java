@@ -1,6 +1,7 @@
 package View;
 
 import Controller.Bord_Controllers.LoadBord_Controller;
+import Controller.Bord_Controllers.Water_Controller;
 import Controller.Player_Controllers.PlayerController;
 import Model.data.StaticData;
 import firebase.FirebaseService;
@@ -28,6 +29,7 @@ import java.util.*;
 public class LoadBordView implements LoadBordObserver {
 
     String kaart = "Homescreenempty.png";
+    //String file = "C:\\Users\\mjboere\\workspace\\Hello FX World\\src\\wereldkaart.jpg";
     private double width = 1600;
     private double height = 900;
     private double windowAnchorX = 50;
@@ -85,6 +87,7 @@ public class LoadBordView implements LoadBordObserver {
         GridPane gridPane = new GridPane();
         gridPane.setAlignment(Pos.CENTER);
         gridPane.setMinSize(width, (height / 1.5));
+        //gridPane.setPadding(new Insets(10, 100, 10, 100));
         gridPane.setVgap(50);
         gridPane.setHgap(50);
         gridPane.setAlignment(Pos.CENTER);
@@ -170,8 +173,19 @@ public class LoadBordView implements LoadBordObserver {
 
         ImageView image = createImageView("giphy2.gif");
         gridPane.add(image, 0, 0);
+
+
+        //gridPane.add(image, 0, 0);
+        //gridPane.add(scoreText, 1, 0);
+
+
         return gridPane;
     }
+
+
+
+
+
 
     @Override
     public void update(LoadBordObservable sb) {

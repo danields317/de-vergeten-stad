@@ -5,12 +5,22 @@ import observers.StormMeterObserver;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Bram de Jong
+ * @version 1.0
+ */
 public class StormMeter implements StormMeterObservable {
     private List<StormMeterObserver> observers = new ArrayList<StormMeterObserver>();
     private int hoogte;
 
+    /**
+     * Deze functue bepaalt de hoogte als deze veranderd.
+     * Met de hoogte die bepaalt wordt, verschuift de stormmeter.
+     * @param stormsterkte
+     */
     public void bepaalHoogte(int stormsterkte) {
         int hoogte = 515;
+        //Voor elke stormsterke wordt de meter hoogte omhoog gegooid
         for (int i = 1; i < stormsterkte; i++){
             hoogte = hoogte - 35;
         }

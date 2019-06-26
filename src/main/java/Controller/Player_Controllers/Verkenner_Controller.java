@@ -3,7 +3,7 @@ package Controller.Player_Controllers;
 import Model.player.*;
 import javafx.scene.paint.Color;
 
-public class Verkenner_Controller extends PlayerController {
+public class Verkenner_Controller extends PlayerController implements SpecialMove {
 
     /////////////////////////////////////// Constructor ///////////////////////////////////////
 

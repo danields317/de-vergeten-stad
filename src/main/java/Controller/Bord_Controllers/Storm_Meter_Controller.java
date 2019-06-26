@@ -6,6 +6,10 @@ import observers.StormMeterObserver;
 import observers.StormObservable;
 import observers.StormObserver;
 
+/**
+ * @author Bram de Jong
+ * @version 1.0
+ */
 public class Storm_Meter_Controller implements StormObserver {
     static Storm_Meter_Controller storm_meter_controller;
     StormController stormController;
@@ -17,6 +21,7 @@ public class Storm_Meter_Controller implements StormObserver {
     }
 
     public static Storm_Meter_Controller getInstance(){
+        //Kijkt of er een Storm_Meter_Controller en maakt er eentje aan als er geen bestaat.
         if (storm_meter_controller == null) {
             storm_meter_controller = new Storm_Meter_Controller();
 
