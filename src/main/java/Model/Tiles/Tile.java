@@ -8,6 +8,11 @@ import observers.BordObserver;
 
 import java.util.ArrayList;
 
+/**
+ * De Tile klasse is de superklasse voor alle andere tiles in de game.
+ * Deze klasse slaat de informatie voor elke tile op.
+ */
+
 public class Tile implements BordObservable{
 
     private ArrayList<BordObserver> observers = new ArrayList<>();
@@ -87,13 +92,11 @@ public class Tile implements BordObservable{
 
     public void setDiscoveredImage(String pad){
         this.discoveredImage = new Image(pad);
-//        setCurrentImage(discoveredImage);
         notifyAllObservers();
     }
 
     public void setUndiscoveredImage(String pad){
         this.undiscoveredImage = new Image(pad);
-//        setCurrentImage(discoveredImage);
         notifyAllObservers();
     }
 
@@ -132,10 +135,12 @@ public class Tile implements BordObservable{
         notifyAllObservers();
     }
 
+
     public void addPlayer(String player){
         players.add(player);
         notifyAllObservers();
     }
+
 
     public void removePlayer(String player){
         for(int i = 0; i < players.size(); i++){
@@ -144,6 +149,7 @@ public class Tile implements BordObservable{
             }
         }
     }
+
 
     public void emptyPlayers() {
         players.clear();
