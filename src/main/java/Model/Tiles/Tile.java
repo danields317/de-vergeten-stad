@@ -8,6 +8,10 @@ import observers.BordObserver;
 
 import java.util.ArrayList;
 
+/**
+ * De Tile klasse houdt bij waar een tile zich bevind en welke attributen de tile op het moment bevat.
+ */
+
 public class Tile implements BordObservable{
 
     private ArrayList<BordObserver> observers = new ArrayList<>();
