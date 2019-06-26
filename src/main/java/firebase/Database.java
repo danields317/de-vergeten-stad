@@ -20,9 +20,7 @@ public class Database {
     public Database() {
 
         try {
-            FileInputStream serviceAccount =
-                    new FileInputStream(PRIVATEKEYLOCATION);
-
+            FileInputStream serviceAccount = new FileInputStream(PRIVATEKEYLOCATION);
 
             FirebaseOptions options = new FirebaseOptions.Builder()
                     .setCredentials(GoogleCredentials.fromStream(serviceAccount))
@@ -43,11 +41,11 @@ public class Database {
 
     public String getPRIVATEKEYLOCATION(){
         try {
-            return getClass().getResource("/iipsen-f7b65-firebase-adminsdk-si9zo-13167bfb98.json").toURI().getPath();
+            return getClass().getResource("/firebaseKey.json").toURI().getPath();
         } catch (URISyntaxException e) {
             e.printStackTrace();
+            return "/firebaseKey.json";
         }
-        return null;
     }
 
 
