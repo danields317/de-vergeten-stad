@@ -318,8 +318,7 @@ public class TileController {
 
     public void checkZandCounter() {
         int zandCounter = 0;
-        //int zandMax = 48;
-        int zandMax = 9;
+        int zandMax = 48;
 
         for (Tile tile : randomTiles) {
             zandCounter += tile.getZand();

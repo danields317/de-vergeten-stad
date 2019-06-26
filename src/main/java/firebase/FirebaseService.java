@@ -13,6 +13,7 @@ import Controller.Player_Controllers.PlayerController;
 import Controller.Tile_Controllers.StormController;
 import Controller.Tile_Controllers.TileController;
 import Controller.firebase_controllers.ListenUpdateController;
+import Model.data.StaticData;
 import Model.player.Player;
 import View.ViewManager;
 import View.bord_views.SpeelbordView;
@@ -37,6 +38,8 @@ public class FirebaseService{
     private Firestore firestore;
     private static final String GEBRUIKERS_PATH = "games";
     private CollectionReference colRef;
+
+    private boolean isRunning = true;
 
     public FirebaseService() {
         Database db = new Database();
@@ -67,30 +70,41 @@ public class FirebaseService{
 
             public void onEvent(@Nullable DocumentSnapshot snapshot,
                                 @Nullable FirestoreException e) {
-                if (e != null) {
-                    System.err.println("Listen failed: " + e);
-                    return;
-                }
+                if (isRunning){
+                    if (e != null) {
+                        System.err.println("Listen failed: " + e);
+                        return;
+                    }
 
-                if (snapshot != null && snapshot.exists()) {
-                    ListenUpdateController listenUpdateController = ListenUpdateController.getInstance();
-                    listenUpdateController.setFirebaseData();
+                    if (snapshot != null && snapshot.exists()) {
+                        ListenUpdateController listenUpdateController = ListenUpdateController.getInstance();
+                        listenUpdateController.setFirebaseData();
 
-                    Platform.runLater(() -> {
-                        (PlayerController.getInstance()).update();
-                        (TileController.getInstance()).update();
-                        (StormController.getInstance()).update();
+                        Platform.runLater(() -> {
+                            (PlayerController.getInstance()).update();
+                            (TileController.getInstance()).update();
+                            (StormController.getInstance()).update();
 
-                        SpeelbordView.getInstance().loadSpelBord();
-                        ViewManager.getInstance().update();
-                    });
+                            SpeelbordView.getInstance().loadSpelBord();
+                            ViewManager.getInstance().update();
 
-                    System.out.println("Current data: " + snapshot.getData());
-                } else {
-                    System.out.print("Current data: null");
+//                            StaticData staticData = StaticData.getInstance();
+//                            if(((String)((Map) staticData.getRoomInfo()).get("activePlayer")).equals(staticData.getClassName()) ) {
+//                                ViewManager.getInstance().enableButtons();
+//                            }
+                        });
+
+                        System.out.println("Current data: " + snapshot.getData());
+                    } else {
+                        System.out.print("Current data: null");
+                    }
                 }
             }
         });
+    }
+
+    public void stopRunning(){
+        isRunning = false;
     }
 
 

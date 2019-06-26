@@ -7,8 +7,10 @@ import Controller.Tile_Controllers.StormController;
 import Controller.firebase_controllers.UpdateFirebaseController;
 import Model.data.StaticData;
 import View.bord_views.*;
+import firebase.FirebaseService;
 import javafx.application.Application;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -229,11 +231,7 @@ public class ViewManager extends Application implements PlayerObserver, StormObs
             loadLoginView();
         });
 
-//        try {
-//            ViewManager.getInstance().stop();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+        FirebaseService.getInstance().stopRunning();
 
         Group group = new Group(pdb);
         //Scene endScene = new Scene(group, windowWidth, windowHeight);
@@ -244,6 +242,18 @@ public class ViewManager extends Application implements PlayerObserver, StormObs
         //primaryStage.setX(windowAnchorX);
         //primaryStage.setY(windowAnchorY);
         //primaryStage.show();
+    }
+
+//    public void enableButtons(){
+//        for (Node i : primaryStage.getScene().getRoot().getChildrenUnmodifiable()){
+//            i.setDisable(false);
+//        }
+//    }
+
+    public void disableButtons(){
+        for (Node i : primaryStage.getScene().getRoot().getChildrenUnmodifiable()){
+            i.setDisable(true);
+        }
     }
 
     @Override
