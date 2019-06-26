@@ -44,7 +44,7 @@ public class Database {
             return getClass().getResource("/firebaseKey.json").toURI().getPath();
         } catch (URISyntaxException e) {
             e.printStackTrace();
-            return "/firebaseKey.json";
+            return null;
         }
     }
 
