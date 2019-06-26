@@ -41,7 +41,7 @@ public class Database {
 
     public String getPRIVATEKEYLOCATION(){
         try {
-            return getClass().getResource("/firebaseKey.json").toURI().getPath();
+            return getClass().getResource("/jsonFile/firebaseKey.json").toURI().getPath();
         } catch (URISyntaxException e) {
             e.printStackTrace();
             return null;
