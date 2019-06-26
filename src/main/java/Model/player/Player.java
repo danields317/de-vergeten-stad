@@ -140,11 +140,6 @@ public class Player implements PlayerObservable{
         }
     }
 
-	/**
-	 * Zet de nieuwe X en Y locatie van een speler wanneer deze verplaatst is.
-	 * @param moveX, verschuiving op de X as.
-	 * @param moveY, verschuiving op de Y as.
-	 */
     public void movePlayerSchuin(RichtingenSchuin richting) {
         switch (richting) {
             case NOORDOOST:
@@ -162,6 +157,11 @@ public class Player implements PlayerObservable{
         }
     }
 
+	/**
+	 * Zet de nieuwe X en Y locatie van een speler wanneer deze verplaatst is.
+	 * @param moveX, verschuiving op de X as.
+	 * @param moveY, verschuiving op de Y as.
+	 */
     private void move(int moveX, int moveY){
 		x = x + moveX;
 		y = y + moveY;
