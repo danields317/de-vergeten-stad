@@ -281,7 +281,7 @@ public class TileController {
         for (Onderdeel onderdeel : onderdelen){
             if(!(onderdeel.getY() == -1) && !(onderdeel.getX() == -1)) {
                 Tile onderdeelSpawn = getTileByLocation(onderdeel.getY(), onderdeel.getX());
-                if (!onderdeelSpawn.getOnderdelen().contains(onderdeel)){
+                if (onderdeelSpawn.checkOnderdelenSoort(onderdeel)){
                     onderdeelSpawn.setOnderdeel(onderdeel);
                 }
             }

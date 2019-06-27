@@ -188,6 +188,15 @@ public class Tile implements BordObservable{
         }
     }
 
+    public boolean checkOnderdelenSoort(Onderdeel onderdeel){
+        for (Onderdeel ond : onderdelen){
+            if (ond.getSoort().equals(onderdeel.getSoort())){
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void removeOnderdeel(){
         if (!onderdelen.isEmpty()){
             onderdelen.remove(0);
