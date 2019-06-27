@@ -102,9 +102,6 @@ public class PlayerController {
                 }
 
                 moveLogica(tileAbove, Player.Richingen.NOORD, isKlimmer);
-
-                tileController.getTileByLocation((player.getY() + 1), player.getX()).notifyAllObservers();
-                tileController.getTileByLocation(player.getY(), player.getX()).notifyAllObservers();
             }
         }
     }
@@ -123,9 +120,6 @@ public class PlayerController {
                 }
 
                 moveLogica(tileBeneath, Player.Richingen.ZUID, isKlimmer);
-
-                tileController.getTileByLocation((player.getY() - 1), player.getX()).notifyAllObservers();
-                tileController.getTileByLocation(player.getY(), player.getX()).notifyAllObservers();
             }
         }
     }
@@ -143,9 +137,6 @@ public class PlayerController {
                     }
                 }
                 moveLogica(tileRight, Player.Richingen.OOST, isKlimmer);
-
-                tileController.getTileByLocation(player.getY(), (player.getX() - 1)).notifyAllObservers();
-                tileController.getTileByLocation(player.getY(), player.getX()).notifyAllObservers();
             }
         }
     }
@@ -163,9 +154,6 @@ public class PlayerController {
                     }
                 }
                 moveLogica(tileLeft, Player.Richingen.WEST, isKlimmer);
-
-                tileController.getTileByLocation(player.getY(), (player.getX() + 1)).notifyAllObservers();
-                tileController.getTileByLocation(player.getY(), player.getX()).notifyAllObservers();
             }
         }
     }
@@ -183,9 +171,6 @@ public class PlayerController {
                     }
                 }
                 moveSchuinLogica(destTile, Player.RichtingenSchuin.NOORDOOST);
-
-                tileController.getTileByLocation((player.getY() + 1), (player.getX() - 1)).notifyAllObservers();
-                tileController.getTileByLocation(player.getY(), player.getX()).notifyAllObservers();
             }
         }
     }
@@ -203,9 +188,6 @@ public class PlayerController {
                     }
                 }
                 moveSchuinLogica(destTile, Player.RichtingenSchuin.ZUIDOOST);
-
-                tileController.getTileByLocation((player.getY() - 1), (player.getX() - 1)).notifyAllObservers();
-                tileController.getTileByLocation(player.getY(), player.getX()).notifyAllObservers();
             }
         }
     }
@@ -223,9 +205,6 @@ public class PlayerController {
                     }
                 }
                 moveSchuinLogica(destTile, Player.RichtingenSchuin.ZUIDWEST);
-
-                tileController.getTileByLocation((player.getY() - 1), (player.getX() + 1)).notifyAllObservers();
-                tileController.getTileByLocation(player.getY(), player.getX()).notifyAllObservers();
             }
         }
     }
@@ -243,11 +222,25 @@ public class PlayerController {
                     }
                 }
                 moveSchuinLogica(destTile, Player.RichtingenSchuin.NOORDWEST);
-
-                tileController.getTileByLocation((player.getY() + 1), (player.getX() + 1)).notifyAllObservers();
-                tileController.getTileByLocation(player.getY(), player.getX()).notifyAllObservers();
             }
         }
+    }
+
+    public void moveTunnel( int x, int y ){
+        //Tile destTile = tileController.getTileByLocation(y, x);
+        Tile tile = getTilelocation();
+
+        tile.removePlayer(this.player.getClassName());
+
+        for(Tile atile : tileController.getTiles()){
+            if(atile.getY() == y && atile.getX() == x) {
+                atile.addPlayer(player.getClassName());
+            }
+        }
+
+        player.setLocatie(x, y);
+        player.useAction();
+
     }
 
     private void moveSchuinLogica(Tile tile, Player.RichtingenSchuin richting){
@@ -470,6 +463,9 @@ public class PlayerController {
         return null;
     }
 
+    /**Krijg de tile waar de lokale speler op staat
+     * @return Tile waar de player op staat
+     */
     public Tile getTilelocation(){
         Tile selectedTile = new Tile();
         for(Tile tile : tileController.getTiles()){

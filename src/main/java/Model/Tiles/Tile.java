@@ -148,6 +148,7 @@ public class Tile implements BordObservable{
                 players.remove(i);
             }
         }
+        notifyAllObservers();
     }
 
 
