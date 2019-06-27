@@ -97,9 +97,9 @@ public class SpeelbordView{
         else if (jetpackSelected){
             equipmentController.gebruikJetpack(x, y);
         }
-        else{
-            tileController.tileClicked(x, y);
-        }
+//        else{
+//            tileController.tileClicked(x, y);
+//        }
     }
 
     public void updateSpelBord(Tile tile, Tile tile2){
