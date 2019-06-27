@@ -118,13 +118,13 @@ public class FirebaseService{
         ApiFuture<WriteResult> future = this.colRef.document("gebruikers").update(docData);
 
 
-        try {
+        /*try {
             System.out.println("Update time : " + future.get().getUpdateTime());
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
 
