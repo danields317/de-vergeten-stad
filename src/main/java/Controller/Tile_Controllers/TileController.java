@@ -369,7 +369,6 @@ public class TileController {
 
     private void updateTilesFromFB(Map<String, Object> tilesMap){
         for (int i = 0; i < 25; i++){
-            System.out.println("leleofgjdkslgndsjkdjlgbsdj");
             Map<String, Object> tileFB = (Map)tilesMap.get(Integer.toString(i));
             Tile tile = randomTiles.get(i);
 
