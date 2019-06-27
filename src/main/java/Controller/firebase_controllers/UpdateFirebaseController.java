@@ -188,7 +188,6 @@ public class UpdateFirebaseController {
             }
 
             if(!start || !this.start){
-                System.out.println("lllllloooooo");
                 tile0.put("Players", tile.getPlayers());
             }else{
                 System.out.print("kkkkkkkkkkkkkkkgggggggggggg");
