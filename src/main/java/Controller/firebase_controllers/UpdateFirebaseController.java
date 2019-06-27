@@ -190,7 +190,6 @@ public class UpdateFirebaseController {
             if(!start || !this.start){
                 tile0.put("Players", tile.getPlayers());
             }else{
-                System.out.print("kkkkkkkkkkkkkkkgggggggggggg");
                 ArrayList<String> a = new ArrayList<>();
                 a.add("Archeoloog");
                 a.add("Klimmer");
