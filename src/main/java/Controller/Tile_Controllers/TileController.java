@@ -291,8 +291,15 @@ public class TileController {
     private void despawnOnderdelen(){
         for (Onderdeel onderdeel : onderdelen){
             if (onderdeel.isOpgepakt()){
-                Tile onderdeelTile = getTileByLocation(onderdeel.getY(), onderdeel.getX());
-                onderdeelTile.removeOnderdeelSoort(onderdeel);
+                for(Tile tile:randomTiles){
+                    for(Onderdeel oD : tile.getOnderdelen()){
+                        if(oD.equals(onderdeel)){
+                            tile.removeOnderdeelSoort(onderdeel);
+                        }
+                    }
+                }
+                //Tile onderdeelTile = getTileByLocation(onderdeel.getY(), onderdeel.getX());
+                //onderdeelTile.removeOnderdeelSoort(onderdeel);
             }
         }
     }
