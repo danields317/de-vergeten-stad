@@ -91,150 +91,162 @@ public class PlayerController {
     public void moveNoord(boolean isKlimmer){
         if(player.getY() > 0 && player.actiesOver()){
             Tile tileAbove = tileController.getTileByLocation((player.getY() - 1), player.getX());
-            Tile tile = getTilelocation();
-            System.out.println(tile);
-            tile.removePlayer(this.player.getClassName());
+            if((tileAbove.getZand() < 2 || isKlimmer) && !tileAbove.getClass().equals(Storm.class) && (tileController.getTileByLocation(player.getY(), player.getX()).getZand() < 2 || isKlimmer)){
+                Tile tile = getTilelocation();
+                tile.removePlayer(this.player.getClassName());
 
-            for(Tile atile : tileController.getTiles()){
-                if(atile.getY() == (tile.getY() - 1) && atile.getX() == tile.getX() ){
-                    atile.addPlayer(player.getClassName());
+                for(Tile atile : tileController.getTiles()){
+                    if(atile.getY() == (tile.getY() - 1) && atile.getX() == tile.getX() ){
+                        atile.addPlayer(player.getClassName());
+                    }
                 }
+
+                moveLogica(tileAbove, Player.Richingen.NOORD, isKlimmer);
+
+                tileController.getTileByLocation((player.getY() + 1), player.getX()).notifyAllObservers();
+                tileController.getTileByLocation(player.getY(), player.getX()).notifyAllObservers();
             }
-
-            moveLogica(tileAbove, Player.Richingen.NOORD, isKlimmer);
-
-            tileController.getTileByLocation((player.getY() + 1), player.getX()).notifyAllObservers();
-            tileController.getTileByLocation(player.getY(), player.getX()).notifyAllObservers();
         }
     }
 
     public void moveZuid(boolean isKlimmer){
         if(player.getY() < 4 && player.actiesOver()){
             Tile tileBeneath = tileController.getTileByLocation((player.getY() + 1), player.getX());
-            Tile tile = getTilelocation();
-            tile.removePlayer(this.player.getClassName());
+            if((tileBeneath.getZand() < 2 || isKlimmer) && !tileBeneath.getClass().equals(Storm.class) && (tileController.getTileByLocation(player.getY(), player.getX()).getZand() < 2 || isKlimmer)) {
+                Tile tile = getTilelocation();
+                tile.removePlayer(this.player.getClassName());
 
-            for(Tile atile : tileController.getTiles()){
-                if(atile.getY() == (tile.getY() + 1) && atile.getX() == tile.getX() ){
-                    atile.addPlayer(player.getClassName());
+                for(Tile atile : tileController.getTiles()){
+                    if(atile.getY() == (tile.getY() + 1) && atile.getX() == tile.getX() ){
+                        atile.addPlayer(player.getClassName());
+                    }
                 }
+
+                moveLogica(tileBeneath, Player.Richingen.ZUID, isKlimmer);
+
+                tileController.getTileByLocation((player.getY() - 1), player.getX()).notifyAllObservers();
+                tileController.getTileByLocation(player.getY(), player.getX()).notifyAllObservers();
             }
-
-            moveLogica(tileBeneath, Player.Richingen.ZUID, isKlimmer);
-
-            tileController.getTileByLocation((player.getY() - 1), player.getX()).notifyAllObservers();
-            tileController.getTileByLocation(player.getY(), player.getX()).notifyAllObservers();
         }
     }
 
     public void moveOost(boolean isKlimmer){
         if(player.getX() < 4 && player.actiesOver()){
             Tile tileRight = tileController.getTileByLocation(player.getY(), (player.getX() + 1));
-            Tile tile = getTilelocation();
-            tile.removePlayer(this.player.getClassName());
+            if((tileRight.getZand() < 2 || isKlimmer) && !tileRight.getClass().equals(Storm.class) && (tileController.getTileByLocation(player.getY(), player.getX()).getZand() < 2 || isKlimmer)) {
+                Tile tile = getTilelocation();
+                tile.removePlayer(this.player.getClassName());
 
-            for(Tile atile : tileController.getTiles()){
-                if(atile.getY() == tile.getY() && atile.getX() == (tile.getX() + 1) ){
-                    atile.addPlayer(player.getClassName());
+                for(Tile atile : tileController.getTiles()){
+                    if(atile.getY() == tile.getY() && atile.getX() == (tile.getX() + 1) ){
+                        atile.addPlayer(player.getClassName());
+                    }
                 }
-            }
-            moveLogica(tileRight, Player.Richingen.OOST, isKlimmer);
+                moveLogica(tileRight, Player.Richingen.OOST, isKlimmer);
 
-            tileController.getTileByLocation(player.getY(), (player.getX() - 1)).notifyAllObservers();
-            tileController.getTileByLocation(player.getY(), player.getX()).notifyAllObservers();
+                tileController.getTileByLocation(player.getY(), (player.getX() - 1)).notifyAllObservers();
+                tileController.getTileByLocation(player.getY(), player.getX()).notifyAllObservers();
+            }
         }
     }
 
     public void moveWest(boolean isKlimmer){
         if(player.getX() > 0 && player.actiesOver()){
             Tile tileLeft = tileController.getTileByLocation(player.getY(), (player.getX() -  1));
-            Tile tile = getTilelocation();
-            tile.removePlayer(this.player.getClassName());
+            if((tileLeft.getZand() < 2 || isKlimmer) && !tileLeft.getClass().equals(Storm.class) && (tileController.getTileByLocation(player.getY(), player.getX()).getZand() < 2 || isKlimmer)) {
+                Tile tile = getTilelocation();
+                tile.removePlayer(this.player.getClassName());
 
-            for(Tile atile : tileController.getTiles()){
-                if(atile.getY() == tile.getY() && atile.getX() == (tile.getX() - 1) ){
-                    atile.addPlayer(player.getClassName());
+                for(Tile atile : tileController.getTiles()){
+                    if(atile.getY() == tile.getY() && atile.getX() == (tile.getX() - 1) ){
+                        atile.addPlayer(player.getClassName());
+                    }
                 }
-            }
-            moveLogica(tileLeft, Player.Richingen.WEST, isKlimmer);
+                moveLogica(tileLeft, Player.Richingen.WEST, isKlimmer);
 
-            tileController.getTileByLocation(player.getY(), (player.getX() + 1)).notifyAllObservers();
-            tileController.getTileByLocation(player.getY(), player.getX()).notifyAllObservers();
+                tileController.getTileByLocation(player.getY(), (player.getX() + 1)).notifyAllObservers();
+                tileController.getTileByLocation(player.getY(), player.getX()).notifyAllObservers();
+            }
         }
     }
 
     public void moveNoordOost(){
         if(player.getX() < 4 && player.getY() > 0 && player.actiesOver()){
             Tile destTile = tileController.getTileByLocation((player.getY() - 1), (player.getX() + 1));
+            if(destTile.getZand() < 2 && !destTile.getClass().equals(Storm.class) && tileController.getTileByLocation(player.getY(), player.getX()).getZand() < 2){
+                Tile tile = getTilelocation();
+                tile.removePlayer(this.player.getClassName());
 
-            Tile tile = getTilelocation();
-            tile.removePlayer(this.player.getClassName());
-
-            for(Tile atile : tileController.getTiles()){
-                if(atile.getY() == (tile.getY() - 1) && atile.getX() == (tile.getX() + 1) ){
-                    atile.addPlayer(player.getClassName());
+                for(Tile atile : tileController.getTiles()){
+                    if(atile.getY() == (tile.getY() - 1) && atile.getX() == (tile.getX() + 1) ){
+                        atile.addPlayer(player.getClassName());
+                    }
                 }
-            }
-            moveSchuinLogica(destTile, Player.RichtingenSchuin.NOORDOOST);
+                moveSchuinLogica(destTile, Player.RichtingenSchuin.NOORDOOST);
 
-            tileController.getTileByLocation((player.getY() + 1), (player.getX() - 1)).notifyAllObservers();
-            tileController.getTileByLocation(player.getY(), player.getX()).notifyAllObservers();
+                tileController.getTileByLocation((player.getY() + 1), (player.getX() - 1)).notifyAllObservers();
+                tileController.getTileByLocation(player.getY(), player.getX()).notifyAllObservers();
+            }
         }
     }
 
     public void moveZuidOost(){
         if(player.getX() < 4 && player.getY() < 4 && player.actiesOver()){
             Tile destTile = tileController.getTileByLocation((player.getY() + 1), (player.getX() + 1));
+            if(destTile.getZand() < 2 && !destTile.getClass().equals(Storm.class) && tileController.getTileByLocation(player.getY(), player.getX()).getZand() < 2){
+                Tile tile = getTilelocation();
+                tile.removePlayer(this.player.getClassName());
 
-            Tile tile = getTilelocation();
-            tile.removePlayer(this.player.getClassName());
-
-            for(Tile atile : tileController.getTiles()){
-                if(atile.getY() == (tile.getY() + 1) && atile.getX() == (tile.getX() + 1) ){
-                    atile.addPlayer(player.getClassName());
+                for(Tile atile : tileController.getTiles()){
+                    if(atile.getY() == (tile.getY() + 1) && atile.getX() == (tile.getX() + 1) ){
+                        atile.addPlayer(player.getClassName());
+                    }
                 }
-            }
-            moveSchuinLogica(destTile, Player.RichtingenSchuin.ZUIDOOST);
+                moveSchuinLogica(destTile, Player.RichtingenSchuin.ZUIDOOST);
 
-            tileController.getTileByLocation((player.getY() - 1), (player.getX() - 1)).notifyAllObservers();
-            tileController.getTileByLocation(player.getY(), player.getX()).notifyAllObservers();
+                tileController.getTileByLocation((player.getY() - 1), (player.getX() - 1)).notifyAllObservers();
+                tileController.getTileByLocation(player.getY(), player.getX()).notifyAllObservers();
+            }
         }
     }
 
     public void moveZuidWest(){
         if(player.getX() > 0 && player.getY() < 4 && player.actiesOver()){
             Tile destTile = tileController.getTileByLocation((player.getY() + 1), (player.getX() - 1));
+            if(destTile.getZand() < 2 && !destTile.getClass().equals(Storm.class) && tileController.getTileByLocation(player.getY(), player.getX()).getZand() < 2){
+                Tile tile = getTilelocation();
+                tile.removePlayer(this.player.getClassName());
 
-            Tile tile = getTilelocation();
-            tile.removePlayer(this.player.getClassName());
-
-            for(Tile atile : tileController.getTiles()){
-                if(atile.getY() == (tile.getY() + 1) && atile.getX() == (tile.getX() - 1) ){
-                    atile.addPlayer(player.getClassName());
+                for(Tile atile : tileController.getTiles()){
+                    if(atile.getY() == (tile.getY() + 1) && atile.getX() == (tile.getX() - 1) ){
+                        atile.addPlayer(player.getClassName());
+                    }
                 }
-            }
-            moveSchuinLogica(destTile, Player.RichtingenSchuin.ZUIDWEST);
+                moveSchuinLogica(destTile, Player.RichtingenSchuin.ZUIDWEST);
 
-            tileController.getTileByLocation((player.getY() - 1), (player.getX() + 1)).notifyAllObservers();
-            tileController.getTileByLocation(player.getY(), player.getX()).notifyAllObservers();
+                tileController.getTileByLocation((player.getY() - 1), (player.getX() + 1)).notifyAllObservers();
+                tileController.getTileByLocation(player.getY(), player.getX()).notifyAllObservers();
+            }
         }
     }
 
     public void moveNoordWest(){
         if(player.getX() > 0 && player.getY() > 0 && player.actiesOver()) {
             Tile destTile = tileController.getTileByLocation((player.getY() - 1), (player.getX() - 1));
-            Tile tile = getTilelocation();
-            tile.removePlayer(this.player.getClassName());
+            if(destTile.getZand() < 2 && !destTile.getClass().equals(Storm.class) && tileController.getTileByLocation(player.getY(), player.getX()).getZand() < 2){
+                Tile tile = getTilelocation();
+                tile.removePlayer(this.player.getClassName());
 
-            for(Tile atile : tileController.getTiles()){
-                if(atile.getY() == (tile.getY() - 1) && atile.getX() == (tile.getX() - 1) ){
-                    atile.addPlayer(player.getClassName());
+                for(Tile atile : tileController.getTiles()){
+                    if(atile.getY() == (tile.getY() - 1) && atile.getX() == (tile.getX() - 1) ){
+                        atile.addPlayer(player.getClassName());
+                    }
                 }
-            }
-            moveSchuinLogica(destTile, Player.RichtingenSchuin.NOORDWEST);
+                moveSchuinLogica(destTile, Player.RichtingenSchuin.NOORDWEST);
 
-            tileController.getTileByLocation((player.getY() + 1), (player.getX() + 1)).notifyAllObservers();
-            tileController.getTileByLocation(player.getY(), player.getX()).notifyAllObservers();
+                tileController.getTileByLocation((player.getY() + 1), (player.getX() + 1)).notifyAllObservers();
+                tileController.getTileByLocation(player.getY(), player.getX()).notifyAllObservers();
+            }
         }
     }
 
