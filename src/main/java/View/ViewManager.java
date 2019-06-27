@@ -29,6 +29,7 @@ public class ViewManager extends Application implements PlayerObserver, StormObs
     private static ViewManager viewManager;
     public enum endConditions {VICTORYROYALE, STERFDOORSTORM, DEHYDRATION, SUFFOCATION};
 
+
     static Stage primaryStage;
     String kaart = "/gamescreenempty.png";
     //BordView bordView = new BordView();  //maak achtergrond

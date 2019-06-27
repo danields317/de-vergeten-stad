@@ -172,13 +172,17 @@ public class Player implements PlayerObservable{
 	}
 
 	public void subtractWater(int water) {
-		
+
 		this.water = this.water - water;
 
 		if (this.water < 0) {
-			(FunctieController.getInstance()).endLose();
+			//(FunctieController.getInstance()).endLose();
+			//return;
+			System.out.println("player klasse");
+		} else {
+			notifyAllObservers();
 		}
-		notifyAllObservers();
+
 	}
 
 	public void useAction(){

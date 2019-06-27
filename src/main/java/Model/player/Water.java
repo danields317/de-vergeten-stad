@@ -15,6 +15,10 @@ public class Water implements WaterObservable {
 
         imgWater = "/veldfles/Fles" + water + "_" + maxWater + ".png" ;
 
+        /*if (water < 0 || water > maxWater || maxWater < 3 || maxWater > 5) {
+            imgWater = "/placeholder.png" ;
+        }*/
+
         notifyAllObservers();
     }
 
