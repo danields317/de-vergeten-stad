@@ -49,10 +49,10 @@ public class Player_Menu_View implements Player_Menu_Observer {
         StackPane verkennerGroup = new StackPane(makeRectangle());
         StackPane waterdragerGroup = new StackPane(makeRectangle());
 
-        archeoloogGroup.setOnMouseClicked(e->playerController.giveWater(Player.SpelerKlassen.ARCHEOLOOG, 1));
-        klimmerGroup.setOnMouseClicked(e->playerController.giveWater(Player.SpelerKlassen.KLIMMER, 1));
-        verkennerGroup.setOnMouseClicked(e->playerController.giveWater(Player.SpelerKlassen.VERKENNER, 1));
-        waterdragerGroup.setOnMouseClicked(e->playerController.giveWater(Player.SpelerKlassen.WATERDRAGER, 1));
+        archeoloogGroup.setOnMouseClicked(e->playerController.giveWater("Archeoloog", 1));
+        klimmerGroup.setOnMouseClicked(e->playerController.giveWater("Klimmer", 1));
+        verkennerGroup.setOnMouseClicked(e->playerController.giveWater("Verkenner", 1));
+        waterdragerGroup.setOnMouseClicked(e->playerController.giveWater("Waterdrager", 1));
 
         archeoloogGroup.getStyleClass().add("playermenu");
         klimmerGroup.getStyleClass().add("playermenu");

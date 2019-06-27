@@ -32,11 +32,6 @@ public class PlayerController {
     StaticData staticData = StaticData.getInstance();
     Player player;
 
-    Player archeoloog;
-    Player klimmer;
-    Player verkenner;
-    Player waterdrager;
-
      TileController tileController = TileController.getInstance();
 
     public PlayerController(String className, int maxWater, int water, String imagePath, Player.SpelerKlassen klasse){
@@ -407,34 +402,21 @@ public class PlayerController {
     }
 
 
-    public void giveWater(Player.SpelerKlassen receiver, int amount){
+    public void giveWater(String receiver, int amount){
 
-        Player receiverPlayer = player;
+        StaticData staticData = StaticData.getInstance();
+        Map<String, Object> gebruikers = (Map)((Map)staticData.getRoomInfo()).get("Selectable_classes");
+        for (int i = 0; i < 4; i++){
+            if (((Map)(gebruikers.get(Integer.toString(i)))).get("name").toString().equals(receiver)) {
+                long oudwater = (long)((Map)(gebruikers.get(Integer.toString(i)))).get("water");
+                long maxwater = (long)((Map)(gebruikers.get(Integer.toString(i)))).get("maxWater");
 
-        switch (receiver){
-            case ARCHEOLOOG:
-                receiverPlayer = archeoloog;
-                break;
-            case KLIMMER:
-                receiverPlayer = klimmer;
-                break;
-            case VERKENNER:
-                receiverPlayer = verkenner;
-                break;
-            case WATERDRAGER:
-                receiverPlayer = waterdrager;
-                break;
+                if (oudwater + 1 <= maxwater && player.getWater() > 0) {
+                    ((Map) (gebruikers.get(Integer.toString(i)))).put("water", oudwater + 1);
+                    player.subtractWater(1);
+                }
+            }
         }
-
-        if(this.getPlayer().getWater() == 0){
-            System.out.println("You dont have any water to give");
-        } else if( receiverPlayer.getWater() >= receiverPlayer.getMaxWater()){
-            System.out.println(receiverPlayer.getClassName() + " has already full water");
-        }else{
-            this.player.subtractWater(amount);
-            receiverPlayer.addWater(amount);
-        }
-
 
     }
 
