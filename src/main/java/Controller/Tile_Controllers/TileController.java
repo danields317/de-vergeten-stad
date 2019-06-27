@@ -271,7 +271,7 @@ public class TileController {
     }
 
     public void checkOnderdeelSpawned(Onderdeel onderdeel){
-        if(!(onderdeel.getY() == -1) && !(onderdeel.getX() == -1)) {
+        if(!(onderdeel.getY() == -1) && !(onderdeel.getX() == -1) && !onderdeel.isOpgepakt()) {
             Tile onderdeelSpawn = getTileByLocation(onderdeel.getY(), onderdeel.getX());
             onderdeelSpawn.setOnderdeel(onderdeel);
         }
@@ -279,7 +279,7 @@ public class TileController {
 
     private void checkOnderdelenSpawned(){
         for (Onderdeel onderdeel : onderdelen){
-            if(!(onderdeel.getY() == -1) && !(onderdeel.getX() == -1)) {
+            if(!(onderdeel.getY() == -1) && !(onderdeel.getX() == -1) && !onderdeel.isOpgepakt()) {
                 Tile onderdeelSpawn = getTileByLocation(onderdeel.getY(), onderdeel.getX());
                 if (!onderdeelSpawn.getOnderdelen().contains(onderdeel)){
                     onderdeelSpawn.setOnderdeel(onderdeel);
