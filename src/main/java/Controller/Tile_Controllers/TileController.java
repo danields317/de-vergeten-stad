@@ -386,7 +386,7 @@ public class TileController {
             if((tileFB.get("discovered").toString()).equals("true")){
                 discovered = true;
             }
-            boolean hasZonneSchild = Boolean.getBoolean(tileFB.get("hasZonneSchild").toString());
+            boolean hasZonneSchild = tileFB.get("hasZonneSchild").equals("true");
             int aantalZand = Integer.valueOf(tileFB.get("aantalZandTegels").toString());
             tile.emptyPlayers();
             String s = tileFB.get("Players").toString();
