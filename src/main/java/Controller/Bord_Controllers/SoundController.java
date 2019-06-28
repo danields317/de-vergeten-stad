@@ -34,7 +34,6 @@ public class SoundController implements Runnable {
             playSound(songs[random]);
             playing = true;
         }
-        */
         //playSound(sound);
         //playing = true;
         */
