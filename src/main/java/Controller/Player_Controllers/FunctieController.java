@@ -2,9 +2,12 @@ package Controller.Player_Controllers;
 
 import Controller.Bord_Controllers.SoundController;
 import Controller.Tile_Controllers.StormController;
+import Controller.Tile_Controllers.TileController;
+import Model.Tiles.Tile;
 import Model.data.StaticData;
 import View.ViewManager;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -54,9 +57,14 @@ public class FunctieController {
 //                }
                 Map<String, Object> obj = new HashMap<String, Object>() {
                     {
-                        put("name", ((((Map) singeClass).get("name")).toString()));
+                        String name = ((((Map) singeClass).get("name")).toString());
+                        put("name", name);
                         put("maxWater", (((Map) singeClass).get("maxWater")) );
-                        put("water", (Integer.valueOf(((Map)singeClass).get("water").toString()))-1);
+                        if (checkSpelersZonBrandt(name)){
+                            put("water", (Integer.valueOf(((Map)singeClass).get("water").toString())));
+                        } else {
+                            put("water", (Integer.valueOf(((Map)singeClass).get("water").toString()))-1);
+                        }
                     }
                 };
                 myObject.put(String.valueOf(i), obj);
@@ -67,6 +75,24 @@ public class FunctieController {
 
         staticData.setRoomInfo(data);
 
+    }
+
+    /**
+     * Omdat spelers geen objecten zijn checkt de functie voor een string met een playerklasse naam of die in een
+     * tunnel staat of onder een zonneschild staat.
+     *
+     * @param speler Een String met een spelerklasse
+     * @return Een boolean of er bij de speler water af moet.
+     */
+    private boolean checkSpelersZonBrandt(String speler){
+        TileController tileController = TileController.getInstance();
+        ArrayList<Tile> tiles = tileController.getTiles();
+        for (Tile tile : tiles){
+            if ((tile.getVariant() == Tile.Varianten.TUNNEL || tile.hasZonneSchild()) && tile.getPlayers().contains(speler)){
+                return true;
+            }
+        }
+        return false;
     }
 
     public void endLose(){
