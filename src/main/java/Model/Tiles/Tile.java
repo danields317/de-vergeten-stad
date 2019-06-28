@@ -9,7 +9,8 @@ import observers.BordObserver;
 import java.util.ArrayList;
 
 /**
- * De Tile klasse houdt bij waar een tile zich bevind en welke attributen de tile op het moment bevat.
+ * De Tile klasse is de superklasse voor alle andere tiles in de game.
+ * Deze klasse slaat de informatie voor elke tile op.
  */
 
 public class Tile implements BordObservable{
@@ -91,13 +92,11 @@ public class Tile implements BordObservable{
 
     public void setDiscoveredImage(String pad){
         this.discoveredImage = new Image(pad);
-//        setCurrentImage(discoveredImage);
         notifyAllObservers();
     }
 
     public void setUndiscoveredImage(String pad){
         this.undiscoveredImage = new Image(pad);
-//        setCurrentImage(discoveredImage);
         notifyAllObservers();
     }
 

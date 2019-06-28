@@ -36,7 +36,6 @@ public class Player_Menu_Controller implements Player_Menu_Observer {
     }
     @Override
     public void update(Player_Menu_Observable sb){
-        System.out.println("Update : Player_Menu_Controller");
         player_menu.spelerBlokOpbouwen();
     }
 

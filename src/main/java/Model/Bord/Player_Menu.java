@@ -13,7 +13,6 @@ public class Player_Menu implements Player_Menu_Observable {
     String[] players = new String[4];
 
     public void spelerBlokOpbouwen(){
-        System.out.println("SpelerBlokOpbouwen : Player_Menu");
         for (int i = 0; i < 4; i++) {
 //            System.out.println("/Player_Menu/"+i+".png");
 //            players[i] = "/Player_Menu/"+i+".png";
