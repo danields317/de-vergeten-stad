@@ -388,14 +388,12 @@ public class PlayerController {
         }
     }
 
-
     public void removeWater(){
-        Tile tile = tileController.getTileByLocation(player.getY(), player.getX());
+        Tile tile = getTilelocation();
         if(!tile.hasZonneSchild() && tile.getVariant() != Tile.Varianten.TUNNEL ) {
             player.subtractWater(1);
         }
     }
-
 
     public void giveWater(String receiver, int amount){
 
