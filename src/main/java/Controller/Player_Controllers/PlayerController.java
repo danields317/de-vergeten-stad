@@ -17,6 +17,8 @@ import java.util.ArrayList;
 import java.util.Map;
 
 /**
+ *De PlayerController klasse bestuurt de beweging van spelers
+ * , het uitgraven van tiles door spelers en het verkrijgen of verwijderen van water van een speler
  *
  * @author Jason
  * @author ryan
@@ -24,7 +26,6 @@ import java.util.Map;
  * @version 1.0.01
  * @since 25-06-2019
  */
-
 public class PlayerController {
 
 
@@ -69,6 +70,9 @@ public class PlayerController {
         return playercont;
     }
 
+    /**
+     * Spawn de spelers op de Starttile.
+     */
     public void spawnSpelers(){
         ArrayList<Tile> tiles = tileController.getTiles();
         Tile spawnTile = null;
@@ -384,15 +388,6 @@ public class PlayerController {
         }
     }
 
-
-
-    public void Uitgraven(){
-
-    }
-
-    public void eenOnderdeelOppakken(){
-
-    }
 
     public void removeWater(){
         Tile tile = tileController.getTileByLocation(player.getY(), player.getX());

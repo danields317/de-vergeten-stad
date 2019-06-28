@@ -5,6 +5,10 @@ import Model.equipment.*;
 
 import java.util.List;
 
+/**
+ * Deze klasse maakt equipment aan en geeft de optie om equipment uit te delen aan tiles.
+ */
+
 public class EquipmentController {
 
     private static EquipmentController equipmentController;
@@ -17,6 +21,10 @@ public class EquipmentController {
         }
         return equipmentController;
     }
+
+    /**
+     * Genereert alle equipment.
+     */
 
 
 
@@ -37,6 +45,12 @@ public class EquipmentController {
         equipmentList[i] = new Jetpack(); i++;
         equipmentList[i] = new Jetpack(); i++;
     }
+
+    /**
+     * Deze functie maakt de lijst met equipment aan als deze nog niet bestaat.
+     * Als de lijst wel bestaat wordt er een equipment object teruggegeven.
+     * @return één equipment object.
+     */
 
     public Equipment getEquipment() {
         if (equipmentList == null) {
