@@ -144,7 +144,7 @@ public class StormController {
                         storm.stormWordtSterker();
                         break;
                     default:
-                        System.out.println("DIT HOORT NIET: StormController");
+                        //System.out.println("DIT HOORT NIET: StormController");
                 }
                 stapelCounter++;
             }else{
@@ -182,7 +182,7 @@ public class StormController {
                 storm.beweegWest(stappen);
                 break;
             default:
-                System.out.println("DIT HOORT NIET: StormController");
+                //System.out.println("DIT HOORT NIET: StormController");
         }
 
     }

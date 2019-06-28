@@ -26,6 +26,7 @@ public class SoundController implements Runnable {
 
     public void run()
     {
+        /*
         String[] songs = {"nTest.wav", "iTest.wav", "tatiTest.wav", "mTest.wav", "CTest.wav", "kTest.wav", "dat_boiTest.wav",  "i_amTest.wav", "sTest.wav"};
         while(true) {
             int random = (int) (Math.random() * songs.length);
@@ -33,7 +34,7 @@ public class SoundController implements Runnable {
             playSound(songs[random]);
             playing = true;
         }
-
+        */
         //playSound(sound);
         //playing = true;
     }

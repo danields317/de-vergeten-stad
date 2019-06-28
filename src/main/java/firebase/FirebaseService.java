@@ -98,7 +98,7 @@ public class FirebaseService{
 
 
                 } else {
-                    System.out.print("Current data: null");
+                    //System.out.print("Current data: null");
                 }
             }
         });
@@ -145,7 +145,7 @@ public class FirebaseService{
             if (document.exists() && document.get(gebruiker)!=null) {
                 return ((Map<String, String>)document.get(gebruiker));
             } else {
-                System.out.println("No such document!");
+                //System.out.println("No such document!");
             }
         } catch (InterruptedException e) {
 
@@ -172,13 +172,13 @@ public class FirebaseService{
         // Add a new document (asynchronously) in collection "cities" with id "LA"
         ApiFuture<WriteResult> future = this.colRef.document(roomID).set(docData);
 
-        try {
+        /*try {
             System.out.println("Update time : " + future.get().getUpdateTime());
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     /**
@@ -198,9 +198,9 @@ public class FirebaseService{
             }
             return rooms;
         }catch (InterruptedException ie){
-            System.out.println("Interrupt: " + ie);
+            //System.out.println("Interrupt: " + ie);
         }catch (ExecutionException ee){
-            System.out.println("Execution: " + ee);
+            //System.out.println("Execution: " + ee);
         }
         return null;
     }
@@ -225,7 +225,7 @@ public class FirebaseService{
                 return document;
             } else {
 
-                System.out.println("No such document!");
+                //System.out.println("No such document!");
             }
         } catch (InterruptedException e) {
 
@@ -249,7 +249,7 @@ public class FirebaseService{
     public static void main(String[] args){
         FirebaseService fb = FirebaseService.getInstance();
         DocumentSnapshot spel = fb.getSpel("test");
-        System.out.println();
+        //System.out.println();
     }
 
 }

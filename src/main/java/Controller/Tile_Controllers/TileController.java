@@ -248,7 +248,7 @@ public class TileController {
             //ga ff checken of je hebt gewonnen
         }
         else{
-            System.out.println("Dit gaat fout (Tilecontroller)");
+            //System.out.println("Dit gaat fout (Tilecontroller)");
         }
     }
 
@@ -264,7 +264,7 @@ public class TileController {
                     checkOnderdeelSpawned(onderdeel);
                 }
                 else{
-                    System.out.println("gaat fout lol (tilecontroller)");
+                    //System.out.println("gaat fout lol (tilecontroller)");
                 }
             }
         }
