@@ -5,6 +5,7 @@ import java.time.LocalTime;
 import java.util.*;
 import java.util.concurrent.ExecutionException;
 
+import Controller.Bord_Controllers.Player_Menu_Controller;
 import Controller.Player_Controllers.FunctieController;
 import Controller.Player_Controllers.PlayerController;
 import Controller.Tile_Controllers.StormController;
@@ -81,6 +82,7 @@ public class FirebaseService{
                         (PlayerController.getInstance()).update();
                         (TileController.getInstance()).update();
                         (StormController.getInstance()).update();
+                        (Player_Menu_Controller.getInstance()).update();
 
                         SpeelbordView.getInstance().loadSpelBord();
 

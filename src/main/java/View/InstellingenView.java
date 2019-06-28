@@ -15,6 +15,7 @@ public class InstellingenView {
         imageView.setLayoutY(830);
         imageView.setFitHeight(50);
         imageView.setFitWidth(50);
+        imageView.getStyleClass().add("instellingen");
         return imageView;
     }
 }

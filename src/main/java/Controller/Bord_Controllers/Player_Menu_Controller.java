@@ -11,7 +11,7 @@ import javafx.scene.layout.GridPane;
 import observers.Player_Menu_Observable;
 import observers.Player_Menu_Observer;
 
-public class Player_Menu_Controller implements Player_Menu_Observer {
+public class Player_Menu_Controller {
     static Player_Menu_Controller player_menu_controller;
     Player_Menu player_menu;
 
@@ -34,8 +34,9 @@ public class Player_Menu_Controller implements Player_Menu_Observer {
     public void begin(){
         player_menu.spelerBlokOpbouwen();
     }
-    @Override
-    public void update(Player_Menu_Observable sb){
+
+    public void update(){
+        System.out.println("Update : Player_Menu_Controller");
         player_menu.spelerBlokOpbouwen();
     }
 

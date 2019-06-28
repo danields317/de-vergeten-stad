@@ -128,7 +128,7 @@ public class ViewManager extends Application implements PlayerObserver, StormObs
         GridPane stormTeken = stormMeterView.createInitialGridPane();
         acties_view = new Acties_View();
         player_menu_view = new Player_Menu_View();
-        (Player_Menu_Controller.getInstance()).begin();
+
 
         StackPane propellor = onderdeelview.loadPropeller("?", "?");
         StackPane beacon = onderdeelview.loadBeacon("?", "?");
@@ -138,6 +138,7 @@ public class ViewManager extends Application implements PlayerObserver, StormObs
         GridPane graafknoppen = graafknoppenview.maakGraafKnoppen();
         GridPane spelbord = speelbordView.loadSpelBord();
         ImageView instelligen = instellingenView.InstellingenView();
+        player_menu_view.maakView();
 //        GridPane acties_view =
 //        Image backgroundImage = new Image("gamescreenempty.png");
 //        Canvas canvas = new Canvas(windowWidth, windowHeight);
@@ -207,7 +208,7 @@ public class ViewManager extends Application implements PlayerObserver, StormObs
         GridPane spelbord = speelbordView.getSpelbord();
         GridPane stormTeken =  stormMeterView.getView();
         GridPane acties = acties_view.getView();
-        VBox playermenu = player_menu_view.getView();
+        GridPane playermenu = player_menu_view.getView();
 
         StackPane uitrusting = uitrustingview.getUitrusting();
 
