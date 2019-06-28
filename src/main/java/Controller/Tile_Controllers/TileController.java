@@ -403,10 +403,14 @@ public class TileController {
 
         Map<String, Object> onderdelenMap = (Map)((Map) roominfo).get("onderdelen");
         Platform.runLater(() -> {
-            updateOnderdelenFromFB(onderdelenMap);
-            despawnOnderdelen();
-            checkOnderdelenSpawned();
+            //updateOnderdelenFromFB(onderdelenMap);
+            //despawnOnderdelen();
+            //checkOnderdelenSpawned();
         });
+
+        updateOnderdelenFromFB(onderdelenMap);
+        checkOnderdelenSpawned();
+        despawnOnderdelen();
     }
 
     /**
