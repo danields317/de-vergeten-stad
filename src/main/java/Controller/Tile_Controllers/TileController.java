@@ -20,6 +20,13 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.Random;
 
+/**
+ * Deze klasse wordt gebruikt om tile behaviour uit te voeren zoals het verplaatsen van tiles.
+ *
+ * @author ryan
+ * @author Daniël
+ * @author Tim
+ */
 public class TileController {
 
     Random random = new Random();
@@ -75,7 +82,10 @@ public class TileController {
     }
 
     /**
+     * Deze functie initialiseert alle tiles.
      * Volgens de spel regels zijn er in totaal 24 tiles, dus loopt de for loop tot 24.
+     *
+     * @author ryan
      */
     private void makeTiles(){
         for (int i = 0; i < 24; i++){
@@ -113,6 +123,13 @@ public class TileController {
     }
 
 
+    /**
+     * Deze functie randomized een ArrayList die hij mee krijgt.
+     * Het is een recursive method.
+     *
+     * @param tiles Een ArrayList van het type Tile.
+     * @author ryan
+     */
     private void randomizeTiles(ArrayList<Tile> tiles){
 
         if (tiles.isEmpty()){
@@ -126,6 +143,11 @@ public class TileController {
         randomizeTiles(tiles);
     }
 
+    /**
+     * Deze functie geeft de tiles die zijn gerandomized een x en y waarde.
+     *
+     * @author ryan
+     */
     private void setTileLocations(){
         int counter = 0;
         for (int i = 0; i < 5; i++){
@@ -157,6 +179,16 @@ public class TileController {
         moveTile(stappen, stormX, stormY, 1, 0);
     }
 
+    /**
+     * Deze functie draait de locaties van 2 tiles om in een bepaalde richting voor een x aantal stappen.
+     *
+     * @param stappen Het aantal stappen dat de storm heeft genomen.
+     * @param stormX De x locatie van de storm.
+     * @param stormY De y locatie van de storm.
+     * @param moveStormX De x locatie waar de storm naartoe beweegt.
+     * @param moveStormY De y locatie waar de storm naartoe beweegt.
+     * @author ryan
+     */
     private void moveTile(StormEventBeweging.Stappen stappen, int stormX, int stormY, int moveStormX, int moveStormY){
         playerController = PlayerController.getInstance();
         for (int i = 0; i < stappen.getNumber(); i++){
@@ -185,6 +217,11 @@ public class TileController {
         }
     }
 
+    /**
+     * Deze functie voegt zand toe aan een paar tiles in het begin, dit is volgens de spelregels.
+     *
+     * @author ryan
+     */
     private void beginZand(){
         randomTiles.get(2).addZandTegel();
         randomTiles.get(6).addZandTegel();
@@ -277,6 +314,11 @@ public class TileController {
         }
     }
 
+    /**
+     * Deze functie checkt voor alle onderdelen of ze al zijn gespawned.
+     *
+     * @author ryan
+     */
     private void checkOnderdelenSpawned(){
         for (Onderdeel onderdeel : onderdelen){
             if(!(onderdeel.getY() == -1) && !(onderdeel.getX() == -1) && !onderdeel.isOpgepakt()) {
@@ -288,6 +330,11 @@ public class TileController {
         }
     }
 
+    /**
+     * Deze functie verwijdert alle onderdelen van de tile waarop hij lag die zijn opgepakt.
+     *
+     * @author ryan
+     */
     private void despawnOnderdelen(){
         for (Onderdeel onderdeel : onderdelen){
             if (onderdeel.isOpgepakt()){
@@ -346,6 +393,11 @@ public class TileController {
         return this.randomTiles;
     }
 
+    /**
+     * Deze functie update alle data waarover deze klasse gaat met de data uit FireBase.
+     *
+     * @author ryan
+     */
     public void updateData(){
         StaticData staticData = StaticData.getInstance();
         Object roominfo = staticData.getRoomInfo();
@@ -360,6 +412,12 @@ public class TileController {
         });
     }
 
+    /**
+     * Deze functie update de onderdelen met data vanuit FireBase.
+     *
+     * @param onderdelenMap Een Map met informatie over de onderdelen
+     * @author ryan
+     */
     private void updateOnderdelenFromFB(Map<String, Object> onderdelenMap){
         for (int i = 0; i <onderdelen.size(); i++){
             Map<String, Object> onderdeelFB = (Map)onderdelenMap.get(Integer.toString(i));
@@ -375,6 +433,12 @@ public class TileController {
         }
     }
 
+    /**
+     * Deze functie update de tiles met data vanuit FireBase.
+     *
+     * @param tilesMap Een Map met informatie over de onderdelen
+     * @author ryan
+     */
     private void updateTilesFromFB(Map<String, Object> tilesMap){
         for (int i = 0; i < 25; i++){
             Map<String, Object> tileFB = (Map)tilesMap.get(Integer.toString(i));
@@ -412,6 +476,12 @@ public class TileController {
         }
     }
 
+    /**
+     * Deze functie maakt tiles aan, aan de hand van info uit FireBase
+     *
+     * @param tilesMap Een Map met informatie over de onderdelen
+     * @author ryan
+     */
     private void makeTilesFormFB(Map<String, Object> tilesMap){
         ArrayList<Tile> fbTiles = new ArrayList<>();
         for (int i = 0; i < 25; i++){
