@@ -98,7 +98,7 @@ public class FirebaseService{
 
 
                 } else {
-                    System.out.print("Current data: null");
+                    //System.out.print("Current data: null");
                 }
             }
         });
@@ -145,7 +145,7 @@ public class FirebaseService{
             if (document.exists() && document.get(gebruiker)!=null) {
                 return ((Map<String, String>)document.get(gebruiker));
             } else {
-                System.out.println("No such document!");
+                //System.out.println("No such document!");
             }
         } catch (InterruptedException e) {
 
@@ -173,7 +173,7 @@ public class FirebaseService{
         ApiFuture<WriteResult> future = this.colRef.document(roomID).set(docData);
 
         try {
-            System.out.println("Update time : " + future.get().getUpdateTime());
+            //System.out.println("Update time : " + future.get().getUpdateTime());
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
@@ -198,9 +198,9 @@ public class FirebaseService{
             }
             return rooms;
         }catch (InterruptedException ie){
-            System.out.println("Interrupt: " + ie);
+            //System.out.println("Interrupt: " + ie);
         }catch (ExecutionException ee){
-            System.out.println("Execution: " + ee);
+            //System.out.println("Execution: " + ee);
         }
         return null;
     }
@@ -225,7 +225,7 @@ public class FirebaseService{
                 return document;
             } else {
 
-                System.out.println("No such document!");
+                //System.out.println("No such document!");
             }
         } catch (InterruptedException e) {
 

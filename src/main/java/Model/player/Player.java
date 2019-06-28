@@ -178,7 +178,7 @@ public class Player implements PlayerObservable{
 		if (this.water < 0) {
 			//(FunctieController.getInstance()).endLose();
 			//return;
-			System.out.println("player klasse");
+			//System.out.println("player klasse");
 		} else {
 			notifyAllObservers();
 		}

@@ -33,7 +33,7 @@ public class Login_Controller {
             login.checkLogin(uName, pass, fbPass);
         }catch (NullPointerException npe){
             login.setError("Gebruiker bestaat niet.");
-            System.out.println("Gebruiker bestaat niet: " + npe.getMessage());
+            //System.out.println("Gebruiker bestaat niet: " + npe.getMessage());
         }
     }
 
