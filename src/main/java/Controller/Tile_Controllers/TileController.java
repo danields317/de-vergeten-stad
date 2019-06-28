@@ -25,6 +25,7 @@ import java.util.Random;
  *
  * @author ryan
  * @author Daniël
+ * @author Tim
  */
 public class TileController {
 
