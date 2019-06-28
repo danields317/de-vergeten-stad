@@ -29,7 +29,7 @@ public class FunctieController {
         return functieController;
     }
 
-    public void updateInfo(){
+    public void updateZonBrand(){
         StaticData staticData = StaticData.getInstance();
         Map<String, Object> data = new HashMap<String, Object>();
         Object classes = ((Map) staticData.getRoomInfo()).get("Selectable_classes");
@@ -56,6 +56,7 @@ public class FunctieController {
                     {
                         put("name", ((((Map) singeClass).get("name")).toString()));
                         put("maxWater", (((Map) singeClass).get("maxWater")) );
+
                         put("water", (Integer.valueOf(((Map)singeClass).get("water").toString()))-1);
                     }
                 };

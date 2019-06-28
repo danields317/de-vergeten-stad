@@ -70,6 +70,8 @@ public class UpdateFirebaseController {
                         put("name", staticData.getClassName());
                         put("maxWater", playerController.getPlayer().getMaxWater());
                         put("water", playerController.getPlayer().getWater());
+                        put("x", playerController.getPlayer().getX());
+                        put("y", playerController.getPlayer().getY());
                     }
                 };
                 myObject.put(String.valueOf(i), obj);
@@ -79,6 +81,8 @@ public class UpdateFirebaseController {
                         put("name", ((((Map) singeClass).get("name")).toString()));
                         put("maxWater", (((Map) singeClass).get("maxWater")));
                         put("water", (((Map) singeClass).get("water")));
+                        put("x", (((Map) singeClass).get("x")));
+                        put("y", (((Map) singeClass).get("y")));
                     }
                 };
                 myObject.put(String.valueOf(i), obj);
@@ -91,9 +95,9 @@ public class UpdateFirebaseController {
 
         data.put("Selectable_classes", myObject);
 
-        data.put("activePlayer", activePlayer);
+        //data.put("activePlayer", activePlayer);
+       data.put("activePlayer", "Archeoloog");
 
-//       data.put("activePlayer", "Archeoloog");
         (FirebaseService.getInstance()).addSpel(staticData.getRoomName(), data);
 
     }
@@ -239,11 +243,25 @@ public class UpdateFirebaseController {
 
         tc = new TileController();
 
+        Map<String, Object> data = new HashMap<String, Object>();
+        data.put("Selectable_classes", players);
+        data.put("tiles", makeTileMap());
+        StaticData.getInstance().setRoomInfo(data);
+        data.put("storm", makeStormMap());
+        data.put("onderdelen", makeOnderdelenMap());
+        data.put("activePlayer", "Archeoloog");
+
+        tc = TileController.getInstance();
+        int startX = tc.getSpawnX();
+        int startY = tc.getSpawnY();
+
         Map<String, Object> obj = new HashMap<String, Object>() {
             {
                 put("name", "Archeoloog");
                 put("maxWater", 3);
                 put("water", 3);
+                put("x", startX);
+                put("y", startY);
             }
         };
         players.put("0", obj);
@@ -252,6 +270,8 @@ public class UpdateFirebaseController {
                 put("name", "Klimmer");
                 put("maxWater", 3);
                 put("water", 3);
+                put("x", startX);
+                put("y", startY);
             }
         };
         players.put("1", obj);
@@ -260,6 +280,8 @@ public class UpdateFirebaseController {
                 put("name", "Verkenner");
                 put("maxWater", 4);
                 put("water", 4);
+                put("x", startX);
+                put("y", startY);
             }
         };
         players.put("2", obj);
@@ -268,16 +290,11 @@ public class UpdateFirebaseController {
                 put("name", "Waterdrager");
                 put("maxWater", 5);
                 put("water", 5);
+                put("x", startX);
+                put("y", startY);
             }
         };
         players.put("3", obj);
-        Map<String, Object> data = new HashMap<String, Object>();
-        data.put("Selectable_classes", players);
-        data.put("tiles", makeTileMap());
-        StaticData.getInstance().setRoomInfo(data);
-        data.put("storm", makeStormMap());
-        data.put("onderdelen", makeOnderdelenMap());
-        data.put("activePlayer", "Archeoloog");
 
         (FirebaseService.getInstance()).addSpel(roomName, data);
         StaticData.getInstance().setRoomInfo(data);

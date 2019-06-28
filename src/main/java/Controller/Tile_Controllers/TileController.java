@@ -476,6 +476,34 @@ public class TileController {
         }
     }
 
+    /** Zoek de spawn tegel en geef de X coordinaat terug
+     * @return X coordinaat van de spawn tegel
+     */
+    public int getSpawnX() {
+        ArrayList<Tile> tiles = tileController.getTiles();
+        Tile spawnTile = null;
+        for (Tile tile : tiles) {
+            if (tile.getClass().equals(StartTile.class)) {
+                return tile.getX();
+            }
+        }
+        return 0;
+    }
+
+    /** Zoek de spawn tegel en geef de Y coordinaat terug
+     * @return Y coordinaat van spawn tegel
+     */
+    public int getSpawnY() {
+        ArrayList<Tile> tiles = tileController.getTiles();
+        Tile spawnTile = null;
+        for (Tile tile : tiles) {
+            if (tile.getClass().equals(StartTile.class)) {
+                return tile.getY();
+            }
+        }
+        return 0;
+    }
+
     /**
      * Deze functie maakt tiles aan, aan de hand van info uit FireBase
      *

@@ -137,7 +137,7 @@ public class StormController {
                         } else {
                             Controller controller = Controller.getInstance();
                             controller.zonBrand();
-                            (FunctieController.getInstance()).updateInfo();
+                            (FunctieController.getInstance()).updateZonBrand();
                         }
                         break;
                     case STERKER:

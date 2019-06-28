@@ -83,6 +83,7 @@ public class PlayerController {
     }
 
 
+
     public void moveNoord(boolean isKlimmer){
         if(player.getY() > 0 && player.actiesOver()){
             Tile tileAbove = tileController.getTileByLocation((player.getY() - 1), player.getX());

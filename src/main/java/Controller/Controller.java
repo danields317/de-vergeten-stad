@@ -15,7 +15,9 @@ public class Controller/* extends Application  */{
     }
 
     public void zonBrand(){
+
         playcont.removeWater();
+
     }
 
     /*
