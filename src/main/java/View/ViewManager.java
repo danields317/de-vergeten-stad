@@ -95,6 +95,12 @@ public class ViewManager extends Application implements PlayerObserver, StormObs
             primaryStage.setX(windowAnchorX);
             primaryStage.setY(windowAnchorY);
             primaryStage.show();
+            StaticData staticData = StaticData.getInstance();
+            Object roomInfo = staticData.getRoomInfo();
+            disableButtons();
+            if (staticData.getClassName().equals(((Map)roomInfo).get("activePlayer").toString())){
+                enableButtons();
+            }
 
         } catch(Exception e) {
             e.printStackTrace();
