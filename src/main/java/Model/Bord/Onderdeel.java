@@ -6,6 +6,11 @@ import observers.OnderdeelObserver;
 
 import java.util.ArrayList;
 
+/**
+ * De Onderdeel klasse houdt bij of een onderdeel ontdekt is of opgepakt is.
+ * ook wordt hier bij gehouden waar een onderdeel moet spawnen.
+ */
+
 public class Onderdeel implements OnderdeelObservable {
 
     private PartTile.Soorten soort;

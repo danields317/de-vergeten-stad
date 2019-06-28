@@ -167,19 +167,6 @@ public class TileView implements BordObserver {
 
 
     private void checkSpelers(Tile tile){
-        /*
-        for (Player speler : tile.getSpelers()){
-            if (speler.getKlasse().equals(Player.SpelerKlassen.KLIMMER)){
-                klimmerImageView.setOpacity(1);
-            } else if (speler.getKlasse().equals(Player.SpelerKlassen.ARCHEOLOOG)){
-                archeoloogImageView.setOpacity(1);
-            } else if (speler.getKlasse().equals(Player.SpelerKlassen.VERKENNER)){
-                verkennerImageView.setOpacity(1);
-            } else if (speler.getKlasse().equals(Player.SpelerKlassen.WATERDRAGER)){
-                waterdragerImageView.setOpacity(1);
-            }
-        }*/
-
         for(String player : tile.getPlayers()){
             if (player.equals("Klimmer")){
                 klimmerImageView.setOpacity(1);

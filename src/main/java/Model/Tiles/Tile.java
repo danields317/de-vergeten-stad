@@ -135,12 +135,10 @@ public class Tile implements BordObservable{
         notifyAllObservers();
     }
 
-
     public void addPlayer(String player){
         players.add(player);
         notifyAllObservers();
     }
-
 
     public void removePlayer(String player){
         for(int i = 0; i < players.size(); i++){
@@ -150,7 +148,6 @@ public class Tile implements BordObservable{
         }
         notifyAllObservers();
     }
-
 
     public void emptyPlayers() {
         players.clear();

@@ -1,5 +1,6 @@
 package firebase;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -20,9 +21,7 @@ public class Database {
     public Database() {
 
         try {
-            FileInputStream serviceAccount =
-                    new FileInputStream(PRIVATEKEYLOCATION);
-
+            FileInputStream serviceAccount = new FileInputStream(PRIVATEKEYLOCATION);
 
             FirebaseOptions options = new FirebaseOptions.Builder()
                     .setCredentials(GoogleCredentials.fromStream(serviceAccount))
@@ -43,11 +42,11 @@ public class Database {
 
     public String getPRIVATEKEYLOCATION(){
         try {
-            return getClass().getResource("/iipsen-f7b65-firebase-adminsdk-si9zo-13167bfb98.json").toURI().getPath();
+            return getClass().getResource("/jsonFile/firebaseKey.json").toURI().getPath();
         } catch (URISyntaxException e) {
             e.printStackTrace();
+            return null;
         }
-        return null;
     }
 
 
