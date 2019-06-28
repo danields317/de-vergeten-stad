@@ -192,7 +192,7 @@ public class ViewManager extends Application implements PlayerObserver, StormObs
         if(((String)((Map) staticData.getRoomInfo()).get("activePlayer")).equals(staticData.getClassName()) ) {
             eindigBeurt = eindigBeurtView.maakEindigbeurtKnop();
         }else{
-            eindigBeurt = new Button( (String)((Map) staticData.getRoomInfo()).get("activePlayer") + "/n beurt");
+            eindigBeurt = new Button( (String)((Map) staticData.getRoomInfo()).get("activePlayer") + " beurt");
             eindigBeurt.setPrefSize(152,57);
             eindigBeurt.setLayoutX(1392);
             eindigBeurt.setLayoutY(732);
