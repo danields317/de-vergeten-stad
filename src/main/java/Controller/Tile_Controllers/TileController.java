@@ -5,7 +5,6 @@ import Model.Bord.Onderdeel;
 import Model.Tiles.*;
 import Model.data.StaticData;
 import Model.equipment.*;
-import Model.part.Part;
 import Model.player.Player;
 import Model.storm.StormEventBeweging;
 import View.ViewManager;

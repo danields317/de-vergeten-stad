@@ -1,7 +1,6 @@
 package Controller.Bord_Controllers;
 
 import Model.Bord.Player_Menu;
-import Model.player.Users;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
