@@ -11,7 +11,7 @@ import com.google.firebase.cloud.FirestoreClient;
 
 public class Database {
 
-    private  final String PRIVATEKEYLOCATION = "/jsonFile/firebaseKey.json";
+    private  final String PRIVATEKEYLOCATION = "/iipsen-f7b65-firebase-adminsdk-si9zo-13167bfb98.json";
     private static final String DATABASEURL = "https://iipsen-f7b65.firebaseio.com";
     private Firestore db;
 
