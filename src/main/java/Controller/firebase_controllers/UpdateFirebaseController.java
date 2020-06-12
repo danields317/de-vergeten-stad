@@ -7,9 +7,8 @@ import Model.Bord.Onderdeel;
 import Model.Tiles.*;
 import Model.data.StaticData;
 import Model.player.Player;
+import Model.storm.*;
 import Model.storm.Storm;
-import Model.storm.StormEvent;
-import Model.storm.StormEventBeweging;
 import firebase.FirebaseService;
 
 import java.util.ArrayList;
@@ -91,9 +90,9 @@ public class UpdateFirebaseController {
 
         data.put("Selectable_classes", myObject);
 
-        data.put("activePlayer", activePlayer);
+//        data.put("activePlayer", activePlayer);
 
-//        data.put("activePlayer", "Archeoloog");
+        data.put("activePlayer", "Archeoloog");
         (FirebaseService.getInstance()).addSpel(staticData.getRoomName(), data);
 
     }
@@ -126,15 +125,22 @@ public class UpdateFirebaseController {
         Map<String, Object> stormEventsMap = new HashMap<>();
         int stormEventCounter = 0;
         for (StormEvent event : events){
-            switch (event.naam){
-                case STERKER:
-                    stormEventsMap.put(Integer.toString(stormEventCounter), event.naam.toString());
+            switch (event.getNaam()){
+                case "STERKER":
+                case "BRANDT":
+                    stormEventsMap.put(Integer.toString(stormEventCounter), event.getNaam());
                     break;
-                case BRANDT:
-                    stormEventsMap.put(Integer.toString(stormEventCounter), event.naam.toString());
+                case "NOORD":
+                    stormEventsMap.put(Integer.toString(stormEventCounter), "BEWEGING"+event.getNaam()+((StormEventNoord) event).getStappen().toString());
                     break;
-                case BEWEGING:
-                    stormEventsMap.put(Integer.toString(stormEventCounter), event.naam.toString()+((StormEventBeweging) event).richting.toString()+((StormEventBeweging) event).stappen.toString());
+                case "OOST":
+                    stormEventsMap.put(Integer.toString(stormEventCounter), "BEWEGING"+event.getNaam()+((StormEventOost) event).getStappen().toString());
+                    break;
+                case "ZUID":
+                    stormEventsMap.put(Integer.toString(stormEventCounter), "BEWEGING"+event.getNaam()+((StormEventZuid) event).getStappen().toString());
+                    break;
+                case "WEST":
+                    stormEventsMap.put(Integer.toString(stormEventCounter), "BEWEGING"+event.getNaam()+((StormEventWest) event).getStappen().toString());
                     break;
             }
             stormEventCounter++;

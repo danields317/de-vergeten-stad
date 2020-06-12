@@ -5,18 +5,15 @@ import Model.Bord.Onderdeel;
 import Model.Tiles.*;
 import Model.data.StaticData;
 import Model.equipment.*;
-import Model.part.Part;
 import Model.player.Player;
-import Model.storm.StormEventBeweging;
+import Model.storm.Stappen;
 import View.ViewManager;
 import View.bord_views.SpeelbordView;
-import com.sun.org.apache.regexp.internal.RE;
 import javafx.application.Platform;
 import observers.BordObserver;
 import observers.OnderdeelObserver;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Map;
 import java.util.Random;
 
@@ -164,16 +161,16 @@ public class TileController {
     }
 
 
-    public void moveTileNoord(StormEventBeweging.Stappen stappen, int stormX, int stormY){
+    public void moveTileNoord(Stappen stappen, int stormX, int stormY){
         moveTile(stappen, stormX, stormY,0,1);
     }
-    public void moveTileOost(StormEventBeweging.Stappen stappen, int stormX, int stormY){
+    public void moveTileOost(Stappen stappen, int stormX, int stormY){
         moveTile(stappen, stormX, stormY, -1, 0);
     }
-    public void moveTileZuid(StormEventBeweging.Stappen stappen, int stormX, int stormY){
+    public void moveTileZuid(Stappen stappen, int stormX, int stormY){
         moveTile(stappen, stormX, stormY, 0, -1);
     }
-    public void moveTileWest(StormEventBeweging.Stappen stappen, int stormX, int stormY){
+    public void moveTileWest(Stappen stappen, int stormX, int stormY){
         moveTile(stappen, stormX, stormY, 1, 0);
     }
 
@@ -187,7 +184,7 @@ public class TileController {
      * @param moveStormY De y locatie waar de storm naartoe beweegt.
      * @author ryan
      */
-    private void moveTile(StormEventBeweging.Stappen stappen, int stormX, int stormY, int moveStormX, int moveStormY){
+    private void moveTile(Stappen stappen, int stormX, int stormY, int moveStormX, int moveStormY){
         playerController = PlayerController.getInstance();
         for (int i = 0; i < stappen.getNumber(); i++){
             if (stormY+moveStormY <= 4 && stormX+moveStormX >= 0 && stormY+moveStormY >= 0 && stormX+moveStormX <= 4){

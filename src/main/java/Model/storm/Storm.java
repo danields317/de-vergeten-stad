@@ -34,25 +34,25 @@ public class Storm implements StormObservable{
         image = new Image("/placeholder.png");
     }
 
-    public void beweegNoord(StormEventBeweging.Stappen stappen){
+    public void beweegNoord(Stappen stappen){
         if (y-stappen.getNumber() >= 0){
             y -= stappen.getNumber();
         }else y = 0;
         notifyAllObservers();
     }
-    public void beweegOost(StormEventBeweging.Stappen stappen){
+    public void beweegOost(Stappen stappen){
         if (x+stappen.getNumber() <= 4){
             x += stappen.getNumber();
         }else x = 4;
         notifyAllObservers();
     }
-    public void beweegZuid(StormEventBeweging.Stappen stappen){
+    public void beweegZuid(Stappen stappen){
         if (y+stappen.getNumber() <= 4){
             y += stappen.getNumber();
         }else y = 4;
         notifyAllObservers();
     }
-    public void beweegWest(StormEventBeweging.Stappen stappen){
+    public void beweegWest(Stappen stappen){
         if (x-stappen.getNumber() >= 0){
             x -= stappen.getNumber();
         }else x = 0;

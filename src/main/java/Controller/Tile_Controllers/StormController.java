@@ -1,19 +1,13 @@
 package Controller.Tile_Controllers;
 
-import Controller.Bord_Controllers.SoundController;
 import Controller.Controller;
 import Controller.Player_Controllers.FunctieController;
 import Controller.Player_Controllers.PlayerController;
 import Model.data.StaticData;
-import Model.player.Player;
-import Model.storm.Storm;
-import Model.storm.StormEvent;
-import Model.storm.StormEventBeweging;
-import View.bord_views.SpeelbordView;
-import javafx.application.Platform;
+import Model.storm.*;
+import factories.StormEventFactory;
 import observers.StormObserver;
 
-import java.lang.invoke.SwitchPoint;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Random;
@@ -26,9 +20,10 @@ import java.util.Random;
  */
 public class StormController {
 
+    private StormEventFactory factory;
+
     static StormController stormcontroller;
     Storm storm;
-
     private ArrayList<StormEvent> stormEvents = new ArrayList<>();
     private ArrayList<StormEvent> randomStormEvents = new ArrayList<>();
     private Random random = new Random();
@@ -40,7 +35,9 @@ public class StormController {
 
     private int aantalStormEvents = 30;
 
-    public StormController(){
+    public StormController(StormEventFactory factory){
+        this.factory = factory;
+
         storm = new Storm();
         makeEvents();
         randomizeEvents(stormEvents);
@@ -50,7 +47,7 @@ public class StormController {
 
     public static StormController getInstance(){
         if (stormcontroller == null){
-            stormcontroller = new StormController();
+            stormcontroller = new StormController(new StormEventFactory());
         }
         return stormcontroller;
     }
@@ -62,33 +59,33 @@ public class StormController {
     private void makeEvents(){
         for (int i = 0; i <= aantalStormEvents; i++){
             if (i < 4) {
-                stormEvents.add(new StormEvent(StormEvent.Namen.BRANDT));
+                stormEvents.add(factory.createStormEvent("BRANDT"));
             }else if (i < 7){
-                stormEvents.add(new StormEvent(StormEvent.Namen.STERKER));
+                stormEvents.add(factory.createStormEvent("STERKER"));
             }else if (i < 10){
-                stormEvents.add(new StormEventBeweging(StormEvent.Namen.BEWEGING, StormEventBeweging.Richtingen.NOORD, StormEventBeweging.Stappen.ONE));
+                stormEvents.add(factory.createStormEventBeweging("NOORD", Stappen.ONE));
             }else if (i < 13){
-                stormEvents.add(new StormEventBeweging(StormEvent.Namen.BEWEGING, StormEventBeweging.Richtingen.OOST, StormEventBeweging.Stappen.ONE));
+                stormEvents.add(factory.createStormEventBeweging("OOST", Stappen.ONE));
             }else if (i < 16){
-                stormEvents.add(new StormEventBeweging(StormEvent.Namen.BEWEGING, StormEventBeweging.Richtingen.ZUID, StormEventBeweging.Stappen.ONE));
+                stormEvents.add(factory.createStormEventBeweging("ZUID", Stappen.ONE));
             }else if (i < 19){
-                stormEvents.add(new StormEventBeweging(StormEvent.Namen.BEWEGING, StormEventBeweging.Richtingen.WEST, StormEventBeweging.Stappen.ONE));
+                stormEvents.add(factory.createStormEventBeweging("WEST", Stappen.ONE));
             }else if (i < 21){
-                stormEvents.add(new StormEventBeweging(StormEvent.Namen.BEWEGING, StormEventBeweging.Richtingen.NOORD, StormEventBeweging.Stappen.TWO));
+                stormEvents.add(factory.createStormEventBeweging("NOORD", Stappen.TWO));
             }else if (i < 23){
-                stormEvents.add(new StormEventBeweging(StormEvent.Namen.BEWEGING, StormEventBeweging.Richtingen.OOST, StormEventBeweging.Stappen.TWO));
+                stormEvents.add(factory.createStormEventBeweging("OOST", Stappen.TWO));
             }else if (i < 25){
-                stormEvents.add(new StormEventBeweging(StormEvent.Namen.BEWEGING, StormEventBeweging.Richtingen.ZUID, StormEventBeweging.Stappen.TWO));
+                stormEvents.add(factory.createStormEventBeweging("ZUID", Stappen.TWO));
             }else if (i < 27){
-                stormEvents.add(new StormEventBeweging(StormEvent.Namen.BEWEGING, StormEventBeweging.Richtingen.WEST, StormEventBeweging.Stappen.TWO));
+                stormEvents.add(factory.createStormEventBeweging("WEST", Stappen.TWO));
             }else if (i < 28){
-                stormEvents.add(new StormEventBeweging(StormEvent.Namen.BEWEGING, StormEventBeweging.Richtingen.NOORD, StormEventBeweging.Stappen.THREE));
+                stormEvents.add(factory.createStormEventBeweging("NOORD", Stappen.THREE));
             }else if (i < 29){
-                stormEvents.add(new StormEventBeweging(StormEvent.Namen.BEWEGING, StormEventBeweging.Richtingen.OOST, StormEventBeweging.Stappen.THREE));
+                stormEvents.add(factory.createStormEventBeweging("OOST", Stappen.THREE));
             }else if (i < 30){
-                stormEvents.add(new StormEventBeweging(StormEvent.Namen.BEWEGING, StormEventBeweging.Richtingen.ZUID, StormEventBeweging.Stappen.THREE));
+                stormEvents.add(factory.createStormEventBeweging("ZUID", Stappen.THREE));
             }else{
-                stormEvents.add(new StormEventBeweging(StormEvent.Namen.BEWEGING, StormEventBeweging.Richtingen.WEST, StormEventBeweging.Stappen.THREE));
+                stormEvents.add(factory.createStormEventBeweging("WEST", Stappen.THREE));
             }
         }
     }
@@ -127,11 +124,20 @@ public class StormController {
         for (int i = 0; i < tmpSterkte; i++){
             if (stapelCounter < randomStormEvents.size()){
                 StormEvent stormEvent = randomStormEvents.get(stapelCounter);
-                switch (stormEvent.naam){
-                    case BEWEGING:
-                        beweegStorm(((StormEventBeweging) stormEvent).richting, ((StormEventBeweging) stormEvent).stappen);
+                switch (stormEvent.getNaam()){
+                    case "NOORD":
+                        beweegStorm(stormEvent.getNaam(), ((StormEventNoord) stormEvent).getStappen());
                         break;
-                    case BRANDT:
+                    case "OOST":
+                        beweegStorm(stormEvent.getNaam(), ((StormEventOost) stormEvent).getStappen());
+                        break;
+                    case "ZUID":
+                        beweegStorm(stormEvent.getNaam(), ((StormEventZuid) stormEvent).getStappen());
+                        break;
+                    case "WEST":
+                        beweegStorm(stormEvent.getNaam(), ((StormEventWest) stormEvent).getStappen());
+                        break;
+                    case "BRANDT":
                         if (PlayerController.getInstance().checkPlayerWater()){
                             (FunctieController.getInstance()).endLose();
                         } else {
@@ -140,7 +146,7 @@ public class StormController {
                             (FunctieController.getInstance()).updateInfo();
                         }
                         break;
-                    case STERKER:
+                    case "STERKER":
                         storm.stormWordtSterker();
                         break;
                     default:
@@ -160,24 +166,24 @@ public class StormController {
     /**
      * Deze functie is een door geef luik om de storm een bepaalde richting op te laten bewegen.
      *
-     * @param richting De richting die de storm op beweegt.
+     * @param naam De richting die de storm op beweegt.
      * @param stappen Het aantal stappen dat de storm beweegt.
      */
-    private void beweegStorm(StormEventBeweging.Richtingen richting, StormEventBeweging.Stappen stappen){
-        switch (richting){
-            case NOORD:
+    private void beweegStorm(String naam, Stappen stappen){
+        switch (naam){
+            case "NOORD":
                 tileController.moveTileZuid(stappen, storm.getX(), storm.getY());
                 storm.beweegNoord(stappen);
                 break;
-            case OOST:
+            case "OOST":
                 tileController.moveTileWest(stappen, storm.getX(), storm.getY());
                 storm.beweegOost(stappen);
                 break;
-            case ZUID:
+            case "ZUID":
                 tileController.moveTileNoord(stappen, storm.getX(), storm.getY());
                 storm.beweegZuid(stappen);
                 break;
-            case WEST:
+            case "WEST":
                 tileController.moveTileOost(stappen, storm.getX(), storm.getY());
                 storm.beweegWest(stappen);
                 break;
@@ -229,33 +235,33 @@ public class StormController {
         ArrayList<StormEvent> events = new ArrayList<>();
         for (int i = 0; i <= aantalStormEvents; i++){
             if (stormEvents.get(Integer.toString(i)).equals("BRANDT")){
-                events.add(new StormEvent(StormEvent.Namen.BRANDT));
+                events.add(factory.createStormEvent("BRANDT"));
             } else if (stormEvents.get(Integer.toString(i)).equals("STERKER")){
-                events.add(new StormEvent(StormEvent.Namen.STERKER));
+                events.add(factory.createStormEvent("STERKER"));
             } else if (stormEvents.get(Integer.toString(i)).equals("BEWEGINGNOORDONE")){
-                events.add(new StormEventBeweging(StormEvent.Namen.BEWEGING, StormEventBeweging.Richtingen.NOORD,StormEventBeweging.Stappen.ONE));
+                events.add(factory.createStormEventBeweging("NOORD", Stappen.ONE));
             } else if (stormEvents.get(Integer.toString(i)).equals("BEWEGINGNOORDTWO")){
-                events.add(new StormEventBeweging(StormEvent.Namen.BEWEGING, StormEventBeweging.Richtingen.NOORD,StormEventBeweging.Stappen.TWO));
+                events.add(factory.createStormEventBeweging("NOORD", Stappen.TWO));
             } else if (stormEvents.get(Integer.toString(i)).equals("BEWEGINGNOORDTHREE")){
-                events.add(new StormEventBeweging(StormEvent.Namen.BEWEGING, StormEventBeweging.Richtingen.NOORD,StormEventBeweging.Stappen.THREE));
+                events.add(factory.createStormEventBeweging("NOORD", Stappen.THREE));
             } else if (stormEvents.get(Integer.toString(i)).equals("BEWEGINGOOSTONE")){
-                events.add(new StormEventBeweging(StormEvent.Namen.BEWEGING, StormEventBeweging.Richtingen.OOST,StormEventBeweging.Stappen.ONE));
+                events.add(factory.createStormEventBeweging("OOST", Stappen.ONE));
             } else if (stormEvents.get(Integer.toString(i)).equals("BEWEGINGOOSTTWO")){
-                events.add(new StormEventBeweging(StormEvent.Namen.BEWEGING, StormEventBeweging.Richtingen.OOST,StormEventBeweging.Stappen.TWO));
+                events.add(factory.createStormEventBeweging("OOST", Stappen.TWO));
             } else if (stormEvents.get(Integer.toString(i)).equals("BEWEGINGOOSTTHREE")){
-                events.add(new StormEventBeweging(StormEvent.Namen.BEWEGING, StormEventBeweging.Richtingen.OOST,StormEventBeweging.Stappen.THREE));
+                events.add(factory.createStormEventBeweging("OOST", Stappen.THREE));
             } else if (stormEvents.get(Integer.toString(i)).equals("BEWEGINGZUIDONE")){
-                events.add(new StormEventBeweging(StormEvent.Namen.BEWEGING, StormEventBeweging.Richtingen.ZUID,StormEventBeweging.Stappen.ONE));
+                events.add(factory.createStormEventBeweging("ZUID", Stappen.ONE));
             } else if (stormEvents.get(Integer.toString(i)).equals("BEWEGINGZUIDTWO")){
-                events.add(new StormEventBeweging(StormEvent.Namen.BEWEGING, StormEventBeweging.Richtingen.ZUID,StormEventBeweging.Stappen.TWO));
+                events.add(factory.createStormEventBeweging("ZUID", Stappen.TWO));
             } else if (stormEvents.get(Integer.toString(i)).equals("BEWEGINGZUIDTHREE")){
-                events.add(new StormEventBeweging(StormEvent.Namen.BEWEGING, StormEventBeweging.Richtingen.ZUID,StormEventBeweging.Stappen.THREE));
+                events.add(factory.createStormEventBeweging("ZUID", Stappen.THREE));
             } else if (stormEvents.get(Integer.toString(i)).equals("BEWEGINGWESTONE")){
-                events.add(new StormEventBeweging(StormEvent.Namen.BEWEGING, StormEventBeweging.Richtingen.WEST,StormEventBeweging.Stappen.ONE));
+                events.add(factory.createStormEventBeweging("WEST", Stappen.ONE));
             } else if (stormEvents.get(Integer.toString(i)).equals("BEWEGINGWESTTWO")){
-                events.add(new StormEventBeweging(StormEvent.Namen.BEWEGING, StormEventBeweging.Richtingen.WEST,StormEventBeweging.Stappen.TWO));
+                events.add(factory.createStormEventBeweging("WEST", Stappen.TWO));
             } else if (stormEvents.get(Integer.toString(i)).equals("BEWEGINGWESTTHREE")){
-                events.add(new StormEventBeweging(StormEvent.Namen.BEWEGING, StormEventBeweging.Richtingen.WEST,StormEventBeweging.Stappen.THREE));
+                events.add(factory.createStormEventBeweging("WEST", Stappen.THREE));
             }
         }
         randomStormEvents = events;
